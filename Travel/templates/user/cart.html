@@ -64,31 +64,31 @@
         <!--商品展示-->
         <div id="content">
             <!--商品记录-->
-            <!-- {% for book in books %} -->
+            {% for g in goods %}
             <div class="item">
                 <div class="check">
                     <img src="{% static '/images/user/product_normal.png' %}" class="checkItem">
                 </div>
                 <div class="gname">
-                    <img src="../img/booking/regist.png">
-                    <p>90分旅行箱</p>
-                    <p>规格: 20寸</p>
-                    <p>颜色: 星空灰</p>
+                    <img src="{{ g.g_img }}">
+                    <p>{{ g.g_name }}</p>
+                    <p>{{ g.time1 }}</p>
+                    <p>{{ g.time2 }}</p>
                 </div>
                 <div class="gprice">
-                    <h3>皮粉专享价</h3>
-                    <p>¥ 299.00</p>
+                    <h3>{{ g.g_type }}</h3>
+                    <p>￥ {{ g.price }}</p>
                 </div>
                 <div class="gcount">
                     <!--阻止超链接默认事件-->
                     <a href="javascript:void(0)" class="minus">-</a>
-                    <input type="text" value="1">
+                    <input type="text" value={{ g.g_num }}>
                     <a href="javascript:void(0)" class="add">+</a>
                 </div>
-                    <div class="gsum">￥ 299.00</div>    
+                    <div class="gsum">￥ {{ g.total_price }}</div>    
                     <div class="action">删除</div>
             </div>
-            <!-- {% endfor %} -->
+            {% endfor %}
             <div id="box1">
                 <p>是否要结算？</p>
                 <button>是</button>

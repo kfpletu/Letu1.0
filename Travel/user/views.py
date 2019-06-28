@@ -58,7 +58,12 @@ def register(request):
 
 #购物车
 def cart(request):
-    return render(request,'user/cart.html')
+    # u_id = request.session['id']
+    # print('啦啦啦啦啦' + u_id)
+    # goods = models.Cart.objects.filter(id=u_id)
+    return render(request,'user/cart.html',locals())    
+
+
 #历史记录
 def order(request):
     return render(request,'user/order.html')
