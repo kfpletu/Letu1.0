@@ -12,7 +12,7 @@ $(function () {
         // console.log("11");
         var cc=$(this).html();
         // console.log(cc);
-        $('#from_city').val(cc);
+        $('#to_city').val(cc);
     });
 
 });
