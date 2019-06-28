@@ -15,13 +15,15 @@
 </head>
 <body>
     <header id="header">
+        {% block msg %}
         <div class="login">
             <b>
                 <div id="cart">
-                    <a href="user/order.html">历史订单</a>
+                    <a href="/user/order">历史订单</a>
                 </div>
             </b>
         </div>
+        {% endblock msg %}
         <div class="center">
             <h1 class="logo">
                 <a href="/" id="logoA">乐途旅行网</a>
