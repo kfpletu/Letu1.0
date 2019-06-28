@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>乐途旅行</title>
+    <link rel="stylesheet" href="/static/css/about/information.css">
+    <link rel="stylesheet" href="/static/css/basic.css">
+    <link rel="stylesheet" href="/static/css/about/about.css">
+    <script src="/static/js/jquery.js"></script>
+</head>
+
+<body>
+    <header id="header">
+        {% if request.session.userinfo %}
+        <div id="cart">
+            <b>
+                <ul>
+                    <li class="home"><a href="javascript:void(0)">欢迎您,{{ request.session.userinfo.uname }}</a>
+                        <ol class='info1'>
+                            <li><a href="/user/topUp">我的钱包</a></li>
+                            <li><a href="/user/cart">我的订单</a></li>
+                            <li><a href="/user/logout">退出登录</a></li>
+                        </ol>
+                    </li>
+                </ul>
+            </b>
+        </div>
+        {% else %}
+        <div class="login">
+            <b>
+                <div id="register">
+                    <a href="/user/register">免费注册</a>
+                </div>
+            </b>
+            <b>
+                <div id="login">
+                    <a href="/user/login">您好,请登录</a>
+                </div>
+            </b>
+        </div>
+        {% endif %}
+        <div class="center">
+            <h1 class="logo">
+                <a href="/" id="logoA">乐途旅行网</a>
+            </h1>
+            <nav>
+                <ul class="link">
+                    <h1 class="none">网站导航</h1>
+                    <li><a href="/">首页</a></li>
+                    <li><a href="/scenic">景点门票</a></li>
+                    <li><a href="/trip">交通出行</a></li>
+                    <li><a href="/hotel">酒店预定</a></li>
+                    <li class="active"><a href="/about">关于我们</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div id="headline">
+        <div class="center">
+            <hgroup>
+                <h3>旅游保险有那些种类？</h3>
+            </hgroup>
+
+        </div>
+    </div>
+    <div id="container">
+        <aside class="sidebar">
+            <div class="sidebox recommend">
+                <h2>美景推荐</h2>
+                <div class="tag">
+                    <a href="###">陕西(10)</a>
+                    <a href="###">四川(10)</a>
+                    <a href="###">浙江(10)</a>
+                    <a href="###">广东(10)</a>
+                    <a href="###">云南(10)</a>
+                    <a href="###">江苏(10)</a>
+                    <a href="###">山东(10)</a>
+                    <a href="###">河南(10)</a>
+                    <a href="###">湖北(10)</a>
+                    <a href="###">甘肃(10)</a>
+                    <a href="###">河北(10)</a>
+                    <a href="###">湖南(10)</a>
+                    <a href="###">广西(10)</a>
+                    <a href="###">新疆(10)</a>
+                    <a href="###">内蒙古(10)</a>
+                    <a href="###">北京(10)</a>
+                    <a href="###">海南(10)</a>
+                    <a href="###">贵州(10)</a>
+                    <a href="###">安徽(10)</a>
+                    <a href="###">青海(10)</a>
+                    <a href="###">上海(10)</a>
+                </div>
+
+            </div>
+            <div class="sidebox popular">
+                <h2>热卖旅游</h2>
+                <div class="figure">
+                    <figure>
+                        <img src="/static/images/recommend/xian.jpg" alt="西安 2 日游">
+                        <figcaption>西安 2 日游</figcaption>
+                    </figure>
+                    <figure> <img src="/static/images/recommend/beijing.jpg" alt="北京 5日 4晚 游">
+                        <figcaption>北京 5日 4晚 游</figcaption>
+                    </figure>
+                    <figure> <img src="/static/images/recommend/zhejiang.jpg" alt="浙江双飞 3 日游">
+                        <figcaption>浙江双飞 3 日游</figcaption>
+                    </figure>
+                    <figure> <img src="/static/images/recommend/yunnan.gif" alt="云南丽江 6 日游">
+                        <figcaption>云南丽江 6 日游</figcaption>
+                    </figure>
+                    <figure> <img src="/static/images/recommend/shandong.gif" alt="山东青岛 5 日游">
+                        <figcaption>山东青岛 5 日游</figcaption>
+                    </figure>
+                    <figure> <img src="/static/images/recommend/guangxi.jpg" alt="广西 6 日半游">
+                        <figcaption>广西 6 日半游</figcaption>
+                    </figure>
+                    <figure> <img src="/static/images/recommend/qinghai.jpg" alt="青海新疆 9 日游">
+                        <figcaption>青海新疆 9 日游</figcaption>
+                    </figure>
+                    <figure> <img src="/static/images/recommend/hainan.gif" alt="海南三亚 4日 5夜游">
+                        <figcaption>海南三亚 4日 5夜游</figcaption>
+                    </figure>
+                </div>
+            </div>
+            <div class="sidebox treasure">
+                <h2>旅游百宝箱</h2>
+                <div class="box">
+                    <a href="###" class="trea1">天气预报</a>
+                    <a href="###" class="trea2">火车票查询</a>
+                    <a href="###" class="trea3">航空查询</a>
+                    <a href="###" class="trea4">地铁线路查询</a>
+                </div>
+            </div>
+        </aside>
+        <div class="state">
+            <section>
+                <h2>旅游保险有那些种类？</h2>
+                <p>国内旅游保险是旅游保险种类中最常见的，对于在境内游玩的旅客来说，可挑选此类保险并关注责任范围，一般要包含意外身故/残疾、医疗补偿等。不仅如此，如果在旅游时选择参加高风险项目如蹦极、滑雪等，需购买可承保高风险运动的国内旅游保险，最好含有24小时紧急救援，并牢牢记住救援服务电话；其次，对于国内自驾游旅客来说，最好选购有针对性的自驾游意外险。最后，国内跟团游客需要留心的是，旅行社的保险往往并不能完全保障出行安全需求，其责任险赔偿很有限，这时就需要我们另外购买一份基础型国内旅游保险。
+                </p>
+                <p>境外旅游保险作为旅游保险种类的一种，在购买时不同目的地国，挑选侧重点不同。若您前往美国、加拿大、日本等经济发达国家，考虑到这些国家医疗水平发达，医药费用昂贵，在挑选境外旅行保险时，医疗保障额度最好在20万元以上。而对于前往东南亚游玩的旅客来说，由于经济水平较低，气候炎热，传染病滋生，购买具有基本保障功能的保险还远远不够，还要注意选购能够承保各类传染性疾病的保险。倘若赴非洲游玩，需关注紧急救援和医疗运输保障，以保证出行安全。当然，去往欧洲国家的旅客则还需另行考虑。
+                </p>
+                <p>计划去欧洲国家旅游的人要特别注意，是否出行的目的地是申根签证国家。申根签证国家主要包括德、法、荷在内的26个欧洲国家。根据申根国家协议要求，去这些国家旅游的人都必须出示一份已购买的申根签证保险，使领馆以此作为签发申根签证的基本前提，这也是常见旅游保险的种类。但是，要注意所购买的保险产品必须是附带全球紧急救援功能。另外，要提醒的是，境外医疗保险金额不少于3万欧元，一般为30万元人民币以上。最后要注意的一点就是，申根签证保险须在所有申根国家和整个逗留期间有效。
+                </p>
+            </section>
+            <p>&nbsp;</p>
+            <section>
+                <h2>联系我们</h2>
+                <address>
+                    <ul>
+                        <li>乐途旅行股份有限公司</li>
+                        <li>地址：陕西省西安市碑林区中铁国际 2019-03(2) 号</li>
+                        <li>邮编：1234567</li>
+                        <li>E-mail：letu@letu.com</li>
+                        <li>电话：029-88888888</li>
+                        <li>传真：029-88666666</li>
+                    </ul>
+                </address>
+            </section>
+        </div>
+    </div>
+    <footer id="footer">
+        <div class="top">
+            <div class="block left">
+                <h2>合作伙伴</h2>
+                <hr>
+                <p><a href="http://www.tuniu.com">途牛旅游网</a></p>
+                <p><a href="http://www.lvmama.com">驴妈妈旅游网</a></p>
+                <p><a href="http://www.ctrip.com">携程旅行网</a></p>
+                <p><a href="http://www.cytsonline.com">中国青年旅行社</a></p>
+            </div>
+            <div class="block center">
+                <h2>旅游 FAQ</h2>
+                <hr>
+                <p><a href="/about/travelContract">旅游合同签订方式？</a></p>
+                <p><a href="/about/childPrice">儿童价是基于什么制定的？</a></p>
+                <p><a href="/about/touristRoute">旅游的线路品质怎么界定的？</a></p>
+                <p><a href="/about/singleRoom">单房差是什么？</a></p>
+                <p><a href="/about/travelInsuranceCategory">旅游保险有那些种类？</a></p>
+            </div>
+            <div class="block right">
+                <h2>联系方式</h2>
+                <hr>
+                <ul>
+                    <li>微博：weibo.com/letu</li>
+                    <li>邮件：letu@letu.com</li>
+                    <li>地址：陕西西安碑林区中铁第一国际9层</li>
+                </ul>
+            </div>
+        </div>
+        <div class="bottom">
+            <p>Copyright ©LT 乐途旅行网 | 陕ICP备120110109号 | 旅行网经营许可证： L-LT-BK12345</p>
+            <img src="/static/images/home/pic.gif" title="站长统计">
+        </div>
+    </footer>
+</body>
+
+</html>

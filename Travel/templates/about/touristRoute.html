@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>乐途旅行</title>
+    <link rel="stylesheet" href="/static/css/about/information.css">
+    <link rel="stylesheet" href="/static/css/basic.css">
+    <link rel="stylesheet" href="/static/css/about/about.css">
+    <script src="/static/js/jquery.js"></script>
+</head>
+
+<body>
+    <header id="header">
+        {% if request.session.userinfo %}
+        <div id="cart">
+            <b>
+                <ul>
+                    <li class="home"><a href="javascript:void(0)">欢迎您,{{ request.session.userinfo.uname }}</a>
+                        <ol class='info1'>
+                            <li><a href="/user/topUp">我的钱包</a></li>
+                            <li><a href="/user/cart">我的订单</a></li>
+                            <li><a href="/user/logout">退出登录</a></li>
+                        </ol>
+                    </li>
+                </ul>
+            </b>
+        </div>
+        {% else %}
+        <div class="login">
+            <b>
+                <div id="register">
+                    <a href="/user/register">免费注册</a>
+                </div>
+            </b>
+            <b>
+                <div id="login">
+                    <a href="/user/login">您好,请登录</a>
+                </div>
+            </b>
+        </div>
+        {% endif %}
+        <div class="center">
+            <h1 class="logo">
+                <a href="/" id="logoA">乐途旅行网</a>
+            </h1>
+            <nav>
+                <ul class="link">
+                    <h1 class="none">网站导航</h1>
+                    <li><a href="/">首页</a></li>
+                    <li><a href="/scenic">景点门票</a></li>
+                    <li><a href="/trip">交通出行</a></li>
+                    <li><a href="/hotel">酒店预定</a></li>
+                    <li class="active"><a href="/about">关于我们</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div id="headline">
+        <div class="center">
+            <hgroup>
+                <h3>旅游的线路品质怎么界定的？</h3>
+            </hgroup>
+
+        </div>
+    </div>
+    <div id="container">
+        <aside class="sidebar">
+            <div class="sidebox recommend">
+                <h2>美景推荐</h2>
+                <div class="tag">
+                    <a href="###">陕西(10)</a>
+                    <a href="###">四川(10)</a>
+                    <a href="###">浙江(10)</a>
+                    <a href="###">广东(10)</a>
+                    <a href="###">云南(10)</a>
+                    <a href="###">江苏(10)</a>
+                    <a href="###">山东(10)</a>
+                    <a href="###">河南(10)</a>
+                    <a href="###">湖北(10)</a>
+                    <a href="###">甘肃(10)</a>
+                    <a href="###">河北(10)</a>
+                    <a href="###">湖南(10)</a>
+                    <a href="###">广西(10)</a>
+                    <a href="###">新疆(10)</a>
+                    <a href="###">内蒙古(10)</a>
+                    <a href="###">北京(10)</a>
+                    <a href="###">海南(10)</a>
+                    <a href="###">贵州(10)</a>
+                    <a href="###">安徽(10)</a>
+                    <a href="###">青海(10)</a>
+                    <a href="###">上海(10)</a>
+                </div>
+
+            </div>
+            <div class="sidebox popular">
+                <h2>热卖旅游</h2>
+                <div class="figure">
+                    <figure>
+                        <img src="/static/images/recommend/xian.jpg" alt="西安 2 日游">
+                        <figcaption>西安 2 日游</figcaption>
+                    </figure>
+                    <figure> <img src="/static/images/recommend/beijing.jpg" alt="北京 5日 4晚 游">
+                        <figcaption>北京 5日 4晚 游</figcaption>
+                    </figure>
+                    <figure> <img src="/static/images/recommend/zhejiang.jpg" alt="浙江双飞 3 日游">
+                        <figcaption>浙江双飞 3 日游</figcaption>
+                    </figure>
+                    <figure> <img src="/static/images/recommend/yunnan.gif" alt="云南丽江 6 日游">
+                        <figcaption>云南丽江 6 日游</figcaption>
+                    </figure>
+                    <figure> <img src="/static/images/recommend/shandong.gif" alt="山东青岛 5 日游">
+                        <figcaption>山东青岛 5 日游</figcaption>
+                    </figure>
+                    <figure> <img src="/static/images/recommend/guangxi.jpg" alt="广西 6 日半游">
+                        <figcaption>广西 6 日半游</figcaption>
+                    </figure>
+                    <figure> <img src="/static/images/recommend/qinghai.jpg" alt="青海新疆 9 日游">
+                        <figcaption>青海新疆 9 日游</figcaption>
+                    </figure>
+                    <figure> <img src="/static/images/recommend/hainan.gif" alt="海南三亚 4日 5夜游">
+                        <figcaption>海南三亚 4日 5夜游</figcaption>
+                    </figure>
+                </div>
+            </div>
+            <div class="sidebox treasure">
+                <h2>旅游百宝箱</h2>
+                <div class="box">
+                    <a href="###" class="trea1">天气预报</a>
+                    <a href="###" class="trea2">火车票查询</a>
+                    <a href="###" class="trea3">航空查询</a>
+                    <a href="###" class="trea4">地铁线路查询</a>
+                </div>
+            </div>
+        </aside>
+        <div class="state">
+            <section>
+                <h2>旅游的线路品质怎么界定的？</h2>
+                <p>不克扣餐饮费用，分量稳定，吃饱不成问题。标准明确；明确不同标准的菜单，供游客选择。不能用简单的八菜一汤来敷衍了事；用餐标准可高可低，不同的标准，价格不同，菜单明确。</p>
+                <p>诚信旅游的住宿标准可高可低，应该明确信息的用语，对于酒店的名称、位置、标准，都要有明确的说明。明确不同标准的酒店，供游客选择。每个酒店所处地理位置，其配套服务设施，周边的娱乐场所，这都是造成价格差异的因素，让游客明了价格与相关配套的一致。
+                </p>
+                <p>出发地与目的地之间交通，相对比较公平和稳定。注意标注火车的硬座、硬卧、软卧、有无空调等，飞机航班时间等。诚信旅游是不允许赌博存在的，必须保证给司机以足够的车费，让他们的付出同样也要得到合理的体现。车容整洁、卫生，对于常用的车型，要配有照片。卫生每天都要打扫一次。车上导游设备齐全，至少要有麦克风。
+                </p>
+                <p>防止行程空虚，杜绝进入高回扣低质量的景点。诚信旅游安排的行程，是最有当地特色的参观景点，让游客充分体验当地的风土人情和自然风光的特点。诚信旅游从人性化出发，不考虑因报价高会拒游客于大门之外，而是设计最有价值的线路给游客。诚信旅游的行程一定要安排合理，参观游览时间要充裕，要让游客玩的尽。
+                </p>
+                <p>好东西、好商店，货真价实。严格制定合理的推介提成比例。购物绝不影响正常游览。</p>
+                <p>白天的行程中不能推荐自费项目，对于一些内容可以但价格较高的自费项目，导游可以推介，但绝对不可以过分推介，不可以夸张，若引起游客的反感，则是不允许的，推荐的确有价值的娱乐项目。</p>
+            </section>
+            <p>&nbsp;</p>
+            <section>
+                <h2>联系我们</h2>
+                <address>
+                    <ul>
+                        <li>乐途旅行股份有限公司</li>
+                        <li>地址：陕西省西安市碑林区中铁国际 2019-03(2) 号</li>
+                        <li>邮编：1234567</li>
+                        <li>E-mail：letu@letu.com</li>
+                        <li>电话：029-88888888</li>
+                        <li>传真：029-88666666</li>
+                    </ul>
+                </address>
+            </section>
+        </div>
+    </div>
+    <footer id="footer">
+        <div class="top">
+            <div class="block left">
+                <h2>合作伙伴</h2>
+                <hr>
+                <p><a href="http://www.tuniu.com">途牛旅游网</a></p>
+                <p><a href="http://www.lvmama.com">驴妈妈旅游网</a></p>
+                <p><a href="http://www.ctrip.com">携程旅行网</a></p>
+                <p><a href="http://www.cytsonline.com">中国青年旅行社</a></p>
+            </div>
+            <div class="block center">
+                <h2>旅游 FAQ</h2>
+                <hr>
+                <p><a href="/about/travelContract">旅游合同签订方式？</a></p>
+                <p><a href="/about/childPrice">儿童价是基于什么制定的？</a></p>
+                <p><a href="/about/touristRoute">旅游的线路品质怎么界定的？</a></p>
+                <p><a href="/about/singleRoom">单房差是什么？</a></p>
+                <p><a href="/about/travelInsuranceCategory">旅游保险有那些种类？</a></p>
+            </div>
+            <div class="block right">
+                <h2>联系方式</h2>
+                <hr>
+                <ul>
+                    <li>微博：weibo.com/letu</li>
+                    <li>邮件：letu@letu.com</li>
+                    <li>地址：陕西西安碑林区中铁第一国际9层</li>
+                </ul>
+            </div>
+        </div>
+        <div class="bottom">
+            <p>Copyright ©LT 乐途旅行网 | 陕ICP备120110109号 | 旅行网经营许可证： L-LT-BK12345</p>
+            <img src="/static/images/home/pic.gif" title="站长统计">
+        </div>
+    </footer>
+</body>
+
+</html>

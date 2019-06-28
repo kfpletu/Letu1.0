@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>乐途旅行</title>
+    {% load static %}
+    <link rel="stylesheet" href="/static/css/home/home.css">
+    <link rel="stylesheet" href="/static/css/basic.css">
+</head>
+<script src="/static/js/jquery.js"></script>
+<script src="/static/js/home/home_banner.js"></script>
+
+<body>
+<header id="header">
+    {% if request.session.userinfo %}
+        <div id="cart">
+            <b>
+                <ul>
+                    <li class="home"><a href="javascript:void(0)">欢迎您,{{ request.session.userinfo.uname }}</a>
+                        <ol class='info1'>
+                            <li><a href="/user/topUp">我的钱包</a></li>
+                            <li><a href="/user/cart">我的订单</a></li>
+                            <li><a href="/user/order">历史订单</a></li>
+                            <li><a href="/user/logout">退出登录</a></li>
+                        </ol>
+                    </li>
+                </ul>
+            </b>
+        </div>
+    {% else %}
+        <div class="login">
+            <b>
+                <div id="register">
+                    <a href="/user/register">免费注册</a>
+                </div>
+            </b>
+            <b>
+                <div id="login">
+                    <a href="/user/login">您好,请登录</a>
+                </div>
+            </b>
+        </div>
+    {% endif %}
+    <div class="center">
+        <h1 class="logo">
+            <a href="/" id="logoA">乐途旅行网</a>
+        </h1>
+        <nav>
+            <ul class="link">
+                <h1 class="none">网站导航</h1>
+                <li class="active"><a href="/">首页</a></li>
+                <li><a href="/scenic">景点门票</a></li>
+                <li><a href="/trip">交通出行</a></li>
+                <li><a href="/hotel">酒店预定</a></li>
+                <li><a href="/about">关于我们</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<div id="search">
+    <div id="imgd">
+        <a href="../travel/html/dayanta.html" id="src1">
+            <img src="../static/images/home/banner01.jpg">
+        </a>
+        <a href="../travel/html/zhonglou.html">
+            <img src="../static/images/home/banner02.jpg">
+        </a>
+        <a href="../travel/html/datangfurongyuan.html">
+            <img src="../static/images/home/banner03.jpg">
+        </a>
+        <a href="../travel/html/bingmayong.html">
+            <img src="../static/images/home/banner04.jpg">
+        </a>
+        <a href="../travel/html/huashan.html">
+            <img src="../static/images/home/banner05.jpg">
+        </a>
+        <a href="../travel/html/zhonglou.html">
+            <img src="../static/images/home/banner06.jpg">
+        </a>
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <a href="javascript:void(0)" class="left"></a>
+        <a href="javascript:void(0)" class="right"></a>
+    </div>
+</div>
+<div id="tour">
+    <section class="center">
+        <h2 class="">热门旅游搜索</h2>
+
+        <div id="search2">
+            <form action="" name="demo">
+                <input type="text" name="search" placeholder="请输入关键字，景点，机票，酒店信息...">
+                <img src="../static/images/home/search1.png" onclick="demo.submit();">
+            </form>
+        </div>
+        <p>国内旅游、国外旅游、自助旅游、自驾旅游、油轮签证、主题旅游等各种最新热门旅游推荐</p>
+    </section>
+    <figure>
+        <a href="">
+            <img src="../static/images/home/tour1.jpg" alt="热门旅游">
+        </a>
+        <figcaption><strong class="title">&lt;西安城墙&gt;</strong>是中国现存规模最大、保存最完整的古代城垣，是第一批全国重点文物保护单位、国家AAAAA级旅游景区 。
+        </figcaption>
+        <div>
+            <em class="sat">满意度77%</em>
+            <span class="price">￥<strong>2864</strong>起</span>
+        </div>
+        <div class="type">西安名景</div>
+    </figure>
+    <figure>
+        <a href="">
+            <img src="../static/images/home/tour2.jpg" alt="热门旅游">
+        </a>
+        <figcaption><strong class="title">&lt;大唐芙蓉园&gt;</strong>
+            大唐芙蓉园位于陕西省西安市城南的曲江开发区，大雁塔东南侧，它是在原唐代芙蓉园遗址以北，
+            仿照唐代皇家园林式样重新建造的，是中国第一个全方位展示盛唐风貌的大型皇家园林式文化主题公园，
+            占地面积1000亩，其中水域面积300亩。
+        </figcaption>
+        <div>
+            <em class="sat">满意度77%</em>
+            <span class="price">￥<strong>2864</strong>起</span>
+        </div>
+        <div class="type">西安名景</div>
+    </figure>
+    <figure>
+        <a href="">
+            <img src="../static/images/home/tour3.jpg" alt="热门旅游">
+        </a>
+        <figcaption><strong class="title">&lt;大明宫 &gt;</strong> 大明宫，大唐帝国的大朝正宫，唐朝的政治中心和
+            国家象征 。始建于唐太宗贞观八年（634年），原名永安宫，是唐长安城三座主要宫殿“三大内”（大明宫、太极宫、
+            兴庆宫）中规模最大的一座，称为“东内”。
+        </figcaption>
+        <div>
+            <em class="sat">满意度77%</em>
+            <span class="price">￥<strong>2864</strong>起</span>
+        </div>
+        <div class="type">西安名景</div>
+    </figure>
+    <figure>
+        <a href="">
+            <img src="../static/images/home/tour4.jpg" alt="热门旅游">
+        </a>
+        <figcaption><strong class="title">&lt;乐华欢乐世界&gt;</strong>
+            乐华欢乐世界是亚洲超大主题乐园，为国家AAAA级旅游景区,园区有欢乐广场、月光湖、巨石山脉、繁星林地、
+            回音山谷、熊猫农场6大主题区域，拥有8台不同类型的主题过山车及翻江倒海、高空飞翔、星际飞艇、雷神之锤等
+            33组动感刺激的游乐设备。
+        </figcaption>
+        <div>
+            <em class="sat">满意度77%</em>
+            <span class="price">￥<strong>2864</strong>起</span>
+        </div>
+        <div class="type">西安名景</div>
+    </figure>
+
+    <figure>
+        <a href="">
+            <img src="../static/images/home/tour5.jpg" alt="热门旅游">
+        </a>
+        <figcaption><strong class="title">&lt;唐华清宫&gt;</strong>
+            唐华清宫，是唐代封建帝王游幸的别宫。后也称“华清池”，位于陕西省西安市临潼区。包括原骊山国家森林公园，
+            与颐和园、圆明园、承德避暑山庄并称为中国四大皇家园林。
+        </figcaption>
+        <div>
+            <em class="sat">满意度77%</em>
+            <span class="price">￥<strong>2864</strong>起</span>
+        </div>
+        <div class="type">西安名景</div>
+    </figure>
+    <figure>
+        <a href="../travel/html/ticket.html">
+            <img src="../static/images/home/tour6.jpg" alt="热门旅游">
+        </a>
+        <figcaption><strong class="title">&lt;西安秦岭野生动物园&gt;</strong>
+            西北首家野生动物园，有兽类、鸟类、两栖类
+            和爬行类动物，其庞大的动物种群、数量都是西北之最。
+        </figcaption>
+        <div>
+            <em class="sat">满意度77%</em>
+            <span class="price">￥<strong>2864</strong>起</span>
+        </div>
+        <div class="type">西安名景</div>
+    </figure>
+    <figure>
+        <a href="">
+            <img src="../static/images/home/tour7.jpg" alt="热门旅游">
+        </a>
+        <figcaption><strong class="title">&lt;长恨歌&gt;</strong>
+            中国首部大型实景历史舞剧，以白居易传世名篇《长恨歌》为蓝本，将历史故事与实景演出相结合，重现1300多年前华清宫
+            里那段感人肺腑的李杨爱情故事。
+        </figcaption>
+        <div>
+            <em class="sat">满意度77%</em>
+            <span class="price">￥<strong>2864</strong>起</span>
+        </div>
+        <div class="type">历史舞剧</div>
+    </figure>
+    <figure>
+        <a href="">
+            <img src="../static/images/home/tour8.jpg" alt="热门旅游">
+        </a>
+        <figcaption><strong
+                class="title">&lt;回民街&gt;</strong>西安回民街是西安著名的美食文化街区，是西安小吃街区。西安风情的
+            代表之一，是回民街区多条街道的统称，由北广济街、北院门、西羊市、大皮院、化觉巷、洒金桥等数条街道组成，
+            在钟鼓楼后。
+        </figcaption>
+        <div>
+            <em class="sat">满意度77%</em>
+            <span class="price">￥<strong>2864</strong>起</span>
+        </div>
+        <div class="type">西安名景</div>
+    </figure>
+    <figure>
+        <a href="">
+            <img src="../static/images/home/tour9.jpg" alt="热门旅游">
+        </a>
+        <figcaption><strong class="title">&lt;骊山&gt;</strong> 骊山位于陕西省西安市临潼区城南,因景色翠秀，
+            美如锦绣，故又名“绣岭”。每当夕阳西下，骊山辉映在金色的晚霞之中，景色格外绮丽，有“骊山晚照”之美誉。
+        </figcaption>
+        <div>
+            <em class="sat">满意度77%</em>
+            <span class="price">￥<strong>2864</strong>起</span>
+        </div>
+        <div class="type">西安名景</div>
+    </figure>
+</div>
+<footer id="footer">
+    <div class="top">
+        <div class="block left">
+            <h2>合作伙伴</h2>
+            <hr>
+            <p><a href="http://www.tuniu.com">途牛旅游网</a></p>
+            <p><a href="http://www.lvmama.com">驴妈妈旅游网</a></p>
+            <p><a href="http://www.ctrip.com">携程旅行网</a></p>
+            <p><a href="http://www.cytsonline.com">中国青年旅行社</a></p>
+        </div>
+        <div class="block center">
+            <h2>旅游 FAQ</h2>
+            <hr>
+            <p><a href="/about/travelContract">旅游合同签订方式？</a></p>
+            <p><a href="/about/childPrice">儿童价是基于什么制定的？</a></p>
+            <p><a href="/about/touristRoute">旅游的线路品质怎么界定的？</a></p>
+            <p><a href="/about/singleRoom">单房差是什么？</a></p>
+            <p><a href="/about/travelInsuranceCategory">旅游保险有那些种类？</a></p>
+        </div>
+        <div class="block right">
+            <h2>联系方式</h2>
+            <hr>
+            <ul>
+                <li>微博：weibo.com/letu</li>
+                <li>邮件：letu@letu.com</li>
+                <li>地址：陕西西安碑林区中铁第一国际9层</li>
+            </ul>
+        </div>
+    </div>
+    <div class="bottom">
+        <p>Copyright ©LT 乐途旅行网 | 陕ICP备120110109号 | 旅行网经营许可证： L-LT-BK12345</p>
+        <img src="/static/images/home/pic.gif" title="站长统计">
+    </div>
+</footer>
+</body>
+
+</html>

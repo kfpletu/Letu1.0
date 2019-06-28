@@ -1,0 +1,165 @@
+/* 页面基础样式 */
+#top,#bottom{
+    width: 1000px;
+    height: 0;
+    padding:0;
+    margin: 0 auto;
+}
+/* 顶部 */
+body{
+    margin-top: 50px;
+}
+
+#top{
+    height: 50px;
+    line-height: 30px;
+    margin-bottom: 10px;
+}
+#top img{
+    height: 50px;
+    border-radius: 10px;
+    /* 调整行内块元素左右元素的垂直对齐方式 */
+    vertical-align: bottom;
+    background-color:crimson;
+}
+#top span{
+    font-size: 24px;
+    margin-left: 10px;
+    line-height: 50px;
+    color: #4f4e4d;
+}
+#top a span{
+    float: right;
+}
+/* 2.主体 */
+#mian{
+    width: 100%;
+    height: 560px;
+    background-image: url(/static/images/user/regist.jpg);
+    background-size: cover;
+}
+#mian form{
+    width: 280px;
+    height: 375px;
+    float: right;
+    margin-top: 120px;
+    margin-right: 120px;
+    background-color: rgba(0, 0, 0, .3);
+    position: relative;
+}
+#mian .content{
+    margin: 10px;
+}
+.content p{
+    font-size: 18px;
+    color: #fff;
+    border-bottom: 1px solid #fff;
+    padding-bottom: 10px;
+}
+.content p a{
+    float: right;
+    color: #fff;
+    margin-right: 15px;
+    margin-top: 3px;
+    font-size: 12px;
+}
+.text{
+    position: relative;
+}
+.text input{
+    width: 218px;
+    border: 1px solid #ddd;
+    padding: 10px 29px; 
+    padding-left: 9px;
+    margin-top: 15px;
+    border-radius: 5px;
+}
+.text img{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    right: 9px;
+    top: 22px;
+}
+.pwd{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.validateCode{
+    height: 70px;
+   
+}
+.validateCode img{
+    width: 110px;
+    height: 37px;
+    border-radius: 10px;
+}
+.validateCode input{
+    width: 102px;
+    border: 1px solid #ddd;
+    float: right;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+.savePwd{
+    color: #fff;
+    margin-bottom: 15px;
+}
+.savePwd a{
+    float: right;
+    color: #fff;
+}
+.savePwd input{
+    /* 按钮自带四个方向的外边距 */
+    vertical-align: middle;
+}
+.login{
+    width: 260px;
+    height: 35px;
+    background-color: #997679;
+    color: #fff;
+    border: none;
+    padding: 0;
+    font-weight: 700;
+}
+#bottom{
+    margin: 0 auto;
+    padding: 0;
+    margin-top: 40px;
+    position: relative;
+    height: 134px;
+}
+#bottom #logoImg{
+    height: 50px;
+    border-radius: 10px;
+    /* 调整行内块元素左右元素的垂直对齐方式 */
+    vertical-align: bottom;
+    background-color: crimson;
+}
+#bottom p{
+    color: #4f4e4d;
+    width: 600px;
+    margin: 0;
+}
+#bottom .img{
+    width: 130px;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+#bottom #fontImg{
+    width: 620px;
+    height: 84px;
+    margin-left: 30px;
+}
+#bottom #imgs{
+    width: 130px;
+    height: 130px;
+}
+#bottom .img #imgs img{
+    width: 134px;
+    height: 134px;
+}
+#bttom .imgEr{
+    float: right;
+}

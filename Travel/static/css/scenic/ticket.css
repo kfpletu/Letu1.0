@@ -1,0 +1,348 @@
+#bodyer1,#bodytickrt,#guid{
+    width:1200px;
+    margin: 20px auto;
+}
+#bodytickrt,#guid{
+    border: 1px solid gray;
+}
+#bodyer1{
+    height: 450px;
+    position: relative;
+}
+/* .imgs{
+    width: 500px;
+    height: 400px;
+    /* background: orange; */
+    /* position: absolute;
+    margin-top:20px; */
+    /* margin-bottom: 10px; */
+    /* margin-left: 10px; */
+/* }
+.imgs img{
+    width: 500px;
+    height: 350px;
+} */ 
+#content {
+    text-align: center;
+    width:450px;
+    height:500px;
+    position: absolute;
+    left:10px;
+}
+
+#view { 
+	margin: 15px 0px;
+	height: 300px;
+	width:430px;
+}
+
+#view img {
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,.6);
+    height: 300px;
+	width:400px;
+	margin: 5px 25px;
+}
+
+#thumbs { 
+	position: relative;
+    margin: 120px 0;
+    
+}
+
+#nav-left-thumbs { left: 0px; }
+	
+#nav-right-thumbs {	right: 0px; }
+
+#nav-left-thumbs, #nav-right-thumbs {
+    position: absolute;
+    top: 10px;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0,0,0,.6);
+    font-size: 1em;
+    font-weight: bold;
+    color: #999;
+    text-shadow: 0 0 10px rgba(0,0,0,.5);
+    cursor: pointer;
+    transition-duration: .5s;
+    margin:6px -10px;
+}
+
+#nav-left-thumbs:hover, #nav-right-thumbs:hover {
+    background: lightgrey;
+}
+
+#pics-thumbs { 
+	position: relative;
+	padding: 5px 5px;
+    margin: 5px 0;
+    white-space: nowrap;
+    overflow: hidden; 
+    transition-duration: .8s;
+}
+
+#pics-thumbs img {
+    padding: 5px;
+	margin: 0 0px;
+    border-radius: 4px;
+    box-shadow: 0 0 5px rgba(0,0,0,.6);
+    cursor: pointer;
+    height: 40px;
+    width:70px;
+    transition-duration: .5s;
+}
+
+
+
+
+.sDetails{
+    width:600px;
+    height: 450px;
+    /* background:red; */
+    right: 20px;
+    /* margin-right: 10px; */
+    margin-top: 20px;
+    float:right;
+    /* position: absolute; */
+}
+.table tr{
+    height: 55px;
+}
+.table img{
+    width:20px;
+    height:20px;
+}
+.tdlast{
+    /* float: right; */
+    margin-right: 60px;
+    color: gray;
+    text-align: right;
+}
+
+#bodytickrt{
+    position: relative;
+    overflow: hidden;
+}
+
+#bodytickrt .daohang a{
+    display: inline-block;
+    width:120px;
+    height:50px;
+    line-height:50px;
+    font-size:20px;
+    color:#000;
+    margin:0 15px;
+    margin-left: 0;
+}
+#bodytickrt .daohang a:hover{
+    color: white;
+    /* background:#00bf4b; */
+}
+/* .count{
+    height:36px;
+    line-height: 36px;
+    border-bottom: 1px solid gray;
+}
+.count span{
+    float:right;
+} 
+
+.count a {
+    display:inline-block;
+    background:crimson;
+    width:80px;
+    height:30px;
+    color: #000;
+    border-radius: 5px;
+    text-align: center;
+    margin:2px 20px;
+
+}
+.count a:hover{
+ /* background:#00bf4b;  */
+    /* color:white;
+} */ 
+
+#bodytickrt .info{
+    height:40px;
+    width:1200px;
+}
+
+.type{
+	margin-top:10px;
+    height:36px;
+    color:#808080;
+    border-bottom: 1px solid gray;
+}
+.type div{
+	float:left;
+    text-align:center;
+    height:36px;
+	line-height:36px;
+}
+
+.gper{
+    width:120px;
+}
+.gname{
+	width:300px;
+}
+.gpt{
+    width:180px;
+}
+.gprice{
+	width:140px;
+}
+.gcount{
+	width:180px;
+}
+.gsum{
+	width:140px;
+}
+.gor{
+    width:130px;
+
+}
+
+/* .gor a{
+    display:inline-block;
+    background:crimson;
+    width:80px;
+    height:30px;
+    color: #000;
+    border-radius: 5px;
+    text-align: center;
+    margin-bottom:-12px;
+}
+.gor a:hover{
+    color: white;
+} */
+
+
+/*全选按钮的垂直对齐*/
+/* .checkAll{
+	vertical-align:middle;
+} */
+/* .conten{
+    margin-top:20px;
+｝ */
+.conten .item{
+	margin-top:10px;
+	height:36px;
+    color:#000;
+    border-bottom: 1px solid gray;
+}
+.conten .item div{
+	float:left;
+	text-align:center;
+	line-height:36px;
+}
+
+.gcount a{
+	float:left;
+	width:26px;
+	height:26px;
+	border:1px solid gray;
+	background:#e8e8e8;
+	color:#333;
+	line-height:26px;
+	font-size:16px;
+
+}
+.gcount input{
+
+	float:left;
+	border:1px solid gray;
+	border-left:0;
+	border-right:0;
+	width:26px;
+	height:26px;
+	padding:0;
+	text-align:center;
+}
+.gcount .minus{
+	margin-left:60px;
+}
+#guid .daohang a{
+    display: inline-block;
+    width:120px;
+    height:50px;
+    line-height:50px;
+    font-size:20px;
+    color:#000;
+    margin:0 15px;
+    margin-left: 0;
+}
+#guid .daohang a:hover{
+    color: white;
+    /* background:#00bf4b; */
+}
+.produce_con{
+    margin:20px;
+    font-size:23px;
+    line-height: 30px;
+}
+
+pre{
+    display: block;
+    overflow: auto;
+    /* background: #f4f4f4; */
+    padding: 5px 10px;
+    /* border: 1px solid #eee; */
+    white-space:pre-wrap;
+    white-space:-moz-pre-wrap;
+    white-space:-pre-wrap;
+    white-space:-o-pre-wrap;
+    word-wrap:break-word;
+    white-space: pre-wrap;
+    width:1140px;
+    /* margin:0 auto; */
+    font-size:15px;
+    }
+
+
+
+
+
+.c-wrapper-style {
+    display: block;
+    cursor: default;
+    height: 40px;
+    line-height: 40px;
+	background:orange
+    
+}
+
+.c-wrapper-style i {
+    display: block;
+    float: left;
+    width: 110px;
+    height: 40px;
+    padding-left: 48px;
+    color: #fff;
+    font-size: 16px;
+    font-style: normal;
+    background:#00bf4b;
+}
+.c-wrapper-style #map_td{
+    float: right;
+    margin-right: 50px;
+}
+#smap{
+    width:1200px;
+    height:500px;
+}
+#allmap{
+    width: 100%;
+    height: 100%;
+}
+a{
+    text-align: center;
+}
+
+#bodytickrt .count span b{
+    color: #551A8B;
+}

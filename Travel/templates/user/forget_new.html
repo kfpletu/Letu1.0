@@ -1,0 +1,24 @@
+{% extends 'user/login.html' %}
+{%block title%}找回密码{%endblock title%}
+{%block head%}找回密码{%endblock head%}
+{%block post%}/user/getpwd{%endblock post%}
+{%block css%}<link rel="stylesheet" href="/static/css/user/forget.css">{%endblock css%}
+{%block body_head%}找回密码<a href="/user/login">返回登录</a>{%endblock body_head%}
+{%block pwd%}
+    <b><span>请输入新密码:</span></b>
+    <input type="password" name='new_pwd'>
+{%endblock pwd%}
+{%block img2%}{%endblock img2%}
+{%block phone%}{%endblock phone%}
+{% block new_pwd %}
+    <b><span>请再次输入密码:</span></b>
+    <input type="password" name='new_pwd_again'>
+    <p style="color: red;"> {{ pwd_error }} </p>
+{% endblock new_pwd %}
+{%block class%}{%endblock class%}
+{%block email%}{%endblock email%}
+{%block giveup%}{%endblock giveup%}
+{% block submit %}
+  style='margin-top:38px;'
+{% endblock submit %}
+{%block value%}确定{%endblock value%}

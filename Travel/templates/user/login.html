@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{%block title%}欢迎登录{%endblock title%}</title>
+    <link rel="stylesheet" href="/static/css/basic.css" type="text/css">
+    <link rel="stylesheet" href="/static/css/user/login.css" type="text/css">
+    {%block css%}{%endblock css%}
+</head>
+<body>
+    <div id="top">
+        <a href="/">
+            <img src="/static/images/user/logo.png" alt="logo">
+        </a>
+        <span>{% block head %}欢迎登录{% endblock head %}</span>
+        <a href="/"><span class="s1">返回首页</span></a>
+    </div>
+    <div id="mian">
+        <form action="{%block post%}/user/login{%endblock post%}" method="post">
+            <div class="content">
+                <p>
+                    {%block body_head%}
+                    登录
+                    <a href="/user/register">新用户注册</a>
+                    {%endblock body_head%}
+                </p>
+                <div class="text">
+                    {%block pwd%}
+                    <input type="text" name="uname" placeholder="{%block uname%}请输入用户名(5~15个字母或数字){%endblock uname%}" minlength="5" maxlength="15">
+                    {%block img1%}<img src="/static/images/user/user.png" alt="">{%endblock img1%}
+                    {%endblock pwd%}
+                </div>
+                <div class="text pwd">
+                    {% block new_pwd %}
+                        <input {%block phone%} type="password" name="upwd" placeholder="请输入密码" {%endblock phone%}>
+                        {%block img2%}<img src="/static/images/user/password.png" alt="">{%endblock img2%}
+                    {% endblock new_pwd %}
+                </div>
+                <div class="{%block class%}validateCode{%endblock class%}">
+                    {%block email%}
+                    <img src="/static/images/user/logo.png" alt="验证码">
+                    <input type="text" name="validateCode" placeholder="验证码输入">
+                    {%endblock email%}
+                </div>
+                {%block giveup%}
+                <div class="savePwd">
+                    <input type="checkbox" name="savePwd" >记住密码
+                    <a href="/user/forget">忘记密码?</a>
+                </div>
+                {%endblock giveup%}
+                <input type="submit"  value="{%block value%}登录{%endblock value%}" class="login" {% block submit %}{% endblock submit %}>
+            </div>
+        </form>
+    </div>
+    <div id="bottom">
+        <a href="/">
+            <img src="/static/images/user/logo.png" alt="logo" id="logoImg">
+        </a>
+        <p>
+            <img src="/static/images/user/letufont.png" alt="" id="fontImg">
+        </p>
+        <div class="img">
+            <div id="imgs">
+                <img src="/static/images/user/erweima.jpg" alt="" width="124px;">
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

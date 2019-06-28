@@ -1,0 +1,198 @@
+body,h1,ul,h2,h3,figure,p{
+    margin: 0;
+    padding: 0;
+}
+
+.none {
+    display: none;
+}
+
+#header .logo {
+    float: left;
+    height: 70px;
+    width: 164px;
+    background-image: url(../images/home/logo.png);
+    text-indent: -999px;
+}
+
+#header .center .logo a:hover{
+    background-color: #80808000;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul,ol {
+    list-style: outside none none;
+}
+
+#header {
+    width: 100%;
+    height: 70px;
+    background-color: crimson;
+    min-width: 1263px;
+    /* 如果分辨率小于1280，固定在1280即可，不必自适应 ,无限缩小布局不会变乱*/
+    box-shadow: 0px 1px 1px black;
+    position: relative;
+    z-index: 999;
+}
+
+#header .center {
+    height: 70px;
+    width: 1263px;
+    margin: 0 auto;
+    background: crimson;
+}
+
+#header a {
+    display: block;
+    color: #eee;
+
+}
+
+#header .active a {
+    background-color:#d61e41;
+    /* border-bottom:-2px solid orange; */
+    color:#eee;
+}
+
+#cart .info1 li a{
+    display: block;
+    color: #eee;
+    line-height: 25px;
+}
+ul,ol{
+	/*取消默认的内边距*/
+	padding:0;
+	/*取消列表的项目符号*/
+	list-style:none;
+	/* background:pink; */
+	}
+.info1 {
+	/*设置隐藏*/
+	display:none;
+	}
+#cart ul li:hover ol{
+    display:block;
+    background: #d61e41;
+    }
+    
+#cart{
+    float:right;
+    margin-right: 50px;
+    font-size: 13px;
+    color: #eee;
+    text-align: center;
+}
+#cart .home{
+    line-height: 70px;
+}
+#cart .home .info1{
+    line-height: 25px;
+}
+#cart .home .info1 li{
+    text-align: center;
+}
+#cart .home #uname{
+    width: 100px;
+}
+#header .link {
+    width: 650px;
+    height: 70px;
+    line-height: 70px;
+    /* 里面的内容垂直居中 */
+    float: right;
+}
+
+#header .link li {
+    float: left;
+    height: 70px;
+    width: 120px;
+    text-align: center;
+}
+#header .login{
+    float: right;
+    font-size: 13px;
+    margin-right: 5px;
+    line-height: 70px;
+}
+#header .login #login,#register,#cart{
+    float: right;  
+}
+#header .login a:hover{
+    background: crimson;
+}
+#header .login #register{
+    margin-right: 20px;
+    margin-left: 15px;
+}
+#footer{
+    width: 100%;
+    height: 360px;
+    background-color: #222;
+    text-align: center;
+    clear: both;
+    /* 避免页面内容发生变化而向上浮动 */
+    position: relative;
+    top: 20px;
+}
+#footer .top{
+    width: 1263px;
+    height: 280px;
+    text-align: center;
+    margin: 0 auto;
+    
+}
+#footer .block{
+    color: #ccc;
+    height: 100%;
+    width: 410px;
+    display: inline-block;
+    /* background-color: red; */
+    text-align: left;
+    vertical-align: top;
+}
+#footer h2{
+    font-weight: normal;
+    font-size: 24px;
+    padding: 20px 0 0 20px;
+    
+}
+#footer hr{
+    width: 90%;
+    border: 1px dashed #333;
+}
+#footer ul{
+    color: #666;
+    font-size: 18px;
+    text-indent: 20px;
+    /* 设置首行缩进，就不用每一个去定位了 */
+    line-height: 2;
+    /* 设置行高，增加行上下间距 */
+}
+#footer .bottom{
+    height: 80px;
+    /* line-height: 60px; */
+    /* 设置行高，垂直居中 */
+    text-align: center;
+    color: #777;
+    background-color: #000;
+    border-top: 1px solid #444;
+}
+#footer .bottom p{
+    line-height: 50px;
+    padding: 0;
+}
+#footer .bottom img{
+    margin-top:0; 
+}
+#footer .top p{
+    margin-left: 20px;
+    height: 36px;
+    font-size: 18px;
+}
+#footer .top  a{
+    color: gray;
+    
+}

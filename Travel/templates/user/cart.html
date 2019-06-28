@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>购物车</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static '/css/home/home.css' %}">
+    <link rel="stylesheet" href="{% static '/css/user/cart.css' %}">
+    <link rel="stylesheet" href="{% static '/css/basic.css' %}">
+    <script src="{% static '/js/jquery.js' %}"></script>
+    <script src="{% static '/js/user/cart.js' %}"></script>
+</head>
+<body>
+    <header id="header">
+        <div class="login">
+            <b>
+                <div id="cart">
+                    <a href="user/order.html">历史订单</a>
+                </div>
+            </b>
+        </div>
+        <div class="center">
+            <h1 class="logo">
+                <a href="/" id="logoA">乐途旅行网</a>
+            </h1>
+            
+            <nav>
+                <ul class="link">
+                    <h1 class="none">网站导航</h1>
+                    <li class="active"><a href="/">首页</a></li>
+                    <li><a href="/scenic">景点门票</a></li>
+                    <li><a href="/trip">交通出行</a></li>
+                    <li><a href="/hotel">酒店预定</a></li>
+                    <li><a href="/about">关于我们</a></li>
+                </ul>
+            </nav>
+            
+        </div>   
+    </header>
+    {% block order %}
+    <div id="main">
+        <!--购物车顶部-->
+        <h2>
+            购物车
+        </h2>
+        <!--购物车商品展示-->
+        <div class="info">
+            <!--顶部的工具栏-->
+            <div class="type">
+                <div class="check">
+                    <img src="{% static '/images/user/product_normal.png' %}" class="checkAll">全选
+                </div>
+                <div class="gname">商品</div>
+                <div class="gprice">单价(元)</div>
+                <div class="gcount">数量</div>
+                <div class="gsum">金额</div>
+                <div class="action">操作</div>
+        </div>
+        <!--商品展示-->
+        <div id="content">
+            <!--商品记录-->
+            <!-- {% for book in books %} -->
+            <div class="item">
+                <div class="check">
+                    <img src="{% static '/images/user/product_normal.png' %}" class="checkItem">
+                </div>
+                <div class="gname">
+                    <img src="../img/booking/regist.png">
+                    <p>90分旅行箱</p>
+                    <p>规格: 20寸</p>
+                    <p>颜色: 星空灰</p>
+                </div>
+                <div class="gprice">
+                    <h3>皮粉专享价</h3>
+                    <p>¥ 299.00</p>
+                </div>
+                <div class="gcount">
+                    <!--阻止超链接默认事件-->
+                    <a href="javascript:void(0)" class="minus">-</a>
+                    <input type="text" value="1">
+                    <a href="javascript:void(0)" class="add">+</a>
+                </div>
+                    <div class="gsum">￥ 299.00</div>    
+                    <div class="action">删除</div>
+            </div>
+            <!-- {% endfor %} -->
+            <div id="box1">
+                <p>是否要结算？</p>
+                <button>是</button>
+                <button>否</button>
+            </div>
+            <div id="box2">
+                <p>没有要结算的订单!!</p>
+            </div> 
+            <img src="../img/booking/wait.jpg" class="wait">
+            <div id="empty">
+                <p>空空如也！</p>
+            </div>  
+        </div>
+        <div id="checkout">
+            <div class="balance">
+                <div>
+                    <b>账户余额:</b>
+                    <b>
+                        <span>0.00</span>
+                    </b>
+                    <b>元</b>
+                </div>
+            </div>
+            <div class="result">
+                <p>
+                    <span>
+                        已选择:
+                        <b class="total-num">0</b>
+                        件商品
+                    </span>
+                    <span>
+                        共计:
+                        <b class="total-price">0.00</b>
+                        元
+                    </span>
+                    <span calss="sub">
+                        <input type="submit" value="结算">
+                    </span>
+                </p>
+            </div>
+        </div>
+        </div>
+    </div>
+    {% endblock order %}
+    <div class="bottom">
+        <p>Copyright ©LT 乐途旅行网 | 陕ICP备120110109号 | 旅行网经营许可证： L-LT-BK12345</p>
+        <img src="{% static '/images/home/pic.gif' %}" title="站长统计">
+    </div>
+    
+    
+</body>
+
+</html>

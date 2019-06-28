@@ -1,0 +1,23 @@
+tr th{
+    width:90px ;
+}
+#detail td{
+    text-align: center;
+    font-size: 15px;
+}
+#tab{
+    font-size: 13px;
+}
+#tab .th{
+    background: bisque;
+}
+/*#query #detail td{*/
+/*    font-size: 15px;*/
+/*}*/
+#roll{
+    height: 850px;
+    /*border: 1px solid red;*/
+    width: 899px;
+    /*background: #00BCD4;*/
+    overflow: auto;
+}

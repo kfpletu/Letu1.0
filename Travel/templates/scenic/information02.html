@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>乐途旅行</title>
+    <!--<link rel="stylesheet" href="../css/information.css">-->
+    <!--<link rel="stylesheet" href="../css/basic.css">-->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/scenic/information.css' %}">
+    <link rel="stylesheet" href="{% static 'css/basic.css' %}">
+</head>
+
+<body>
+<<<<<<< HEAD
+<header id="header">
+    {% if uname %}
+=======
+    <header id="header">
+        {% if request.session.userinfo %}
+>>>>>>> 47446b1d3ccdfa4e22b5f2705bf3986e33414f4f
+        <div id="cart">
+            <b>
+                <ul>
+                    <li class="home"><a href="javascript:void(0)">欢迎您,{{ request.session.userinfo.uname }}</a>
+                        <ol class='info1'>
+                            <li><a href="/user/topUp">我的钱包</a></li>
+                            <li><a href="/user/cart'">我的订单</a></li>
+                            <li><a href="/user/logout">退出登录</a></li>
+                        </ol>
+                    </li>
+                </ul>
+            </b>
+        </div>
+    {% else %}
+        <div class="login">
+            <b>
+                <div id="register">
+                    <a href="/user/register">免费注册</a>
+                </div>
+            </b>
+            <b>
+                <div id="login">
+                    <a href="/user/login">您好,请登录</a>
+                </div>
+            </b>
+        </div>
+    {% endif %}
+    <div class="center">
+        <h1 class="logo">乐途旅行网</h1>
+        <nav>
+            <ul class="link">
+                <h1 class="none">网站导航</h1>
+                <li><a href="/">首页</a></li>
+                <li class="active"><a href="/scenic">景点门票</a></li>
+                <li><a href="/trip">交通出行</a></li>
+                <li><a href="/hotel">酒店预定</a></li>
+                <li><a href="/about">关于我们</a></li>
+            </ul>
+        </nav>
+
+    </div>
+</header>
+<div id="headline">
+    <div class="center">
+        <hgroup>
+            <h2>景点门票</h2>
+            <h3>介绍各种最新旅游信息、资讯要闻、景点攻略、门票购买等</h3>
+        </hgroup>
+
+    </div>
+</div>
+<div id="container">
+    <aside class="sidebar">
+        <div class="sidebox recommend">
+            <h2>美景推荐</h2>
+            <div class="tag">
+                <a href="###">陕西(10)</a>
+                <a href="###">四川(10)</a>
+                <a href="###">浙江(10)</a>
+                <a href="###">广东(10)</a>
+                <a href="###">云南(10)</a>
+                <a href="###">江苏(10)</a>
+                <a href="###">山东(10)</a>
+                <a href="###">河南(10)</a>
+                <a href="###">湖北(10)</a>
+                <a href="###">甘肃(10)</a>
+                <a href="###">河北(10)</a>
+                <a href="###">湖南(10)</a>
+                <a href="###">广西(10)</a>
+                <a href="###">新疆(10)</a>
+                <a href="###">内蒙古(10)</a>
+                <a href="###">北京(10)</a>
+                <a href="###">海南(10)</a>
+                <a href="###">贵州(10)</a>
+                <a href="###">安徽(10)</a>
+                <a href="###">青海(10)</a>
+                <a href="###">上海(10)</a>
+            </div>
+
+        </div>
+        <div class="sidebox popular">
+            <h2>热卖旅游</h2>
+            <div class="figure">
+                <figure>
+                    <img src="/static/images/recommend/xian.jpg" alt="西安 2 日游">
+                    <figcaption>西安 2 日游</figcaption>
+                </figure>
+                <figure><img src="/static/images/recommend/beijing.jpg" alt="北京 5日 4晚 游">
+                    <figcaption>北京 5日 4晚 游</figcaption>
+                </figure>
+                <figure><img src="/static/images/recommend/zhejiang.jpg" alt="浙江双飞 3 日游">
+                    <figcaption>浙江双飞 3 日游</figcaption>
+                </figure>
+                <figure><img src="/static/images/recommend/yunnan.gif" alt="云南丽江 6 日游">
+                    <figcaption>云南丽江 6 日游</figcaption>
+                </figure>
+                <figure><img src="/static/images/recommend/shandong.gif" alt="山东青岛 5 日游">
+                    <figcaption>山东青岛 5 日游</figcaption>
+                </figure>
+                <figure><img src="/static/images/recommend/guangxi.jpg" alt="广西 6 日半游">
+                    <figcaption>广西 6 日半游</figcaption>
+                </figure>
+                <figure><img src="/static/images/recommend/qinghai.jpg" alt="青海新疆 9 日游">
+                    <figcaption>青海新疆 9 日游</figcaption>
+                </figure>
+                <figure><img src="/static/images/recommend/hainan.gif" alt="海南三亚 4日 5夜游">
+                    <figcaption>海南三亚 4日 5夜游</figcaption>
+                </figure>
+            </div>
+        </div>
+        <div class="sidebox treasure">
+            <h2>旅游百宝箱</h2>
+            <div class="box">
+                <a href="###" class="trea1">天气预报</a>
+                <a href="/trip" class="trea2">火车票查询</a>
+                <a href="###" class="trea3">航空查询</a>
+                <a href="###" class="trea4">地铁线路查询</a>
+            </div>
+        </div>
+    </aside>
+    <div class="list">
+        <!-- 子导航栏 -->
+        <div class="infor">
+            <ul class="left">
+                <li><a href="{% url 'scenic1' %}">限时特价</a></li>
+                <li><a href="##" class="select">热门推荐</a></li>
+            </ul>
+            <ul class="right">
+                <li><a href="###" class="select">推荐</a></li>
+                <li><a href="###">折扣</a></li>
+                <li><a href="###">特价</a></li>
+            </ul>
+        </div>
+        <!-- 加载子条目 -->
+
+        <figure class="tour">
+            <img src="../img/information2/兵马俑.jpg" alt="热门旅游">
+            <figcaption>
+                <article>
+                    <header>
+                        <hgroup>
+                            <h2>秦始皇兵马俑博物馆</h2>
+                            <h3>世界八大奇迹之一。举世闻名的秦兵马俑，重现两千年前军队的姿态。</h3>
+                        </hgroup>
+
+                    </header>
+                    <ol>
+                        <li>
+                            <mark>地址</mark>
+                            西安市临潼区秦始皇陵以东1.5公里处
+                        </li>
+                        <li>
+                            <mark>5A级</mark>
+                            乐途旅行口碑榜，最佳战略合作伙伴
+                        </li>
+
+                    </ol>
+
+                    <footer>
+                        本团游由乐途旅行网赞助提供，截止于
+                        <time>2019-10-10</time>
+                    </footer>
+
+                </article>
+                <div class="buy">
+                    <div class="price">￥<strong>120</strong></div>
+                    <div class="reserve"><a href="###">立即抢购</a></div>
+                </div>
+                <div class="type">兵马俑</div>
+                <!-- <div class="disc"><span>4.7折</span></div> -->
+            </figcaption>
+
+        </figure>
+        <figure class="tour">
+            <img src="../img/information2/博物馆.jpg" alt="热门旅游">
+            <figcaption>
+                <article>
+                    <header>
+                        <hgroup>
+                            <h2>陕西历史博物馆</h2>
+                            <h3>中国古代文明的艺术殿堂。中国第一座大型现代化博物馆。</h3>
+                        </hgroup>
+
+                    </header>
+                    <ol>
+                        <li>
+                            <mark>地址</mark>
+                            西安市雁塔区小寨东路91号（大雁塔西北侧）
+                        </li>
+                        <li>
+                            <mark>5A级</mark>
+                            乐途旅行口碑榜第二名
+                        </li>
+                    </ol>
+
+                    <footer>
+                        本团游由乐途旅行网赞助提供，截止于
+                        <time>2019-10-10</time>
+                    </footer>
+                </article>
+                <div class="buy">
+                    <div class="price">￥<strong>30</strong></div>
+                    <div class="reserve"><a href="###">立即抢购</a></div>
+                </div>
+                <div class="type">博物馆</div>
+                <!--  <div class="disc"><span>4.7折</span></div> -->
+            </figcaption>
+
+        </figure>
+        <figure class="tour">
+            <img src="../img/information2/tour1.jpg" alt="热门旅游">
+            <figcaption>
+                <article>
+                    <header>
+                        <hgroup>
+                            <h2>西安城墙</h2>
+                            <h3>中国保存较完整的古城墙
+                                触摸历史遗迹，感受历史沧桑</h3>
+                        </hgroup>
+
+                    </header>
+                    <ol>
+                        <li>
+                            <mark>地址</mark>
+                            主要游玩的城门：永宁门（碑林区南大街2号）
+                        </li>
+                        <li>
+                            <mark>5A级</mark>
+                            乐途口碑榜最受媒体青睐景区
+                        </li>
+                    </ol>
+
+                    <footer>
+                        本团游由乐途旅行网赞助提供，截止于
+                        <time>2019-10-10</time>
+                    </footer>
+                </article>
+                <div class="buy">
+                    <div class="price">￥<strong>54</strong></div>
+                    <div class="reserve"><a href="###">立即抢购</a></div>
+                </div>
+                <div class="type">城墙</div>
+                <!-- <div class="disc"><span>4.7折</span></div> -->
+            </figcaption>
+
+        </figure>
+        <figure class="tour">
+            <img src="../img/information2/tour5.jpg" alt="热门旅游">
+            <figcaption>
+                <article>
+                    <header>
+                        <hgroup>
+                            <h2>大唐芙蓉园</h2>
+                            <h3>昔日皇家御苑
+                                感受盛唐气象和璀璨的华美夜景.</h3>
+                        </hgroup>
+
+                    </header>
+                    <ol>
+                        <li>
+                            <mark>地址</mark>
+                            西安市曲江新区芙蓉西路99号
+                        </li>
+                        <li>
+                            <mark>5A级</mark>
+                            乐途口碑榜最具影响力景区
+                        </li>
+                    </ol>
+
+                    <footer>
+                        本团游由乐途旅行网赞助提供，截止于
+                        <time>2019-10-10</time>
+                    </footer>
+                </article>
+                <div class="buy">
+                    <div class="price">￥<strong>108</strong></div>
+                    <div class="reserve"><a href="###">立即抢购</a></div>
+                </div>
+                <div class="type">大唐芙蓉园</div>
+                <!-- <div class="disc"><span>4.7折</span></div> -->
+            </figcaption>
+
+        </figure>
+        <figure class="tour">
+            <img src="../img/information2/tour7.jpg" alt="热门旅游">
+            <figcaption>
+                <article>
+                    <header>
+                        <hgroup>
+                            <h2>《长恨歌》演出</h2>
+                            <h3>华清池上的山水实景演出
+                                演绎了李杨的爱情悲剧、唐朝的盛衰转变..</h3>
+                        </hgroup>
+
+                    </header>
+                    <ol>
+                        <li>
+                            <mark>地址</mark>
+                            西安市临潼区华清路38号
+                        </li>
+                        <li>乐途口碑榜最受大家喜爱的歌舞剧</li>
+                    </ol>
+
+                    <footer>
+                        本团游由乐途旅行网赞助提供，截止于
+                        <time>2019-10-10</time>
+                    </footer>
+                </article>
+                <div class="buy">
+                    <div class="price">￥<strong>218</strong></div>
+                    <div class="reserve"><a href="###">立即抢购</a></div>
+                </div>
+                <div class="type">歌舞剧</div>
+                <!-- <div class="disc"><span>4.7折</span></div> -->
+            </figcaption>
+
+        </figure>
+        <figure class="tour">
+            <img src="../img/information2/tour8.jpg" alt="热门旅游">
+            <figcaption>
+                <article>
+                    <header>
+                        <hgroup>
+                            <h2>回民街</h2>
+                            <h3>回民老街区，浓厚的穆斯林气息
+                                有着几百年历史的街区。.</h3>
+                        </hgroup>
+
+                    </header>
+                    <ol>
+                        <li>
+                            <mark>地址</mark>
+                            西安市莲湖区西大街1号
+                        </li>
+                        <li>乐途口碑榜最受大家喜爱的吃货一条街</li>
+                    </ol>
+
+                    <footer>
+                        本团游由乐途旅行网赞助提供，截止于
+                        <time>2019-10-10</time>
+                    </footer>
+                </article>
+                <div class="buy">
+                    <div class="price">￥<strong>15</strong></div>
+                    <div class="reserve"><a href="###">立即抢购</a></div>
+                </div>
+                <div class="type">回民街</div>
+                <!-- <div class="disc"><span>4.7折</span></div> -->
+            </figcaption>
+
+        </figure>
+        <figure class="tour">
+            <img src="../img/information2/海洋馆.jpg" alt="热门旅游">
+            <figcaption>
+                <article>
+                    <header>
+                        <hgroup>
+                            <h2>曲江海洋极地公园</h2>
+                            <h3>海洋景观与极地风光于一体，西北地区较大规模的海洋主题公园。</h3>
+                        </hgroup>
+
+                    </header>
+                    <ol>
+                        <li>
+                            <mark>地址</mark>
+                            西安市雁塔区曲江二路1号
+                        </li>
+                        <li>
+                            <mark>4A级</mark>
+                            乐途口碑榜最受儿童喜欢的景点
+                        </li>
+                    </ol>
+
+                    <footer>
+                        本团游由乐途旅行网赞助提供，截止于
+                        <time>2019-10-10</time>
+                    </footer>
+                </article>
+                <div class="buy">
+                    <div class="price">￥<strong>158</strong></div>
+                    <div class="reserve"><a href="###">立即抢购</a></div>
+                </div>
+                <div class="type">极地海洋馆</div>
+                <!-- <div class="disc"><span>4.7折</span></div> -->
+            </figcaption>
+
+        </figure>
+        <figure class="tour">
+            <img src="../img/information2/tour4.jpg" alt="热门旅游">
+            <figcaption>
+                <article>
+                    <header>
+                        <hgroup>
+                            <h2>乐华城 乐华欢乐世界</h2>
+                            <h3>大型集群游乐场所，亲子游玩好去处。
+                                过山车主题公园</h3>
+                        </hgroup>
+
+                    </header>
+                    <ol>
+                        <li>
+                            <mark>地址</mark>
+                            西安市西咸新区乐华城
+                        </li>
+                        <li>乐途口碑榜全球卓越主题公园</li>
+                    </ol>
+
+                    <footer>
+                        本团游由乐途旅行网赞助提供，截止于
+                        <time>2019-10-10</time>
+                    </footer>
+                </article>
+                <div class="buy">
+                    <div class="price">￥<strong>98</strong></div>
+                    <div class="reserve"><a href="###">立即抢购</a></div>
+                </div>
+                <div class="type" 乐华城
+    </div>
+    <!-- <div class="disc"><span>4.7折</span></div> -->
+    </figcaption>
+
+    </figure>
+    <figure class="tour">
+        <img src="../img/information2/tour6.jpg" alt="热门旅游">
+        <figcaption>
+            <article>
+                <header>
+                    <hgroup>
+                        <h2>秦岭野生动物园</h2>
+                        <h3>全国野生动物保护科普教育基地。
+                            秦岭绝美生态旅游区。</h3>
+                    </hgroup>
+
+                </header>
+                <ol>
+                    <li>
+                        <mark>地址</mark>
+                        西安市长安区滦镇
+                    </li>
+                    <li>
+                        <mark>4A级</mark>
+                        乐途口碑榜最佳自然景区
+                    </li>
+                </ol>
+
+                <footer>
+                    本团游由乐途旅行网赞助提供，截止于
+                    <time>2019-10-10</time>
+                </footer>
+            </article>
+            <div class="buy">
+                <div class="price">￥<strong>95</strong></div>
+                <div class="reserve"><a href="###">立即抢购</a></div>
+            </div>
+            <div class="type">动物园</div>
+            <!-- <div class="disc"><span>4.7折</span></div> -->
+        </figcaption>
+
+    </figure>
+    <div class="more"><a href="###">加载更多...</a></div>
+
+</div>
+</div>
+<footer id="footer">
+    <div class="top">
+        <div class="block left">
+            <h2>合作伙伴</h2>
+            <hr>
+            <p><a href="http://www.tuniu.com">途牛旅游网</a></p>
+            <p><a href="http://www.lvmama.com">驴妈妈旅游网</a></p>
+            <p><a href="http://www.ctrip.com">携程旅行网</a></p>
+            <p><a href="http://www.cytsonline.com">中国青年旅行社</a></p>
+        </div>
+        <div class="block center">
+            <h2>旅游 FAQ</h2>
+            <hr>
+            <p><a href="/about/travelContract">旅游合同签订方式？</a></p>
+            <p><a href="/about/childPrice">儿童价是基于什么制定的？</a></p>
+            <p><a href="/about/touristRoute">旅游的线路品质怎么界定的？</a></p>
+            <p><a href="/about/singleRoom">单房差是什么？</a></p>
+            <p><a href="/about/travelInsuranceCategory">旅游保险有那些种类？</a></p>
+        </div>
+        <div class="block right">
+            <h2>联系方式</h2>
+            <hr>
+            <ul>
+                <li>微博：weibo.com/letu</li>
+                <li>邮件：letu@letu.com</li>
+                <li>地址：陕西西安碑林区中铁第一国际9层</li>
+            </ul>
+        </div>
+    </div>
+    <div class="bottom">
+        <p>Copyright ©LT 乐途旅行网 | 陕ICP备120110109号 | 旅行网经营许可证： L-LT-BK12345</p>
+        <img src="../img/booking/pic.gif" title="站长统计">
+    </div>
+</footer>
+</body>
+
+</html>

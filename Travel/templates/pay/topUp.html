@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>支付中心</title>
+    <link rel="stylesheet" href="/static/css/base.css" type="text/css">
+    <link rel="stylesheet" href="/static/css/pay/topUp.css" type="text/css">
+    <script src="/static/js/jquery.js"></script>
+    <script src="/static/js/pay/topUP.js"></script>
+</head>
+
+<body>
+    <div id="top">
+        <a href="../index.html">
+            <img src="/static/images/home/logo.png" alt="logo">
+        </a>
+        <span>支付中心</span>
+        <a href="../index.html"><span class="s1">返回首页</span></a>
+    </div>
+    <div id="main">
+        <!-- <div class="pin"> -->
+        <div class="payimg">
+            <img src="" class='imger' alt="">
+        </div>
+        <form action="">
+            <div class="content">
+                <p>
+                    金额充值
+                    <!-- <a href="../html/register.html">新用户注册</a> -->
+                </p>
+                <div class="choice">
+                    <p>请选择充值金额</p>
+                    <input type="radio" name="money" value="100" id="money1" class='input1' checked><label
+                        for="money1">100</label>
+                    <input type="radio" name="money" value="200" id="money2" class='input1'><label
+                        for="money2">200</label>
+                    <input type="radio" name="money" value="500" id="money3" class='input1'><label
+                        for="money3">500</label>
+                    <input type="radio" name="money" value="1000" id="money4" class='input1'><label
+                        for="money4">1000</label>
+                    <p class="other">
+                        其他金额
+                        <input type="text" name="money" id="" value="0">
+                    </p>
+
+                </div>
+
+                <div class="pay">
+                    <p>请选择支付方式</p>
+                    <input type="radio" name="pay" value="zhifubao" id="zhifubao"><label for="zhifubao">支付宝</label>
+                    <input type="radio" name="pay" value="weixin" id="weixin"><label for="weixin">微信</label>
+                    <input type="radio" name="pay" value="yinlian" id="yinlian"><label for="yinlian">银联</label>
+                </div>
+                <div class="butt">
+                    <input type="submit" value="确认" class="button">
+                </div>
+                <!-- <div class="butt">
+                    <p>充值</p>      
+                </div> -->
+            </div>
+
+        </form>
+        <!-- <div class="up">
+            <p>已完成支付,充值成功</p>
+        </div>    -->
+
+    </div>
+    <div id="bottom">
+        <a href="../index.html">
+            <img src="/static/images/home/logo.png" alt="logo" id="logoImg">
+        </a>
+        <p>
+            <img src="/static/images/pay/letufont.png" alt="" id="fontImg">
+        </p>
+        <div class="img">
+            <div id="imgs">
+                <img src="/static/images/pay/erweima.jpg" alt="" width="124px;">
+            </div>
+        </div>
+
+    </div>
+    <div class="bottom">
+        <p>Copyright ©LT 乐途旅行网 | 陕ICP备120110109号 | 旅行网经营许可证： L-LT-BK12345</p>
+        <img src="/static/images/home/pic.gif" title="站长统计">
+    </div>
+</body>
+
+</html>

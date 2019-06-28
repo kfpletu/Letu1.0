@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>免费注册</title>
+    <link rel="stylesheet" href="/static/css/basic.css" type="text/css">
+    <link rel="stylesheet" href="/static/css/user/register.css" type="text/css">
+</head>
+<body>
+    <div id="top">
+        <a href="/">
+            <img src="/static/images/user/logo.png" alt="logo">
+        </a>
+        <span>免费注册</span>
+        <a href="/"><span class="s1">返回首页</span></a>
+    </div>
+    <div id="mian">
+        <form action="/user/register" method="post">
+            <div class="content">
+                <p>
+                    注册
+                    <a href="login">返回登录</a>
+                </p>
+                <div class="text">
+                    <input type="text" name="uname" placeholder="请输入用户名(5~15个字母或数字)" maxlength="15" minlength="5">
+                    <img src="/static/images/user/user.png" alt="">
+                </div>
+                <div class="text pwd">
+                    <input type="password" name="upwd" placeholder="请输入密码(5~15个字母或数字)" maxlength="15">
+                    <img src="/static/images/user/password.png" alt="">
+                </div>
+                <div class="text phon">
+                    <input type="text" name="phone" placeholder="请输入手机号码" maxlength="11">
+                </div>
+                <div class="text email">
+                    <input type="text" name="email" placeholder="请输入可用邮箱">
+                </div>
+                <input type="submit" id="" value="注册" class="login">
+            </div>
+        </form>
+    </div>
+    <div id="bottom">
+        <a href="/">
+            <img src="/static/images/user/logo.png" alt="logo" id="logoImg">
+        </a>
+        <p>
+            <img src="/static/images/user/letufont.png" alt="" id="fontImg">
+        </p>
+        <div class="img">
+            <div id="imgs">
+                <img src="/static/images/user/erweima.jpg" alt="" width="124px;">
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

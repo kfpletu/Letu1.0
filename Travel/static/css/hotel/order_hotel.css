@@ -1,0 +1,257 @@
+#headline {
+    background: linear-gradient(to bottom right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0)) no-repeat center,
+        url(../../images/hotel/headline.jpeg) no-repeat center;
+    background-size: 100% 300px;
+
+}
+#container{
+    overflow: hidden;
+    margin-top: 20px;
+    padding-top: 10px;
+     padding-left: 15px;
+}
+#container .order {
+    width: 900px;
+    float: left;
+    color: #666;
+    overflow: hidden;
+
+}
+#brandListFirst{
+    margin-top:0px;
+    margin-bottom: 15px;
+    height: 30px;
+}
+#brandListFirst a{
+    float: left;
+    height: 30px;
+    margin-right: 15px;
+    font-size: 20px;
+    color: #03A9F4;
+}
+/*搜索框直接外框*/
+#container .out-form{
+    width: 900px;
+    overflow: hidden;
+}
+#container .out-form img{
+    margin-left: 5px;
+    width: 290px;
+    height: 290px;
+    float: left;
+    border-radius: 5px;
+}
+/*搜索框*/
+#container .out-form .form{
+    width: 600px;
+    border-radius: 10px;
+    /*background:#e7e4e4;*/
+    box-shadow: 0 5px 2px gray;
+    border: 1px solid grey;
+    box-sizing: border-box;
+    padding-left: 15px;
+    padding-right: 15px;
+    float: left;
+  
+}
+#container .form h2 {
+    height: 40px;
+    line-height: 40px;
+    font-size: 30px;
+    font-weight: normal;
+    padding: 0;
+    color: #666;
+    text-align: center;
+    border-bottom: 1px double grey;
+
+}
+
+/*搜索框酒店类型*/
+#container .form .infor {
+    margin: 10px 0 0 0;
+    background-color: #fff;
+}
+#container .form li,
+#container .new li {
+    display: inline-block;
+}
+#container .form .infor li {
+    padding: 5px 10px;
+}
+#container .form ul li:nth-child(3) a{
+    color: #666;
+}
+#container .form ul li a{
+    color: #666;
+}
+#container .form ul li a:hover {
+    display: block;
+    /*height: 20px;*/
+    /*line-height: 20px;*/
+    color: #fff;
+    background-color: #458B00;
+    /*padding: 1px 4px;*/
+    border-radius: 4px;
+    /*margin: 0 10px 0 16px;*/
+
+}
+a:visited {
+    color: #666;
+}
+/*搜索栏输入框*/
+#container .form input {
+    width: 158px;
+    height: 18px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    border-radius: 4px;
+    padding: 5px;
+    font-size: 15px;
+    color: #666;
+    margin: 0 0 0 16px;
+
+}
+/*下拉框*/
+#container .form select {
+    width: 170px;
+    height: 30px;
+    background-color: #fff;
+    border-radius: 4px;
+    font-size: 15px;
+    margin: 0 0 0 16px;
+}
+#container .form select:focus,#container .form input:focus{
+    outline: none;
+}
+#container .form p {
+    line-height: 3;
+}
+
+#container .form .button {
+
+    display: inline-block;
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 4px;
+    background-color: orange;
+    color: #fff;
+    font-size: 20px;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    left: 50%;
+    margin-left: -65px;
+    
+}
+
+#container .new {
+    margin:0 auto;
+    width: 900px;
+    overflow: hidden;
+}
+
+#container .new h2 {
+    margin-top: 30px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 30px;
+    font-weight: normal;
+    border-bottom: 1px dashed grey;
+    padding: 0 0 15px 0;
+    color: #666;
+    text-align: center;
+}
+
+#container .new ul{
+    margin: 20px 0 0 20px;
+    height: 30px;  
+
+}
+
+#container .new li{
+    
+    margin-left:10px; 
+    font-size: 15px;
+    line-height: 35px;
+    
+}
+#container .new li a{
+    color: #666;
+}
+#container .new li a:hover{
+    display: block;
+    background-color: #458B00;
+    border-radius: 4px;
+    color: #fff;
+
+}
+/*图片区域*/
+.hotel_figure{
+    float: left;
+    display: inline-block;
+    width: 260px;
+    margin: 0 15px; 
+    vertical-align: top;
+    height: 210px;
+    border: 1px solid #ddd;
+    margin-top:20px;
+    text-align: center;
+    border-radius: 4px;
+    position: relative;
+    font-size: 16px;
+    font-weight: 700;
+    color: #000;
+    position: relative;
+
+}
+.hotel_img{
+    width: 250px;
+    margin: 5px 5px 0 5px;
+    height: 150px;
+}
+.hotel_imfor{
+    padding-top: 0.1px;
+}
+.hotel_figure a{
+    position: absolute;
+    background: orange;
+    text-align: center;
+    width: 80px;
+    height: 22px;
+    bottom: 3px;
+    right: 8px;
+    color: #fff;
+    line-height:23px;
+    border-radius:5px; 
+}
+.hotel_figure a:hover{
+    background: #458B00;
+}
+.brandListBox{
+    margin-top: 40px;
+    margin: 40px auto;
+    width: 18880px;
+    height: 84px;
+    border-top:1px solid #666;
+    border-bottom: 1px solid #666;
+    text-align: center;
+    font-size: 12px;
+}
+.brandListBox .brandList{
+    width: 86px;
+    height: 80px;
+    float: left;
+    margin-top:2px; 
+}
+.brandListBox .brandList:hover{
+    border:1px solid orange;
+}
+.brandListBox .brandList img{
+    width:80px;
+    height:60px;
+}
+#container .list .more {
+    margin: 20px auto;
+}
