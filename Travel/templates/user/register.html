@@ -18,6 +18,7 @@
     </div>
     <div id="mian">
         <form action="/user/register" method="post">
+            {% csrf_token %}
             <div class="content">
                 <p>
                     注册
