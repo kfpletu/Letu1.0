@@ -3,10 +3,16 @@ from django.db import models
 # Create your models here.
 
 class Info(models.Model):
-    uname = models.CharField('用户姓名', max_length=15,unique=True)
-    upwd = models.CharField('用户密码', max_length=15,null=False)
+    uname = models.CharField('用户姓名', max_length=50,unique=True)
+    upwd = models.CharField('用户密码', max_length=150,null=False)
     phone = models.CharField('手机号', max_length=11, unique=True)
     email = models.EmailField('邮箱')
+    price = models.DecimalField('余额',max_digits=8,decimal_places=2,default=0)
+    is_online = models.BooleanField('登录状态', default=0)
+    join_time = models.DateTimeField('注册时间', auto_now_add=True)
+    is_alive = models.BooleanField('是否注销', default=0)
+    
+    
 
 
 class Cart(models.Model):

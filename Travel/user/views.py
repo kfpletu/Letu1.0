@@ -9,31 +9,34 @@ from django.http import HttpResponseRedirect
 # 登录
 def login(request):
     if request.method == 'GET':
-        print('get')
         return render(request, 'user/login.html')
     elif request.method == 'POST':
         # 获取登录页面form表单提交的uname和upwd
-        print('post')
         uname = request.POST.get('uname')
         upwd = request.POST.get('upwd')
         # 获取验证码
         validateCode = request.POST.get('validateCode')
 
         remember = request.POST.get('remember')
-        print(validateCode,remember)
         # 从数据库获取uname和upwd
         try:
             user = Info.objects.get(uname=uname, upwd=upwd)
-            request.session['userinfo'] = {
-                'uname': user.uname,
-                'id': user.id
-            }
-            resp = render(request, 'index.html', locals())
-            if remember:
-                resp.set_cookie('uname', uname, max_age=7 * 24 * 60 * 60)
+            if user.is_online:
+                resp = render(request,'user/login.html',locals())
+                return resp
             else:
-                resp.delete_cookie('uname')
-            return resp
+                user.is_online = 1
+                user.save()
+                request.session['userinfo'] = {
+                    'uname': user.uname,
+                    'id': user.id
+                }
+                resp = render(request, 'index.html', locals())
+                if remember:
+                    resp.set_cookie('uname', uname, max_age=7 * 24 * 60 * 60)
+                else:
+                    resp.delete_cookie('uname')
+                return resp
         except:
             # 出异常,说明用户名密码不正确,刷新当前登录页面
             return render(request,'user/login.html')
@@ -84,24 +87,34 @@ def updatepwd(request):
     elif request.method == 'POST':
         # 获取用户输入的新密码
         uname = request.session['uname']
-        print(uname)
         new_pwd = request.POST.get('new_pwd')
         new_pwd_again = request.POST.get('new_pwd_again')
         if new_pwd == new_pwd_again:
-            abook = Info.objects.get(uname=uname)
-            abook.upwd = new_pwd
-            abook.save()
-            del request.session['uname']
-            return render(request, 'user/login.html')
+            try:
+                abook = Info.objects.get(uname=uname)
+                abook.upwd = new_pwd
+                abook.save()
+                del request.session['uname']
+                return render(request, 'user/login.html')
+            except:
+                return render(request, 'user/forget.html')
         else:
             pwd_error = '密码不一致'
-            return render(request,'user/forget_new.html',locals())
+            return render(request,'user/forget.html',locals())
         
 
 def logout(request):
-    del request.session['userinfo']
-    # del request.session['id']
-    return HttpResponseRedirect('/')
+    try:
+        uid = request.session['userinfo']['id']
+        user = Info.objects.get(id=uid)
+        user.is_online = False
+        user.save()
+        # print(user.is_online)
+        del request.session['userinfo']
+        # del request.session['id']
+        return HttpResponseRedirect('/')
+    except:
+        return HttpResponseRedirect('/')
 
 #购物车
 def cart(request):
