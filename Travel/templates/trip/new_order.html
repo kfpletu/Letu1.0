@@ -153,6 +153,7 @@
             </ul>
 
             <form action="/trip/search" method="get">
+                {% csrf_token %}
                 <div class="left">
                     <p>
                         <label for="from_city">出发城市</label>
@@ -195,8 +196,6 @@
                 <li class="li"><a href="javascript:void (0)" class="aa">成都</a></li>
                 <li class="li"><a href="javascript:void (0)" class="aa">杭州</a></li>
             </ul>
-            <form action="">
-            </form>
             <div id="roll">
                 <table id="tab">
                     <thead>
