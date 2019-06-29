@@ -8,8 +8,8 @@
 #content{
     box-sizing:border-box;
     width: 1200px;
-    height: 1040px;
-    border: 1px solid #333;
+    height: 630px;
+    border: 1px solid orange;
     position: relative;
 }
 
@@ -74,7 +74,7 @@
 .type{
     margin-top: 25px;
     height: 36px;
-    border-top: 1px solid gray;
+    border-top: 1px solid orange;
     background: #e6e6e5;
     box-shadow: 0 2px 3px gray; 
     color: #808080;
@@ -136,10 +136,10 @@
     text-align: left;
 }
 .item .gname img{
-    width: 84px;
+    width: 140px;
     height: 84px;
     float: left; 
-    margin-left: 20%;
+    margin-left: 65px;
     margin-right: 20px;
     margin-top: 15px;
 }

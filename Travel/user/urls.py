@@ -8,9 +8,10 @@ urlpatterns = [
     url(r'^register', views.register),
     url(r'^cart',views.cart),
     url(r'^order',views.order),
-    url(r'^forget$', views.forget),
-    url(r'^getpwd$', views.getpwd),
+    url(r'^forget$', views.getpwd),
+    url(r'^getpwd$', views.updatepwd),
     url(r'^logout$', views.logout),
     url(r'^booking',views.booking),
+    url(r'^topUp$',views.topup)
     
 ]
