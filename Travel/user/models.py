@@ -14,9 +14,8 @@ class Info(models.Model):
     is_alive = models.BooleanField('是否注销', default=0)
 
     def __str__(self):
-        return '姓名' + self.uname + '电话' + self.phone + '邮箱'
-        +self.email+'余额'+self.price+'登录状态'+self.is_online
-    
+        return '姓名%s 电话%s 邮箱%s 余额%s 登录状态%s' \
+        % (self.uname, self.phone, self.email, self.price, self.is_online)
     
 
 
