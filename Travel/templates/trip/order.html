@@ -153,6 +153,7 @@
                 </p>
 
                 <form action="/trip/search" method="get">
+                    {% csrf_token %}
                     <div class="left">
                         <p>
                             <label for="from_city">出发城市</label>
@@ -194,6 +195,7 @@
                     <li class="li"><a href="javascript:void (0)" class="aa">杭州</a></li>
                 </ul>
                 <form action="" id="formtab">
+                    {% csrf_token %}
                     <table id="tab">
                         <thead>
                             <tr class="th" id="float">
@@ -229,41 +231,6 @@
                                 <th class="last" colspan="1" rowspan="1">备注</th>
                             </tr>
                         </thead>
-
-                        {#                    <tbody id="queryLeftTable">#}
-                        {#                    <tr class="th1" id="detail">#}
-                        {#                        <td width="90" colspan="1" rowspan="1">车次</td>#}
-                        {#                        <td width="100" colspan="1" rowspan="1">出发站<br clear="none">#}
-                        {#                            到达站#}
-                        {#                        </td>#}
-                        {#                        <td width="82" colspan="1" rowspan="1" id="startendtime"><span class="b1" id="s_time"#}
-                        {#                                                                                       style="cursor: pointer;">出发时间</span><br><span#}
-                        {#                                class="b2" id="r_time" style="cursor: pointer;">到达时间</span></td>#}
-                        {#                        <td width="82" colspan="1" rowspan="1"><span class="b3" id="l_s"#}
-                        {#                                                                     style="cursor: pointer;">历时</span>#}
-                        {#                        </td>#}
-                        {#                        <td width="66" colspan="1" rowspan="1">商务座<br clear="none">#}
-                        {#                            特等座#}
-                        {#                        </td>#}
-                        {#                        <td width="66" colspan="1" rowspan="1">一等座</td>#}
-                        {#                        <td width="66" colspan="1" rowspan="1">二等座</td>#}
-                        {#                        <td width="66" colspan="1" rowspan="1">高级<br clear="none">#}
-                        {#                            软卧#}
-                        {#                        </td>#}
-                        {#                        <td width="66" colspan="1" rowspan="1">软卧<br clear="none">#}
-                        {#                            一等卧#}
-                        {#                        </td>#}
-                        {#                        <td width="66" colspan="1" rowspan="1">动卧</td>#}
-                        {#                        <td widthcitySelect="66" colspan="1" rowspan="1">硬卧<br clear="none">#}
-                        {#                            二等卧#}
-                        {#                        </td>#}
-                        {#                        <td width="66" colspan="1" rowspan="1">软座</td>#}
-                        {#                        <td width="66" colspan="1" rowspan="1">硬座</td>#}
-                        {#                        <td width="66" colspan="1" rowspan="1">无座</td>#}
-                        {#                        <td width="66" colspan="1" rowspan="1">其他</td>#}
-                        {#                        <td class="last" colspan="1" rowspan="1">备注</td>#}
-                        {#                    </tr>#}
-                        {#                    </tbody>#}
                     </table>
                 </form>
             </div>

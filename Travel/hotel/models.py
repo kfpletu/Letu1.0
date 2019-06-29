@@ -3,7 +3,6 @@ from django.db import models
 # Create your models here.
 
 
-
 class House(models.Model):
     hotel_name=models.CharField('酒店名',max_length=20)
     house_count=models.IntegerField('剩余房间数量',default=30)

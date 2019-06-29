@@ -55,10 +55,10 @@ def KnowWeather(url):
     return findall_dict
 
 
-xian = KnowWeather(url='http://www.weather.com.cn/weather/101110101.shtml')  # 西安
+# xian = KnowWeather(url='http://www.weather.com.cn/weather/101110101.shtml')  # 西安
 baoji = KnowWeather(url='http://www.weather.com.cn/weather/101110901.shtml')  # 宝鸡
-ankang = KnowWeather(url='http://www.weather.com.cn/weather/101110701.shtml')  # 安康
-xianyang = KnowWeather(url='http://www.weather.com.cn/weather/101110200.shtml')  # 咸阳
-
+# ankang = KnowWeather(url='http://www.weather.com.cn/weather/101110701.shtml')  # 安康
+# xianyang = KnowWeather(url='http://www.weather.com.cn/weather/101110200.shtml')  # 咸阳
+#
 for date, value in baoji.items():
     print(value, end='\n')

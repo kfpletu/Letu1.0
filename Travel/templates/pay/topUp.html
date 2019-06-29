@@ -25,7 +25,8 @@
         <div class="payimg">
             <img src="" class='imger' alt="">
         </div>
-        <form action="">
+        <form action="" method="post">
+            {% csrf_token %}
             <div class="content">
                 <p>
                     金额充值
