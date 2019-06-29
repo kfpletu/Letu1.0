@@ -4,6 +4,7 @@ from django.shortcuts import render
 from .models import *
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
+from django.core.paginator import Paginator
 
 
 # 登录
@@ -80,7 +81,7 @@ def getpwd(request):
             return render(request, 'user/forget_new.html')
         except:
             return render(request,'user/forget.html')
-
+# 修改密码
 def updatepwd(request):
     if request.method == 'GET':
         return render(request, 'user/forget.html')
@@ -102,7 +103,7 @@ def updatepwd(request):
             pwd_error = '密码不一致'
             return render(request,'user/forget.html',locals())
         
-
+# 退出登录
 def logout(request):
     try:
         uid = request.session['userinfo']['id']
@@ -130,6 +131,8 @@ def cart(request):
     # u_id = request.session['id']
     goods = Cart.objects.filter(id=1)
     paginator = Paginator(goods,4)
+    car_page = request.GET.get('cart',1)
+    page = paginator.page(cur_page)
     return render(request,'user/cart.html',locals())
 
 #历史记录
