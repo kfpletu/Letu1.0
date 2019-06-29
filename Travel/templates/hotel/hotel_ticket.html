@@ -1,25 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>酒店详情</title>
-    <link rel="stylesheet" href="/static/css/hotel/home.css">
-    <link rel="stylesheet" href="/static/css/hotel/basic.css">
-    <link rel="stylesheet" href="/static/css/hotel/hotel_ticket.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>酒店详情</title>
+<link rel="stylesheet" href="/static/css/hotel/home.css">
+<link rel="stylesheet" href="/static/css/hotel/basic.css">
+<link rel="stylesheet" href="/static/css/hotel/hotel_ticket.css">
 </head>
 <script src="/static/js/hotel/jquery.js"></script>
-<script src="/static/js/hotel/map.js"></script>
+{#<script src="/static/js/hotel/map.js"></script>#}
 <script src="/static/js/hotel/order.js"></script>
-<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=DVz4AM0f5tDaH8dZwBCjRzHxuaKn3x7x"></script>
-<script type="text/javascript" src="../../static/js/hotel/prefixfree.min.js"></script>
-<script type="text/javascript" src="../../static/js/hotel/hotel_ticket.js"></script>
- <!-- <script type="text/javascript" src="../js/hotel_ticket/zoom-slideshow.js"></script>
-<!<script src='../js/hotel_ticket/tic.js'></script> -->
- <script src="../../static/js/hotel/layDate-v5.0.9/laydate/laydate.js"></script>
+{#<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=DVz4AM0f5tDaH8dZwBCjRzHxuaKn3x7x"></script>#}
+{#<script type="text/javascript" src="/static/js/hotel/prefixfree.min.js"></script>#}
+<script type="text/javascript" src="/static/js/hotel/hotel_ticket.js"></script>
+<script src="/static/js/hotel/layDate-v5.0.9/laydate/laydate.js"></script>
 <body>
-    <header id="header">
-        {% if request.session.userinfo %}
+<header id="header">
+    {% if request.session.userinfo %}
         <div id="cart">
             <b>
                 <ul>
@@ -33,7 +31,7 @@
                 </ul>
             </b>
         </div>
-        {% else %}
+    {% else %}
         <div class="login">
             <b>
                 <div id="register">
@@ -46,80 +44,80 @@
                 </div>
             </b>
         </div>
-        {% endif %}
-        <div class="center">
-            <h1 class="logo">
-                <a href="/" id="logoA">乐途旅行网</a>
-            </h1>
+    {% endif %}
+    <div class="center">
+        <h1 class="logo">
+            <a href="/" id="logoA">乐途旅行网</a>
+        </h1>
 
-            <nav>
-                <ul class="link">
-                    <h1 class="none">网站导航</h1>
-                    <li><a href="/index">首页</a></li>
-                    <li><a href="/scenic/">景点门票</a></li>
-                    <li><a href="/trip/">交通出行</a></li>
-                    <li class="active"><a href="/hotel/">酒店预定</a></li>
-                    <li><a href="/about/">关于我们</a></li>
-                </ul>
-            </nav>
+        <nav>
+            <ul class="link">
+                <h1 class="none">网站导航</h1>
+                <li><a href="/index">首页</a></li>
+                <li><a href="/scenic/">景点门票</a></li>
+                <li><a href="/trip/">交通出行</a></li>
+                <li class="active"><a href="/hotel/">酒店预定</a></li>
+                <li><a href="/about/">关于我们</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<div id="bodyer1">
+    <!-- <div class="imgs">
+        <img src="../img/info/qinlingdongwuyuan.jpg" alt="图片加载中">
+    </div> -->
+    <div><b>{{ hotel_name }}</b></div>
+    <div id="content">
+        <div id="view">
+            <img src="/static/images/hotel/{{ hotel_p }}/11.png" alt="Nature1"/>
+            <img src="/static/images/hotel/{{ hotel_p }}/12.png" alt="Nature2"/>
+            <img src="/static/images/hotel/{{ hotel_p }}/13.png" alt="Nature3"/>
+            <img src="/static/images/hotel/{{ hotel_p }}/14.png" alt="Nature4"/>
+            <img src="/static/images/hotel/{{ hotel_p }}/15.png" alt="Nature5"/>
         </div>
-    </header>
-
-    <div id="bodyer1">
-        <!-- <div class="imgs">
-            <img src="../img/info/qinlingdongwuyuan.jpg" alt="图片加载中">
-        </div> -->
-        <div><b>{{ hotel_name }}</b></div>
-        <div id="content">
-            <div id="view">
-                <img src="/static/images/hotel/{{ hotel_p }}/11.png" alt="Nature1" />
-                <img src="/static/images/hotel/{{ hotel_p }}/12.png" alt="Nature2" />
-                <img src="/static/images/hotel/{{ hotel_p }}/13.png" alt="Nature3" />
-                <img src="/static/images/hotel/{{ hotel_p }}/14.png" alt="Nature4" />
-                <img src="/static/images/hotel/{{ hotel_p }}/15.png" alt="Nature5" />
-            </div>
-            <div id="pics-thumbs">
-                    <img src="/static/images/hotel/{{ hotel_p }}/11.png" alt="Nature1" />
-                    <img src="/static/images/hotel/{{ hotel_p }}/12.png" alt="Nature2" />
-                    <img src="/static/images/hotel/{{ hotel_p }}/13.png" alt="Nature3" />
-                    <img src="/static/images/hotel/{{ hotel_p }}/14.png" alt="Nature4" />
-                    <img src="/static/images/hotel/{{ hotel_p }}/15.png" alt="Nature5" />
-            </div>
-        </div>
-        <div class="sDetails">
-           <div class="hotel_info">
-               <div id="hotel_info_1">4.5分</div>
-               <a href="##">{{ order_count }}位住客已评论</a>
-
-           </div  >
-           <div class="hotel_info">2011年装修 2011年开业
-               <br>电话：{{phone}}{#029-87388888#}
-               <br>地址：{{address}}{#新城区东新街199号（近民乐园）#}
-            </div>
-           <div class="hotel_info">
-               <div class="wifi">
-                   <img src="../../static/images/hotel/wifi.png">无线上网
-               </div>
-               <div class="wifi">
-                   <img src="../../static/images/hotel/computer.png">有线上网
-               </div>
-               <div class="wifi">
-                   <img src="../../static/images/hotel/p.png">收费停车
-               </div>
-               <div class="wifi">
-                   <img src="../../static/images/hotel/canting.png">餐厅
-               </div>
-           </div>
+        <div id="pics-thumbs">
+            <img src="/static/images/hotel/{{ hotel_p }}/11.png" alt="Nature1"/>
+            <img src="/static/images/hotel/{{ hotel_p }}/12.png" alt="Nature2"/>
+            <img src="/static/images/hotel/{{ hotel_p }}/13.png" alt="Nature3"/>
+            <img src="/static/images/hotel/{{ hotel_p }}/14.png" alt="Nature4"/>
+            <img src="/static/images/hotel/{{ hotel_p }}/15.png" alt="Nature5"/>
         </div>
     </div>
+    <div class="sDetails">
+        <div class="hotel_info">
+            <div id="hotel_info_1">4.5分</div>
+            <a href="##">{{ order_count }}位住客已评论</a>
 
-    <div id="bodytickrt">
-        <div class=daohang style="background:orange;">
-            <a href="##">房间订购</a>
-            <a href="/scenic/information">周围景点</a>
         </div>
+        <div class="hotel_info">2011年装修 2011年开业
+            <br>电话：{{ phone }}{#029-87388888#}
+            <br>地址：{{ address }}{#新城区东新街199号（近民乐园）#}
+        </div>
+        <div class="hotel_info">
+            <div class="wifi">
+                <img src="/static/images/hotel/wifi.png">无线上网
+            </div>
+            <div class="wifi">
+                <img src="/static/images/hotel/computer.png">有线上网
+            </div>
+            <div class="wifi">
+                <img src="/static/images/hotel/p.png">收费停车
+            </div>
+            <div class="wifi">
+                <img src="/static/images/hotel/canting.png">餐厅
+            </div>
+        </div>
+    </div>
+</div>
 
-        <div class=count>
+<div id="bodytickrt">
+    <div class=daohang style="background:orange;">
+        <a href="javascript:void(0)">房间订购</a>
+        <a href="/scenic/information">周围景点</a>
+    </div>
+
+    <div class=count>
 
             <span>
                 已预定：
@@ -131,27 +129,27 @@
                 <a href="##">预定</a>
             </span>
 
+    </div>
+
+    <div class="info">
+        <!--顶部工具栏-->
+        <div class="type">
+            <div class="check">
+                {#                    <img src="../img/cart/product_normal.png" class="checkAll">#}
+                全选
+            </div>
+            <!-- <div class=gper>人员</div> -->
+            <div class="gname">房型信息</div>
+            <div class=gpt>提前预定时间</div>
+            <div class="gprice">单价（元）</div>
+            <div class="gcount">数量</div>
+            <div class="gsum">金额</div>
         </div>
 
-        <div class="info">
-            <!--顶部工具栏-->
-            <div class="type">
-                <div class="check">
-{#                    <img src="../img/cart/product_normal.png" class="checkAll">#}
-                    全选
-                </div>
-                <!-- <div class=gper>人员</div> -->
-                <div class="gname">房型信息</div>
-                <div class=gpt>提前预定时间</div>
-                <div class="gprice">单价（元）</div>
-                <div class="gcount">数量</div>
-                <div class="gsum">金额</div>
-            </div>
-
-            <div class="conten">
-                <!--购票信息-->
-                {% for room in rooms %}
-                     <div class="item">
+        <div class="conten">
+            <!--购票信息-->
+            {% for room in rooms %}
+                <div class="item">
                     <div class="check">
 
 
@@ -161,29 +159,31 @@
                         <p><b>{{ room.room_name }}</b></p>
                         <p>{#窗户  有#}{{ room.window }}</p>
                         <p>{#面积  43㎡#}{{ room.area }}</p>
-                        <p>{#床型  大床1.8×2.0米1张#}{{room.bed  }}</p>
+                        <p>{#床型  大床1.8×2.0米1张#}{{ room.bed }}</p>
                     </div>
-                    <form action="{{ id }}" method="post">
-                    <div class=gpt>
-                        <p>入住时间：<input type="text" id="from_date1" name="" placeholder="请选择入住日期"></p>
-                        <p>预计搬出：<input type="text" id="to_date1" name="" placeholder="请选择退房日期"></p>
-                    </div>
-                    <div class="gprice">
-                        <h3>乐途专享价</h3>
-                        <p>￥ {#977.00#}{{ room.price }}</p>
-                    </div>
-                    <div class="gcount">
-                        <!--阻止超链接默认事件-->
-                        <a href="javascript:void(0)" class="minus">-</a>
-                        <input type="text" value="1">
-                        <a href="javascript:void(0)" class="add">+</a>
+                    <form action="{% url 'hotel'%}{{ id }}/{{ room.room_level }}" method="post">
 
-                    </div>
-                    <div class="gsum">￥ 977.00</div>
-                    <div class="action"><input type="submit" value="直接订房"></div>
+                        <div class=gpt>
+                            <p>入住时间：<input type="text" id="from_date{{ room.room_level }}" name="from_data" placeholder="请选择入住日期"></p>
+                            <p>预计搬出：<input type="text" id="to_date{{ room.room_level }}" name="to_data" placeholder="请选择退房日期"></p>
+                        </div>
+                        <div class="gprice">
+                            <h3>乐途专享价</h3>
+                            <p>￥ {#977.00#}{{ room.price }}</p>
+                        </div>
+                        <div class="gcount">
+                            <!--阻止超链接默认事件-->
+                            <a href="javascript:void(0)" class="minus">-</a>
+                            <input type="text" value="1">
+                            <a href="javascript:void(0)" class="add">+</a>
+
+
+                        </div>
+                        <div class="gsum">￥ 977.00</div>
+                        <div class="action"><input type="submit" value="直接订房"></div>
                     </form>
                 </div>
-                {% endfor %}
+            {% endfor %}
 
         </div>
         <div id="JTZN">
@@ -192,7 +192,7 @@
                 <span id="map_td"></span>
             </div>
             <div id="smap">
-                	<div id="allmap"></div>
+                <div id="allmap"></div>
             </div>
         </div>
     </div>
@@ -231,5 +231,6 @@
             <img src="../../static/images/hotel/pic.gif" title="站长统计">
         </div>
     </footer>
+</div>
 </body>
 </html>
