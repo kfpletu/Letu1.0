@@ -22,24 +22,28 @@ def login(request):
         try:
             # 从数据库获取uname和upwd
             user = Info.objects.get(uname=uname, upwd=upwd)
-            # 登录状态为1,刷新登录页面,禁止登录
-            if user.is_online:
-                resp = render(request,'user/login.html',locals())
+            # 登录状态为真,刷新登录页面,禁止登录
+            if user.is_alive:
+                resp = render(request, 'user/login.html', locals())
                 return resp
             else:
-                # 修改登录状态,发送seesion,cookie,返回首页
-                user.is_online = 1
-                user.save()
-                request.session['userinfo'] = {
-                    'uname': user.uname,
-                    'id': user.id
-                }
-                resp = render(request, 'index.html', locals())
-                if remember:
-                    resp.set_cookie('uname', uname, max_age=7 * 24 * 60 * 60)
+                if user.is_online:
+                    resp = render(request,'user/login.html',locals())
+                    return resp
                 else:
-                    resp.delete_cookie('uname')
-                return resp
+                    # 修改登录状态,发送seesion,cookie,返回首页
+                    user.is_online = 1
+                    user.save()
+                    request.session['userinfo'] = {
+                        'uname': user.uname,
+                        'id': user.id
+                    }
+                    resp = HttpResponseRedirect('/', locals())
+                    if remember:
+                        resp.set_cookie('uname', uname, max_age=7 * 24 * 60 * 60)
+                    else:
+                        resp.delete_cookie('uname')
+                    return resp
         except:
             # 出异常,说明用户名密码不正确,刷新当前登录页面
             return render(request,'user/login.html')
@@ -121,9 +125,23 @@ def logout(request):
         user = Info.objects.get(id=uid)
         user.is_online = False
         user.save()
-        # print(user.is_online)
         del request.session['userinfo']
-        # del request.session['id']
+        return HttpResponseRedirect('/')
+    except:
+        # 直接返回首页,但不删除seesion
+        return HttpResponseRedirect('/')
+
+
+def cancel(request):
+    try:
+        # 获取seesion中的id信息,修改对应id的用户登录状态修改,删除session,返回首页
+        uid = request.session['userinfo']['id']
+        user = Info.objects.get(id=uid)
+        user.is_online = False
+        # 将用户注销状态修改
+        user.is_alive = True
+        user.save()
+        del request.session['userinfo']
         return HttpResponseRedirect('/')
     except:
         # 直接返回首页,但不删除seesion
@@ -140,11 +158,13 @@ def booking(request):
 
 #购物车
 def cart(request):
-    # u_id = request.session['id']
-    goods = Cart.objects.filter(id=1)
-    paginator = Paginator(goods,4)
-    car_page = request.GET.get('cart',1)
-    page = paginator.page(car_page)
+    u_id = request.session['userinfo']['id']
+    # print(u_id)
+    goods = Cart.objects.filter(user_id=u_id)
+    # print(goods)
+    # paginator = Paginator(goods,4)
+    # car_page = request.GET.get('cart',1)
+    # page = paginator.page(cur_page)
     return render(request,'user/cart.html',locals())
 
 #历史记录

@@ -16,52 +16,60 @@
 </head>
 
 <body>
-    <header id="header">
-        {% if request.session.userinfo %}
-        <div id="cart">
-            <b>
-                <ul>
-                    <li class="home"><a href="javascript:void(0)">欢迎您,{{ request.session.userinfo.uname }}</a>
-                        <ol class='info1'>
-                            <li><a href="/user/topUp">我的钱包</a></li>
-                            <li><a href="/user/cart">我的订单</a></li>
-                            <li><a href="/user/logout">退出登录</a></li>
-                        </ol>
-                    </li>
-                </ul>
-            </b>
-        </div>
-        {% else %}
-        <div class="login">
-            <b>
-                <div id="register">
-                    <a href="/user/register">免费注册</a>
-                </div>
-            </b>
-            <b>
-                <div id="login">
-                    <a href="/user/login">您好,请登录</a>
-                </div>
-            </b>
-        </div>
-        {% endif %}
-        <div class="center">
-            <h1 class="logo">
-                <a href="/" id="logoA">乐途旅行网</a>
-            </h1>
-            <nav>
-                <ul class="link">
-                    <h1 class="none">网站导航</h1>
-                    <li><a href="/">首页</a></li>
-                    <li><a href="/scenic">景点门票</a></li>
-                    <li class="active"><a href="/trip">交通出行</a></li>
-                    <li><a href="/hotel">酒店预定</a></li>
-                    <li><a href="/about">关于我们</a></li>
-                </ul>
-            </nav>
-
-        </div>
-    </header>
+<header id="header">
+    {% if request.session.userinfo %}
+    <div id="cart">
+        <b>
+            <ul>
+                <li class="home"><a href="javascript:void(0)">欢迎您,{{ request.session.userinfo.uname }}</a>
+                    <ol class='info1'>
+                        <li><a href="/user/topUp">我的钱包</a></li>
+                        <li><a href="/user/cart">我的订单</a></li>
+                        <li><a href="/user/order">历史订单</a></li>
+                        <li><a href="/user/logout">退出登录</a></li>
+                        <li>
+                            <ul>
+                                <li class="home"><a href="javascript:void(0)">用户管理</a></li>
+                                <ol class="info1">
+                                    <li><a href="/user/cancel">注销账号</a></li>
+                                </ol>
+                            </ul>
+                        </li>
+                    </ol>
+                </li>
+            </ul>
+        </b>
+    </div>
+    {% else %}
+    <div class="login">
+        <b>
+            <div id="register">
+                <a href="/user/register">免费注册</a>
+            </div>
+        </b>
+        <b>
+            <div id="login">
+                <a href="/user/login">您好,请登录</a>
+            </div>
+        </b>
+    </div>
+    {% endif %}
+    <div class="center">
+        <h1 class="logo">
+            <a href="/" id="logoA">乐途旅行网</a>
+        </h1>
+        <nav>
+            <ul class="link">
+                <h1 class="none">网站导航</h1>
+                <li class="active"><a href="/">首页</a></li>
+                <li><a href="/scenic">景点门票</a></li>
+                <li><a href="/trip">交通出行</a></li>
+                <li><a href="/hotel">酒店预定</a></li>
+                <li><a href="/about">关于我们</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
     <div id="headline">
         <div class="center">
             <hgroup>

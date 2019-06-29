@@ -2,7 +2,7 @@ from django.contrib import admin
 from . import models
 # Register your models here.
 class InfoManage(admin.ModelAdmin):
-    list_display = ['id', 'uname', 'phone', 'email', 'is_online']
+    list_display = ['id', 'uname', 'phone', 'email', 'is_online', 'join_time','is_alive']
     list_display_links = ['id', 'uname']
     list_filter = ['id']
 
