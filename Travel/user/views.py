@@ -80,7 +80,7 @@ def getpwd(request):
             return render(request, 'user/forget_new.html')
         except:
             return render(request,'user/forget.html')
-
+# 修改密码
 def updatepwd(request):
     if request.method == 'GET':
         return render(request, 'user/forget.html')
@@ -102,7 +102,7 @@ def updatepwd(request):
             pwd_error = '密码不一致'
             return render(request,'user/forget.html',locals())
         
-
+# 退出登录
 def logout(request):
     try:
         uid = request.session['userinfo']['id']
