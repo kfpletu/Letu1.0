@@ -144,7 +144,7 @@ def cart(request):
     goods = Cart.objects.filter(id=1)
     paginator = Paginator(goods,4)
     car_page = request.GET.get('cart',1)
-    page = paginator.page(cur_page)
+    page = paginator.page(car_page)
     return render(request,'user/cart.html',locals())
 
 #历史记录
