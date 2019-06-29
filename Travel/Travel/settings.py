@@ -132,3 +132,6 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR,'static')
 ]
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+#hotel 文件上传测试代码
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images/hotel')

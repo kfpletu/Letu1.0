@@ -25,20 +25,15 @@ class Scbr(models.Model):
     img5=models.ImageField('景点图片5')
     word1=models.CharField('主题词1',max_length=5,null=True)
     word2=models.CharField('主题词1',max_length=5,null=True)
-    scp=models.OneToOneField(Scen,models.CASCADE,null=True)
+    # scp=models.OneToOneField(Scen,models.CASCADE,null=True)
     class Meta:
         verbose_name='景点信息表2'
         verbose_name_plural = verbose_name
 class Introduce(models.Model):
     sce_details=models.TextField('景区介绍')
-    sce_name2=models.OneToOneField(Scbr,models.CASCADE,null=True)
+    # sce_name2=models.OneToOneField(Scbr,models.CASCADE,null=True)
 class Ticket(models.Model):
     type=models.CharField("门票种类",max_length=10)
     name=models.CharField("门票名称",max_length=20)
     price=models.DecimalField("门票价格",max_digits=6,decimal_places=2)
-    sce_name3 = models.ForeignKey(Scbr,models.CASCADE,null=True)
-
-# class Address(models.Model):
-#     longitudes=models.DecimalField('经度',max_digits=9,decimal_places=6)
-#     latitudes=models.DecimalField('纬度',max_digits=8,decimal_places=6)
-#     sce_name2 = models.OneToOneField(Scen,models.CASCADE,null=True)
+    # sce_name3 = models.ForeignKey(Scbr,models.CASCADE,null=True)

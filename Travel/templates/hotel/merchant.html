@@ -1,0 +1,30 @@
+{#商家信息上传页面#}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>商家文件上传</title>
+    <style>
+        #input_file{
+            width: 300px;
+            border: 1px solid orange;
+        }
+    </style>
+</head>
+<body>
+    {{ aa }}
+    <a href="{% url 'hotel' %}">返回酒店首页</a>
+    <h1>请上传文件</h1>
+    <form action="{% url 'hotel' %}upload_picture" enctype="multipart/form-data" method="post">
+        <input id="input_file" type="file" name="myfile">
+        <select name="level">
+            <option value="3">星级酒店</option>
+            <option value="4">主题酒店</option>
+            <option value="2">民宿公寓</option>
+            <option value="1" selected>快速便捷</option>
+        </select>
+        <br>
+        <input type="submit" value="上传文件">
+    </form>
+</body>
+</html>
