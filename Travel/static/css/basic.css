@@ -73,7 +73,7 @@ ul,ol{
 	/*设置隐藏*/
 	display:none;
 	}
-#cart ul li:hover ol{
+#cart ul .home:hover .info1{
     display:block;
     background: #d61e41;
     }
