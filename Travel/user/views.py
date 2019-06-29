@@ -128,10 +128,12 @@ def booking(request):
 
 #购物车
 def cart(request):
-    # u_id = request.session['id']
-    goods = Cart.objects.filter(id=1)
+    # u_id = request.session[]['id']
+    goods = Cart.objects.filter(user_id=69)
     paginator = Paginator(goods,4)
-    car_page = request.GET.get('cart',1)
+    print('啦啦啦啦',paginator.num_pages)
+    # if paginator.num_pages > 3: 
+    cur_page = request.GET.get('page',1)
     page = paginator.page(cur_page)
     return render(request,'user/cart.html',locals())
 

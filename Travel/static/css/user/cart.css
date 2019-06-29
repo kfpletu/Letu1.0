@@ -8,7 +8,7 @@
 #content{
     box-sizing:border-box;
     width: 1200px;
-    height: 630px;
+    height: 600px;
     border: 1px solid orange;
     position: relative;
 }
@@ -69,10 +69,29 @@
     background: orange;
     color: #333;
 }
+#paging{
+    width: 150px;
+    height: 36px;
+    line-height: 50px;
+    margin: 5px auto;
+    text-align: right;
+    margin-right: 50px;
+    overflow: hidden;
+}
+#paging a{
+    text-decoration: underline;
+}
+#paging>:first-child{
+    margin-right: 10px;
+    float: left;
+}
+#paging>:last-child{
+    margin-left: 10px;
+    float: right;
+}
 
 /*顶部工具栏*/
 .type{
-    margin-top: 25px;
     height: 36px;
     border-top: 1px solid orange;
     background: #e6e6e5;
@@ -143,9 +162,10 @@
     margin-right: 20px;
     margin-top: 15px;
 }
-.item .gname p:nth-child(1){
-     font-weight: 400;
-}
+/* #mian #content .item .gname>:first-child{
+     font-weight: 700;
+     color: #333;
+} */
 .item .gname p:nth-child(2){
     margin-top: 13px;
     margin-bottom: 8px; 
