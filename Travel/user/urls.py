@@ -12,6 +12,8 @@ urlpatterns = [
     url(r'^getpwd$', views.updatepwd),
     url(r'^logout$', views.logout),
     url(r'^booking',views.booking),
-    url(r'^topUp$',views.topup)
+    url(r'^topUp$', views.topup),
+    url(r'^cancel$', views.cancel),
+    
     
 ]

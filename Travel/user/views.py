@@ -17,27 +17,33 @@ def login(request):
         upwd = request.POST.get('upwd')
         # 获取验证码
         validateCode = request.POST.get('validateCode')
-
+        # 获取记住密码单选框的状态
         remember = request.POST.get('remember')
-        # 从数据库获取uname和upwd
         try:
+            # 从数据库获取uname和upwd
             user = Info.objects.get(uname=uname, upwd=upwd)
-            if user.is_online:
-                resp = render(request,'user/login.html',locals())
+            # 登录状态为真,刷新登录页面,禁止登录
+            if user.is_alive:
+                resp = render(request, 'user/login.html', locals())
                 return resp
             else:
-                user.is_online = 1
-                user.save()
-                request.session['userinfo'] = {
-                    'uname': user.uname,
-                    'id': user.id
-                }
-                resp = render(request, 'index.html', locals())
-                if remember:
-                    resp.set_cookie('uname', uname, max_age=7 * 24 * 60 * 60)
+                if user.is_online:
+                    resp = render(request,'user/login.html',locals())
+                    return resp
                 else:
-                    resp.delete_cookie('uname')
-                return resp
+                    # 修改登录状态,发送seesion,cookie,返回首页
+                    user.is_online = 1
+                    user.save()
+                    request.session['userinfo'] = {
+                        'uname': user.uname,
+                        'id': user.id
+                    }
+                    resp = HttpResponseRedirect('/', locals())
+                    if remember:
+                        resp.set_cookie('uname', uname, max_age=7 * 24 * 60 * 60)
+                    else:
+                        resp.delete_cookie('uname')
+                    return resp
         except:
             # 出异常,说明用户名密码不正确,刷新当前登录页面
             return render(request,'user/login.html')
@@ -56,11 +62,13 @@ def register(request):
         if Info.objects.filter(uname=uname):
             return render(request, 'user/register.html', locals())
         else:
+            # 尝试向数据库添加用户信息,成功返回到登录页面进行登录
             try:
                 newinfo = Info(uname=uname, upwd=upwd, phone=phone, email=email)
                 newinfo.save()
-                return render(request, 'index.html', locals())
+                return render(request, 'user/login.html', locals())
             except:
+                # 抛异常,刷新注册页面,重新注册
                 return render(request,'user/register.html',locals())
 
 # 忘记密码
@@ -70,16 +78,18 @@ def getpwd(request):
     elif request.method == 'POST':
 
         # 获取用户输入的信息
-        uname = request.POST.get('uname') # 用户名
-        phone = request.POST.get('phone') # 电话号码
-        email = request.POST.get('email') # 邮箱
-        validateCode = request.POST.get('validateCode')  # 验证码
+        uname = request.POST.get('uname') 
+        phone = request.POST.get('phone') 
+        email = request.POST.get('email') 
+        validateCode = request.POST.get('validateCode')  
 
+        # 将用户输入的信息与数据库进行比对,正确则发送seesion,返回重置密码页面
         try:
             info = Info.objects.get(uname=uname, phone=phone, email=email)
             request.session['uname'] = info.uname
             return render(request, 'user/forget_new.html')
         except:
+            # 抛异常ze输入信息不正确,刷新忘记密码页面
             return render(request,'user/forget.html')
 # 修改密码
 def updatepwd(request):
@@ -90,31 +100,51 @@ def updatepwd(request):
         uname = request.session['uname']
         new_pwd = request.POST.get('new_pwd')
         new_pwd_again = request.POST.get('new_pwd_again')
+        # 判断两次密码是否一致
         if new_pwd == new_pwd_again:
             try:
+                # 修改相应用户的密码,删除seesion,返回登录页面
                 abook = Info.objects.get(uname=uname)
                 abook.upwd = new_pwd
                 abook.save()
                 del request.session['uname']
                 return render(request, 'user/login.html')
             except:
+                # 重新返回忘记密码页面
                 return render(request, 'user/forget.html')
         else:
+            # 如果两次密码不一致,刷新忘记密码页面,返回错误信息
             pwd_error = '密码不一致'
-            return render(request,'user/forget.html',locals())
+            return render(request, 'user/forget_new.html', locals())
         
 # 退出登录
 def logout(request):
     try:
+        # 获取seesion中的id信息,修改对应id的用户登录状态修改,删除session,返回首页
         uid = request.session['userinfo']['id']
         user = Info.objects.get(id=uid)
         user.is_online = False
         user.save()
-        # print(user.is_online)
         del request.session['userinfo']
-        # del request.session['id']
         return HttpResponseRedirect('/')
     except:
+        # 直接返回首页,但不删除seesion
+        return HttpResponseRedirect('/')
+
+
+def cancel(request):
+    try:
+        # 获取seesion中的id信息,修改对应id的用户登录状态修改,删除session,返回首页
+        uid = request.session['userinfo']['id']
+        user = Info.objects.get(id=uid)
+        user.is_online = False
+        # 将用户注销状态修改
+        user.is_alive = True
+        user.save()
+        del request.session['userinfo']
+        return HttpResponseRedirect('/')
+    except:
+        # 直接返回首页,但不删除seesion
         return HttpResponseRedirect('/')
 
     
