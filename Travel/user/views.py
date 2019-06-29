@@ -112,3 +112,7 @@ def logout(request):
     del request.session['userinfo']
     # del request.session['id']
     return HttpResponseRedirect('/')
+
+
+def booking(request):
+    return render(request,'user/booking.html',locals())

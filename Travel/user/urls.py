@@ -11,5 +11,6 @@ urlpatterns = [
     url(r'^forget$', views.forget),
     url(r'^getpwd$', views.getpwd),
     url(r'^logout$', views.logout),
+    url(r'^booking',views.booking),
     
 ]

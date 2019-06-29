@@ -6,6 +6,5 @@ urlpatterns = [
     # url(r'^admin/', admin.site.urls),
     url('^$', views.index),
     url(r'^index', views.index),
-
     
 ]
