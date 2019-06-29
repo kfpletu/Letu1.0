@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from . import models
 from django.db.models import *
 import os
-
+import time
 # from . import weather
 # Create your views here.
 #酒店首页
@@ -24,11 +24,6 @@ def index(request):
     elif request.method=='POST':
         pass
 
-
-
-# def test(requesst,x):
-#     print(x)
-#     return HttpResponse('测试成功%s'%x)
 #导入酒店数据
 def init_hotel(request):
             pwd=os.path.dirname(__file__)
@@ -106,15 +101,26 @@ def hotel(request,id,level):
             return render(request, 'hotel/hotel_ticket.html',dic)
         elif request.method=='POST':
             from user.models import Cart
-
+            # for i in range(15):
             Cart.objects.create(
             user_id=request.session['userinfo']['id'],
             g_img="/static/images/hotel/%s/2%s.png"%(dic['hotel_p'],level),
             g_name=dic['hotel_name'],
             time1=request.POST.get("from_data",''),
             time2=request.POST.get("to_data",''),
-            g_type=dic['rooms'][int(level)].room_name,
-            price=float(dic['rooms'][int(level)].price),
-            total_price=float(dic['rooms'][int(level)].price)
+            g_type=dic['rooms'][int(level)-1].room_name,
+            price=float(dic['rooms'][int(level)-1].price),
+            total_price=float(dic['rooms'][int(level)-1].price)
             )
-            return render(request,'hotel/hotel_ticket.html',dic)
+
+            now=time.ctime()
+            from_data = request.POST.get("from_data", '')
+            to_data= request.POST.get("to_data", '')
+            cart_id=str(request.session['userinfo']['id'])+now+dic['rooms'][int(level)-1].room_name
+            return render(request, 'hotel/booking.html',locals())
+            # return render(request,'hotel/hotel_ticket.html',dic)
+
+
+
+# def test_book(requset):
+#     return render(requset,'hotel/booking.html')
