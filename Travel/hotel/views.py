@@ -98,7 +98,7 @@ def hotel_ticket(id):
     return locals()
 
 
-def hotel(request,id):
+def hotel(request,id,level):
         # id=int(id)
         # order_count =models.House.objects.get(id=id).order_count
         # hotel=models.Hotel.objects.get(id=id)
@@ -137,6 +137,15 @@ def hotel(request,id):
         # )
             return render(request, 'hotel/hotel_ticket.html',dic)
         elif request.method=='POST':
-            print(1)
-            print(2)
-            return HttpResponse('fsd')
+            from user.models import Cart
+            Cart.objects.create(
+            user_id=1,
+            g_img="/static/images/hotel/%s/2%s.png"%(dic['hotel_p'],level),
+            g_name=dic['hotel_name'],
+            time1='fdsafd',
+            time2='fdasfas',
+            g_type=dic['rooms'][int(level)].room_name,
+            price=float(dic['rooms'][int(level)].price),
+            total_price=float(dic['rooms'][int(level)].price)
+            )
+            return render(request,'hotel/hotel_ticket.html',dic)
