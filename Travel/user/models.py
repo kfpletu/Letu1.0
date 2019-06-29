@@ -12,6 +12,10 @@ class Info(models.Model):
     is_online = models.BooleanField('登录状态', default=0)
     join_time = models.DateTimeField('注册时间', auto_now_add=True)
     is_alive = models.BooleanField('是否注销', default=0)
+
+    def __str__(self):
+        return '姓名' + self.uname + '电话' + self.phone + '邮箱'
+        +self.email+'余额'+self.price+'登录状态'+self.is_online
     
     
 
