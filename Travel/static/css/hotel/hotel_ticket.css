@@ -332,14 +332,17 @@ body{
 	margin-left:20px;
 }
 .conten .item .action{
-    float: right;
+    float: left;
+    margin-left: 50px;
 }
-.action a {
+
+.action input {
     display:inline-block;
     background:#dc143b;
     width:80px;
     height:30px;
     color: #000;
+    border:0px;
     border-radius: 5px;
     text-align: center;
     margin:2px 20px;
@@ -347,11 +350,14 @@ body{
     margin-right: 28px;
 
 }
-.action a:hover{
+.action input:hover{
     background:green;
     color:white;
-}
 
+}
+.action input:focus{
+    border:0px;
+}
 
 
 

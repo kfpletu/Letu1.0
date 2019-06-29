@@ -2,8 +2,40 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8b3a3aeb-510d-4e78-9923-add4cb843ce3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Travel/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Travel/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Travel/manage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Travel/manage.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Travel/hotel/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/Travel/hotel/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Travel/hotel/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Travel/hotel/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Travel/hotel/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Travel/hotel/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Travel/hotel/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Travel/hotel/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Travel/static/css/hotel/hotel_ticket.css" beforeDir="false" afterPath="$PROJECT_DIR$/Travel/static/css/hotel/hotel_ticket.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Travel/static/css/hotel/order_hotel.css" beforeDir="false" afterPath="$PROJECT_DIR$/Travel/static/css/hotel/order_hotel.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Travel/static/images/hotel/1/1/大麦酒店(大兴东路龙湖星悦荟购物中心店)_地址_电话_价格_预订_环境(图)-美团酒店_files/js" beforeDir="false" afterPath="$PROJECT_DIR$/Travel/static/images/hotel/1/1/大麦酒店(大兴东路龙湖星悦荟购物中心店)_地址_电话_价格_预订_环境(图)-美团酒店_files/js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Travel/static/images/hotel/1/2/汉庭(西安火车站店)_地址_电话_价格_预订_环境(图)-美团酒店_files/js" beforeDir="false" afterPath="$PROJECT_DIR$/Travel/static/images/hotel/1/2/汉庭(西安火车站店)_地址_电话_价格_预订_环境(图)-美团酒店_files/js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Travel/static/images/hotel/1/3/锦江之星(西安五路口地铁站机场大巴店)_地址_电话_价格_预订_环境(图)-美团酒店_files/js" beforeDir="false" afterPath="$PROJECT_DIR$/Travel/static/images/hotel/1/3/锦江之星(西安五路口地铁站机场大巴店)_地址_电话_价格_预订_环境(图)-美团酒店_files/js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Travel/static/images/hotel/1/4/美豪丽致酒店(西安民乐园店)_地址_电话_价格_预订_环境(图)-美团酒店_files/js" beforeDir="false" afterPath="$PROJECT_DIR$/Travel/static/images/hotel/1/4/美豪丽致酒店(西安民乐园店)_地址_电话_价格_预订_环境(图)-美团酒店_files/js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Travel/static/images/hotel/2/1/【屋里厢】让你在户外，感受白云。让你在屋内感受那份宁静。文人雅客三居，只等您来赏。_西安唐延路北段民宿-美团榛果民宿_files/js(1)" beforeDir="false" afterPath="$PROJECT_DIR$/Travel/static/images/hotel/2/1/【屋里厢】让你在户外，感受白云。让你在屋内感受那份宁静。文人雅客三居，只等您来赏。_西安唐延路北段民宿-美团榛果民宿_files/js(1)" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Travel/static/images/hotel/2/2/【谷雨小屋】近地铁_唐都医院_203_西安城东客运站民宿-美团榛果民宿_files/js(1)" beforeDir="false" afterPath="$PROJECT_DIR$/Travel/static/images/hotel/2/2/【谷雨小屋】近地铁_唐都医院_203_西安城东客运站民宿-美团榛果民宿_files/js(1)" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Travel/static/images/hotel/3/1/西安富力希尔顿酒店_地址_电话_价格_预订_环境(图)-美团酒店_files/js" beforeDir="false" afterPath="$PROJECT_DIR$/Travel/static/images/hotel/3/1/西安富力希尔顿酒店_地址_电话_价格_预订_环境(图)-美团酒店_files/js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Travel/static/images/hotel/3/2/信息.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Travel/static/images/hotel/3/2/信息.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Travel/static/images/hotel/3/2/西安开元名都大酒店_地址_电话_价格_预订_环境(图)-美团酒店_files/analytics.js" beforeDir="false" afterPath="$PROJECT_DIR$/Travel/static/images/hotel/3/2/西安开元名都大酒店_地址_电话_价格_预订_环境(图)-美团酒店_files/analytics.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Travel/static/images/hotel/3/2/西安开元名都大酒店_地址_电话_价格_预订_环境(图)-美团酒店_files/com_header.js" beforeDir="false" afterPath="$PROJECT_DIR$/Travel/static/images/hotel/3/2/西安开元名都大酒店_地址_电话_价格_预订_环境(图)-美团酒店_files/com_header.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Travel/static/images/hotel/3/2/西安开元名都大酒店_地址_电话_价格_预订_环境(图)-美团酒店_files/fetch.js" beforeDir="false" afterPath="$PROJECT_DIR$/Travel/static/images/hotel/3/2/西安开元名都大酒店_地址_电话_价格_预订_环境(图)-美团酒店_files/fetch.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Travel/static/images/hotel/3/2/西安开元名都大酒店_地址_电话_价格_预订_环境(图)-美团酒店_files/ie-shim.js" beforeDir="false" afterPath="$PROJECT_DIR$/Travel/static/images/hotel/3/2/西安开元名都大酒店_地址_电话_价格_预订_环境(图)-美团酒店_files/ie-shim.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Travel/static/images/hotel/3/2/西安开元名都大酒店_地址_电话_价格_预订_环境(图)-美团酒店_files/js" beforeDir="false" afterPath="$PROJECT_DIR$/Travel/static/images/hotel/3/2/西安开元名都大酒店_地址_电话_价格_预订_环境(图)-美团酒店_files/js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Travel/static/images/hotel/3/2/西安开元名都大酒店_地址_电话_价格_预订_环境(图)-美团酒店_files/map-loader.html" beforeDir="false" afterPath="$PROJECT_DIR$/Travel/static/images/hotel/3/2/西安开元名都大酒店_地址_电话_价格_预订_环境(图)-美团酒店_files/map-loader.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Travel/static/images/hotel/3/2/西安开元名都大酒店_地址_电话_价格_预订_环境(图)-美团酒店_files/reset.css" beforeDir="false" afterPath="$PROJECT_DIR$/Travel/static/images/hotel/3/2/西安开元名都大酒店_地址_电话_价格_预订_环境(图)-美团酒店_files/reset.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Travel/static/images/hotel/3/2/西安开元名都大酒店_地址_电话_价格_预订_环境(图)-美团酒店_files/saved_resource" beforeDir="false" afterPath="$PROJECT_DIR$/Travel/static/images/hotel/3/2/西安开元名都大酒店_地址_电话_价格_预订_环境(图)-美团酒店_files/saved_resource" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Travel/static/images/hotel/3/3/西安W酒店_地址_电话_价格_预订_环境(图)-美团酒店_files/js" beforeDir="false" afterPath="$PROJECT_DIR$/Travel/static/images/hotel/3/3/西安W酒店_地址_电话_价格_预订_环境(图)-美团酒店_files/js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Travel/static/images/hotel/3/4/西安凯悦酒店_地址_电话_价格_预订_环境(图)-美团酒店_files/js" beforeDir="false" afterPath="$PROJECT_DIR$/Travel/static/images/hotel/3/4/西安凯悦酒店_地址_电话_价格_预订_环境(图)-美团酒店_files/js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Travel/static/images/hotel/3/5/西安喜来登大酒店_地址_电话_价格_预订_环境(图)-美团酒店_files/js" beforeDir="false" afterPath="$PROJECT_DIR$/Travel/static/images/hotel/3/5/西安喜来登大酒店_地址_电话_价格_预订_环境(图)-美团酒店_files/js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Travel/static/images/hotel/4/1/信息.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Travel/static/images/hotel/4/1/信息.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Travel/static/images/hotel/4/2/花枝恋主题酒店(高新阳光天地绿地笔克会展中心店)_地址_电话_价格_预订_环境(图)-美团酒店_files/js" beforeDir="false" afterPath="$PROJECT_DIR$/Travel/static/images/hotel/4/2/花枝恋主题酒店(高新阳光天地绿地笔克会展中心店)_地址_电话_价格_预订_环境(图)-美团酒店_files/js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Travel/static/images/hotel/4/3/米兰主题酒店_地址_电话_价格_预订_环境(图)-美团酒店_files/js" beforeDir="false" afterPath="$PROJECT_DIR$/Travel/static/images/hotel/4/3/米兰主题酒店_地址_电话_价格_预订_环境(图)-美团酒店_files/js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Travel/static/images/hotel/4/4/史瑞弗酒店(西安曲江会展朱雀大街店)_地址_电话_价格_预订_环境(图)-美团酒店_files/js" beforeDir="false" afterPath="$PROJECT_DIR$/Travel/static/images/hotel/4/4/史瑞弗酒店(西安曲江会展朱雀大街店)_地址_电话_价格_预订_环境(图)-美团酒店_files/js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Travel/static/images/hotel/4/5/天鹅恋情侣主题酒店(大明宫万达店)_地址_电话_价格_预订_环境(图)-美团酒店_files/js" beforeDir="false" afterPath="$PROJECT_DIR$/Travel/static/images/hotel/4/5/天鹅恋情侣主题酒店(大明宫万达店)_地址_电话_价格_预订_环境(图)-美团酒店_files/js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -12,39 +44,24 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Travel/manage.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="29">
-              <caret line="2" column="10" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="10" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Travel/templates/trip/new_order.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7830">
-              <caret line="270" column="10" lean-forward="true" selection-start-line="270" selection-start-column="10" selection-end-line="270" selection-end-column="10" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Travel/static/css/trip/new_order.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="667">
-              <caret line="23" selection-start-line="23" selection-end-line="23" />
+            <state relative-caret-position="-48">
+              <caret line="5" column="30" lean-forward="true" selection-start-line="5" selection-start-column="30" selection-end-line="5" selection-end-column="30" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Travel/static/css/trip/order.css">
+        <entry file="file://$PROJECT_DIR$/Travel/hotel/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2668">
-              <caret line="92" lean-forward="true" selection-start-line="92" selection-end-line="92" />
+            <state relative-caret-position="216">
+              <caret line="132" column="42" selection-start-line="132" selection-start-column="42" selection-end-line="132" selection-end-column="42" />
+              <folding>
+                <element signature="e#0#35#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -52,7 +69,7 @@
     </leaf>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/Travel" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -64,20 +81,10 @@
       </list>
     </option>
   </component>
-  <component name="ProjectConfigurationFiles">
-    <option name="files">
-      <list>
-        <option value="$PROJECT_DIR$/.idea/letu.iml" />
-        <option value="$PROJECT_DIR$/.idea/misc.xml" />
-        <option value="$PROJECT_DIR$/.idea/modules.xml" />
-        <option value="$PROJECT_DIR$/.idea/vcs.xml" />
-      </list>
-    </option>
-  </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="1085" />
-    <option name="y" value="160" />
-    <option name="width" value="830" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="303" />
+    <option name="y" value="67" />
+    <option name="width" value="1404" />
     <option name="height" value="906" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -86,62 +93,35 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="letu" type="b2602c69:ProjectViewProjectNode" />
-              <item name="letu" type="462c0819:PsiDirectoryNode" />
+              <item name="Letu1.0" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Letu1.0" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="letu" type="b2602c69:ProjectViewProjectNode" />
-              <item name="letu" type="462c0819:PsiDirectoryNode" />
+              <item name="Letu1.0" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Letu1.0" type="462c0819:PsiDirectoryNode" />
               <item name="Travel" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="letu" type="b2602c69:ProjectViewProjectNode" />
-              <item name="letu" type="462c0819:PsiDirectoryNode" />
-              <item name="Travel" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="letu" type="b2602c69:ProjectViewProjectNode" />
-              <item name="letu" type="462c0819:PsiDirectoryNode" />
-              <item name="Travel" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="letu" type="b2602c69:ProjectViewProjectNode" />
-              <item name="letu" type="462c0819:PsiDirectoryNode" />
-              <item name="Travel" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
-              <item name="trip" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="letu" type="b2602c69:ProjectViewProjectNode" />
-              <item name="letu" type="462c0819:PsiDirectoryNode" />
+              <item name="Letu1.0" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Letu1.0" type="462c0819:PsiDirectoryNode" />
               <item name="Travel" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="letu" type="b2602c69:ProjectViewProjectNode" />
-              <item name="letu" type="462c0819:PsiDirectoryNode" />
-              <item name="Travel" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="trip" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Travel/manage.py" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
@@ -158,6 +138,30 @@
       </list>
     </option>
   </component>
+  <component name="RunManager">
+    <configuration name="manage" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="letu" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/bin/python3.6" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Travel" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Travel/manage.py" />
+      <option name="PARAMETERS" value="runserver 5000" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -169,41 +173,47 @@
       <option name="presentableId" value="Default" />
       <updated>1561706912136</updated>
       <workItem from="1561706913770" duration="804000" />
+      <workItem from="1561768930054" duration="493000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="804000" />
+    <option name="totallyTimeSpent" value="1297000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="45" y="25" width="1875" height="1055" extended-state="7" />
+    <frame x="303" y="67" width="1404" height="906" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Favorites" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.105066665" />
+      <window_info id="DB Browser" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1464497" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Database Changes" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Python Console" />
-      <window_info anchor="bottom" id="Terminal" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="DB Execution Console" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.26902887" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="SciView" />
-      <window_info anchor="right" id="Database" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Database Changes" order="9" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Terminal" order="11" />
+      <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="SciView" order="3" />
+      <window_info anchor="right" id="Database" order="4" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Letu1_0$manage.coverage" NAME="manage Coverage Results" MODIFIED="1561769105789" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Travel" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/Travel/static/js/trip/order.js">
@@ -218,31 +228,41 @@
         <state relative-caret-position="-4002" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Travel/manage.py">
+    <entry file="file://$PROJECT_DIR$/Travel/static/css/trip/new_order.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="29">
-          <caret line="2" column="10" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="10" />
+        <state relative-caret-position="552">
+          <caret line="23" selection-start-line="23" selection-end-line="23" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Travel/templates/trip/new_order.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7830">
-          <caret line="270" column="10" lean-forward="true" selection-start-line="270" selection-start-column="10" selection-end-line="270" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Travel/static/css/trip/new_order.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="667">
-          <caret line="23" selection-start-line="23" selection-end-line="23" />
+        <state relative-caret-position="28">
+          <caret line="244" column="18" selection-start-line="244" selection-start-column="18" selection-end-line="244" selection-end-column="18" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Travel/static/css/trip/order.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2668">
-          <caret line="92" lean-forward="true" selection-start-line="92" selection-end-line="92" />
+        <state relative-caret-position="232">
+          <caret line="92" selection-start-line="92" selection-end-line="92" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Travel/manage.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-48">
+          <caret line="5" column="30" lean-forward="true" selection-start-line="5" selection-start-column="30" selection-end-line="5" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Travel/hotel/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="132" column="42" selection-start-line="132" selection-start-column="42" selection-end-line="132" selection-end-column="42" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
