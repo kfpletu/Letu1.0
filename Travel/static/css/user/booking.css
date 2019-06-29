@@ -1,0 +1,74 @@
+/* 订单信息 */
+#orderMsg{
+    width: 800px;
+    height: 600px;
+    background: #f1f3f4;
+    margin: 100px auto;
+}
+.topMsg{
+    box-sizing: border-box;
+    width: 800px;
+    height: 50px;
+    margin: 0 auto;
+    background: orange;
+    
+}
+.topMsg p{
+    line-height:50px;
+    font-size: 1.6em;
+    font-weight: 400;
+    margin-left: 50px;
+}
+.botMsg{
+    width: 600px;
+    margin: 20px auto;
+    font-size: 12px;
+}
+.succ img{
+    width: 80px;
+    height: 80px;
+    float: left;
+    margin-left: 200px;
+    margin-right: 20px;
+}
+.succ h3{
+    line-height: 80px;
+    font-size: 1.5em;
+    margin-left: 10px;
+}
+.succ p{
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-style: oblique;
+    font-size: 1.5em;
+}
+.orderTable{
+    line-height: 35px;
+    font-size: 1.2em;
+    margin-left: 50px;
+}
+.orderTable td:nth-child(1){
+    text-align: right;
+}
+.orderTable td:nth-child(2){
+    width:400px;
+    text-align: center;
+}
+.orderTable th{
+    font-size: 1.2em;
+    text-align: right;
+}
+.endBt button{
+    width: 100px;
+    height: 50px;
+    padding: 0;
+    background: orange;
+    margin-top: 16px;
+    margin-left: 190px;
+    font-size: 16px;                 
+}
+.endBt button:nth-child(2){
+    margin-left: 30px;
+    width: 120px;
+}

@@ -39,9 +39,24 @@ class Room(models.Model):
     bed=models.CharField('床',max_length=100)
     hotel=models.ForeignKey(Hotel,null=True)
     house=models.ForeignKey(House,models.CASCADE,null=True)
+    room_level=models.CharField('房间编号',default='1',max_length=5)
     class Meta:
         db_table='room'
 
     def __str__(self):
         return '房间名: %s 价位: %s'%(self.room_name,self.price)
 
+# class Test_book(models.Model):
+#     test_user_id=models.CharField('用户id',max_length=5)
+#     test_hotel_id=models.CharField('酒店id',max_length=5)
+#     test_room_name = models.CharField('房间名', max_length=20)
+#     test_area = models.CharField('面积', max_length=10)
+#     test_price = models.CharField('价位', max_length=10)
+#     test_window = models.CharField('窗', max_length=20)
+#     test_bed = models.CharField('床', max_length=100)
+#
+#     class Meta:
+#         db_table='test'
+#
+#     def __str__(self):
+#         return '用户id: %s 房间名: %s'%(self.test_user_id,self.test_room_name)

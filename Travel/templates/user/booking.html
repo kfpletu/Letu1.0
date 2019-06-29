@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    {% extends 'user/cart.html' %}
+    {% load static %}
+    {% block href %}
+    <link rel="stylesheet" href="{% static '/css/user/booking.css' %}">
+    {% endblock href %}
+</head>
+<body>
+    {% block order %}
+    <div id="orderMsg">
+        <div class="topMsg">
+            <p>乐途旅游订单信息</p>
+        </div>
+        <div class="botMsg">
+            <div class="succ">
+                <img src="{% static '/images/user/succ.jpg' %}">
+                <h3>预定成功</h3>
+                <p>感谢使用乐途旅游网，祝你旅途愉快!</p>
+                <hr>
+            </div>
+            <div class='orderTable'>
+                <table>
+                    <tr>
+                        <th colspan:2>订单信息</th>
+                    </tr>
+                    <tr>
+                        <td>订单状态:</td>
+                        <td>感谢使用乐途旅游网，祝你旅途愉快!</td>
+                    </tr>
+                    <tr>
+                        <td>订单号:</td>
+                        <td>感谢使用乐途旅游网，祝你旅途愉快!</td>
+                    </tr>
+                    <tr>
+                        <td>订单时间:</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>订单流水号:</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>起始时间:</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>到期时间:</td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="endBt">
+                <button onclick="history.go(-1)"><a href="javascript:viod(0)">继续购买</a></button>
+                <button><a href="/user/cart.html">进入购物车结算</a></button>
+            </div>
+        </div>
+    </div>
+    {% endblock order %}
+</body>
+</html>
