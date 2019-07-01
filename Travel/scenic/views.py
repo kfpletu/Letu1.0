@@ -85,7 +85,6 @@ def ticket(request,s):
                                total_price=suprice,
                                add_time=retime
                                     )
-            # total_price=int(tic.price)*request.POST.get('number','')
             return HttpResponse("加入成功")
 
 def scenic2(request):

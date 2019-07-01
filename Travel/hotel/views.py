@@ -6,13 +6,13 @@ import os
 import time
 from django.conf import settings
 from django.http import HttpResponseRedirect
-# from . import weather
+from . import weather
 # Create your views here.
 #酒店首页
 def index(request):
 
     if request.method=='GET':
-        # weather_list=weather.city_weather()
+        weather_list=weather.city_weather()
         house_list=models.House.objects.order_by('-order_count')
         # for house in house_list:
         #     house.hotel.hotel_name=house.hotel_name
@@ -24,7 +24,8 @@ def index(request):
         house_list=house_list[0:5]#热门品牌
         return render(request,'hotel/order_hotel.html',locals())
     elif request.method=='POST':
-        pass
+        return render(request,'hotel/order_room.html')
+
 
 #导入酒店数据
 def init_hotel(request):

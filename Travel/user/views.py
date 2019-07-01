@@ -5,7 +5,12 @@ from .models import *
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.core.paginator import Paginator
+<<<<<<< HEAD
+from .page_helper import *
+=======
+from django.contrib.auth.hashers import make_password, check_password
 
+>>>>>>> d3872dc5b351966cd0c1b1712619f0ebbd3d241b
 
 # 登录
 def login(request):
@@ -15,6 +20,7 @@ def login(request):
         # 获取登录页面form表单提交的uname和upwd
         uname = request.POST.get('uname')
         upwd = request.POST.get('upwd')
+        upwd = make_password(upwd, 'xiaochen', 'pbkdf2_sha256')
         # 获取验证码
         validateCode = request.POST.get('validateCode')
         # 获取记住密码单选框的状态
@@ -56,6 +62,7 @@ def register(request):
         # 获取用户注册输入的信息
         uname = request.POST.get('uname')
         upwd = request.POST.get('upwd')
+        upwd = make_password(upwd, 'xiaochen', 'pbkdf2_sha256')
         phone = request.POST.get('phone')
         email = request.POST.get('email')
         # 获取数据库uname,判断是否重复
@@ -99,7 +106,9 @@ def updatepwd(request):
         # 获取用户输入的新密码
         uname = request.session['uname']
         new_pwd = request.POST.get('new_pwd')
+        new_pwd = make_password(new_pwd, 'xiaochen', 'pbkdf2_sha256')
         new_pwd_again = request.POST.get('new_pwd_again')
+        new_pwd_again = make_password(new_pwd_again, 'xiaochen', 'pbkdf2_sha256')
         # 判断两次密码是否一致
         if new_pwd == new_pwd_again:
             try:
@@ -116,7 +125,7 @@ def updatepwd(request):
             # 如果两次密码不一致,刷新忘记密码页面,返回错误信息
             pwd_error = '密码不一致'
             return render(request, 'user/forget_new.html', locals())
-        
+
 # 退出登录
 def logout(request):
     try:
@@ -131,14 +140,14 @@ def logout(request):
         # 直接返回首页,但不删除seesion
         return HttpResponseRedirect('/')
 
-
+# 注销登录
 def cancel(request):
     try:
-        # 获取seesion中的id信息,修改对应id的用户登录状态修改,删除session,返回首页
+        # 获取seesion中的id信息,修改对应id的用户登录状态,删除session,返回首页
         uid = request.session['userinfo']['id']
         user = Info.objects.get(id=uid)
         user.is_online = False
-        # 将用户注销状态修改
+        # 修改用户注销状态
         user.is_alive = True
         user.save()
         del request.session['userinfo']
@@ -169,4 +178,14 @@ def cart(request):
 
 #历史记录
 def order(request):
-    return render(request, 'user/order.html')
+    uid=request.session['userinfo']['id']
+    # page_num=request.GET.get('page')
+    # data=History_list.objects.filter(u_id=uid)
+    # data_counts=data.count()
+    # page_obj=Page(page_num,data_counts,url_prefix="/user/order/",per_page=4,max_page=6)
+    # all_data_order=History_list.objects.filter(u_id=uid)[page_obj.start:page_obj.end]
+    # page_html=page_obj.page_html()
+    data=History_list.objects.filter(u_id=uid).all()
+    if data:
+        return render(request, 'user/order.html',locals())
+    return render(request,'user/new_order.html')
