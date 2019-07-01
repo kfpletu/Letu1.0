@@ -17,7 +17,7 @@ class Scen(models.Model):
 class Scbr(models.Model):
     sce_name1 = models.CharField('景点名称', max_length=8)
     grage=models.CharField('景区级别',default='AAAA',max_length=10)
-    sce_addr=models.CharField("景区地址",max_length=30)
+    sce_addr=models.CharField("景区地址",max_length=30,default='1')
     open_time=models.CharField("开放时间",max_length=200)
     img1=models.ImageField('景点图片1')
     img2=models.ImageField('景点图片2')
