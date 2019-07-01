@@ -155,271 +155,35 @@
                 </ul>
             </div>
             <!-- 加载子条目 -->
-
+            {% for sen in scens %}
             <figure class="tour">
-               <a href="##"> <img src="{% static 'images/scenic/info/huaqingchi.jpg' %}" alt="限时特价"></a>
+               <a href="{% url 'scenic1' %}{{ sen.id }}"> <img src="{{ sen.img }}" alt="限时特价"></a>
                <figcaption>                   
                     <article>
                         <header>
                             <hgroup>
-                                <h2>盛唐皇家宫苑</h2>
-                                <h3>自然造化的山地温泉，让周、秦、汉、隋、唐历代帝王皆在此营建离宫别苑。</h3>
+                                <h2>{{ sen.sce_topic }}</h2>
+                                <h3>{{ sen.brief_des }}</h3>
                             </hgroup>
 
                         </header>
                         <ol>
-                            <li><mark>公车</mark>从火车站（东广场）乘坐914、915、游5（306）路公交</li>
-                            <li><mark>自驾</mark>G30连霍高速-108国道-秦唐大道</li>
+                            <li><mark>公车</mark>{{ sen.bus_go }}</li>
+                            <li><mark>自驾</mark>{{ sen.car_go }}</li>
                         </ol>
 
                         <footer>
-                            由乐途旅行网赞助提供，截止于 <time>2019-9-20</time>
+                            由乐途旅行网赞助提供，截止于 <time>{{ sen.low_time}}</time>
                         </footer>
                     </article>
                     <div class="buy">
-                        <div class="price">￥<strong>30起</strong><s>￥60</s></div>
-                        <div class="reserve"><a href="##">立即抢购</a></div>
+                        <div class="price">￥<strong>{{ sen.local_price }}起</strong><s>￥{{ sen.pre_price }}</s></div>
+                        <div class="reserve"><a href="{% url 'scenic1' %}{{ sen.id }}">立即抢购</a></div>
                     </div>
-                    <div class="type">华清池</div>
-                    <div class="disc"><span>５.0折</span></div>  
+                    <div class="type">{{ sen.sce_name }}</div>
                 </figcaption>
             </figure>
-            
-            <figure class="tour">
-                <a href="##"><img src="{% static 'images/scenic/info/datangfurongyuan.jpg' %}" alt="限时特价"></a>
-                <figcaption>
-                    <article>
-                        <header>
-                            <hgroup>
-                                <h2>唐文化主题公园</h2>
-                                <h3>创演盛世气概，梦回盛唐帝国。用宏大气势，震慑游客。</h3>
-                            </hgroup>
-
-                        </header>
-                        <ol>
-                            <li><mark>公车</mark>乘坐公交5、19、21、22、24、27、30、34等均可到达</li>
-                            <li><mark>自驾</mark>市内芙蓉西路</li>
-                        </ol>
-
-                        <footer>
-                            由乐途旅行网赞助提供，截止于 <time>2019-9-10</time>
-                        </footer>
-                    </article>
-                    <div class="buy">
-                        <div class="price">￥<strong>50起</strong><s>￥90</s></div>
-                        <div class="reserve"><a href="###">立即抢购</a></div>
-                    </div>
-                    <div class="type">大唐芙蓉园</div>
-                    <div class="disc"><span>5.6折</span></div>
-                </figcaption>
-
-            </figure>
-            <figure class="tour">
-                <a href="##"><img src="{% static 'images/scenic/info/mingchengqiang.jpg' %}" alt="限时特价"></a>
-                <figcaption>
-                    <article>
-                        <header>
-                            <hgroup>
-                                <h2>城垣建筑</h2>
-                                <h3>细数这些城门的名称来历，也从一个侧面反映了古城的沉浮丧衰。
-
-                                </h3>
-                            </hgroup>
-
-                        </header>
-                        <ol>
-                            <li><mark>公交</mark> 公交5、18、215、603、611路均可到达</li>
-                            <li><mark>自驾</mark>市内环城东路南段</li>
-                        </ol>
-
-                        <footer>
-                            由乐途旅行网赞助提供，截止于 <time>2019-8-20</time>
-                        </footer>
-                    </article>
-                    <div class="buy">
-                        <div class="price">￥<strong>60起</strong><s>￥100</s></div>
-                        <div class="reserve"><a href="###">立即抢购</a></div>
-                    </div>
-                    <div class="type">明城墙</div>
-                    <div class="disc"><span>６.0折</span></div>
-                </figcaption>
-
-            </figure>
-            <figure class="tour">
-                <a href="##"><img src="{% static 'images/scenic/info/lishiguan.jpg' %}" alt="限时特价"></a>
-                <figcaption>
-                    <article>
-                        <header>
-                            <hgroup>
-                                <h2>国家级历史类大型博物馆</h2>
-                                <h3>陕西历史博物馆则是展示陕西历史文化和中国古代文明的艺术殿堂。</h3>
-                            </hgroup>
-
-                        </header>
-                        <ol>
-                            <li><mark>公车</mark>公交5路、4路、701路、710路等均可到达陕西历史博物馆</li>
-                            <li><mark>自驾</mark>市内翠华路</li>
-                        </ol>
-
-                        <footer>
-                            由乐途旅行网赞助提供，截止于 <time>2019-9-1</time>
-                        </footer>
-                    </article>
-                    <div class="buy">
-                        <div class="price">￥<strong>35起</strong><s>￥60</s></div>
-                        <div class="reserve"><a href="###">立即抢购</a></div>
-                    </div>
-                    <div class="type">陕西历史博物馆</div>
-                    <div class="disc"><span>5.8折</span></div>
-                </figcaption>
-
-            </figure>
-            <figure class="tour">
-                <a href="##"><img src="{% static 'images/scenic/info/xiaoyanta.jpg' %}" alt="限时特价"></a>
-                <figcaption>
-                    <article>
-                        <header>
-                            <hgroup>
-                                <h2>荐福寺塔</h2>
-                                <h3>一个砖塔经过6次地震不倒塌，反而自然复合起来，确是一件奇事。</h3>
-                            </hgroup>
-
-                        </header>
-                        <ol>
-                            <li><mark>公车</mark>乘坐五龙专线、700、707、713路等公交到“小雁塔”站</li>
-                            <li><mark>自驾</mark>西安市内友谊西路</li>
-                        </ol>
-
-                        <footer>
-                            由乐途旅行网赞助提供，截止于 <time>2019-8-10</time>
-                        </footer>
-                    </article>
-                    <div class="buy">
-                        <div class="price">￥<strong>50起</strong><s>￥80</s></div>
-                        <div class="reserve"><a href="###">立即抢购</a></div>
-                    </div>
-                    <div class="type">小雁塔</div>
-                    <div class="disc"><span>6.3折</span></div>
-                </figcaption>
-
-            </figure>
-            <figure class="tour">
-                <a href="##"><img src="{% static 'images/scenic/info/qinlingdigong.jpg' %}" alt="限时特价"></a>
-                <figcaption>
-                    <article>
-                        <header>
-                            <hgroup>
-                                <h2>辉煌雄伟秦皇陵</h2>
-                                <h3>蜡像雕塑与壁画结合，再现了秦始皇生前的一些重要活动场面。</h3>
-                            </hgroup>
-
-                        </header>
-                        <ol>
-                            <li><mark>公交</mark> 地铁1号线 → 307路 → 临潼201路 → 临潼303路</li>
-                            <li><mark>自驾</mark> 环城北路- 华清西路-华清东路-东城大道-G108-秦陵北路到终点</li>
-                        </ol>
-
-                        <footer>
-                            由乐途旅行网赞助提供，截止于 <time>2019-8-15</time>
-                        </footer>
-                    </article>
-                    <div class="buy">
-                        <div class="price">￥<strong>40起</strong><s>￥７０</s></div>
-                        <div class="reserve"><a href="###">立即抢购</a></div>
-                    </div>
-                    <div class="type">秦陵地宫</div>
-                    <div class="disc"><span>5.7折</span></div>
-                </figcaption>
-
-            </figure>
-            <figure class="tour">
-                <a href="##"><img src="{% static 'images/scenic/info/changhenge.jpg' %}" alt="限时特价"></a>
-                <figcaption>
-                    <article>
-                        <header>
-                            <hgroup>
-                                <h2>首部大型实景历史舞剧</h2>
-                                <h3>以骊山山体为背景，以华清池九龙湖做舞台,万星闪烁的梦幻天空。</h3>
-                            </hgroup>
-
-                        </header>
-                        <ol>
-                            <li><mark>公车</mark> 306路旅游专线车或915路西潼高速</li>
-                            <li><mark>自驾</mark>G30连霍高速转108国道</li>
-                        </ol>
-
-                        <footer>
-                            由乐途旅行网赞助提供，截止于 <time>2019-9-5</time>
-                        </footer>
-                    </article>
-                    <div class="buy">
-                        <div class="price">￥<strong>60起</strong><s>￥80</s></div>
-                        <div class="reserve"><a href="###">立即抢购</a></div>
-                    </div>
-                    <div class="type">长恨歌</div>
-                    <div class="disc"><span>7.5</span></div>
-                </figcaption>
-
-            </figure>
-            <figure class="tour">
-                <a href="##"><img src="{% static 'images/scenic/info/qinlingdongwuyuan.jpg' %}" alt="限时特价"></a>
-                <figcaption>
-                    <article>
-                        <header>
-                            <hgroup>
-                                <h2>野生动物保护教育基地</h2>
-                                <h3>徜徉在丛林与花径之间，听百鸟与清风唱和，看猛兽与群山相伴。</h3>
-                            </hgroup>
-                        </header>
-                        <ol>
-                            <li><mark>公车</mark> 环山旅游１号线、334路</li>
-                            <li><mark>自驾</mark> 西安火车站---曲江路----包茂高速公路-----关中环线-----西安秦岭野生动物园。</li>
-                        </ol>
-
-                        <footer>
-                            由乐途旅行网赞助提供，截止于 <time>2019-8-10</time>
-                        </footer>
-                    </article>
-                    <div class="buy">
-                        <div class="price">￥<strong>60起</strong><s>￥７０</s></div>
-                        <!--<div class="reserve"><a href="ticket">立即抢购</a></div>-->
-                        <div class="reserve"><a href="/scenic/ticket">立即抢购</a></div>
-
-                    </div>
-                    <div class="type">秦岭野生动物园</div>
-                    <div class="disc"><span>8.6折</span></div>
-                </figcaption>
-
-            </figure>
-            <figure class="tour">
-                <a href="##"><img src="{% static 'images/scenic/info/zhuquegongyuan.jpg' %}" alt="限时特价"></a>
-                <figcaption>
-                    <article>
-                        <header>
-                            <hgroup>
-                                <h2>避暑佳境</h2>
-                                <h3>国家森林公园，以自然山水为基础，天然森林为主体的自然风景旅游区。</h3>
-                            </hgroup>
-
-                        </header>
-                        <ol>
-                            <li><mark>公车</mark> 直通车：西安省体育场西门——朱雀国家森林公园</li>
-                            <li><mark>自驾</mark> 经西安绕城高速上（汉中、重庆）方向的高速到朱雀出口处</li>
-                        </ol>
-
-                        <footer>
-                            由乐途旅行网赞助提供，截止于 <time>2019-8-6</time>
-                        </footer>
-                    </article>
-                    <div class="buy">
-                        <div class="price">￥<strong>60起</strong><s>￥８０</s></div>
-                        <div class="reserve"><a href="###">立即抢购</a></div>
-                    </div>
-                    <div class="type">朱雀森林公园</div>
-                    <div class="disc"><span>7.5折</span></div>
-                </figcaption>
-
-            </figure>
+            {% endfor %}
             <div class="more"><a href="###">加载更多...</a></div>
 
         </div>
@@ -455,7 +219,7 @@
         </div>
         <div class="bottom">
                 <p>Copyright ©LT 乐途旅行网 | 陕ICP备120110109号 | 旅行网经营许可证： L-LT-BK12345</p>
-                <img src="{% static 'images/scenic/booking/pic.gif' %}" title="站长统计">
+                <img src="/static/images/scenic/pic.gif" title="站长统计">
             </div>
     </footer>
 </body>

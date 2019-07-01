@@ -1,9 +1,10 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse,Http404
 from . import models
 from django.db.models import *
 import os
 import time
+from django.conf import settings
 # from . import weather
 # Create your views here.
 #酒店首页
@@ -121,6 +122,18 @@ def hotel(request,id,level):
             # return render(request,'hotel/hotel_ticket.html',dic)
 
 
-
-# def test_book(requset):
-#     return render(requset,'hotel/booking.html')
+#商家文件上传
+def upload_picture(request):
+    if request.method=='GET':
+        return render(request,'hotel/merchant.html')
+    elif request.method=='POST':
+        #得到文件流对象
+        file=request.FILES['myfile']
+        print('上传的文件名',file.name)
+        level=request.POST.get('level','')
+        #配置文件夹地址
+        filename=os.path.join(os.path.join(settings.MEDIA_ROOT,level),file.name)
+        with open(filename,'wb') as f:
+            f.write(file.file.read())
+            return render(request,'hotel/merchant.html',{'aa':'文件上传成功'})
+    raise Http404
