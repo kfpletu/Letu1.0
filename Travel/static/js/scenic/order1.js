@@ -8,7 +8,7 @@ $(function (){
 		value++;
 		$(this).prev().val(value);
 		countPrice($(this),value);
-		sum();
+//		sum();
 
 	})
 	$(".minus").click(function (){
@@ -18,7 +18,7 @@ $(function (){
 		}
 		$(this).next().val(value);
 		countPrice($(this),value)
-		sum()
+//		sum()
 
 	})
 	//价格联动
