@@ -11,7 +11,7 @@
  *
  * Date: 2015-04-28T16:19Z
  */
-console.log(666666666)
+console.log('7777777777')
 (function( global, factory ) {
 
 	if ( typeof module === "object" && typeof module.exports === "object" ) {

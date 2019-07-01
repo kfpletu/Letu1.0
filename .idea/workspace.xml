@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+<<<<<<< HEAD
+  <component name="ProjectFrameBounds" extendedState="1">
+    <option name="x" value="365" />
+    <option name="y" value="27" />
+    <option name="width" value="1451" />
+    <option name="height" value="891" />
+=======
   <component name="ChangeListManager">
     <list default="true" id="8b3a3aeb-510d-4e78-9923-add4cb843ce3" name="Default Changelist" comment="">
 <<<<<<< HEAD
@@ -370,10 +377,14 @@
       <pane id="Scope" />
 >>>>>>> b8c37a65c9eca5b15859a37f1176496f4a3fcffc
     </panes>
+>>>>>>> 4fbb28e2b23f881d812b80cc5d2065858001cac6
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+<<<<<<< HEAD
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+=======
 <<<<<<< HEAD
     <property name="last_opened_file_path" value="$PROJECT_DIR$/Travel/manage.py" />
 =======
@@ -898,5 +909,6 @@
         </state>
       </provider>
     </entry>
+>>>>>>> 4fbb28e2b23f881d812b80cc5d2065858001cac6
   </component>
 </project>
