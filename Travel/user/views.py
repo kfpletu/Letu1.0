@@ -5,7 +5,7 @@ from .models import *
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.core.paginator import Paginator
-
+from .page_helper import *
 
 # 登录
 def login(request):
@@ -169,4 +169,14 @@ def cart(request):
 
 #历史记录
 def order(request):
-    return render(request, 'user/order.html')
+    uid=request.session['userinfo']['id']
+    # page_num=request.GET.get('page')
+    # data=History_list.objects.filter(u_id=uid)
+    # data_counts=data.count()
+    # page_obj=Page(page_num,data_counts,url_prefix="/user/order/",per_page=4,max_page=6)
+    # all_data_order=History_list.objects.filter(u_id=uid)[page_obj.start:page_obj.end]
+    # page_html=page_obj.page_html()
+    data=History_list.objects.filter(u_id=uid).all()
+    if data:
+        return render(request, 'user/order.html',locals())
+    return render(request,'user/new_order.html')
