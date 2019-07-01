@@ -10,14 +10,20 @@ class Scen(models.Model):
     pre_price=models.DecimalField("原价",max_digits=6,decimal_places=2)
     local_price=models.DecimalField("现价",max_digits=6,decimal_places=2)
     low_time=models.DateField("优惠截止时间",default='2019-09-20')
-    img=models.ImageField('景点图片')
+    img=models.ImageField('景点图片',null=True)
     class Meta:
         verbose_name='景点信息表1'
         verbose_name_plural = verbose_name
+    def __str__(self):
+        return (self.id,self.sce_name)
 class Scbr(models.Model):
-    sce_name1 = models.CharField('景点名称', max_length=8)
+    sce_name = models.CharField('景点名称', max_length=8)
     grage=models.CharField('景区级别',default='AAAA',max_length=10)
+<<<<<<< HEAD
     sce_addr=models.CharField("景区地址",max_length=30,default='1')
+=======
+    sce_addr=models.CharField("景区地址",max_length=30,null=True)
+>>>>>>> 4fbb28e2b23f881d812b80cc5d2065858001cac6
     open_time=models.CharField("开放时间",max_length=200)
     img1=models.ImageField('景点图片1')
     img2=models.ImageField('景点图片2')
@@ -26,15 +32,15 @@ class Scbr(models.Model):
     img5=models.ImageField('景点图片5')
     word1=models.CharField('主题词1',max_length=5,null=True)
     word2=models.CharField('主题词1',max_length=5,null=True)
-    # scp=models.OneToOneField(Scen,models.CASCADE,null=True)
+    scen=models.OneToOneField(Scen,models.CASCADE,null=True)
     class Meta:
         verbose_name='景点信息表2'
         verbose_name_plural = verbose_name
 class Introduce(models.Model):
     sce_details=models.TextField('景区介绍')
-    # sce_name2=models.OneToOneField(Scbr,models.CASCADE,null=True)
+    scbr=models.OneToOneField(Scbr,models.CASCADE,null=True)
 class Ticket(models.Model):
     type=models.CharField("门票种类",max_length=10)
     name=models.CharField("景点名称",max_length=20)
     price=models.DecimalField("门票价格",max_digits=6,decimal_places=2)
-    # sce_name3 = models.ForeignKey(Scbr,models.CASCADE,null=True)
+    scbr= models.ForeignKey(Scbr,models.CASCADE,null=True)
