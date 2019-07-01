@@ -158,11 +158,9 @@ def booking(request):
 
 #购物车
 def cart(request):
-    # u_id = request.session[]['id']
-    goods = Cart.objects.filter(user_id=69)
-    paginator = Paginator(goods,4)
-    print('啦啦啦啦',paginator.num_pages)
-    # if paginator.num_pages > 3: 
+    u_id = request.session['userinfo']['id']
+    goods = Cart.objects.filter(user_id=u_id)
+    paginator = Paginator(goods,4) 
     cur_page = request.GET.get('page',1)
     page = paginator.page(cur_page)
     return render(request,'user/cart.html',locals())
@@ -170,3 +168,16 @@ def cart(request):
 #历史记录
 def order(request):
     return render(request, 'user/order.html')
+
+#删除购物车商品
+def del_goods(request,g_id):
+    target = Cart.objects.get(id=g_id)
+    target.delete()
+    return render(request,'user/cart.html',locals())
+
+#
+# def jump(request):
+#     o_num = request.GET['orderNum']
+#     o_price = request.GET['orderPrice']
+#     print('啦啦啦啦'+o_num,o_price)
+#     return render(request,'user/cart.html')

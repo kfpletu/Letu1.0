@@ -13,6 +13,8 @@
     {% block href %}
     <script src="{% static '/js/jquery.js' %}"></script>
     <script src="{% static '/js/user/cart.js' %}"></script>
+    <!-- <script src="{% static '/js/common.js' %}"></script>
+    <script src="{% static '/js/user/jump.js' %}"></script> -->
     {% endblock href %}
 </head>
 <body>
@@ -97,6 +99,7 @@
             <div class="item">
                 <div class="check">
                     <img src="{% static '/images/user/product_normal.png' %}" class="checkItem">
+                    <span class="hid">{{ g.id }}</span>
                 </div>
                 <div class="gname">
                     <img src="{{ g.g_img }}">
@@ -114,8 +117,10 @@
                     <input type="text" value={{ g.g_num }}>
                     <a href="javascript:void(0)" class="add">+</a>
                 </div>
-                    <div class="gsum">￥ {{ g.total_price }}</div>    
-                    <div class="action">删除</div>
+                <div class="gsum">￥ {{ g.total_price }}</div>    
+                <div class="action" name='del'>
+                    <a href="/user/del/{{ g.id }}">删除</a>
+                </div>
             </div>
             {% endfor %}
             <div id="box1">
@@ -145,17 +150,17 @@
                 <p>
                     <span>
                         已选择:
-                        <b class="total-num">0</b>
+                        <b class="total-num" name="orderNum" class="oNum">0</b>
                         件商品
                     </span>
                     <span>
                         共计:
-                        <b class="total-price">0.00</b>
+                        <b class="total-price" name="orderPrice" class="oPrice">0.00</b>
                         元
                     </span>
-                    <span calss="sub">
-                        <input type="submit" value="结算">
-                    </span>
+                    <div class='sub'>
+                        <a href="/user/cart">结算</a>
+                    </div>
                 </p>
             </div>
         </div>
