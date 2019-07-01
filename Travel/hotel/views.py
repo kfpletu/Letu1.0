@@ -96,7 +96,6 @@ def hotel_ticket(id):
 
 def hotel(request,id,level):
 
-
         dic=hotel_ticket(id)
         if request.method == 'GET':
             return render(request, 'hotel/hotel_ticket.html',dic)
