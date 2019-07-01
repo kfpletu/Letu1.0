@@ -5,6 +5,7 @@ from .models import *
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.core.paginator import Paginator
+from django.contrib.auth.hashers import make_password, check_password
 
 
 # 登录
@@ -15,6 +16,7 @@ def login(request):
         # 获取登录页面form表单提交的uname和upwd
         uname = request.POST.get('uname')
         upwd = request.POST.get('upwd')
+        upwd = make_password(upwd, 'xiaochen', 'pbkdf2_sha256')
         # 获取验证码
         validateCode = request.POST.get('validateCode')
         # 获取记住密码单选框的状态
@@ -56,6 +58,7 @@ def register(request):
         # 获取用户注册输入的信息
         uname = request.POST.get('uname')
         upwd = request.POST.get('upwd')
+        upwd = make_password(upwd, 'xiaochen', 'pbkdf2_sha256')
         phone = request.POST.get('phone')
         email = request.POST.get('email')
         # 获取数据库uname,判断是否重复
@@ -99,7 +102,9 @@ def updatepwd(request):
         # 获取用户输入的新密码
         uname = request.session['uname']
         new_pwd = request.POST.get('new_pwd')
+        new_pwd = make_password(new_pwd, 'xiaochen', 'pbkdf2_sha256')
         new_pwd_again = request.POST.get('new_pwd_again')
+        new_pwd_again = make_password(new_pwd_again, 'xiaochen', 'pbkdf2_sha256')
         # 判断两次密码是否一致
         if new_pwd == new_pwd_again:
             try:
@@ -116,7 +121,7 @@ def updatepwd(request):
             # 如果两次密码不一致,刷新忘记密码页面,返回错误信息
             pwd_error = '密码不一致'
             return render(request, 'user/forget_new.html', locals())
-        
+
 # 退出登录
 def logout(request):
     try:
@@ -131,14 +136,14 @@ def logout(request):
         # 直接返回首页,但不删除seesion
         return HttpResponseRedirect('/')
 
-
+# 注销登录
 def cancel(request):
     try:
-        # 获取seesion中的id信息,修改对应id的用户登录状态修改,删除session,返回首页
+        # 获取seesion中的id信息,修改对应id的用户登录状态,删除session,返回首页
         uid = request.session['userinfo']['id']
         user = Info.objects.get(id=uid)
         user.is_online = False
-        # 将用户注销状态修改
+        # 修改用户注销状态
         user.is_alive = True
         user.save()
         del request.session['userinfo']
