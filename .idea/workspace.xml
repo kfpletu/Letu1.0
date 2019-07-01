@@ -206,6 +206,24 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
+        <entry file="file://$PROJECT_DIR$/Travel/user/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-232">
+              <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Travel/user/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="522">
+              <caret line="21" column="24" selection-start-line="21" selection-start-column="24" selection-end-line="21" selection-end-column="24" />
+              <folding>
+                <element signature="e#0#35#0" expanded="true" />
+              </folding>
+=======
         <entry file="file://$PROJECT_DIR$/Travel/hotel/models.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="108">
@@ -227,6 +245,7 @@
               <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
 >>>>>>> origin/master
 >>>>>>> b8c37a65c9eca5b15859a37f1176496f4a3fcffc
+>>>>>>> 713b719eb0b8bb546e393f0ec8029111c6c42643
             </state>
           </provider>
         </entry>
@@ -286,7 +305,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="1085" />
     <option name="y" value="160" />
     <option name="width" value="830" />
@@ -463,12 +482,19 @@
       <workItem from="1561768930054" duration="493000" />
 =======
       <workItem from="1561706913770" duration="2812000" />
+<<<<<<< HEAD
+      <workItem from="1561718208217" duration="7121000" />
+=======
       <workItem from="1561718208217" duration="5161000" />
 >>>>>>> b8c37a65c9eca5b15859a37f1176496f4a3fcffc
+>>>>>>> 713b719eb0b8bb546e393f0ec8029111c6c42643
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
+    <option name="totallyTimeSpent" value="9933000" />
+=======
 <<<<<<< HEAD
     <option name="totallyTimeSpent" value="1297000" />
   </component>
@@ -486,6 +512,7 @@
       <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.26902887" />
 =======
     <option name="totallyTimeSpent" value="7973000" />
+>>>>>>> 713b719eb0b8bb546e393f0ec8029111c6c42643
   </component>
   <component name="ToolWindowManager">
 <<<<<<< HEAD
@@ -502,7 +529,7 @@
     <frame x="45" y="25" width="1875" height="1055" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15626666" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15626666" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -849,10 +876,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Travel/user/models.py">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="-232">
+          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Travel/user/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="522">
+          <caret line="21" column="24" selection-start-line="21" selection-start-column="24" selection-end-line="21" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+=======
         <state relative-caret-position="290">
           <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
 >>>>>>> origin/master
 >>>>>>> b8c37a65c9eca5b15859a37f1176496f4a3fcffc
+>>>>>>> 713b719eb0b8bb546e393f0ec8029111c6c42643
         </state>
       </provider>
     </entry>
