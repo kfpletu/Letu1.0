@@ -3,7 +3,6 @@ from django.db import models
 # Create your models here.
 
 
-
 class House(models.Model):
     hotel_name=models.CharField('酒店名',max_length=20)
     house_count=models.IntegerField('剩余房间数量',default=30)
@@ -40,9 +39,12 @@ class Room(models.Model):
     bed=models.CharField('床',max_length=100)
     hotel=models.ForeignKey(Hotel,null=True)
     house=models.ForeignKey(House,models.CASCADE,null=True)
+    room_level=models.CharField('房间编号',default='1',max_length=5)
     class Meta:
         db_table='room'
 
     def __str__(self):
         return '房间名: %s 价位: %s'%(self.room_name,self.price)
 
+class test(models.Model):
+    cc=models.CharField('fsd',max_length=11)

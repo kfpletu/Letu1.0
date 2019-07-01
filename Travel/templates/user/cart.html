@@ -10,8 +10,10 @@
     <link rel="stylesheet" href="{% static '/css/home/home.css' %}">
     <link rel="stylesheet" href="{% static '/css/user/cart.css' %}">
     <link rel="stylesheet" href="{% static '/css/basic.css' %}">
+    {% block href %}
     <script src="{% static '/js/jquery.js' %}"></script>
     <script src="{% static '/js/user/cart.js' %}"></script>
+    {% endblock href %}
 </head>
 <body>
     <header id="header">
@@ -48,6 +50,33 @@
         <h2>
             购物车
         </h2>
+        <!-- 分页 -->
+        <div id='paging'>
+                {# 分页功能 #}
+                {# 上一页功能 #}
+                {% if page.has_previous %}
+                <a href="{% url 'goodType' %}?page={{ page.previous_page_number }}">上一页</a>
+                {% else %}
+                <span>上一页</span>
+                {% endif %}
+            
+                {# 以下增加各页的超链接 #}
+                {% for p in paginator.page_range %}
+                    {# 判断p是否是当前页，如果是当前面，不加超链接#}
+                    {% if p == page.number %}
+                    {{ p }}
+                    {% else %}
+                    <a href="{% url 'goodType' %}?page={{ p }}">{{p}}</a>
+                    {% endif %}
+                {% endfor %}
+            
+                {#下一页功能#}
+                {% if page.has_next %}
+                <a href="{% url 'goodType' %}?page={{ page.next_page_number }}">下一页</a>
+                {% else %}
+                <span>下一页</span>
+                {% endif %}
+        </div>
         <!--购物车商品展示-->
         <div class="info">
             <!--顶部的工具栏-->
@@ -60,11 +89,11 @@
                 <div class="gcount">数量</div>
                 <div class="gsum">金额</div>
                 <div class="action">操作</div>
-        </div>
+            </div>
         <!--商品展示-->
         <div id="content">
             <!--商品记录-->
-            {% for g in goods %}
+            {% for g in page %}
             <div class="item">
                 <div class="check">
                     <img src="{% static '/images/user/product_normal.png' %}" class="checkItem">
@@ -72,8 +101,8 @@
                 <div class="gname">
                     <img src="{{ g.g_img }}">
                     <p>{{ g.g_name }}</p>
-                    <p>{{ g.time1 }}</p>
-                    <p>{{ g.time2 }}</p>
+                    <p>起: {{ g.time1 }}</p>
+                    <p>止: {{ g.time2 }}</p>
                 </div>
                 <div class="gprice">
                     <h3>{{ g.g_type }}</h3>
@@ -97,7 +126,7 @@
             <div id="box2">
                 <p>没有要结算的订单!!</p>
             </div> 
-            <img src="../img/booking/wait.jpg" class="wait">
+            <img src="" class="wait">
             <div id="empty">
                 <p>空空如也！</p>
             </div>  
@@ -137,7 +166,6 @@
         <p>Copyright ©LT 乐途旅行网 | 陕ICP备120110109号 | 旅行网经营许可证： L-LT-BK12345</p>
         <img src="{% static '/images/home/pic.gif' %}" title="站长统计">
     </div>
-    
     
 </body>
 
