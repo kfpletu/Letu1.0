@@ -330,4 +330,16 @@
 .item .oname p:nth-child(3){
     margin-bottom: 8px; 
 }
-
+#boxx{
+    width: 300px;
+    height: 210px;
+    /*background: red;*/
+    margin: 150px auto;
+}
+.boxx{
+    margin: 0 auto;
+    padding-top: 75px;
+    /*background: green;*/
+    text-align: center;
+    color: red;
+}

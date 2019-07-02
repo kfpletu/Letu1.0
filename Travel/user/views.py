@@ -183,8 +183,7 @@ def order(request):
     data=History_list.objects.filter(u_id=uid).all()
     if data:
         return render(request, 'user/order.html',locals())
-    return render(request,'user/new_order.html')
-
+    return render(request, 'user/order.html')
 
 #删除购物车商品
 def del_goods(request,g_id):
