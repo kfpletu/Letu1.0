@@ -191,15 +191,40 @@ def del_goods(request,g_id):
     target.delete()
     return render(request,'user/cart.html')
 
-
+#数量加1
 def add(request,g_id):
     target = Cart.objects.get(id=g_id)
-    p = target.g_num
-    p += 1
-    target.g_num = p
-    # target.save()
-    print("啦啦啦",target.g_num)
+    n = target.g_num
+    p = target.price
+    n += 1
+    total_p = p * n
+    target.total_price = total_p
+    target.g_num = n
+    target.save()
     return render(request,'user/cart.html')
+
+#数量减1    
+def reduce(request,g_id):
+    target = Cart.objects.get(id=g_id)
+    n = target.g_num
+    p = target.price
+    if n > 1:
+        n -= 1
+    total_p = p * n
+    target.total_price = total_p
+    target.g_num = n
+    target.save()
+    return render(request,'user/cart.html')
+
+#修改订单状态
+def modif(request,g_id):
+    target = Cart.objects.get(id=g_id)
+    statu = target.is_pay
+    statu = 1
+    target.is_pay = statu
+    target.save()
+    
+    return render(request,'user/payment.html')
     
 def payment(request):
     print("哈哈哈")
