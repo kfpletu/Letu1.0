@@ -37,7 +37,7 @@ $(function(){
 		timerH=setInterval(function(){
 		listBoxMarginH-=2;	
 		$('.brandListBox:first').css('margin-left',(listBoxMarginH+'px'))
-		if (listBoxMarginH<-4400){
+		if (listBoxMarginH<-8400){
 			listBoxMarginH=0;
 		}
 	},50)
@@ -67,6 +67,8 @@ $(function(){
 		}
 	},100)
 	})
+	
+
 	
 
 })
