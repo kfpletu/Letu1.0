@@ -154,12 +154,12 @@
                     </div>
                     <div class="gpt" style="width:190px;">
                         <!--<input type="date" name="starttime">-->
-                        <input class="Wdate" type="text" onfocus="WdatePicker({dateFmt:'yyyy-M-d H:mm:ss',minDate: '%y-%M-%d 15:00:00',
-                        maxDate: '%y-%M-#{%d+60} 20:00:00' })" placeholder="请输入开始时间"/>
+                        <input name="starttime" class="Wdate" type="text" onfocus="WdatePicker({dateFmt:'yyyy-M-d H:mm:ss',minDate: '%y-%M-%d 15:00:00',
+                        maxDate: '%y-%M-#{%d+60} 20:00:00' })" placeholder="请输入结束时间"/>
                     </div>
                     <div class="gpt2" style="width:190px;">
                         <!--<input type="date" name="endtime">-->
-                        <input class="Wdate" type="text" onfocus="WdatePicker({dateFmt:'yyyy-M-d H:mm:ss',minDate: '%y-%M-%d 20:00:00',
+                        <input name="endtime" class="Wdate" type="text" onfocus="WdatePicker({dateFmt:'yyyy-M-d H:mm:ss',minDate: '%y-%M-%d 20:00:00',
                         maxDate: '%y-%M-#{%d+63} 20:00:00' })" placeholder="请输入结束时间"/>
                     </div>
                     <div class="gprice" style="width:100px;">
@@ -174,7 +174,7 @@
                     <div class="gsum">￥ {{ tic.price }}</div>
                     <div class="gor">
                         <!-- <a href="##">预定</a> -->
-                        <input type="submit" value='加入购物车' 
+                        <input type="submit" value='加入购物车'
                         style='color:#000;background: crimson;outline:none;border-radius: 5px;border:0;height:30px;width:80px;line-height:36px;' name="sub">
                     </div>
                     </form>
