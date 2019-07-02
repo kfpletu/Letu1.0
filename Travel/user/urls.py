@@ -19,4 +19,7 @@ urlpatterns = [
     url(r'^reduce/(\d+)$',views.reduce),   
     # url(r'history$',views.history),
     url(r'^modif/(\d+)$',views.modif),   
+    url(r'^payment$',views.payment),
+    
+    
 ]
