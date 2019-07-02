@@ -5,12 +5,8 @@ from .models import *
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.core.paginator import Paginator
-<<<<<<< HEAD
-from .page_helper import *
-=======
 from django.contrib.auth.hashers import make_password, check_password
 
->>>>>>> d3872dc5b351966cd0c1b1712619f0ebbd3d241b
 
 # 登录
 def login(request):
@@ -188,4 +184,4 @@ def order(request):
     data=History_list.objects.filter(u_id=uid).all()
     if data:
         return render(request, 'user/order.html',locals())
-    return render(request,'user/new_order.html')
+    return render(request,'user/order.html')
