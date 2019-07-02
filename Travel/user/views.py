@@ -216,15 +216,32 @@ def reduce(request,g_id):
     target.save()
     return render(request,'user/cart.html')
 
-#修改订单状态
+#订单结算
 def modif(request,g_id):
     target = Cart.objects.get(id=g_id)
     statu = target.is_pay
     statu = 1
     target.is_pay = statu
     target.save()
-    
-    return render(request,'user/payment.html')
+    try:
+        a_order = History_list.objects.create(
+            u_id = target.user_id,
+            g_img = target.g_img,
+            g_name = target.g_name,
+            time1 = target.time1,
+            time2 = target.time2,
+            g_type = target.g_type,
+            price = target.price,
+            g_num = target.g_num,
+            total_price = target.total_price,
+            # booking_time = models.DateTimeField('订单时间', auto_now_add=True),
+            # serial_num = models.CharField('流水号', max_length=50),
+            is_del = target.is_pay
+        )
+    except:
+        return HttpResponse('购买失败')
+    else:
+        return render(request,'user/payment.html')
     
 def payment(request):
     print("哈哈哈")
