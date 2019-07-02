@@ -5,7 +5,12 @@ from .models import *
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.core.paginator import Paginator
+# <<<<<<< HEAD
+from .page_helper import *
+# =======
+from django.contrib.auth.hashers import make_password, check_password
 
+# >>>>>>> d3872dc5b351966cd0c1b1712619f0ebbd3d241b
 
 # 登录
 def login(request):
@@ -15,6 +20,7 @@ def login(request):
         # 获取登录页面form表单提交的uname和upwd
         uname = request.POST.get('uname')
         upwd = request.POST.get('upwd')
+        upwd = make_password(upwd, 'xiaochen', 'pbkdf2_sha256')
         # 获取验证码
         validateCode = request.POST.get('validateCode')
         # 获取记住密码单选框的状态
@@ -48,6 +54,8 @@ def login(request):
             # 出异常,说明用户名密码不正确,刷新当前登录页面
             return render(request,'user/login.html')
 
+
+
 #注册
 def register(request):
     if request.method == 'GET':
@@ -56,20 +64,35 @@ def register(request):
         # 获取用户注册输入的信息
         uname = request.POST.get('uname')
         upwd = request.POST.get('upwd')
+        upwd = make_password(upwd, 'xiaochen', 'pbkdf2_sha256')
         phone = request.POST.get('phone')
         email = request.POST.get('email')
-        # 获取数据库uname,判断是否重复
-        if Info.objects.filter(uname=uname):
-            return render(request, 'user/register.html', locals())
-        else:
-            # 尝试向数据库添加用户信息,成功返回到登录页面进行登录
-            try:
-                newinfo = Info(uname=uname, upwd=upwd, phone=phone, email=email)
-                newinfo.save()
-                return render(request, 'user/login.html', locals())
-            except:
-                # 抛异常,刷新注册页面,重新注册
-                return render(request,'user/register.html',locals())
+        # 尝试向数据库添加用户信息,成功返回到登录页面进行登录
+        try:
+            Info.objects.create(uname=uname, upwd=upwd, phone=phone, email=email)
+            return HttpResponse('注册成功')
+        except Exception as e:
+            # 抛异常,刷新注册页面,重新注册
+            return HttpResponse('注册失败')
+                
+
+def checkuname(request):
+    uname = request.GET.get('uname')
+    if Info.objects.filter(uname=uname):
+        return HttpResponse('用户名已经存在')
+    return HttpResponse('')
+
+def checkphone(request):
+    phone = request.GET.get('phone')
+    if Info.objects.filter(phone=phone):
+        return HttpResponse('该手机号码已经被注册')
+    return HttpResponse('')
+
+# def registers(request):
+#     print('1')
+#     uname = request.POST.get('uname')
+#     print(uname)
+#     return HttpResponse('注册成功')
 
 # 忘记密码
 def getpwd(request):
@@ -89,7 +112,7 @@ def getpwd(request):
             request.session['uname'] = info.uname
             return render(request, 'user/forget_new.html')
         except:
-            # 抛异常ze输入信息不正确,刷新忘记密码页面
+            # 抛异常则输入信息不正确,刷新忘记密码页面
             return render(request,'user/forget.html')
 # 修改密码
 def updatepwd(request):
@@ -97,9 +120,11 @@ def updatepwd(request):
         return render(request, 'user/forget.html')
     elif request.method == 'POST':
         # 获取用户输入的新密码
-        uname = request.session['uname']
-        new_pwd = request.POST.get('new_pwd')
+        uname = request.session['']
+        new_pwd = request.POST.get('neunamew_pwd')
+        new_pwd = make_password(new_pwd, 'xiaochen', 'pbkdf2_sha256')
         new_pwd_again = request.POST.get('new_pwd_again')
+        new_pwd_again = make_password(new_pwd_again, 'xiaochen', 'pbkdf2_sha256')
         # 判断两次密码是否一致
         if new_pwd == new_pwd_again:
             try:
@@ -116,7 +141,7 @@ def updatepwd(request):
             # 如果两次密码不一致,刷新忘记密码页面,返回错误信息
             pwd_error = '密码不一致'
             return render(request, 'user/forget_new.html', locals())
-        
+
 # 退出登录
 def logout(request):
     try:
@@ -131,14 +156,14 @@ def logout(request):
         # 直接返回首页,但不删除seesion
         return HttpResponseRedirect('/')
 
-
+# 注销登录
 def cancel(request):
     try:
-        # 获取seesion中的id信息,修改对应id的用户登录状态修改,删除session,返回首页
+        # 获取seesion中的id信息,修改对应id的用户登录状态,删除session,返回首页
         uid = request.session['userinfo']['id']
         user = Info.objects.get(id=uid)
         user.is_online = False
-        # 将用户注销状态修改
+        # 修改用户注销状态
         user.is_alive = True
         user.save()
         del request.session['userinfo']
@@ -158,15 +183,102 @@ def booking(request):
 
 #购物车
 def cart(request):
-    # u_id = request.session[]['id']
-    goods = Cart.objects.filter(user_id=69)
-    paginator = Paginator(goods,4)
-    print('啦啦啦啦',paginator.num_pages)
-    # if paginator.num_pages > 3: 
+    u_id = request.session['userinfo']['id']
+    goods = Cart.objects.filter(user_id=u_id)
+    paginator = Paginator(goods,4) 
     cur_page = request.GET.get('page',1)
     page = paginator.page(cur_page)
     return render(request,'user/cart.html',locals())
 
 #历史记录
 def order(request):
+    uid=request.session['userinfo']['id']
+    # page_num=request.GET.get('page')
+    # data=History_list.objects.filter(u_id=uid)
+    # data_counts=data.count()
+    # page_obj=Page(page_num,data_counts,url_prefix="/user/order/",per_page=4,max_page=6)
+    # all_data_order=History_list.objects.filter(u_id=uid)[page_obj.start:page_obj.end]
+    # page_html=page_obj.page_html()
+    data=History_list.objects.filter(u_id=uid).all()
+    if data:
+        return render(request, 'user/order.html',locals())
     return render(request, 'user/order.html')
+
+#删除购物车商品
+def del_goods(request,g_id):
+    target = Cart.objects.get(id=g_id)
+    target.delete()
+    return render(request,'user/cart.html')
+
+#数量加1
+def add(request,g_id):
+    target = Cart.objects.get(id=g_id)
+    n = target.g_num
+    p = target.price
+    n += 1
+    total_p = p * n
+    target.total_price = total_p
+    target.g_num = n
+    target.save()
+    return render(request,'user/cart.html')
+
+#数量减1    
+def reduce(request,g_id):
+    target = Cart.objects.get(id=g_id)
+    n = target.g_num
+    p = target.price
+    if n > 1:
+        n -= 1
+    total_p = p * n
+    target.total_price = total_p
+    target.g_num = n
+    target.save()
+    return render(request,'user/cart.html')
+
+#订单结算
+def modif(request,g_id):
+    target = Cart.objects.get(id=g_id)
+    statu = target.is_pay
+    statu = 1
+    target.is_pay = statu
+    target.save()
+    try:
+        a_order = History_list.objects.create(
+            u_id = target.user_id,
+            g_img = target.g_img,
+            g_name = target.g_name,
+            time1 = target.time1,
+            time2 = target.time2,
+            g_type = target.g_type,
+            price = target.price,
+            g_num = target.g_num,
+            total_price = target.total_price,
+            # booking_time = models.DateTimeField('订单时间', auto_now_add=True),
+            # serial_num = models.CharField('流水号', max_length=50),
+            is_del = target.is_pay
+        )
+    except:
+        return HttpResponse('购买失败')
+    else:
+        return render(request,'user/payment.html')
+    
+def payment(request):
+    print("哈哈哈")
+    return render(request,'user/payment.html')
+
+def test(request):
+    History_list.objects.create(
+        u_id=85,
+        g_img='/static/images/scenic/info/a1.jpg',
+        g_name='华清池',
+        time1='2019-07-02',
+        time2='2019-07-02',
+        g_type=2,
+        price=70,
+        g_num=1,
+        total_price=70,
+        booking_time='2019-07-02 15:55:30.854756',
+        serial_num=2019454821548412,
+        is_del=False
+    )
+    return HttpResponse("ok")

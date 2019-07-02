@@ -6,17 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>ticket</title>
     {% load static %}
-    <script src="/static/js/scenic/jquery-1.11.3.js"></script>
+    <script src="/static/js/scenic/jquery.js"></script>
     <link rel="stylesheet" href="{% static 'css/scenic/home.css' %}">
     <link rel="stylesheet" href="{% static 'css/basic.css' %}">
     <link rel="stylesheet" href="{% static 'css/scenic/ticket.css' %}">
 </head>
-{#<script src="{% static 'js/scenic/map.js' %}"></script>#}
-<script src="/static/js/scenic/order1.js"></script>
-{#<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=DVz4AM0f5tDaH8dZwBCjRzHxuaKn3x7x"></script>#}
+<script src="{% static 'js/scenic/map.js' %}"></script>
+<script src="/static/js/scenic/order.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=DVz4AM0f5tDaH8dZwBCjRzHxuaKn3x7x"></script>
 <script type="text/javascript" src="{% static 'js/scenic/prefixfree.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/scenic/zoom-slideshow.js' %}"></script>
 <script src="{% static 'js/scenic/tic.js' %}"></script>
+<script src="/static/js/scenic/WdatePicker时间插件/My97DatePicker/WdatePicker.js"></script>
 <body>
     <header id="header">
         {% if request.session.userinfo %}
@@ -122,7 +123,7 @@
 
     <div id="bodytickrt">
         <div class=daohang style="background:orange;">
-            <a href="/scenic/ticket">门票订购</a>
+            <a href="##">门票订购</a>
             <a href="/hotel">周围酒店</a>
         </div>
 
@@ -152,10 +153,14 @@
                         <p>{{ tic.name }}</p>
                     </div>
                     <div class="gpt" style="width:190px;">
-                        <input type="date" name="starttime">
+                        <!--<input type="date" name="starttime">-->
+                        <input name="starttime" class="Wdate" type="text" onfocus="WdatePicker({dateFmt:'yyyy-M-d H:mm:ss',minDate: '%y-%M-%d 15:00:00',
+                        maxDate: '%y-%M-#{%d+60} 20:00:00' })" placeholder="请输入结束时间"/>
                     </div>
                     <div class="gpt2" style="width:190px;">
-                        <input type="date" name="endtime">
+                        <!--<input type="date" name="endtime">-->
+                        <input name="endtime" class="Wdate" type="text" onfocus="WdatePicker({dateFmt:'yyyy-M-d H:mm:ss',minDate: '%y-%M-%d 20:00:00',
+                        maxDate: '%y-%M-#{%d+63} 20:00:00' })" placeholder="请输入结束时间"/>
                     </div>
                     <div class="gprice" style="width:100px;">
                         <p>￥ {{ tic.price }}</p>
@@ -169,16 +174,16 @@
                     <div class="gsum">￥ {{ tic.price }}</div>
                     <div class="gor">
                         <!-- <a href="##">预定</a> -->
-                        <input type="submit" value='加入购物车' 
+                        <input type="submit" value='加入购物车'
                         style='color:#000;background: crimson;outline:none;border-radius: 5px;border:0;height:30px;width:80px;line-height:36px;' name="sub">
                     </div>
                     </form>
                 </div>
                 {% endfor %}
-
             </div>
         </div>
     </div>
+    <div id="tishi" style="width:1200px;margin:20px auto">温馨提示：您可提前预定未来60天之内的门票,开始和结束时间必填</div>
 
     <div id=guid>
         <div class=daohang style="background:orange;">
@@ -192,15 +197,17 @@
             {% endautoescape %}
 
         </div>
-        <!--<div id="JTZN">-->
-            <!--<div class="c-wrapper-style">-->
-                <!--<i class="detail-icon-3">交通指南</i>-->
-                <!--<span id="map_td"></span>-->
-            <!--</div>-->
-            <!--<div id="smap">-->
-                	<!--<div id="allmap"></div>-->
-            <!--</div>-->
-        <!--</div>-->
+        <div id="JTZN">
+            <div class="c-wrapper-style">
+                <i class="detail-icon-3">交通指南</i>
+                <span id="map_td"></span>
+            </div>
+            <div id="smap">
+                	<div id="allmap">
+
+                    </div>
+            </div>
+        </div>
     </div>
 
     <footer id="footer">

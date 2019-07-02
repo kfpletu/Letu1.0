@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>结算中心</title>
+    <link rel="stylesheet" href="/static/css/about/information.css">
+    <link rel="stylesheet" href="/static/css/basic.css">
+{#    <link rel="stylesheet" href="/static/css/about/about.css">#}
+    <link rel="stylesheet" href="/static/css/pay/payment.css">
+    <link rel="stylesheet" href="/static/css/pay/topUp.css">
+    <script src="/static/js/jquery.js"></script>
+</head>
+
+<body>
+    <header id="header">
+        {% if request.session.userinfo %}
+        <div id="cart">
+            <b>
+                <ul>
+                    <li class="home"><a href="javascript:void(0)">欢迎您,{{ request.session.userinfo.uname }}</a>
+                        <ol class='info1'>
+                            <li><a href="/user/topUp">我的钱包</a></li>
+                            <li><a href="/user/cart">我的订单</a></li>
+                            <li><a href="/user/order">历史订单</a></li>
+                            <li><a href="/user/logout">退出登录</a></li>
+                            <li><a href="/user/cancel">注销账号</a></li>
+                        </ol>
+                    </li>
+                </ul>
+            </b>
+        </div>
+        {% else %}
+        <div class="login">
+            <b>
+                <div id="register">
+                    <a href="/user/register">免费注册</a>
+                </div>
+            </b>
+            <b>
+                <div id="login">
+                    <a href="/user/login">您好,请登录</a>
+                </div>
+            </b>
+        </div>
+        {% endif %}
+        <div class="center">
+            <h1 class="logo">
+                <a href="/" id="logoA">乐途旅行网</a>
+            </h1>
+            <nav>
+                <ul class="link">
+                    <h1 class="none">网站导航</h1>
+                    <li class="active"><a href="/">首页</a></li>
+                    <li><a href="/scenic">景点门票</a></li>
+                    <li><a href="/trip">交通出行</a></li>
+                    <li><a href="/hotel">酒店预定</a></li>
+                    <li><a href="/about">关于我们</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="cart_box">
+    <h2 class="main_tit">
+      支付中心<strong>Payment</strong>
+    </h2>
+    <!--支付成功-->
+    <div class="msg_tips">
+
+      <div class="msg">
+          <div class="ico">
+          <img src="/static/images/pay/payment.png" alt="状态">
+          </div>
+          <div class="ico1">
+              <strong>支付成功啦！</strong>
+            <p>恭喜您，您的支付已经成功！</p>
+            <p>您可以点击这里进入<a href="/user/order" id="myorder">我的订单</a>查看订单状态！</p>
+            <p>如有其它问题，请立即与我们客服人员联系。</p>
+          </div>
+
+      </div>
+    </div>
+    <!--支付成功-->
+
+    <div class="clear"></div>
+  </div>
+   <footer>
+        <div class="bottom">
+            <p>Copyright ©LT 乐途旅行网 | 陕ICP备120110109号 | 旅行网经营许可证： L-LT-BK12345</p>
+            <img src="/static/images/home/pic.gif" title="站长统计">
+        </div>
+   </footer>
+</body>
+
+</html>

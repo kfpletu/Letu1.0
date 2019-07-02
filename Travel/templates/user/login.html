@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/static/css/basic.css" type="text/css">
     <link rel="stylesheet" href="/static/css/user/login.css" type="text/css">
     {%block css%}{%endblock css%}
+
 </head>
 <body>
     <div id="top">
@@ -31,7 +32,7 @@
                 </p>
                 <div class="text">
                     {%block pwd%}
-                    <input type="text" name="uname" placeholder="{%block uname%}请输入用户名(5~15个字母或数字){%endblock uname%}" minlength="5" maxlength="15">
+                    <input type="text" name="uname" id="uname" placeholder="{%block uname%}请输入用户名(5~15个字母或数字){%endblock uname%}" minlength="5" maxlength="15">
                     {%block img1%}<img src="/static/images/user/user.png" alt="">{%endblock img1%}
                     {%endblock pwd%}
                 </div>

@@ -1,18 +1,19 @@
 from django.shortcuts import render
 from django.http import HttpResponse,Http404
+from django.db.models import Q,F
 from . import models
 from django.db.models import *
 import os
 import time
 from django.conf import settings
 from django.http import HttpResponseRedirect
-from . import weather
+# from . import weather
 # Create your views here.
 #酒店首页
+price_list=[(0,200),(200,500),(500,100),(1000,2000),(2000,10000)]
 def index(request):
-
     if request.method=='GET':
-        weather_list=weather.city_weather()
+        # weather_list=weather.city_weather()
         house_list=models.House.objects.order_by('-order_count')
         # for house in house_list:
         #     house.hotel.hotel_name=house.hotel_name
@@ -24,7 +25,19 @@ def index(request):
         house_list=house_list[0:5]#热门品牌
         return render(request,'hotel/order_hotel.html',locals())
     elif request.method=='POST':
-        return render(request,'hotel/order_room.html')
+        try:
+            in_time=request.POST.get('in-time','')
+            out_time=request.POST.get('out-time','')
+            # room_num=request.POST.get('room-num','')
+            price=price_list[int(request.POST.get('room-price',''))]
+            hotel_level=request.POST.get('hotel-level','')
+            about=request.POST.get('room-keyword','')
+            rooms=models.Room.objects.filter(price__range=price)
+            print(price)
+            print(rooms)
+            return render(request,'hotel/order_room.html',locals())
+        except:
+            return render(request,'hotel/order_hotel.html')
 
 
 #导入酒店数据
@@ -95,7 +108,7 @@ def hotel_ticket(id):
     # room3_price = rooms[2].price
     return locals()
 
-
+#详情视图函数
 def hotel(request,id,level):
 
         dic=hotel_ticket(id)
@@ -142,3 +155,7 @@ def upload_picture(request):
             f.write(file.file.read())
             return render(request,'hotel/merchant.html',{'aa':'文件上传成功'})
     raise Http404
+#测试
+def test(request):
+
+    return render(request,'hotel/order_room.html')
