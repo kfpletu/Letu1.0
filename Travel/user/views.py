@@ -222,8 +222,9 @@ def modif(request,g_id):
     statu = target.is_pay
     statu = 1
     target.is_pay = statu
-    print("啦啦啦啦",target.is_pay)
-    # return render(request,'user/payment.html')
+    target.save()
+    
+    return render(request,'user/payment.html')
     
 def payment(request):
     print("哈哈哈")
