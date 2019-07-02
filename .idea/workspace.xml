@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="d677d9e0-6f74-4bd4-bdd2-8a57c8ff23b2" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/Travel/static/css/user/new_order.css" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/Travel/static/js/pay/topUP.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/Travel/templates/user/new_order.html" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/Travel/user/page_helper.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
+=======
+    <list default="true" id="409337c6-13d3-431f-b5b5-e76cc05f2deb" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+>>>>>>> c2d48c7c23966a9ed012f5f80e919df8af561d9e
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,6 +22,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
+<<<<<<< HEAD
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Travel/user/urls.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -33,6 +40,13 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="350">
               <caret line="175" column="19" lean-forward="true" selection-start-line="175" selection-start-column="19" selection-end-line="175" selection-end-column="19" />
+=======
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Travel/scenic/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="418">
+              <caret line="49" column="31" lean-forward="true" selection-start-line="49" selection-start-column="31" selection-end-line="49" selection-end-column="31" />
+>>>>>>> c2d48c7c23966a9ed012f5f80e919df8af561d9e
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
@@ -40,6 +54,7 @@
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Travel/templates/user/new_order.html">
           <provider selected="true" editor-type-id="text-editor">
@@ -99,10 +114,17 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/Travel" />
+=======
+    </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+>>>>>>> c2d48c7c23966a9ed012f5f80e919df8af561d9e
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/Travel/hotel/views.py" />
         <option value="$PROJECT_DIR$/Travel/user/urls.py" />
         <option value="$PROJECT_DIR$/Travel/user/page_helper.py" />
@@ -111,6 +133,9 @@
         <option value="$PROJECT_DIR$/Travel/static/css/user/cart.css" />
         <option value="$PROJECT_DIR$/Travel/user/views.py" />
         <option value="$PROJECT_DIR$/Travel/templates/user/order.html" />
+=======
+        <option value="$PROJECT_DIR$/Travel/scenic/views.py" />
+>>>>>>> c2d48c7c23966a9ed012f5f80e919df8af561d9e
       </list>
     </option>
   </component>
@@ -120,16 +145,24 @@
     <option name="width" value="1492" />
     <option name="height" value="917" />
   </component>
+<<<<<<< HEAD
+=======
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+>>>>>>> c2d48c7c23966a9ed012f5f80e919df8af561d9e
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+<<<<<<< HEAD
       <pane id="Scope" />
+=======
+>>>>>>> c2d48c7c23966a9ed012f5f80e919df8af561d9e
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
+<<<<<<< HEAD
               <item name="letu" type="b2602c69:ProjectViewProjectNode" />
               <item name="letu" type="462c0819:PsiDirectoryNode" />
             </path>
@@ -149,17 +182,100 @@
               <item name="letu" type="462c0819:PsiDirectoryNode" />
               <item name="Travel" type="462c0819:PsiDirectoryNode" />
               <item name="user" type="462c0819:PsiDirectoryNode" />
+=======
+              <item name="Letu1.0" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Letu1.0" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Letu1.0" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Letu1.0" type="462c0819:PsiDirectoryNode" />
+              <item name="Travel" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Letu1.0" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Letu1.0" type="462c0819:PsiDirectoryNode" />
+              <item name="Travel" type="462c0819:PsiDirectoryNode" />
+              <item name="scenic" type="462c0819:PsiDirectoryNode" />
+>>>>>>> c2d48c7c23966a9ed012f5f80e919df8af561d9e
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+<<<<<<< HEAD
+=======
+      <pane id="Scope" />
+>>>>>>> c2d48c7c23966a9ed012f5f80e919df8af561d9e
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="409337c6-13d3-431f-b5b5-e76cc05f2deb" name="Default Changelist" comment="" />
+      <created>1561985529720</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1561985529720</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="177" y="56" width="1492" height="917" extended-state="0" />
+    <layout>
+      <window_info id="Favorites" side_tool="true" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Version Control" />
+      <window_info anchor="bottom" id="Python Console" />
+      <window_info anchor="bottom" id="Terminal" />
+      <window_info anchor="bottom" id="Event Log" side_tool="true" visible="true" weight="0.038119443" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="update" />
+    <option name="LAST_COMMIT_MESSAGE" value="update" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/Travel/scenic/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="49" column="31" lean-forward="true" selection-start-line="49" selection-start-column="31" selection-end-line="49" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">

@@ -5,6 +5,7 @@ from .models import *
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.core.paginator import Paginator
+from .page_helper import *
 from django.contrib.auth.hashers import make_password, check_password
 
 
@@ -163,11 +164,9 @@ def booking(request):
 
 #购物车
 def cart(request):
-    # u_id = request.session[]['id']
-    goods = Cart.objects.filter(user_id=69)
-    paginator = Paginator(goods,4)
-    print('啦啦啦啦',paginator.num_pages)
-    # if paginator.num_pages > 3: 
+    u_id = request.session['userinfo']['id']
+    goods = Cart.objects.filter(user_id=u_id)
+    paginator = Paginator(goods,4) 
     cur_page = request.GET.get('page',1)
     page = paginator.page(cur_page)
     return render(request,'user/cart.html',locals())
