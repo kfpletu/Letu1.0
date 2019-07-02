@@ -189,12 +189,15 @@ def order(request):
 def del_goods(request,g_id):
     target = Cart.objects.get(id=g_id)
     target.delete()
-    return render(request,'user/cart.html',locals())
+    return render(request,'user/cart.html')
 
 
-# def add(request):
-#     o_num = request.GET['orderNum']
-#     o_price = request.GET['orderPrice']
-#     print('啦啦啦啦'+o_num,o_price)
-#     return render(request,'user/cart.html')
+def add(request,g_id):
+    target = Cart.objects.get(id=g_id)
+    p = target.g_num
+    p += 1
+    target.g_num = p
+    # target.save()
+    print("啦啦啦",target.g_num)
+    return render(request,'user/cart.html')
     
