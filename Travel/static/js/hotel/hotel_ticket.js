@@ -173,5 +173,6 @@ $(function(){
         laydate.render({
             elem: '#to_date3' //指定元素,即你要输入的框的id号即可
         });
+   	
 	
 })

@@ -35,11 +35,13 @@ class Room(models.Model):
     room_name=models.CharField('房间名',max_length=20)
     area=models.CharField('面积',max_length=10)
     price=models.CharField('价位',max_length=10)
+    iprice=models.IntegerField('数字价位',default=1)
     window=models.CharField('窗',max_length=20)
     bed=models.CharField('床',max_length=100)
     hotel=models.ForeignKey(Hotel,null=True)
     house=models.ForeignKey(House,models.CASCADE,null=True)
     room_level=models.CharField('房间编号',default='1',max_length=5)
+
     class Meta:
         db_table='room'
 
@@ -47,4 +49,4 @@ class Room(models.Model):
         return '房间名: %s 价位: %s'%(self.room_name,self.price)
 
 class test(models.Model):
-    cc=models.CharField('fsd',max_length=11)
+    pass

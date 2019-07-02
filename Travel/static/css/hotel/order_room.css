@@ -1,0 +1,213 @@
+.daohang{
+    margin-top:20px;
+}
+.daohang a{
+    display: inline-block;
+    width:120px;
+    height:50px;
+    line-height:50px;
+    font-size:20px;
+    color:#000;
+    margin:0 15px;
+    margin-left:20px ;
+    text-align: center;
+}
+.daohang a:hover{
+    color: white;
+    background:green;
+}
+.count{
+    height:36px;
+    line-height: 36px;
+    border-bottom: 1px solid gray;
+}
+.count span{
+    float:right;
+} 
+
+.count a {
+    display:inline-block;
+    background:#dc143b;
+    width:80px;
+    height:30px;
+    color: #000;
+    border-radius: 5px;
+    text-align: center;
+    margin:2px 20px;
+
+}
+.count a:hover{
+    background:green;
+    color:white;
+}
+#bodytickrt .info{
+    height:40px;
+    width:900px;
+}
+
+.type{
+	margin-top:10px;
+    height:36px;
+    color:#808080;
+    border-bottom: 1px solid gray;
+}
+.type div{
+	float:left;
+    text-align:center;
+    height:36px;
+	line-height:36px;
+}
+.count{
+    display: none;
+}
+.check{
+	width:70px;
+    display: none;
+}
+/*.gper{
+    width:100px;
+}*/
+.gname{
+	width:369px;
+    margin-left: 20px;
+}
+.gpt{
+    width:240px;
+}
+.gprice{
+	width:130px;
+}
+.gcount{
+	width:100px;
+    display: none;
+
+}
+.gsum{
+	width:90px;
+    display: none;
+}
+
+.conten .item .action{
+    float: right;
+    /*margin-left: 50px;*/
+}
+
+/*全选按钮的垂直对齐*/
+.checkAll{
+	vertical-align:middle;
+}
+/* .conten{
+    margin-top:20px;
+｝ */
+.conten .item{
+	margin-top:5px;
+	height:115px;
+    color:#000;
+    text-align:center;
+    border-bottom: 1px dashed gray;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+}
+.conten .item div{
+	float:left;
+	text-align:center;
+	height:115px;
+}
+/*调整垂直居中*/
+.item .check,.item .gsum,.item .action{
+    line-height:115px;
+}
+.item .gname{
+    border-right:1px solid gray;
+    text-align:left;
+    height: 115px;
+}
+.item .gname img{
+    width:120px;
+    height:89px;
+    float:left;
+    /*margin-right:20px;*/
+    margin-top:10px;
+    margin-right: 15px;
+    border-style: none;
+    border-radius: 2px;
+
+}
+.item .gname p:nth-child(2){
+    margin-top:10px;
+    margin-bottom:5px;
+    text-align: left;
+}
+.item .gname p:nth-child(3),.item .gname p:nth-child(4),.item .gname p:nth-child(5){
+    /*margin-bottom:5px;*/
+    font-size: 14px;
+    color: gray;
+    text-align: left;
+}
+.item .gpt p input{
+    height: 20px;
+    outline:none;
+}
+.item .gpt p:nth-child(1){
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+.item .gpt input{
+    width: 120px;
+}
+.gprice h3{
+    color:#997679;
+    margin-top:18px;
+    /*margin-bottom:10px; */
+}
+.gprice p{
+    font-size: 18px;
+    color:orange;
+}
+.gcount a{
+	float:left;
+	width:26px;
+	height:26px;
+	border:1px solid gray;
+	background:#e8e8e8;
+	color:#333;
+	line-height:26px;
+	font-size:16px;
+	 margin-top:40px; 
+}
+.gcount input{
+	 margin-top:40px; 
+	float:left;
+	border:1px solid gray;
+	border-left:0;
+	border-right:0;
+	width:26px;
+	height:26px;
+	padding:0;
+	text-align:center;
+}
+.gcount .minus{
+	margin-left:20px;
+}
+.action input {
+    display:inline-block;
+    background:#dc143b;
+    width:80px;
+    height:30px;
+    color: #000;
+    border:0px;
+    border-radius: 5px;
+    text-align: center;
+    margin:2px 20px;
+    line-height: 30px;
+    margin-right: 28px;
+
+}
+.action input:hover{
+    background:green;
+    color:white;
+
+}
+.action input:focus{
+    border:0px;
+}

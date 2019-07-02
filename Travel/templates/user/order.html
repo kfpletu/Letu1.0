@@ -34,6 +34,7 @@
         </div>
         <!--商品展示-->
         <div id="content">
+        {% if data %}
             {% for datum in data %}
                 <!--商品记录-->
                 <div class="item">
@@ -56,11 +57,20 @@
                     </div>
                     <div class="osum">¥ {{ datum.total_price }}</div>
                     <div class="otime">
-                        <p>{{ booking_time }}</p>
+                        <p>{{ datum.booking_time }}</p>
                     </div>
                     <div class="oaction" id="delect">删除</div>
                 </div>
             {% endfor %}
+        {% else %}
+             <div id="boxx">
+                    <div class="boxx">
+                        <h3>您还没有在乐途旅行订购产品哦!</h3>
+                        <h3>快去首页看看吧!</h3>
+                    </div>
+                </div>
+        {% endif %}
+
 
 
         </div>

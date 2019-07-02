@@ -54,7 +54,7 @@ $(function(){
         sum();
     });
     //结算确认框
-    $("#main .result input").click(function(){
+    $("#main .result .sub").click(function(){
         if($("#main .result .total-price").html()!=0.00){
             $("#box1").css("display","block");
         }else{
@@ -82,7 +82,7 @@ function countPrice(that,value){
     that.parent().next().html("￥ "+sum);
 }
 //移除操作
-$(".item .action").click(function(){
+$(".item .action a").click(function(){
     //移除整个商品记录
     $(this).parents(".item").remove();
     sum()
@@ -93,6 +93,7 @@ function sum(){
     var num = 0; //保存总数量
     var price = 0; //保存总价格
     //数据遍历,each(function(){})
+    console.log($(".checkItem[checked]"))
     $(".checkItem[checked]").each(function(){
         //每取到一个元素就调用当前函数,this指代函数的调用者
         var n = $(this).parents(".item").find(".gcount input").val();
@@ -106,9 +107,9 @@ function sum(){
     $(".total-num").html(num);
     $(".total-price").html(price);
     if($(".checkItem[checked]").length){
-        $(".result input").css("background","red");
+        $(".result .sub").css("background","red");
     }else{
-        $(".result input").css("background","gray");
+        $(".result .sub").css("background","gray");
     }
     //显示空空如也
     if($("#content .item").length==0){

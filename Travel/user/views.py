@@ -5,12 +5,9 @@ from .models import *
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.core.paginator import Paginator
-<<<<<<< HEAD
 from .page_helper import *
-=======
 from django.contrib.auth.hashers import make_password, check_password
 
->>>>>>> d3872dc5b351966cd0c1b1712619f0ebbd3d241b
 
 # 登录
 def login(request):
@@ -167,11 +164,9 @@ def booking(request):
 
 #购物车
 def cart(request):
-    # u_id = request.session[]['id']
-    goods = Cart.objects.filter(user_id=69)
-    paginator = Paginator(goods,4)
-    print('啦啦啦啦',paginator.num_pages)
-    # if paginator.num_pages > 3: 
+    u_id = request.session['userinfo']['id']
+    goods = Cart.objects.filter(user_id=u_id)
+    paginator = Paginator(goods,4) 
     cur_page = request.GET.get('page',1)
     page = paginator.page(cur_page)
     return render(request,'user/cart.html',locals())
@@ -188,4 +183,66 @@ def order(request):
     data=History_list.objects.filter(u_id=uid).all()
     if data:
         return render(request, 'user/order.html',locals())
-    return render(request,'user/new_order.html')
+    return render(request, 'user/order.html')
+
+#删除购物车商品
+def del_goods(request,g_id):
+    target = Cart.objects.get(id=g_id)
+    target.delete()
+    return render(request,'user/cart.html')
+
+#数量加1
+def add(request,g_id):
+    target = Cart.objects.get(id=g_id)
+    n = target.g_num
+    p = target.price
+    n += 1
+    total_p = p * n
+    target.total_price = total_p
+    target.g_num = n
+    target.save()
+    return render(request,'user/cart.html')
+
+#数量减1    
+def reduce(request,g_id):
+    target = Cart.objects.get(id=g_id)
+    n = target.g_num
+    p = target.price
+    if n > 1:
+        n -= 1
+    total_p = p * n
+    target.total_price = total_p
+    target.g_num = n
+    target.save()
+    return render(request,'user/cart.html')
+
+#修改订单状态
+def modif(request,g_id):
+    target = Cart.objects.get(id=g_id)
+    statu = target.is_pay
+    statu = 1
+    target.is_pay = statu
+    target.save()
+    
+    return render(request,'user/payment.html')
+    
+def payment(request):
+    print("哈哈哈")
+    return render(request,'user/payment.html')
+
+def test(request):
+    History_list.objects.create(
+        u_id=85,
+        g_img='/static/images/scenic/info/a1.jpg',
+        g_name='华清池',
+        time1='2019-07-02',
+        time2='2019-07-02',
+        g_type=2,
+        price=70,
+        g_num=1,
+        total_price=70,
+        booking_time='2019-07-02 15:55:30.854756',
+        serial_num=2019454821548412,
+        is_del=False
+    )
+    return HttpResponse("ok")
