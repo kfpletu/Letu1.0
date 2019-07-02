@@ -5,18 +5,12 @@ from .models import *
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.core.paginator import Paginator
-<<<<<<< Updated upstream
-from .page_helper import *
-from django.contrib.auth.hashers import make_password, check_password
-
-=======
 # <<<<<<< HEAD
 from .page_helper import *
 # =======
 from django.contrib.auth.hashers import make_password, check_password
 
 # >>>>>>> d3872dc5b351966cd0c1b1712619f0ebbd3d241b
->>>>>>> Stashed changes
 
 # 登录
 def login(request):
