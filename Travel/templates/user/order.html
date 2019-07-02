@@ -5,61 +5,78 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    
+
+
 </head>
 <body>
-    {% extends 'user/cart.html' %}
-    {% block msg %}
-    {% endblock msg %}
-    {% block order%}
+{% extends 'user/cart.html' %}
+{% block msg %}
+{% endblock msg %}
+{% block order %}
     <div id="main">
-        <!--购物车顶部标签-->
-        <h2>
-            历史订单
-        </h2>
-        <!--购物车商品展示-->
-        <div class="info">
-            <!--顶部的工具栏-->
-            <div class="type">
-                <div class="ocheck">
-                    <img src="/static/images/user/product_normal.png" class="checkAll">全选
-                </div>
-                <div class="oname">商品</div>
-                <div class="oprice">单价(元)</div>
-                <div class="ocount">数量</div>
-                <div class="osum">金额</div>
-                <div class="otime">购买时间</div>
-                <div class="oaction">操作</div>
+    <!--购物车顶部标签-->
+    <h2>
+        历史订单
+    </h2>
+    <!--购物车商品展示-->
+    <div class="info">
+        <!--顶部的工具栏-->
+        <div class="type">
+            <div class="ocheck">
+                <img src="/static/images/user/product_normal.png" class="checkAll">全选
             </div>
+            <div class="oname">商品</div>
+            <div class="oprice">单价(元)</div>
+            <div class="ocount">数量</div>
+            <div class="osum">金额</div>
+            <div class="otime">购买时间</div>
+            <div class="oaction">操作</div>
+        </div>
         <!--商品展示-->
         <div id="content">
-            <!--商品记录-->
-            <div class="item">
-                <div class="ocheck">
-                    <img src="/static/images/user/product_normal.png" class="checkItem">
+        {% if data %}
+            {% for datum in data %}
+                <!--商品记录-->
+                <div class="item">
+
+                    <div class="ocheck">
+                        <img src="/static/images/user/product_normal.png" class="checkItem">
+                    </div>
+                    <div class="oname">
+                        <img src="{{ datum.g_img }}">
+                        <p>{{ datum.g_name }}</p>
+                        <p>{{ datum.time1 }}</p>
+                        <p>{{ datum.time2 }}</p>
+                    </div>
+                    <div class="oprice">
+                        <h3>{{ datum.g_type }}</h3>
+                        <p>¥ {{ datum.price }}</p>
+                    </div>
+                    <div class="ocount">
+                        <p>{{ datum.g_num }}</p>
+                    </div>
+                    <div class="osum">¥ {{ datum.total_price }}</div>
+                    <div class="otime">
+                        <p>{{ datum.booking_time }}</p>
+                    </div>
+                    <div class="oaction" id="delect">删除</div>
                 </div>
-                <div class="oname">
-                    <img src="/static/images/user/regist.jpg">
-                    <p>90分旅行箱</p>
-                    <p>规格: 20寸</p>
-                    <p>颜色: 星空灰</p>
+            {% endfor %}
+        {% else %}
+             <div id="boxx">
+                    <div class="boxx">
+                        <h3>您还没有在乐途旅行订购产品哦!</h3>
+                        <h3>快去首页看看吧!</h3>
+                    </div>
                 </div>
-                <div class="oprice">
-                    <h3>皮粉专享价</h3>
-                    <p>¥ 299.00</p>
-                </div>
-                <div class="ocount">
-                    <p>1</p>
-                </div>
-                <div class="osum">￥ 299.00</div> 
-                <div class="otime">
-                    <p>2019.6.24</p>
-                </div>   
-                <div class="oaction">删除</div>
-        </div>
+        {% endif %}
+
+
+
         </div>
     </div>
-    {% endblock order%}
-    
+    </div>
+{% endblock order %}
+
 </body>
 </html>
