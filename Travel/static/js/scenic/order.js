@@ -1,4 +1,3 @@
-console.log('1111');
 $(function (){
 //	1.数量增减
 	$(".add").click(function (){

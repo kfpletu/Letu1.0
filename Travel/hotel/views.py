@@ -5,13 +5,14 @@ from django.db.models import *
 import os
 import time
 from django.conf import settings
-# from . import weather
+from django.http import HttpResponseRedirect
+from . import weather
 # Create your views here.
 #酒店首页
 def index(request):
 
     if request.method=='GET':
-        # weather_list=weather.city_weather()
+        weather_list=weather.city_weather()
         house_list=models.House.objects.order_by('-order_count')
         # for house in house_list:
         #     house.hotel.hotel_name=house.hotel_name
@@ -23,7 +24,8 @@ def index(request):
         house_list=house_list[0:5]#热门品牌
         return render(request,'hotel/order_hotel.html',locals())
     elif request.method=='POST':
-        pass
+        return render(request,'hotel/order_room.html')
+
 
 #导入酒店数据
 def init_hotel(request):
@@ -96,30 +98,33 @@ def hotel_ticket(id):
 
 def hotel(request,id,level):
 
-
         dic=hotel_ticket(id)
         if request.method == 'GET':
             return render(request, 'hotel/hotel_ticket.html',dic)
-        elif request.method=='POST':
-            from user.models import Cart
-            # for i in range(15):
-            Cart.objects.create(
-            user_id=request.session['userinfo']['id'],
-            g_img="/static/images/hotel/%s/2%s.png"%(dic['hotel_p'],level),
-            g_name=dic['hotel_name'],
-            time1=request.POST.get("from_data",''),
-            time2=request.POST.get("to_data",''),
-            g_type=dic['rooms'][int(level)-1].room_name,
-            price=float(dic['rooms'][int(level)-1].price),
-            total_price=float(dic['rooms'][int(level)-1].price)
-            )
-
-            now=time.ctime()
-            from_data = request.POST.get("from_data", '')
-            to_data= request.POST.get("to_data", '')
-            cart_id=str(request.session['userinfo']['id'])+now+dic['rooms'][int(level)-1].room_name
-            return render(request, 'hotel/booking.html',locals())
-            # return render(request,'hotel/hotel_ticket.html',dic)
+        elif request.method == 'POST':
+            try:
+                request.session['userinfo']['uname']
+                from user.models import Cart
+                # for i in range(15):
+                Cart.objects.create(
+                    user_id=request.session['userinfo']['id'],
+                    g_img="/static/images/hotel/%s/2%s.png" % (
+                        dic['hotel_p'], level),
+                    g_name=dic['hotel_name'],
+                    time1=request.POST.get("from_data", ''),
+                    time2=request.POST.get("to_data", ''),
+                    g_type=dic['rooms'][int(level)-1].room_name,
+                    price=float(dic['rooms'][int(level)-1].price),
+                    total_price=float(dic['rooms'][int(level)-1].price)
+                )
+                now = time.ctime()
+                from_data = request.POST.get("from_data", '')
+                to_data = request.POST.get("to_data", '')
+                cart_id = str(request.session['userinfo']['id']) + \
+                    now+dic['rooms'][int(level)-1].room_name
+                return render(request, 'hotel/booking.html', locals())
+            except:
+                return render(request,'user/login.html')
 
 
 #商家文件上传
