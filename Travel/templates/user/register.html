@@ -7,6 +7,9 @@
     <title>免费注册</title>
     <link rel="stylesheet" href="/static/css/basic.css" type="text/css">
     <link rel="stylesheet" href="/static/css/user/register.css" type="text/css">
+        <script src="/static/js/jquery.js"></script>
+        <script src="/static/js/user/Ajax_common.js"></script>
+        <script src="/static/js/user/register.js"></script>
 </head>
 <body>
     <div id="top">
@@ -17,30 +20,36 @@
         <a href="/"><span class="s1">返回首页</span></a>
     </div>
     <div id="mian">
-        <form action="/user/register" method="post">
-            {% csrf_token %}
-            <div class="content">
-                <p>
-                    注册
-                    <a href="login">返回登录</a>
-                </p>
-                <div class="text">
-                    <input type="text" name="uname" placeholder="请输入用户名(5~15个字母或数字)" maxlength="15" minlength="5">
-                    <img src="/static/images/user/user.png" alt="">
+        <!-- <form action="/user/register" method="post"> -->
+            <div id="form">
+                {% csrf_token %}
+                <div class="content">
+                    <p>
+                        注册
+                        <a href="/user/login">返回登录</a>
+                    </p>
+                    <div class="text">
+                        <input type="text" name="uname" id="uname" placeholder="(以字母开头的5~15个字符)">
+                        <img src="/static/images/user/user.png" alt="">
+                        <label for="" id="name" style="color: red"></label>
+                    </div>
+                    <div class="text pwd">
+                        <input type="password" name="upwd" id="upwd" placeholder="(由数字、字母下划线组成的6~20个字符)">
+                        <img src="/static/images/user/password.png" alt="">
+                        <label for="" id="pwd" style="color: red"></label>
+                    </div>
+                    <div class="text phon">
+                        <input type="text" name="phone" id='phone' placeholder="请输入手机号码">
+                        <label for="" id="uphone" style="color: red"></label>
+                    </div>
+                    <div class="text email">
+                        <input type="text" name="email" id='email' placeholder="请输入可用邮箱">
+                        <label for="" id="uemail" style="color: red"></label>
+                    </div>
+                    <input type="submit" id="subReg" value="注册" class="login">
                 </div>
-                <div class="text pwd">
-                    <input type="password" name="upwd" placeholder="请输入密码(5~15个字母或数字)" maxlength="15">
-                    <img src="/static/images/user/password.png" alt="">
-                </div>
-                <div class="text phon">
-                    <input type="text" name="phone" placeholder="请输入手机号码" maxlength="11">
-                </div>
-                <div class="text email">
-                    <input type="text" name="email" placeholder="请输入可用邮箱">
-                </div>
-                <input type="submit" id="" value="注册" class="login">
             </div>
-        </form>
+        <!-- </form> -->
     </div>
     <div id="bottom">
         <a href="/">

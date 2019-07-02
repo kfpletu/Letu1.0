@@ -5,8 +5,8 @@ from django.db import models
 
 class Info(models.Model):
     uname = models.CharField('用户姓名', max_length=50,unique=True)
-    upwd = models.CharField('用户密码', max_length=150,null=False)
-    phone = models.CharField('手机号', max_length=11, unique=True)
+    upwd = models.CharField('用户密码', max_length=250,null=False)
+    phone = models.CharField('手机号', max_length=15, unique=True)
     email = models.EmailField('邮箱')
     price = models.DecimalField('余额',max_digits=8,decimal_places=2,default=0)
     is_online = models.BooleanField('登录状态', default=0)
