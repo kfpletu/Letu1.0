@@ -67,17 +67,12 @@ def ticket(request,s):
             pass
         if request.POST.get('sub')!='':
             retime = time.ctime()
-            # date = datetime.date.today()
-            now=datetime.datetime.now()
-            date = now.strftime("%Y-%m-%d")
             num=request.POST.get('number','')
             sttime=request.POST.get('starttime','')
             entime=request.POST.get('endtime','')
-            # if sttime<=date:
-            #     return HttpResponse("预定需最少提前一天,请重新选择")
-            # elif entime<sttime:
-            #     return HttpResponse("结束时间必须大于等于开始时间,请重新选择")
-            # suprice=num*int(tic.price)
+            suprice=int(num)*tic.price
+            import decimal
+            suprice=decimal.Decimal(suprice)
             ord=Cart.objects.create(
                                user_id=request.session['userinfo']['id'],
                                g_img=ts.img1,
@@ -87,11 +82,10 @@ def ticket(request,s):
                                g_type=tic.type,
                                price=tic.price,
                                g_num=num,
-                               total_price=tic.price,
+                               total_price=suprice,
                                add_time=retime
                                     )
-            # total_price=int(tic.price)*request.POST.get('number','')
-            return render(request,"加入成功")
+            return HttpResponse("加入成功")
 
 def scenic2(request):
     if request.method == 'GET':
