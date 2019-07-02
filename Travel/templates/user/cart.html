@@ -114,7 +114,7 @@
                 <div class="gcount">
                     <!--阻止超链接默认事件-->
                     <a href="javascript:void(0)" class="minus">-</a>
-                    <input type="text" value={{ g.g_num }}>
+                    <input type="text" value="{{ g.g_num }}"">
                     <a href="javascript:void(0)" class="add">+</a>
                 </div>
                 <div class="gsum">￥ {{ g.total_price }}</div>    
@@ -126,7 +126,9 @@
             {% endfor %}
             <div id="box1">
                 <p>是否要结算？</p>
-                <button>是</button>
+                <a href="javascript:void(0)">
+                    <button class="btnYes">是</button>
+                </a>
                 <button>否</button>
             </div>
             <div id="box2">
@@ -159,9 +161,7 @@
                         <b class="total-price">0.00</b>
                         元
                     </span>
-                    <div class='sub'>
-                        <a href="/user/cart">结算</a>
-                    </div>
+                    <div class='sub'>结算</div>
                 </p>
             </div>
         </div>

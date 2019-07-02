@@ -63,12 +63,9 @@
     background: gray;
     border: none; 
     float: right;
-    position: relative;
+    text-align: center;
+}
 
-}
-#checkout .result div a{
-    margin-left: 48px;
-}
 #main .balance{
     margin-top: 20px;
     overflow: hidden;;
