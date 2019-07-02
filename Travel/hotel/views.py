@@ -7,7 +7,7 @@ import os
 import time
 from django.conf import settings
 from django.http import HttpResponseRedirect
-from . import weather
+# from . import weather
 # Create your views here.
 #酒店首页
 price_list=[(0,200),(200,500),(500,100),(1000,2000),(2000,10000)]
