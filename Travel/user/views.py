@@ -192,8 +192,8 @@ def del_goods(request,g_id):
     target.delete()
     return render(request,'user/cart.html',locals())
 
-#
-# def jump(request):
+
+# def add(request):
 #     o_num = request.GET['orderNum']
 #     o_price = request.GET['orderPrice']
 #     print('啦啦啦啦'+o_num,o_price)

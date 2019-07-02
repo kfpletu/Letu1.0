@@ -11,10 +11,6 @@
  *
  * Date: 2015-04-28T16:19Z
  */
-<<<<<<< HEAD
-=======
-
->>>>>>> 023fa7c765b96c1d175ac2683999ca69f2d4c7be
 (function( global, factory ) {
 
 	if ( typeof module === "object" && typeof module.exports === "object" ) {

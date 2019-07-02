@@ -82,7 +82,7 @@ function countPrice(that,value){
     that.parent().next().html("￥ "+sum);
 }
 //移除操作
-$(".item .action").click(function(){
+$(".item .action a").click(function(){
     //移除整个商品记录
     $(this).parents(".item").remove();
     sum()
