@@ -204,3 +204,20 @@ def add(request,g_id):
 def payment(request):
     print("哈哈哈")
     return render(request,'user/payment.html')
+
+def test(request):
+    History_list.objects.create(
+        u_id=85,
+        g_img='/static/images/scenic/info/a1.jpg',
+        g_name='华清池',
+        time1='2019-07-02',
+        time2='2019-07-02',
+        g_type=2,
+        price=70,
+        g_num=1,
+        total_price=70,
+        booking_time='2019-07-02 15:55:30.854756',
+        serial_num=2019454821548412,
+        is_del=False
+    )
+    return HttpResponse("ok")

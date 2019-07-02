@@ -18,6 +18,6 @@ urlpatterns = [
     url(r'^add/(\d+)$',views.add),
     # url(r'history$',views.history),
     url(r'^payment$',views.payment),
-    
+    url(r'^test',views.test),
     
 ]
