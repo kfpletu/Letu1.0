@@ -15,10 +15,16 @@
       <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
 =======
     <list default="true" id="409337c6-13d3-431f-b5b5-e76cc05f2deb" name="Default Changelist" comment="">
+<<<<<<< Updated upstream
       <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
 >>>>>>> c2d48c7c23966a9ed012f5f80e919df8af561d9e
 >>>>>>> dd86daf62dc3292d3617475c5bf1cee5757af805
+=======
+      <change beforePath="$PROJECT_DIR$/Travel/hotel/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Travel/hotel/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Travel/hotel/weather.py" beforeDir="false" afterPath="$PROJECT_DIR$/Travel/hotel/weather.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Travel/user/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Travel/user/views.py" afterDir="false" />
+>>>>>>> Stashed changes
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -385,10 +391,22 @@
       <option name="presentableId" value="Default" />
       <updated>1561985529720</updated>
     </task>
+    <task id="LOCAL-00001" summary="update">
+      <created>1562064953556</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1562064953556</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
+<<<<<<< Updated upstream
     <frame x="177" y="56" width="1492" height="917" extended-state="0" />
+=======
+    <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
+>>>>>>> Stashed changes
     <layout>
       <window_info id="Favorites" side_tool="true" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />

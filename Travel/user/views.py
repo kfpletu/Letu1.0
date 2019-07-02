@@ -5,9 +5,12 @@ from .models import *
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.core.paginator import Paginator
+# <<<<<<< HEAD
 from .page_helper import *
+# =======
 from django.contrib.auth.hashers import make_password, check_password
 
+# >>>>>>> d3872dc5b351966cd0c1b1712619f0ebbd3d241b
 
 # 登录
 def login(request):
@@ -51,6 +54,8 @@ def login(request):
             # 出异常,说明用户名密码不正确,刷新当前登录页面
             return render(request,'user/login.html')
 
+
+
 #注册
 def register(request):
     if request.method == 'GET':
@@ -62,18 +67,32 @@ def register(request):
         upwd = make_password(upwd, 'xiaochen', 'pbkdf2_sha256')
         phone = request.POST.get('phone')
         email = request.POST.get('email')
-        # 获取数据库uname,判断是否重复
-        if Info.objects.filter(uname=uname):
-            return render(request, 'user/register.html', locals())
-        else:
-            # 尝试向数据库添加用户信息,成功返回到登录页面进行登录
-            try:
-                newinfo = Info(uname=uname, upwd=upwd, phone=phone, email=email)
-                newinfo.save()
-                return render(request, 'user/login.html', locals())
-            except:
-                # 抛异常,刷新注册页面,重新注册
-                return render(request,'user/register.html',locals())
+        # 尝试向数据库添加用户信息,成功返回到登录页面进行登录
+        try:
+            Info.objects.create(uname=uname, upwd=upwd, phone=phone, email=email)
+            return HttpResponse('注册成功')
+        except Exception as e:
+            # 抛异常,刷新注册页面,重新注册
+            return HttpResponse('注册失败')
+                
+
+def checkuname(request):
+    uname = request.GET.get('uname')
+    if Info.objects.filter(uname=uname):
+        return HttpResponse('用户名已经存在')
+    return HttpResponse('')
+
+def checkphone(request):
+    phone = request.GET.get('phone')
+    if Info.objects.filter(phone=phone):
+        return HttpResponse('该手机号码已经被注册')
+    return HttpResponse('')
+
+# def registers(request):
+#     print('1')
+#     uname = request.POST.get('uname')
+#     print(uname)
+#     return HttpResponse('注册成功')
 
 # 忘记密码
 def getpwd(request):
@@ -93,7 +112,7 @@ def getpwd(request):
             request.session['uname'] = info.uname
             return render(request, 'user/forget_new.html')
         except:
-            # 抛异常ze输入信息不正确,刷新忘记密码页面
+            # 抛异常则输入信息不正确,刷新忘记密码页面
             return render(request,'user/forget.html')
 # 修改密码
 def updatepwd(request):
@@ -101,8 +120,8 @@ def updatepwd(request):
         return render(request, 'user/forget.html')
     elif request.method == 'POST':
         # 获取用户输入的新密码
-        uname = request.session['uname']
-        new_pwd = request.POST.get('new_pwd')
+        uname = request.session['']
+        new_pwd = request.POST.get('neunamew_pwd')
         new_pwd = make_password(new_pwd, 'xiaochen', 'pbkdf2_sha256')
         new_pwd_again = request.POST.get('new_pwd_again')
         new_pwd_again = make_password(new_pwd_again, 'xiaochen', 'pbkdf2_sha256')
@@ -246,3 +265,20 @@ def modif(request,g_id):
 def payment(request):
     print("哈哈哈")
     return render(request,'user/payment.html')
+
+def test(request):
+    History_list.objects.create(
+        u_id=85,
+        g_img='/static/images/scenic/info/a1.jpg',
+        g_name='华清池',
+        time1='2019-07-02',
+        time2='2019-07-02',
+        g_type=2,
+        price=70,
+        g_num=1,
+        total_price=70,
+        booking_time='2019-07-02 15:55:30.854756',
+        serial_num=2019454821548412,
+        is_del=False
+    )
+    return HttpResponse("ok")
