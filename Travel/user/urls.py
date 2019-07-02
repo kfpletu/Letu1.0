@@ -15,7 +15,7 @@ urlpatterns = [
     url(r'^topUp$', views.topup),
     url(r'^cancel$', views.cancel),
     url(r'^del/(\d+)$',views.del_goods),
-    # url(r'^add',views.jump),
+    url(r'^add/(\d+)$',views.add),
     # url(r'history$',views.history),
     url(r'^payment$',views.payment),
     
