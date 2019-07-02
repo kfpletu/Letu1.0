@@ -198,3 +198,6 @@ def del_goods(request,g_id):
 #     print('啦啦啦啦'+o_num,o_price)
 #     return render(request,'user/cart.html')
     
+def payment(request):
+    print("哈哈哈")
+    return render(request,'user/payment.html')
