@@ -38,7 +38,7 @@ body{
     background-image: url(/static/images/user/regist.jpg);
     background-size: cover;
 }
-#mian form{
+#mian #form{
     width: 280px;
     height: 375px;
     float: right;
@@ -47,6 +47,7 @@ body{
     background-color: rgba(0, 0, 0, .3);
     position: relative;
 }
+
 #mian .content{
     margin: 10px;
 }
@@ -90,7 +91,7 @@ body{
     margin-top: 15px;
 }
 .login{
-    margin-top: 20px;
+    margin-top: 25px;
     width: 260px;
     height: 35px;
     background-color: #997679;

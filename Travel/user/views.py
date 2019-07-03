@@ -52,7 +52,8 @@ def login(request):
             return render(request, 'user/login.html')
 
 
-# 注册
+
+#注册
 def register(request):
     if request.method == 'GET':
         return render(request, 'user/register.html')
@@ -63,19 +64,32 @@ def register(request):
         upwd = make_password(upwd, 'xiaochen', 'pbkdf2_sha256')
         phone = request.POST.get('phone')
         email = request.POST.get('email')
-        # 获取数据库uname,判断是否重复
-        if Info.objects.filter(uname=uname):
-            return render(request, 'user/register.html', locals())
-        else:
-            # 尝试向数据库添加用户信息,成功返回到登录页面进行登录
-            try:
-                newinfo = Info(uname=uname, upwd=upwd, phone=phone, email=email)
-                newinfo.save()
-                return render(request, 'user/login.html', locals())
-            except:
-                # 抛异常,刷新注册页面,重新注册
-                return render(request, 'user/register.html', locals())
+        # 尝试向数据库添加用户信息,成功返回到登录页面进行登录
+        try:
+            Info.objects.create(uname=uname, upwd=upwd, phone=phone, email=email)
+            return HttpResponse('注册成功')
+        except Exception as e:
+            # 抛异常,刷新注册页面,重新注册
+            return HttpResponse('注册失败')
+                
 
+def checkuname(request):
+    uname = request.GET.get('uname')
+    if Info.objects.filter(uname=uname):
+        return HttpResponse('用户名已经存在')
+    return HttpResponse('')
+
+def checkphone(request):
+    phone = request.GET.get('phone')
+    if Info.objects.filter(phone=phone):
+        return HttpResponse('该手机号码已经被注册')
+    return HttpResponse('')
+
+# def registers(request):
+#     print('1')
+#     uname = request.POST.get('uname')
+#     print(uname)
+#     return HttpResponse('注册成功')
 
 # 忘记密码
 def getpwd(request):
@@ -95,18 +109,16 @@ def getpwd(request):
             request.session['uname'] = info.uname
             return render(request, 'user/forget_new.html')
         except:
-            # 抛异常ze输入信息不正确,刷新忘记密码页面
-            return render(request, 'user/forget.html')
-
-
+            # 抛异常则输入信息不正确,刷新忘记密码页面
+            return render(request,'user/forget.html')
 # 修改密码
 def updatepwd(request):
     if request.method == 'GET':
         return render(request, 'user/forget.html')
     elif request.method == 'POST':
         # 获取用户输入的新密码
-        uname = request.session['uname']
-        new_pwd = request.POST.get('new_pwd')
+        uname = request.session['']
+        new_pwd = request.POST.get('neunamew_pwd')
         new_pwd = make_password(new_pwd, 'xiaochen', 'pbkdf2_sha256')
         new_pwd_again = request.POST.get('new_pwd_again')
         new_pwd_again = make_password(new_pwd_again, 'xiaochen', 'pbkdf2_sha256')
@@ -228,17 +240,33 @@ def reduce(request, g_id):
     return render(request, 'user/cart.html')
 
 
-# 修改订单状态
-def modif(request, g_id):
+#订单结算
+def modif(request,g_id):
     target = Cart.objects.get(id=g_id)
     statu = target.is_pay
     statu = 1
     target.is_pay = statu
     target.save()
-
-    return render(request, 'user/payment.html')
-
-
+    try:
+        a_order = History_list.objects.create(
+            u_id = target.user_id,
+            g_img = target.g_img,
+            g_name = target.g_name,
+            time1 = target.time1,
+            time2 = target.time2,
+            g_type = target.g_type,
+            price = target.price,
+            g_num = target.g_num,
+            total_price = target.total_price,
+            # booking_time = models.DateTimeField('订单时间', auto_now_add=True),
+            # serial_num = models.CharField('流水号', max_length=50),
+            is_del = target.is_pay
+        )
+    except:
+        return HttpResponse('购买失败')
+    else:
+        return render(request,'user/payment.html')
+    
 def payment(request):
     print("哈哈哈")
     return render(request, 'user/payment.html')
