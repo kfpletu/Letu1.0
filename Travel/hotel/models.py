@@ -41,7 +41,7 @@ class Room(models.Model):
     hotel=models.ForeignKey(Hotel,null=True)
     house=models.ForeignKey(House,models.CASCADE,null=True)
     room_level=models.CharField('房间编号',default='1',max_length=5)
-    room_p=models.CharField('房间图片地址',max_length=50,default='1')
+    # room_p=models.CharField('房间图片地址',max_length=50,default='1')
 
     class Meta:
         db_table='room'
