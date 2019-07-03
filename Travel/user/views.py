@@ -19,7 +19,6 @@ def login(request):
         # 获取登录页面form表单提交的uname和upwd
         uname = request.POST.get('uname')
         upwd = request.POST.get('upwd')
-        print(uname,upwd)
         upwd = make_password(upwd, 'xiaochen', 'pbkdf2_sha256')
         # 获取验证码
         validateCode = request.POST.get('validateCode')
