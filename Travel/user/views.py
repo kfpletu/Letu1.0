@@ -70,10 +70,10 @@ def register(request):
         # 尝试向数据库添加用户信息,成功返回到登录页面进行登录
         try:
             Info.objects.create(uname=uname, upwd=upwd, phone=phone, email=email)
-            return HttpResponse('注册成功')
+            return HttpResponse('')
         except Exception as e:
             # 抛异常,刷新注册页面,重新注册
-            return HttpResponse('注册失败')
+            return HttpResponse('注册失败,请重新注册')
                 
 
 def checkuname(request):

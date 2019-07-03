@@ -22,6 +22,6 @@ urlpatterns = [
     # url(r'history$',views.history),
     url(r'^modif/(\d+)$',views.modif),   
     url(r'^payment$',views.payment),
-    url(r'^test',views.test),
+    # url(r'^test',views.test),
     
 ]
