@@ -93,7 +93,6 @@ function sum(){
     var num = 0; //保存总数量
     var price = 0; //保存总价格
     //数据遍历,each(function(){})
-    console.log($(".checkItem[checked]"))
     $(".checkItem[checked]").each(function(){
         //每取到一个元素就调用当前函数,this指代函数的调用者
         var n = $(this).parents(".item").find(".gcount input").val();
