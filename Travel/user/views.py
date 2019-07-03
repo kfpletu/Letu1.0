@@ -1,3 +1,5 @@
+from PIL import Image, ImageDraw, ImageFont, ImageFilter
+import random
 from django.shortcuts import render,redirect
 
 # Create your views here.
@@ -17,6 +19,7 @@ def login(request):
         # 获取登录页面form表单提交的uname和upwd
         uname = request.POST.get('uname')
         upwd = request.POST.get('upwd')
+        print(uname,upwd)
         upwd = make_password(upwd, 'xiaochen', 'pbkdf2_sha256')
         # 获取验证码
         validateCode = request.POST.get('validateCode')
@@ -52,6 +55,30 @@ def login(request):
             return render(request, 'user/login.html')
 
 
+def yanzm(request):
+    """
+        登录图形图形验证码
+    """
+
+    img = Image.new("RGB", (110, 37), (255, 255, 255))
+    code = [chr(x) for x in range(97, 123)]+[str(x) for x in range(10)]
+    code = random.sample(code, 6)
+    code = ''.join(code)
+    draw = ImageDraw.Draw(img)
+    for _ in range(10):
+        draw.point(
+            (random.randint(0, 150), random.randint(0, 50)),  # 坐标
+            fill=(0, 0, 0))  # 颜色
+    for _ in range(10):
+        draw.line([(random.randint(0, 150), random.randint(0, 50)),
+                (random.randint(0, 150), random.randint(0, 50))],
+                fill=(150, 150, 2))
+
+    font = ImageFont.truetype(
+        "/usr/share/fonts/truetype/freefont/FreeSerif.ttf", 24)
+    draw.text((30, 10), code, font=font, fill="green")
+    img.save('static/images/logImg/code.jpg')
+    return HttpResponse(code)
 
 #注册
 def register(request):
