@@ -5,12 +5,18 @@ $(function () {
             upwd: $('#upwd').val(),
             csrfmiddlewaretoken: $("[name='csrfmiddlewaretoken']").val()
         }
-        $.post("/user/login/", jsObj,
-            function () {
-                alert('登录成功')
-                location.href = '/'
-            },
-            
-        );
+        $.ajax({
+            type: "post",
+            url: "/user/login/",
+            data: jsObj,
+            success: function (response) {
+                alert(response)
+                if (response == '登录成功') {
+                    location.href='/'
+                } else {
+                    location.href='/user/login'
+                }
+            }
+        });
     });
 })

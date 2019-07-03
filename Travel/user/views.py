@@ -29,11 +29,11 @@ def login(request):
             user = Info.objects.get(uname=uname, upwd=upwd)
             # 登录状态为真,刷新登录页面,禁止登录
             if user.is_alive:
-                resp = render(request, 'user/login.html', locals())
+                resp = HttpResponse('该用户已经注销')
                 return resp
             else:
                 if user.is_online:
-                    resp = render(request, 'user/login.html', locals())
+                    resp = HttpResponse('该用户已在其他地方登录')
                     return resp
                 else:
                     # 修改登录状态,发送seesion,cookie,返回首页
@@ -43,7 +43,7 @@ def login(request):
                         'uname': user.uname,
                         'id': user.id
                     }
-                    resp = HttpResponseRedirect('/', locals())
+                    resp = HttpResponse('登录成功', locals())
                     if remember:
                         resp.set_cookie('uname', uname, max_age=7 * 24 * 60 * 60)
                     else:
@@ -51,7 +51,7 @@ def login(request):
                     return resp
         except:
             # 出异常,说明用户名密码不正确,刷新当前登录页面
-            return render(request, 'user/login.html')
+            return HttpResponse('登录失败,请重新登录')
 
 
 def yanzm(request):
