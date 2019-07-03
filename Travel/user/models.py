@@ -30,7 +30,7 @@ class Cart(models.Model):
     g_num = models.IntegerField('商品数量', default=1)
     total_price = models.DecimalField('总价', max_digits=10, decimal_places=2)
     add_time = models.DateTimeField(auto_now_add=True)
-    # serial_num = models.CharField('流水号',max_length=50)
+    serial_num = models.CharField('流水号',max_length=50)
     is_pay = models.BooleanField(default=False)  # 默认0为未支付，1为已支付
 
 
