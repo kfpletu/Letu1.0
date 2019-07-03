@@ -238,13 +238,11 @@ def reduce(request, g_id):
 
 #订单结算
 def modif(request,g_id):
-    print("11111")
     target = Cart.objects.get(id=g_id)
     statu = target.is_pay
     statu = 1
     target.is_pay = statu
     target.save()
-    print("啦啦啦啦",target.is_pay)
     try:
         a_order = History_list.objects.create(
             u_id = target.user_id,
@@ -256,14 +254,13 @@ def modif(request,g_id):
             price = target.price,
             g_num = target.g_num,
             total_price = target.total_price,
-            booking_time = '2019.233.2321',
+            booking_time = '2019-2-2',
             is_del = target.is_pay
         )
     except:
         return HttpResponse('购买失败')
     else:
-        print("啦啦啦啦",a_order)
-    return render(request,'user/payment.html')
+        return render(request,'user/payment.html')
     
 def payment(request):
     return render(request, 'user/payment.html')
