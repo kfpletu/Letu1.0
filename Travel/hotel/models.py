@@ -7,7 +7,7 @@ class House(models.Model):
     hotel_name=models.CharField('酒店名',max_length=20)
     house_count=models.IntegerField('剩余房间数量',default=30)
     order_count=models.IntegerField('下单次数',default=0)
-
+    hotel_p = models.CharField('图片地址', max_length=25, default='/')
     class Meta:
         db_table='house'
 

@@ -121,6 +121,12 @@ def backup(request):
     fd.close()
     return HttpResponse('复制成功')
 
+#导入house表中hotel_p
+def init_house_p():
+    for house in models.House.objects.all():
+        house.hotel_p=house.hotel.hotel_p
+        house.save()
+
 #设置house_id
 def init_house_id(request):
     models.Room.objects.all().update(house_id=F('hotel_id'))
@@ -132,6 +138,11 @@ def init_house_iprice(requset):
     for room in rooms:
         room.room_p=room.hotel.hotel_p
         room.save()
+
+
+def b_rooms():
+    for room in models.Room.objects.all():
+        fd=open('/home/tarena/桌面/test/中期项目/Letu1.0/Travel/static/images/hotel/rooms.txt')
 
 
 # 数据库主表数据导入
@@ -212,3 +223,5 @@ def upload_picture(request):
 def test(request):
 
     return render(request,'hotel/order_room.html')
+
+
