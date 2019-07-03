@@ -30,10 +30,10 @@ $(function(){
 		}
 	},100)
 
-	$('.brandListBox:first').mouseover(function(){
+	$('#brandListFirst').mouseover(function(){
 		clearInterval(timerH)
 	})
-	$('.brandListBox:first').mouseout(function(){
+	$('#brandListFirst').mouseout(function(){
 		timerH=setInterval(function(){
 		listBoxMarginH-=2;	
 		$('.brandListBox:first').css('margin-left',(listBoxMarginH+'px'))
@@ -53,12 +53,12 @@ $(function(){
 		}
 	},100)
 
-	$('.brandListBox:last').mouseover(function(){
+	$('#last_brand').mouseover(function(){
 		cursor = 'vertical-text'
 		clearInterval(timerF)
 	})
 
-	$('.brandListBox:last').mouseout(function(){
+	$('#last_brand').mouseout(function(){
 		timerF=setInterval(function(){
 		listBoxMarginF-=2;	
 		$('.brandListBox:last').css('margin-left',(listBoxMarginF+'px'))
@@ -69,6 +69,6 @@ $(function(){
 	})
 	
 
-	
+
 
 })

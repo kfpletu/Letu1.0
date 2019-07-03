@@ -199,7 +199,7 @@ def order(request):
     data = History_list.objects.filter(u_id=uid,is_del='1').all()
     if data:
         return render(request, 'user/order.html', locals())
-    return render(request, 'user/order.html')
+    return render(request, 'user/order.html',locals())
 
 
 # 删除购物车商品
@@ -265,6 +265,7 @@ def payment(request):
 
 
 def test(request):
+    """用于测试"""
     History_list.objects.create(
         u_id=85,
         g_img='/static/images/scenic/info/a1.jpg',
@@ -283,6 +284,11 @@ def test(request):
 
 
 def delete(request):
+    """
+    用户删除自己的购买记录
+    :param request: 前端的请求
+    :return:
+    """
     id=request.GET['id']
     data = History_list.objects.filter(id=id)
     data.update(is_del=0)

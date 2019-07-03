@@ -7,7 +7,7 @@ class House(models.Model):
     hotel_name=models.CharField('酒店名',max_length=20)
     house_count=models.IntegerField('剩余房间数量',default=30)
     order_count=models.IntegerField('下单次数',default=0)
-
+    hotel_p = models.CharField('图片地址', max_length=25, default='/')
     class Meta:
         db_table='house'
 
@@ -41,6 +41,7 @@ class Room(models.Model):
     hotel=models.ForeignKey(Hotel,null=True)
     house=models.ForeignKey(House,models.CASCADE,null=True)
     room_level=models.CharField('房间编号',default='1',max_length=5)
+    # room_p=models.CharField('房间图片地址',max_length=50,default='1')
 
     class Meta:
         db_table='room'
@@ -48,5 +49,3 @@ class Room(models.Model):
     def __str__(self):
         return '房间名: %s 价位: %s'%(self.room_name,self.price)
 
-# class test(models.Model):
-#     pass
