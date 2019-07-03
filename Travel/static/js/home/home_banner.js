@@ -3,7 +3,7 @@ $(function(){
     var imgList = $("#imgd img");
     var liList = $("#imgd li");
     var index = 0;
-    var timer = setInterval(autoPlay,2000);
+    var timer = setInterval(autoPlay,3000);
     function autoPlay(){
         //当前图片隐藏
         imgList.eq(index).css("display","none");

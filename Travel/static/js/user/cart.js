@@ -119,7 +119,6 @@ $(".item .oaction").click(function(){
 });
 //显示空空如也
 if($("#content .item").length==0){
-    console.log($("#content .item"))
     $("#empty").css("display","block");
 }
 
