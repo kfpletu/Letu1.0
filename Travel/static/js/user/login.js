@@ -27,7 +27,7 @@ $(function() {
             url: "/user/yanzma",
             dataType:'json',
             success: function(response) {
-                console.log(response.url)
+                console.log(response.code)
                 $('#yanzma').attr('src',response.url+"?t="+Math.random())
             },
             error: function(){

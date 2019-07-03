@@ -84,7 +84,8 @@ def yanzma(request):
     img.save(src)
     src ='/static/images/logImg/code.jpg'
     imgUrl = {
-        'url':src
+        'url':src,
+        'code':code
     }
     return HttpResponse(json.dumps(imgUrl))
 
