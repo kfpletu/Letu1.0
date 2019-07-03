@@ -5,11 +5,11 @@ $(function(){
         var xhr = createXhr()
         var url = "/user/del/" + gId
         xhr.open('get',url,true)
-        xhr.onreadystatechange = function(){
-            if(xhr.readyState==4 && xhr.status==200){
-                $("body").html(xhr.responseText) 
-            }
-        }
+        // xhr.onreadystatechange = function(){
+        //     if(xhr.readyState==4 && xhr.status==200){
+        //         $("body").html(xhr.responseText) 
+        //     }
+        // }
         xhr.send(null)
     })
     //数量-1
