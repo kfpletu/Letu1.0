@@ -104,6 +104,19 @@
         <!--商品展示-->
         <div id="content">
             <!--商品记录-->
+            <div id="box1">
+                <p>是否要结算？</p>
+                <a href="/user/payment">
+                    <button class="btnYes">是</button>
+                </a>
+                <button>否</button>
+            </div>
+            <div id="box2">
+                <p>没有要结算的订单!!</p>
+            </div> 
+            <div id="empty">
+                <p>空空如也！</p>
+            </div>  
             {% for g in page %}
             <div class="item">
                 <div class="check">
@@ -133,7 +146,7 @@
                 </div>
             </div>
             {% endfor %}
-            <div id="box1">
+            <!-- <div id="box1">
                 <p>是否要结算？</p>
                 <a href="/user/payment">
                     <button class="btnYes">是</button>
@@ -146,7 +159,7 @@
             <img src="" class="wait">
             <div id="empty">
                 <p>空空如也！</p>
-            </div>  
+            </div>   -->
         </div>
         <div id="checkout">
             <div class="balance">
