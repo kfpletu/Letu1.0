@@ -67,29 +67,25 @@ def register(request):
         # 尝试向数据库添加用户信息,成功返回到登录页面进行登录
         try:
             Info.objects.create(uname=uname, upwd=upwd, phone=phone, email=email)
-            return HttpResponse('注册成功')
+            return HttpResponse('')
         except Exception as e:
             # 抛异常,刷新注册页面,重新注册
-            return HttpResponse('注册失败')
+            return HttpResponse('注册失败,请重新注册')
                 
-
+# 检测当前用户名是否被注册
 def checkuname(request):
     uname = request.GET.get('uname')
     if Info.objects.filter(uname=uname):
         return HttpResponse('用户名已经存在')
     return HttpResponse('')
 
+# 检测当前手机号是否被注册
 def checkphone(request):
     phone = request.GET.get('phone')
     if Info.objects.filter(phone=phone):
         return HttpResponse('该手机号码已经被注册')
     return HttpResponse('')
 
-# def registers(request):
-#     print('1')
-#     uname = request.POST.get('uname')
-#     print(uname)
-#     return HttpResponse('注册成功')
 
 # 忘记密码
 def getpwd(request):
@@ -117,8 +113,8 @@ def updatepwd(request):
         return render(request, 'user/forget.html')
     elif request.method == 'POST':
         # 获取用户输入的新密码
-        uname = request.session['']
-        new_pwd = request.POST.get('neunamew_pwd')
+        uname = request.session['uname']
+        new_pwd = request.POST.get('new_pwd')
         new_pwd = make_password(new_pwd, 'xiaochen', 'pbkdf2_sha256')
         new_pwd_again = request.POST.get('new_pwd_again')
         new_pwd_again = make_password(new_pwd_again, 'xiaochen', 'pbkdf2_sha256')
@@ -130,7 +126,7 @@ def updatepwd(request):
                 abook.upwd = new_pwd
                 abook.save()
                 del request.session['uname']
-                return render(request, 'user/login.html')
+                return HttpResponseRedirect('/user/login')
             except:
                 # 重新返回忘记密码页面
                 return render(request, 'user/forget.html')
