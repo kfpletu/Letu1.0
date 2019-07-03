@@ -291,8 +291,8 @@ def test(request):
 
 
 def delete(request):
-    # target = History_list.objects.filter(id=g_id)
     id=request.GET['id']
-    target = History_list.objects.filter(id=id)
-    target.update(is_del=0)
+    data = History_list.objects.filter(id=id)
+    data.update(is_del=0)
     return redirect('/user/order')
+    # return render(request,'user/order.html')
