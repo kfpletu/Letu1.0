@@ -110,10 +110,6 @@ function sum(){
     }else{
         $(".result .sub").css("background","gray");
     }
-    //显示空空如也
-    if($("#content .item").length==0){
-        $("#empty").css("display","block");
-    }
 
 }
 //历史订单移除
@@ -121,6 +117,12 @@ $(".item .oaction").click(function(){
     //移除整个商品记录
     $(this).parents(".item").remove();
 });
+//显示空空如也
+if($("#content .item").length==0){
+    console.log($("#content .item"))
+    $("#empty").css("display","block");
+}
+
 });
 
 

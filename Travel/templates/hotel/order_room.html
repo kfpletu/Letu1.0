@@ -32,20 +32,20 @@
 
                     </div>
                     <div class="gname">
-                        <img src="/static/images/hotel/{# { hotel_p }#}1/3/2{{ room.room_level }}.png">
-                        <p><b>{{ room.room_name }}</b></p>
+                        <img src="/static/images/hotel/{{ room.hotel.hotel_p }}/2{{ room.room_level }}.png">
+                        <p><b>{{ room.hotel.hotel_name }}</b></p>
                         <p>{#窗户  有#}{{ room.window }}</p>
                         <p>{#面积  43㎡#}{{ room.area }}</p>
                         <p>{#床型  大床1.8×2.0米1张#}{{ room.bed }}</p>
                     </div>
-                    <form action="{% url 'hotel'%}{{ id }}/{{ room.room_level }}" method="post">
+                    <form action="{% url 'hotel'%}{{ room.hotel.id }}/{{ room.room_level }}" method="post">
 
                         <div class=gpt>
                             <p><label for="from_date{{ room.room_level }}">入住时间：</label><input type="text" id="from_date{{ room.room_level }}" name="from_data" value="{{ in_time }}"></p>
                             <p><label for="to_date{{ room.room_level }}">预计搬出：</label><input type="text" id="to_date{{ room.room_level }}" name="to_data" value="{{ out_time }}"></p>
                         </div>
                         <div class="gprice">
-                            <h3>乐途专享价</h3>
+                            <h3>{{ room.room_name }}</h3>
                             <p>￥ {#977.00#}{{ room.price }}</p>
                         </div>
                         <div class="gcount">
