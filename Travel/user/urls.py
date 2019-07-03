@@ -23,6 +23,6 @@ urlpatterns = [
     url(r'^payment$',views.payment),
     url(r'^test',views.test),#用于测试
     url(r'^delete/',views.delete),
-    url(r'^yanzma/$',views.yanzm)
+    url(r'^yanzma/$',views.yanzma)
 
 ]

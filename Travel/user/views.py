@@ -1,6 +1,7 @@
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 import random
 from django.shortcuts import render,redirect
+import json
 
 # Create your views here.
 from .models import *
@@ -22,6 +23,7 @@ def login(request):
         upwd = make_password(upwd, 'xiaochen', 'pbkdf2_sha256')
         # 获取验证码
         validateCode = request.POST.get('validateCode')
+        print(validateCode)
         # 获取记住密码单选框的状态
         remember = request.POST.get('remember')
         try:
@@ -54,11 +56,13 @@ def login(request):
             return HttpResponse('登录失败,请重新登录')
 
 
-def yanzm(request):
+# 验证码
+
+
+def yanzma(request):
     """
         登录图形图形验证码
     """
-
     img = Image.new("RGB", (110, 37), (255, 255, 255))
     code = [chr(x) for x in range(97, 123)]+[str(x) for x in range(10)]
     code = random.sample(code, 6)
@@ -76,8 +80,13 @@ def yanzm(request):
     font = ImageFont.truetype(
         "/usr/share/fonts/truetype/freefont/FreeSerif.ttf", 24)
     draw.text((30, 10), code, font=font, fill="green")
-    img.save('static/images/logImg/code.jpg')
-    return HttpResponse(code)
+    src='static/images/logImg/code.jpg'
+    img.save(src)
+    src ='/static/images/logImg/code.jpg'
+    imgUrl = {
+        'url':src
+    }
+    return HttpResponse(json.dumps(imgUrl))
 
 #注册
 def register(request):
