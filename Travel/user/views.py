@@ -126,7 +126,7 @@ def updatepwd(request):
                 abook.upwd = new_pwd
                 abook.save()
                 del request.session['uname']
-                return render(request, 'user/login.html')
+                return HttpResponseRedirect('/user/login')
             except:
                 # 重新返回忘记密码页面
                 return render(request, 'user/forget.html')
