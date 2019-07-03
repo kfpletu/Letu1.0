@@ -25,6 +25,7 @@
             elem: '#to_date' //指定元素,即你要输入的框的id号即可
         });
     </script>
+    <script src="/static/js/hotel/data.js"></script>
 </head>
 
 <body>
@@ -172,9 +173,9 @@
                     <div class="form-top">
                         <p>
                             <label for="from_date">入住日期:</label>
-                            <input type="text" name="in-time" id="from_date" value="{{ today }}">
+                            <input type="text" name="in-time" class="date_time" id="from_date" value="{{ today }}">
                             <label for="to_date">退房日期:</label>
-                            <input type="text" name="out-time" id="to_date" value="{{ tomorrow }}">
+                            <input type="text" name="out-time" class="date_time"  id="to_date" value="{{ tomorrow }}">
 
                         </p>
 
