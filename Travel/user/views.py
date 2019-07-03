@@ -254,14 +254,13 @@ def modif(request,g_id):
             price = target.price,
             g_num = target.g_num,
             total_price = target.total_price,
-            # booking_time = models.DateTimeField('订单时间', auto_now_add=True),
-            # serial_num = models.CharField('流水号', max_length=50),
             is_del = target.is_pay
         )
     except:
         return HttpResponse('购买失败')
     else:
-        return render(request,'user/payment.html')
+        print("啦啦啦啦",a_order)
+        # return render(request,'user/payment.html')
     
 def payment(request):
     print("哈哈哈")
@@ -287,8 +286,8 @@ def test(request):
 
 
 def delete(request):
-    # target = History_list.objects.filter(id=g_id)
     id=request.GET['id']
-    target = History_list.objects.filter(id=id)
-    target.update(is_del=0)
+    data = History_list.objects.filter(id=id)
+    data.update(is_del=0)
     return redirect('/user/order')
+    # return render(request,'user/order.html')
