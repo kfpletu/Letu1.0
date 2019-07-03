@@ -19,11 +19,9 @@ urlpatterns = [
     url(r'^del/(\d+)$',views.del_goods),
     url(r'^add/(\d+)$',views.add),
     url(r'^reduce/(\d+)$',views.reduce),   
-    # url(r'history$',views.history),
     url(r'^modif/(\d+)$',views.modif),   
     url(r'^payment$',views.payment),
     url(r'^test',views.test),#用于测试
-    # url(r'^delete/(\d+)$',views.delete),
     url(r'^delete/',views.delete),
 
 ]

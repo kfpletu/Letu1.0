@@ -5,6 +5,11 @@ $(function(){
         var xhr = createXhr()
         var url = "/user/del/" + gId
         xhr.open('get',url,true)
+        // xhr.onreadystatechange = function(){
+        //     if(xhr.readyState==4 && xhr.status==200){
+        //         $("body").html(xhr.responseText) 
+        //     }
+        // }
         xhr.send(null)
     })
     //数量-1
@@ -28,8 +33,8 @@ $(function(){
             var gId = $(this).parents(".item").find(".hid").html()
             console.log(gId)
             var xhr = createXhr()
-            var url = "/user/modif/" + gId
-            console.log(url) 
+            var url = "/user/modif/" + gId 
+            console.log(url)
             xhr.open("get",url,true);
             xhr.send(null);
         })
