@@ -41,6 +41,7 @@ class Room(models.Model):
     hotel=models.ForeignKey(Hotel,null=True)
     house=models.ForeignKey(House,models.CASCADE,null=True)
     room_level=models.CharField('房间编号',default='1',max_length=5)
+    room_p=models.CharField('房间图片地址',max_length=50,default='1')
 
     class Meta:
         db_table='room'
@@ -48,5 +49,3 @@ class Room(models.Model):
     def __str__(self):
         return '房间名: %s 价位: %s'%(self.room_name,self.price)
 
-class test(models.Model):
-    pass

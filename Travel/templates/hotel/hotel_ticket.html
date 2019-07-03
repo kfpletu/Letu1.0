@@ -165,8 +165,8 @@
                     <form action="{% url 'hotel'%}{{ id }}/{{ room.room_level }}" method="post">
 
                         <div class=gpt>
-                            <p>入住时间：<input type="text" id="from_date{{ room.room_level }}" name="from_data" placeholder="请选择入住日期"></p>
-                            <p>预计搬出：<input type="text" id="to_date{{ room.room_level }}" name="to_data" placeholder="请选择退房日期"></p>
+                            <p>入住时间：<input type="text" id="from_date{{ room.room_level }}" name="from_data" value="{{ today }}"></p>
+                            <p>预计搬出：<input type="text" id="to_date{{ room.room_level }}" name="to_data" value="{{ tomorrow }}"></p>
                         </div>
                         <div class="gprice">
                             <h3>乐途专享价</h3>
