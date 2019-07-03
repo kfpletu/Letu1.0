@@ -180,7 +180,7 @@ def booking(request):
 # 购物车
 def cart(request):
     u_id = request.session['userinfo']['id']
-    goods = Cart.objects.filter(user_id=u_id)
+    goods = Cart.objects.filter(user_id=u_id,is_pay=0)
     paginator = Paginator(goods, 4)
     cur_page = request.GET.get('page', 1)
     page = paginator.page(cur_page)
@@ -239,11 +239,8 @@ def reduce(request, g_id):
 #订单结算
 def modif(request,g_id):
     target = Cart.objects.get(id=g_id)
-    statu = target.is_pay
-    statu = 1
-    target.is_pay = statu
+    target.is_pay = 1
     target.save()
-    print("啦啦啦啦",target.is_pay)
     try:
         a_order = History_list.objects.create(
             u_id = target.user_id,
@@ -261,8 +258,7 @@ def modif(request,g_id):
     except:
         return HttpResponse('购买失败')
     else:
-        print("啦啦啦啦",a_order)
-    return render(request,'user/payment.html')
+        return render(request,'user/payment.html')
     
 def payment(request):
     print("哈哈哈")
