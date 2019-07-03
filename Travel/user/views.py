@@ -238,6 +238,7 @@ def reduce(request, g_id):
 
 #订单结算
 def modif(request,g_id):
+    print("11111")
     target = Cart.objects.get(id=g_id)
     statu = target.is_pay
     statu = 1
@@ -264,7 +265,6 @@ def modif(request,g_id):
         return render(request,'user/payment.html')
     
 def payment(request):
-    print("哈哈哈")
     return render(request, 'user/payment.html')
 
 
