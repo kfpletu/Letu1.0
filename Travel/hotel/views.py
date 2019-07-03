@@ -8,7 +8,7 @@ import os
 import time
 from django.conf import settings
 from django.http import HttpResponseRedirect
-from . import weather
+# from . import weather
 # Create your views here.
 #获得今天明天的日期
 def get_time():
