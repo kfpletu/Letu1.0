@@ -20,11 +20,19 @@
 <body>
     <header id="header">
         {% block msg %}
-        <div class="login">
+        <div id="cart">
             <b>
-                <div id="cart">
-                    <a href="/user/order">历史订单</a>
-                </div>
+                <ul>
+                    <li class="home"><a href="javascript:void(0)">欢迎您,{{ request.session.userinfo.uname }}</a>
+                        <ol class='info1'>
+                            <li><a href="/user/topUp">我的钱包</a></li>
+                            <li><a href="/user/cart">我的订单</a></li>
+                            <li><a href="/user/order">历史订单</a></li>
+                            <li><a href="/user/logout">退出登录</a></li>
+                            <li><a href="/user/cancel">注销账号</a></li>
+                        </ol>
+                    </li>
+                </ul>
             </b>
         </div>
         {% endblock msg %}
@@ -84,7 +92,8 @@
             <!--顶部的工具栏-->
             <div class="type">
                 <div class="check">
-                    <img src="{% static '/images/user/product_normal.png' %}" class="checkAll">全选
+                    <img src="{% static '/images/user/product_normal.png' %}" class="checkAll">
+                    全选
                 </div>
                 <div class="gname">商品</div>
                 <div class="gprice">单价(元)</div>
@@ -95,6 +104,19 @@
         <!--商品展示-->
         <div id="content">
             <!--商品记录-->
+            <div id="box1">
+                <p>是否要结算？</p>
+                <a href="/user/payment">
+                    <button class="btnYes">是</button>
+                </a>
+                <button>否</button>
+            </div>
+            <div id="box2">
+                <p>没有要结算的订单!!</p>
+            </div> 
+            <div id="empty">
+                <p>空空如也！</p>
+            </div>  
             {% for g in page %}
             <div class="item">
                 <div class="check">
@@ -114,7 +136,7 @@
                 <div class="gcount">
                     <!--阻止超链接默认事件-->
                     <a href="javascript:void(0)" class="minus">-</a>
-                    <input type="text" value="{{ g.g_num }}"">
+                    <input type="text" value="{{ g.g_num }}">
                     <a href="javascript:void(0)" class="add">+</a>
                 </div>
                 <div class="gsum">￥ {{ g.total_price }}</div>    
@@ -124,9 +146,9 @@
                 </div>
             </div>
             {% endfor %}
-            <div id="box1">
+            <!-- <div id="box1">
                 <p>是否要结算？</p>
-                <a href="javascript:void(0)">
+                <a href="/user/payment">
                     <button class="btnYes">是</button>
                 </a>
                 <button>否</button>
@@ -137,7 +159,7 @@
             <img src="" class="wait">
             <div id="empty">
                 <p>空空如也！</p>
-            </div>  
+            </div>   -->
         </div>
         <div id="checkout">
             <div class="balance">

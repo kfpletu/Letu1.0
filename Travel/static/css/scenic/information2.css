@@ -274,15 +274,15 @@ a:hover{
 }
 
 #container .list .tour .price {
-    font-size: 20px;
+    font-size: 25px;
     color: #f60;
-    
+    text-align: center;
 }
 
-#container .list .tour .price s {
+#container .list .tour .price ss {
     font-size: 16px;
     color: #999;
-    
+        
 }
 
 #container .list .tour .reserve {

@@ -1,16 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 
 # Create your views here.
 from .models import *
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.core.paginator import Paginator
-# <<<<<<< HEAD
 from .page_helper import *
-# =======
 from django.contrib.auth.hashers import make_password, check_password
 
-# >>>>>>> d3872dc5b351966cd0c1b1712619f0ebbd3d241b
 
 # 登录
 def login(request):
@@ -34,7 +31,7 @@ def login(request):
                 return resp
             else:
                 if user.is_online:
-                    resp = render(request,'user/login.html',locals())
+                    resp = render(request, 'user/login.html', locals())
                     return resp
                 else:
                     # 修改登录状态,发送seesion,cookie,返回首页
@@ -52,7 +49,7 @@ def login(request):
                     return resp
         except:
             # 出异常,说明用户名密码不正确,刷新当前登录页面
-            return render(request,'user/login.html')
+            return render(request, 'user/login.html')
 
 
 
@@ -101,10 +98,10 @@ def getpwd(request):
     elif request.method == 'POST':
 
         # 获取用户输入的信息
-        uname = request.POST.get('uname') 
-        phone = request.POST.get('phone') 
-        email = request.POST.get('email') 
-        validateCode = request.POST.get('validateCode')  
+        uname = request.POST.get('uname')
+        phone = request.POST.get('phone')
+        email = request.POST.get('email')
+        validateCode = request.POST.get('validateCode')
 
         # 将用户输入的信息与数据库进行比对,正确则发送seesion,返回重置密码页面
         try:
@@ -142,6 +139,7 @@ def updatepwd(request):
             pwd_error = '密码不一致'
             return render(request, 'user/forget_new.html', locals())
 
+
 # 退出登录
 def logout(request):
     try:
@@ -155,6 +153,7 @@ def logout(request):
     except:
         # 直接返回首页,但不删除seesion
         return HttpResponseRedirect('/')
+
 
 # 注销登录
 def cancel(request):
@@ -172,46 +171,50 @@ def cancel(request):
         # 直接返回首页,但不删除seesion
         return HttpResponseRedirect('/')
 
-    
+
 def topup(request):
     return render(request, 'pay/topUp.html')
 
-#订购成功跳转页面
-def booking(request):
-    return render(request,'user/booking.html',locals())
-    
 
-#购物车
+# 订购成功跳转页面
+def booking(request):
+    return render(request, 'user/booking.html', locals())
+
+
+# 购物车
 def cart(request):
     u_id = request.session['userinfo']['id']
     goods = Cart.objects.filter(user_id=u_id)
-    paginator = Paginator(goods,4) 
-    cur_page = request.GET.get('page',1)
+    paginator = Paginator(goods, 4)
+    cur_page = request.GET.get('page', 1)
     page = paginator.page(cur_page)
-    return render(request,'user/cart.html',locals())
+    return render(request, 'user/cart.html', locals())
 
-#历史记录
+
+# 历史记录
 def order(request):
-    uid=request.session['userinfo']['id']
+    uid = request.session['userinfo']['id']
     # page_num=request.GET.get('page')
     # data=History_list.objects.filter(u_id=uid)
     # data_counts=data.count()
     # page_obj=Page(page_num,data_counts,url_prefix="/user/order/",per_page=4,max_page=6)
     # all_data_order=History_list.objects.filter(u_id=uid)[page_obj.start:page_obj.end]
     # page_html=page_obj.page_html()
-    data=History_list.objects.filter(u_id=uid).all()
+    data = History_list.objects.filter(u_id=uid,is_del='1').all()
     if data:
-        return render(request, 'user/order.html',locals())
+        return render(request, 'user/order.html', locals())
     return render(request, 'user/order.html')
 
-#删除购物车商品
-def del_goods(request,g_id):
+
+# 删除购物车商品
+def del_goods(request, g_id):
     target = Cart.objects.get(id=g_id)
     target.delete()
-    return render(request,'user/cart.html')
+    return render(request, 'user/cart.html')
 
-#数量加1
-def add(request,g_id):
+
+# 数量加1
+def add(request, g_id):
     target = Cart.objects.get(id=g_id)
     n = target.g_num
     p = target.price
@@ -220,10 +223,11 @@ def add(request,g_id):
     target.total_price = total_p
     target.g_num = n
     target.save()
-    return render(request,'user/cart.html')
+    return render(request, 'user/cart.html')
 
-#数量减1    
-def reduce(request,g_id):
+
+# 数量减1
+def reduce(request, g_id):
     target = Cart.objects.get(id=g_id)
     n = target.g_num
     p = target.price
@@ -233,21 +237,40 @@ def reduce(request,g_id):
     target.total_price = total_p
     target.g_num = n
     target.save()
-    return render(request,'user/cart.html')
+    return render(request, 'user/cart.html')
 
-#修改订单状态
+
+#订单结算
 def modif(request,g_id):
     target = Cart.objects.get(id=g_id)
     statu = target.is_pay
     statu = 1
     target.is_pay = statu
     target.save()
-    
-    return render(request,'user/payment.html')
+    try:
+        a_order = History_list.objects.create(
+            u_id = target.user_id,
+            g_img = target.g_img,
+            g_name = target.g_name,
+            time1 = target.time1,
+            time2 = target.time2,
+            g_type = target.g_type,
+            price = target.price,
+            g_num = target.g_num,
+            total_price = target.total_price,
+            # booking_time = models.DateTimeField('订单时间', auto_now_add=True),
+            # serial_num = models.CharField('流水号', max_length=50),
+            is_del = target.is_pay
+        )
+    except:
+        return HttpResponse('购买失败')
+    else:
+        return render(request,'user/payment.html')
     
 def payment(request):
     print("哈哈哈")
-    return render(request,'user/payment.html')
+    return render(request, 'user/payment.html')
+
 
 def test(request):
     History_list.objects.create(
@@ -262,6 +285,14 @@ def test(request):
         total_price=70,
         booking_time='2019-07-02 15:55:30.854756',
         serial_num=2019454821548412,
-        is_del=False
+        is_del=True
     )
     return HttpResponse("ok")
+
+
+def delete(request):
+    # target = History_list.objects.filter(id=g_id)
+    id=request.GET['id']
+    target = History_list.objects.filter(id=id)
+    target.update(is_del=0)
+    return redirect('/user/order')

@@ -5,17 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <script src="/static/js/jquery.js"></script>
+    <script src="/static/js/common.js"></script>
+    <script src="/static/js/pay/del.js"></script>
 
 
 </head>
 <body>
 {% extends 'user/cart.html' %}
 {% block msg %}
+<div id="cart">
+    <b>
+        <ul>
+            <li class="home"><a href="javascript:void(0)">欢迎您,{{ request.session.userinfo.uname }}</a>
+                <ol class='info1'>
+                    <li><a href="/user/topUp">我的钱包</a></li>
+                    <li><a href="/user/cart">我的订单</a></li>
+                    <li><a href="/user/order">历史订单</a></li>
+                    <li><a href="/user/logout">退出登录</a></li>
+                    <li><a href="/user/cancel">注销账号</a></li>
+                </ol>
+            </li>
+        </ul>
+    </b>
+</div>
 {% endblock msg %}
 {% block order %}
     <div id="main">
     <!--购物车顶部标签-->
-    <h2>
+    <h2 class="history">
         历史订单
     </h2>
     <!--购物车商品展示-->
@@ -41,6 +59,7 @@
 
                     <div class="ocheck">
                         <img src="/static/images/user/product_normal.png" class="checkItem">
+                        <span class="hid" style="display: none">{{ datum.id }}</span>
                     </div>
                     <div class="oname">
                         <img src="{{ datum.g_img }}">

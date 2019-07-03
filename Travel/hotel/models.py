@@ -48,5 +48,5 @@ class Room(models.Model):
     def __str__(self):
         return '房间名: %s 价位: %s'%(self.room_name,self.price)
 
-class test(models.Model):
-    pass
+# class test(models.Model):
+#     pass
