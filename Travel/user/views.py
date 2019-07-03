@@ -252,7 +252,7 @@ def modif(request,g_id):
             price = target.price,
             g_num = target.g_num,
             total_price = target.total_price,
-            booking_time = '2019.233.2321',
+            booking_time = '2019-2-2',
             is_del = target.is_pay
         )
     except:
@@ -261,7 +261,6 @@ def modif(request,g_id):
         return render(request,'user/payment.html')
     
 def payment(request):
-    print("哈哈哈")
     return render(request, 'user/payment.html')
 
 
