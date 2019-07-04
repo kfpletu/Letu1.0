@@ -38,8 +38,10 @@
                 </div>
                 <div class="{%block class%}validateCode{%endblock class%}">
                     {%block email%}
-                    <img src="/static/images/logImg/code.jpg" alt="验证码" id="yanzma" name='yanzma'>
+                    <img src="" alt="点击刷新验证码" id="yanzma" name='yanzma' style="color:red;font-size: 12px">
                     <input type="text" name="validateCode" placeholder="验证码输入" id="validateCode"> {%endblock email%}
+                    <span id="showImg" style="display: none"></span>
+                    <span id="show" style="color:red"></span>
                 </div>
                 {%block giveup%}
                 <div class="savePwd">
