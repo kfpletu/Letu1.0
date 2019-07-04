@@ -1,7 +1,7 @@
 {% extends 'user/login.html' %}
 {%block title%}找回密码{%endblock title%}
 {%block head%}找回密码{%endblock head%}
-{%block post%}/user/forget{%endblock post%}
+{%block post%}<form action="/user/forget" method="post"></form>{%endblock post%}
 {%block css%}<link rel="stylesheet" href="/static/css/user/forget.css">{%endblock css%}
 {%block body_head%}找回密码<a href="/user/login">返回登录</a>{%endblock body_head%}
 {%block uname%}请输入您要找回的用户名{%endblock uname%}
@@ -17,3 +17,6 @@
     </div>
 {%endblock giveup%}
 {%block value%}提交{%endblock value%}
+{% block form %}
+</form>
+{% endblock form %}

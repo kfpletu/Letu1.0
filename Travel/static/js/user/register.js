@@ -95,6 +95,7 @@ $(function () {
                 xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
                 var res = 'uname=' + $('#uname').val() + '&upwd=' + $('#upwd').val() +
                     '&phone=' + $('#phone').val() + '&email=' + $('#email').val()
+                    + '&csrfmiddlewaretoken=' + $('[name="csrfmiddlewaretoken"]').val()
                 console.log(res);
                 xhr.send(res)
             }
