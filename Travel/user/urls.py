@@ -26,7 +26,7 @@ urlpatterns += [
     url(r'^topUp$',views.topup),
 ]
 
-# 小凡凡的路由
+# 购物车的路由
 urlpatterns += [
     url(r'^balance', views.balance),
     url(r'^cart', views.cart, name = 'goodType'),
