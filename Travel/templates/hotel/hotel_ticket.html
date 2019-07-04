@@ -163,7 +163,7 @@
                         <p>{#面积  43㎡#}{{ room.area }}</p>
                         <p>{#床型  大床1.8×2.0米1张#}{{ room.bed }}</p>
                     </div>
-                    <form action="{% url 'hotel'%}{{ id }}/{{ room.room_level }}" method="post" id="form">
+                    <form action="{% url 'hotel'%}{{ id }}/{{ room.room_level }}" method="post" class ="form">
 
                         <div class=gpt>
                             <p>入住时间：<input type="text" class="date_time" id="from_date{{ room.room_level }}" name="from_data" value="{{ today }}"></p>

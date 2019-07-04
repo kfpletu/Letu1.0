@@ -10,21 +10,23 @@ from django.conf import settings
 from django.http import HttpResponseRedirect
 # from . import weather
 # Create your views here.
+
 #获得今天明天的日期
 def get_time():
     today = time.strftime("%Y-%m-%d", time.localtime())
     tomorrow=time.strftime("%Y-%m-%d", time.localtime(time.time()+86400))
     return today,tomorrow
+
 #hotel 预订首页
 def index(request):
     if request.method=='GET':
         # weather_list=weather.city_weather()
         house_list=models.House.objects.order_by('-order_count')
         house_list=house_list[0:9]#销量排名前9的酒店
-        hotel_list=[]
-        for house in house_list:
-            hotel_list.append(house.hotel)
-        house_list=house_list[0:5]#热门品牌
+        # hotel_list=[]
+        # for house in house_list:
+        #     hotel_list.append(house.hotel)
+        house_list_li=house_list[0:5]#热门品牌
         today,tomorrow=get_time()
         return render(request,'hotel/order_hotel.html',locals())
     elif request.method=='POST':
@@ -153,6 +155,7 @@ def init_house_p():
     for house in models.House.objects.all():
         house.hotel_p=house.hotel.hotel_p
         house.save()
+
 
 #设置house_id
 def init_house_id(request):

@@ -234,9 +234,9 @@
                 <h2>热门酒店推荐</h2>
                 <ul>
                     <li>热门品牌：</li>
-                    <li><a href="">全部</a></li>
+                    <li><a href="javascript:void(0)">全部</a></li>
 
-                  {% for house in house_list %}
+                  {% for house in house_list_li %}
 
                         <li><a href="javascript:void(0)">{{ house.hotel_name }}</a></li>
 
@@ -245,11 +245,11 @@
 {#                    <li><a href="javascript:void(0)">富力希尔顿</a></li>#}
                 </ul>
                 <div class="hotel_imfor">
-                {% for hotel in hotel_list %}
+                {% for house in house_list %}
                     <figure class="hotel_figure">
-                        <img src="/static/images/hotel/{{ hotel.house.hotel_p }}/11.png" alt="The Pulpit Rock" class="hotel_img">
-                        <span class="hotel_name">{{ hotel.hotel_name }}</span> {{ hotel.hotel_level }}
-                        <a href="{{ hotel.id }}">点击进入</a>
+                        <img src="/static/images/hotel/{{ house.hotel_p }}/11.png" alt="The Pulpit Rock" class="hotel_img">
+                        <span class="hotel_name">{{ house.hotel_name }}</span> {{ house.hotel.hotel_level }}
+                        <a href="{{ house.id }}">点击进入</a>
                     </figure>
                    {% endfor %}
                 <!--
