@@ -1,6 +1,6 @@
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 import random
-from django.shortcuts import render,redirect
+from django.shortcuts import render, redirect
 import json
 
 # Create your views here.
@@ -64,7 +64,7 @@ def yanzma(request):
         登录图形图形验证码
     """
     img = Image.new("RGB", (110, 37), (255, 255, 255))
-    code = [chr(x) for x in range(97, 123)]+[str(x) for x in range(10)]
+    code = [chr(x) for x in range(97, 123)] + [str(x) for x in range(10)]
     code = random.sample(code, 6)
     code = ''.join(code)
     draw = ImageDraw.Draw(img)
@@ -74,22 +74,23 @@ def yanzma(request):
             fill=(0, 0, 0))  # 颜色
     for _ in range(10):
         draw.line([(random.randint(0, 150), random.randint(0, 50)),
-                (random.randint(0, 150), random.randint(0, 50))],
-                fill=(150, 150, 2))
+                   (random.randint(0, 150), random.randint(0, 50))],
+                  fill=(150, 150, 2))
 
     font = ImageFont.truetype(
         "/usr/share/fonts/truetype/freefont/FreeSerif.ttf", 24)
     draw.text((30, 10), code, font=font, fill="green")
-    src='static/images/logImg/code.jpg'
+    src = 'static/images/logImg/code.jpg'
     img.save(src)
-    src ='/static/images/logImg/code.jpg'
+    src = '/static/images/logImg/code.jpg'
     imgUrl = {
-        'url':src,
-        'code':code
+        'url': src,
+        'code': code
     }
     return HttpResponse(json.dumps(imgUrl))
 
-#注册
+
+# 注册
 def register(request):
     if request.method == 'GET':
         return render(request, 'user/register.html')
@@ -208,31 +209,6 @@ def cancel(request):
         return HttpResponseRedirect('/')
 
 
-def topup(request):
-    # return render(request, 'pay/topUp.html')
-    uid = request.session['userinfo']['id']
-    if request.method == "GET":
-        return render(request, 'pay/topUp.html')
-    elif request.method == "POST":
-        uid = request.session['userinfo']['id']
-        money = float(request.POST['money'])
-        money1 = float(request.POST['money1'])
-        try:
-            if money == 0 and money1 != 0:
-                print(money1)
-                user = Info.objects.get(id=uid)
-                user.price = money1
-                user.save()
-            elif money1 == 0 and money != 0:
-                print(money)
-                user = Info.objects.get(id=uid)
-                user.price = money
-                user.save()
-            return HttpResponse("1")
-        except:
-            return HttpResponse("0")
-
-
 # 订购成功跳转页面
 def booking(request):
     return render(request, 'user/booking.html', locals())
@@ -242,7 +218,7 @@ def booking(request):
 def cart(request):
     u_id = request.session['userinfo']['id']
     balance = Info.objects.get(id=u_id)
-    goods = Cart.objects.filter(user_id=u_id,is_pay=0)
+    goods = Cart.objects.filter(user_id=u_id, is_pay=0)
     paginator = Paginator(goods, 4)
     cur_page = request.GET.get('page', 1)
     page = paginator.page(cur_page)
@@ -262,7 +238,7 @@ def order(request):
 def del_goods(request, g_id):
     target = Cart.objects.get(id=g_id)
     target.delete()
-    return render(request,'user/cart.html')
+    return render(request, 'user/cart.html')
 
 
 # 数量加1
@@ -315,8 +291,8 @@ def modif(request, g_id):
         return HttpResponse('购买失败')
     # else:
     #     return render(request,'user/payment.html')
-    
-    
+
+
 def payment(request):
     return render(request, 'user/payment.html')
 
@@ -339,6 +315,31 @@ def test(request):
     )
     return HttpResponse("ok")
 
+
+def topup(request):
+    # return render(request, 'pay/topUp.html')
+    # uid = request.session['userinfo']['id']
+    if request.method == "GET":
+        return render(request, 'pay/topUp.html')
+    elif request.method == "POST":
+        uid = request.session['userinfo']['id']
+        money = float(request.POST['money'])
+        money1 = float(request.POST['money1'])
+        try:
+            user = Info.objects.get(id=uid)
+            if money == 0 and money1 != 0:
+                change_money = float(user.price)
+                change_money = change_money + money1
+            elif money1 == 0 and money != 0:
+                change_money = float(user.price)
+                change_money = change_money + money
+            user.price = change_money
+            user.save()
+            return HttpResponse("1")
+        except:
+            return HttpResponse("0")
+
+
 def delete(request):
     """
     用户删除自己的购买记录
@@ -351,7 +352,8 @@ def delete(request):
     return redirect('/user/order')
     # return render(request,'user/order.html')
 
-#余额
+
+# 余额
 def balance(request):
     t_price = request.GET["totalPrice"]
     t_price = int(t_price)
@@ -362,10 +364,8 @@ def balance(request):
         money -= t_price
         balance.price = money
         balance.save()
-        return render(request, 'user/payment.html')  
+        return render(request, 'user/payment.html')
     else:
-        print('嘎嘎嘎嘎嘎嘎个',money)
+        print('嘎嘎嘎嘎嘎嘎个', money)
         msg = json.dumps("亲!你的余额不足额")
         return HttpResponse(msg)
-        
-           
