@@ -24,6 +24,7 @@ urlpatterns += [
     url(r'^delete/', views.delete),
     url(r'^order$',views.order),
     url(r'^topUp$',views.topup),
+    url(r'^top-top/$',views.top_top),
 ]
 
 # 购物车的路由

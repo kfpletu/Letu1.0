@@ -318,31 +318,26 @@ def test(request):
 
 def topup(request):
     """
-    充值功能的实现
-    成功:返回True 1
-    失败:返回False 0
     :param request:
-    :return: 布尔值,前端进行判断使用
+    :return:
     """
-    if request.method == "GET":
-        return render(request, 'pay/topUp.html')
-    elif request.method == "POST":
-        uid = request.session['userinfo']['id']
-        money = float(request.POST['money'])
-        money1 = float(request.POST['money1'])
-        try:
-            user = Info.objects.get(id=uid)
-            if money == 0 and money1 != 0:
-                change_money = float(user.price)
-                change_money = change_money + money1
-            elif money1 == 0 and money != 0:
-                change_money = float(user.price)
-                change_money = change_money + money
-            user.price = change_money
-            user.save()
-            return HttpResponse("1")
-        except:
-            return HttpResponse("0")
+    return render(request, 'pay/topUp.html')
+
+
+
+def top_top(request):
+    uid = request.session['userinfo']['id']
+    user = Info.objects.get(id=uid)
+    money = float(request.POST['money'])
+    try:
+        change_money = float(user.price)
+        change_money = change_money + money
+        user.price=change_money
+        user.save()
+        return HttpResponse("1")
+    except:
+        return HttpResponse("0")
+
 
 
 def delete(request):
