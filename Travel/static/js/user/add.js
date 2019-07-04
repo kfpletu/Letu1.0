@@ -4,7 +4,12 @@ $(function(){
         var gId = $(this).parents('.item').find(".hid").html()
         var xhr = createXhr()
         var url = "/user/del/" + gId
-        xhr.open('get',url,true)  
+        xhr.open('get',url,true)
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState==4 && xhr.status==200){
+                $("body").html(xhr.responseText)
+            }
+        }  
         xhr.send(null)
     })
     //数量-1
@@ -28,17 +33,21 @@ $(function(){
             totalPrice: $(".result .total-price").html()
         }
         $.get("/user/balance",msg,function(data){
-            console.log(data)
             if(data){
                 $("#box3").show()
                 $("#box3 .bal").html(data)
-            }
-            else{
+            }else{
                 $(".checkItem[checked]").each(function(){
                     var gId = $(this).parents(".item").find(".hid").html()
                     var xhr = createXhr()
                     var url = "/user/modif/" + gId 
                     xhr.open("get",url,true);
+                    xhr.onreadystatechange = function(){
+                        if(xhr.readyState==4 && xhr.status==200){
+                            console.log(xhr.responseText)
+                            window.location.href = xhr.responseText
+                        }
+                    }  
                     xhr.send(null);
                 })
             }

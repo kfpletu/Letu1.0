@@ -6,14 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>OrderHotel</title>
-    {% block block_css %}{% endblock block_css %}
     <link rel="stylesheet" href="../../static/css/hotel/information.css">
     <link rel="stylesheet" href="../../static/css/basic.css">
     <link rel="stylesheet" href="../../static/css/hotel/order_hotel.css">
     <script type="text/javascript" src='/static/js/hotel/jquery.js'></script>
     <script type="text/javascript" src='/static/js/hotel/order_hotel.js'></script>
     <script src="/static/js/hotel/layDate-v5.0.9/laydate/laydate.js"></script>
-    <script>
+    {% block block_css %}
+        <script>
         lay('#version').html('-v' + laydate.v);
 
         //执行一个laydate实例
@@ -25,6 +25,7 @@
         });
     </script>
     <script src="/static/js/hotel/hotel_date.js"></script>
+    {% endblock block_css %}
 </head>
 
 <body>
@@ -146,13 +147,13 @@
         </aside>
         <div class="list order">
             {% block block_new %}
-            <div class="brandListBox" id="brandListFirst">
+            <div class="brandListBox" id="brandListFirst">{{ weather_str }}</div>
 {#                <a href="">花样土耳其 10 日游</a>#}
-                {% for  weather in weather_list %}
-                        {% for wea in weather %}
-                            <a href="">{{ wea }}</a>}
-                        {% endfor %}
-                {% endfor %}
+{#                {% for  weather in weather_list %}#}
+{#                        {% for wea in weather %}#}
+{#                            <a href="">{{ wea }}</a>}#}
+{#                        {% endfor %}#}
+{#                {% endfor %}#}
             </div>
             <div class="out-form">
                 <form action="room" method="post"  id='form'>
@@ -165,7 +166,7 @@
                             <li><a href="javascript:void(0)">星级酒店</a></li>
                             <li><a href="javascript:void(0)">快速便捷</a></li>
                             <li><a href="javascript:void(0)">民宿公寓</a></li>
-                            <li><a href="javascript:void(0)">主题套房</a></li>
+                            <li><a href="javascript:void(0)">主题酒店</a></li>
 
                         </ul>
                     </p>
@@ -177,18 +178,18 @@
                             <label for="to_date">退房日期:</label>
                             <input type="text" name="out-time" class="date_time"  id="to_date" value="{{ tomorrow }}">
 
-                        </p>
-
-                    </div>
-                    <div class="form-middle">
-                        <p>
-                            订房数量:
+                         <label>订房数量:</label>
                             <select name="room-num">
                                 <option value="2">2</option>
                                 <option value="3">3</option>
                                 <option value="4">4</option>
                                 <option value="1" selected>1</option>
-                            </select>
+                            </select>   
+                        </p>
+
+                    </div>
+                    <div class="form-middle">
+                        <p>                        
                             房间价位:
                             <select name="room-price">
                                 <option value="0">200元以下</option>
@@ -197,14 +198,8 @@
                                 <option value="4">2000元以上</option>
                                 <option value="1" selected>200元-500元</option>
                             </select>
-
-                        </p>
-
-                    </div>
-                    <div class="form-third">
-                        <p>
                             酒店级别:
-                            <select name="hotel-level">
+                            <select name="hotel-level" id="hotel-level">
                                 <option value="3">星级酒店</option>
                                 <option value="4">主题酒店</option>
                                 <option value="2">民宿公寓</option>
@@ -213,7 +208,6 @@
                             <label for="room-keyword">其他要求:</label>
                             <input type="text" name="room-keyword">
                         </p>
-
                     </div>
                     <div class="form-bottom">
                         <p>
@@ -234,9 +228,9 @@
                 <h2>热门酒店推荐</h2>
                 <ul>
                     <li>热门品牌：</li>
-                    <li><a href="">全部</a></li>
+                    <li><a href="javascript:void(0)">全部</a></li>
 
-                  {% for house in house_list %}
+                  {% for house in house_list_li %}
 
                         <li><a href="javascript:void(0)">{{ house.hotel_name }}</a></li>
 
@@ -245,11 +239,11 @@
 {#                    <li><a href="javascript:void(0)">富力希尔顿</a></li>#}
                 </ul>
                 <div class="hotel_imfor">
-                {% for hotel in hotel_list %}
+                {% for house in house_list %}
                     <figure class="hotel_figure">
-                        <img src="/static/images/hotel/{{ hotel.house.hotel_p }}/11.png" alt="The Pulpit Rock" class="hotel_img">
-                        <span class="hotel_name">{{ hotel.hotel_name }}</span> {{ hotel.hotel_level }}
-                        <a href="{{ hotel.id }}">点击进入</a>
+                        <img src="/static/images/hotel/{{ house.hotel_p }}/11.png" alt="The Pulpit Rock" class="hotel_img">
+                        <span class="hotel_name">{{ house.hotel_name }}</span> {{ house.hotel.hotel_level }}
+                        <a href="{{ house.id }}">点击进入</a>
                     </figure>
                    {% endfor %}
                 <!--

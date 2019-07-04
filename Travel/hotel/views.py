@@ -8,23 +8,34 @@ import os
 import time
 from django.conf import settings
 from django.http import HttpResponseRedirect
-# from . import weather
+from user.models import Cart
+from . import weather
 # Create your views here.
+
+
+
 #获得今天明天的日期
 def get_time():
     today = time.strftime("%Y-%m-%d", time.localtime())
     tomorrow=time.strftime("%Y-%m-%d", time.localtime(time.time()+86400))
     return today,tomorrow
+
+#天气预报
+def city_weather(request):
+    weather_str = weather.city_weather()
+    return HttpResponse(weather_str)
+
 #hotel 预订首页
 def index(request):
     if request.method=='GET':
-        # weather_list=weather.city_weather()
+        # weather_str=weather.city_weather()
+        # print(weather_str)
         house_list=models.House.objects.order_by('-order_count')
         house_list=house_list[0:9]#销量排名前9的酒店
-        hotel_list=[]
-        for house in house_list:
-            hotel_list.append(house.hotel)
-        house_list=house_list[0:5]#热门品牌
+        # hotel_list=[]
+        # for house in house_list:
+        #     hotel_list.append(house.hotel)
+        house_list_li=house_list[0:5]#热门品牌
         today,tomorrow=get_time()
         return render(request,'hotel/order_hotel.html',locals())
     elif request.method=='POST':
@@ -64,8 +75,9 @@ def search(keyword,hotel_level):
 #酒店首页搜索引擎
 def room(request):
     if request.method=='GET':
-        rooms=models.Room.objects.all()
-        return render(request, 'hotel/order_room.html', locals())
+        # rooms=models.Room.objects.all()
+        # today, tomorrow = get_time()
+        return HttpResponseRedirect('/hotel')
     elif request.method=='POST':
         try:
             #入住时间
@@ -91,11 +103,6 @@ def room(request):
             return render(request,'hotel/order_room.html',locals())
         except:
             return HttpResponseRedirect('/hotel/')
-
-
-
-
-
 
 #导入酒店数据
 def init_hotel(request):
@@ -154,6 +161,7 @@ def init_house_p():
         house.hotel_p=house.hotel.hotel_p
         house.save()
 
+
 #设置house_id
 def init_house_id(request):
     models.Room.objects.all().update(house_id=F('hotel_id'))
@@ -192,7 +200,7 @@ def hotel_ticket(id):
     today, tomorrow = get_time()
     return locals()
 
-#详情视图函数
+#酒店详情视图函数
 def hotel(request,id,level):
 
         dic=hotel_ticket(id)
@@ -202,7 +210,6 @@ def hotel(request,id,level):
             #将房间加入购物车
             try:
                 # user_id=request.session['userinfo']['uname']
-                from user.models import Cart
                 # for i in range(15):
                 #数据导入cart表
                 Cart.objects.create(

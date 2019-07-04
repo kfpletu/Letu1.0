@@ -1,6 +1,6 @@
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 import random
-from django.shortcuts import render,redirect
+from django.shortcuts import render, redirect
 import json
 
 # Create your views here.
@@ -64,7 +64,7 @@ def yanzma(request):
         登录图形图形验证码
     """
     img = Image.new("RGB", (110, 37), (255, 255, 255))
-    code = [chr(x) for x in range(97, 123)]+[str(x) for x in range(10)]
+    code = [chr(x) for x in range(97, 123)] + [str(x) for x in range(10)]
     code = random.sample(code, 6)
     code = ''.join(code)
     draw = ImageDraw.Draw(img)
@@ -74,22 +74,23 @@ def yanzma(request):
             fill=(0, 0, 0))  # 颜色
     for _ in range(10):
         draw.line([(random.randint(0, 150), random.randint(0, 50)),
-                (random.randint(0, 150), random.randint(0, 50))],
-                fill=(150, 150, 2))
+                   (random.randint(0, 150), random.randint(0, 50))],
+                  fill=(150, 150, 2))
 
     font = ImageFont.truetype(
         "/usr/share/fonts/truetype/freefont/FreeSerif.ttf", 24)
     draw.text((30, 10), code, font=font, fill="green")
-    src='static/images/logImg/code.jpg'
+    src = 'static/images/logImg/code.jpg'
     img.save(src)
-    src ='/static/images/logImg/code.jpg'
+    src = '/static/images/logImg/code.jpg'
     imgUrl = {
-        'url':src,
-        'code':code
+        'url': src,
+        'code': code
     }
     return HttpResponse(json.dumps(imgUrl))
 
-#注册
+
+# 注册
 def register(request):
     if request.method == 'GET':
         return render(request, 'user/register.html')
@@ -107,13 +108,15 @@ def register(request):
         except Exception as e:
             # 抛异常,刷新注册页面,重新注册
             return HttpResponse('注册失败,请重新注册')
-                
+
+
 # 检测当前用户名是否被注册
 def checkuname(request):
     uname = request.GET.get('uname')
     if Info.objects.filter(uname=uname):
         return HttpResponse('用户名已经存在')
     return HttpResponse('')
+
 
 # 检测当前手机号是否被注册
 def checkphone(request):
@@ -142,7 +145,9 @@ def getpwd(request):
             return render(request, 'user/forget_new.html')
         except:
             # 抛异常则输入信息不正确,刷新忘记密码页面
-            return render(request,'user/forget.html')
+            return render(request, 'user/forget.html')
+
+
 # 修改密码
 def updatepwd(request):
     if request.method == 'GET':
@@ -204,10 +209,6 @@ def cancel(request):
         return HttpResponseRedirect('/')
 
 
-def topup(request):
-    return render(request, 'pay/topUp.html')
-
-
 # 订购成功跳转页面
 def booking(request):
     return render(request, 'user/booking.html', locals())
@@ -216,8 +217,10 @@ def booking(request):
 # 购物车
 def cart(request):
     u_id = request.session['userinfo']['id']
+    #获取账户余额
     balance = Info.objects.get(id=u_id)
-    goods = Cart.objects.filter(user_id=u_id,is_pay=0)
+    #获取该用户购物车商品对象
+    goods = Cart.objects.filter(user_id=u_id, is_pay=0)
     paginator = Paginator(goods, 4)
     cur_page = request.GET.get('page', 1)
     page = paginator.page(cur_page)
@@ -227,23 +230,25 @@ def cart(request):
 # 历史记录
 def order(request):
     uid = request.session['userinfo']['id']
-    # page_num=request.GET.get('page')
-    # data=History_list.objects.filter(u_id=uid)
-    # data_counts=data.count()
-    # page_obj=Page(page_num,data_counts,url_prefix="/user/order/",per_page=4,max_page=6)
-    # all_data_order=History_list.objects.filter(u_id=uid)[page_obj.start:page_obj.end]
-    # page_html=page_obj.page_html()
-    data = History_list.objects.filter(u_id=uid,is_del='1').all()
+    data = History_list.objects.filter(u_id=uid, is_del='1').all()
     if data:
         return render(request, 'user/order.html', locals())
-    return render(request, 'user/order.html',locals())
+    return render(request, 'user/order.html', locals())
 
 
 # 删除购物车商品
 def del_goods(request, g_id):
     target = Cart.objects.get(id=g_id)
     target.delete()
-    return render(request,'user/cart.html')
+
+    u_id = request.session['userinfo']['id']
+    balance = Info.objects.get(id=u_id)
+    goods = Cart.objects.filter(user_id=u_id, is_pay=0)
+    paginator = Paginator(goods, 4)
+    cur_page = request.GET.get('page', 1)
+    page = paginator.page(cur_page)
+
+    return render(request, 'user/cart.html',locals())
 
 
 # 数量加1
@@ -273,31 +278,33 @@ def reduce(request, g_id):
     return render(request, 'user/cart.html')
 
 
-#订单结算
-def modif(request,g_id):
+# 订单结算
+def modif(request, g_id):
     target = Cart.objects.get(id=g_id)
     target.is_pay = 1
     target.save()
     try:
-        a_order = History_list.objects.create(
-            u_id = target.user_id,
-            g_img = target.g_img,
-            g_name = target.g_name,
-            time1 = target.time1,
-            time2 = target.time2,
-            g_type = target.g_type,
-            price = target.price,
-            g_num = target.g_num,
-            total_price = target.total_price,
-            booking_time = '2019-2-2',
-            is_del = target.is_pay
+        History_list.objects.create(
+            u_id=target.user_id,
+            g_img=target.g_img,
+            g_name=target.g_name,
+            time1=target.time1,
+            time2=target.time2,
+            g_type=target.g_type,
+            price=target.price,
+            g_num=target.g_num,
+            total_price=target.total_price,
+            booking_time='2019-2-2',
+            is_del=target.is_pay
         )
-    except:
+    except:                 
         return HttpResponse('购买失败')
-    # else:
-    #     return render(request,'user/payment.html')
+    else:
+        return HttpResponse('payment.html')
     
     
+
+
 def payment(request):
     return render(request, 'user/payment.html')
 
@@ -320,19 +327,45 @@ def test(request):
     )
     return HttpResponse("ok")
 
+
+def topup(request):
+    """
+    :param request:
+    :return:
+    """
+    return render(request, 'pay/topUp.html')
+
+
+
+def top_top(request):
+    uid = request.session['userinfo']['id']
+    user = Info.objects.get(id=uid)
+    money = float(request.POST['money'])
+    try:
+        change_money = float(user.price)
+        change_money = change_money + money
+        user.price=change_money
+        user.save()
+        return HttpResponse("1")
+    except:
+        return HttpResponse("0")
+
+
+
 def delete(request):
     """
     用户删除自己的购买记录
     :param request: 前端的请求
     :return:
     """
-    id=request.GET['id']
+    id = request.GET['id']
     data = History_list.objects.filter(id=id)
     data.update(is_del=0)
     return redirect('/user/order')
     # return render(request,'user/order.html')
 
-#余额
+
+# 余额
 def balance(request):
     t_price = request.GET["totalPrice"]
     t_price = int(t_price)
@@ -343,10 +376,8 @@ def balance(request):
         money -= t_price
         balance.price = money
         balance.save()
-        return render(request, 'user/payment.html')  
-    else:
-        print('嘎嘎嘎嘎嘎嘎个',money)
-        msg = json.dumps("亲!你的余额不足额")
+        msg = json.dumps("")
         return HttpResponse(msg)
-        
-           
+    else:
+        msg = json.dumps("亲!你的余额不足额...")
+        return HttpResponse(msg)
