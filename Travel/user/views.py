@@ -284,7 +284,7 @@ def modif(request, g_id):
     target.is_pay = 1
     target.save()
     try:
-        a_order = History_list.objects.create(
+        History_list.objects.create(
             u_id=target.user_id,
             g_img=target.g_img,
             g_name=target.g_name,
@@ -300,7 +300,9 @@ def modif(request, g_id):
     except:                 
         return HttpResponse('购买失败')
     else:
-        return render(request,'user/payment.html')
+        return HttpResponse('payment.html')
+    
+    
 
 
 def payment(request):
@@ -374,7 +376,8 @@ def balance(request):
         money -= t_price
         balance.price = money
         balance.save()
-        # return render(request, 'user/payment.html')
+        msg = json.dumps("")
+        return HttpResponse(msg)
     else:
         msg = json.dumps("亲!你的余额不足额...")
         return HttpResponse(msg)
