@@ -32,13 +32,13 @@
 
                     </div>
                     <div class="gname">
-                        <img src="/static/images/hotel/{{ room.hotel.hotel_p }}/2{{ room.room_level }}.png">
-                        <p><b>{{ room.hotel.hotel_name }}</b></p>
+                        <img src="/static/images/hotel/{{ room.house.hotel_p }}/2{{ room.room_level }}.png">
+                        <p><b>{{ room.house.hotel_name }}</b></p>
                         <p>{#窗户  有#}{{ room.window }}</p>
                         <p>{#面积  43㎡#}{{ room.area }}</p>
                         <p>{#床型  大床1.8×2.0米1张#}{{ room.bed }}</p>
                     </div>
-                    <form action="{% url 'hotel'%}{{ room.hotel.id }}/{{ room.room_level }}" method="post">
+                    <form action="{% url 'hotel'%}{{ room.house.id }}/{{ room.room_level }}" method="post">
 
                         <div class=gpt>
                             <p><label for="from_date{{ room.room_level }}">入住时间：</label><input type="text" id="from_date{{ room.room_level }}" name="from_data" value="{{ in_time }}"></p>

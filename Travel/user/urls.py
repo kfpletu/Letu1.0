@@ -1,11 +1,12 @@
-from django.conf.urls import url
-# from django.contrib import admin
+from django.conf.urls
+import url# from django.contrib
+import admin
 
-from . import views
+from.import views
 
 # 梦晗的路由
 urlpatterns = [
-    # url(r'^admin/', admin.site.urls),
+    #url(r '^admin/', admin.site.urls),
     url(r'^login', views.login),
     url(r'^register', views.register),
     url(r'^forget$', views.getpwd),
@@ -14,23 +15,22 @@ urlpatterns = [
     url(r'^cancel$', views.cancel),
     url(r'^checkuname$', views.checkuname),
     url(r'^checkphone$', views.checkphone),
-
+    url(r'^yanzma/$', views.yanzma),
 ]
-
 
 # kavin的路由
 urlpatterns += [
-    url(r'^order$', views.order),
-    url(r'^topUp$', views.topup),
     url(r'^payment$', views.payment),
-    url(r'^test', views.test),  # 用于测试
+    url(r'^test', views.test), #用于测试
     url(r'^delete/', views.delete),
+    url(r'^order$',views.order),
+    url(r'^topUp$',views.topup),
 ]
-
 
 # 小凡凡的路由
 urlpatterns += [
-    url(r'^cart', views.cart, name='goodType'),
+    url(r'^balance', views.balance),
+    url(r'^cart', views.cart, name = 'goodType'),
     url(r'^booking$', views.booking),
     url(r'^del/(\d+)$', views.del_goods),
     url(r'^add/(\d+)$', views.add),
