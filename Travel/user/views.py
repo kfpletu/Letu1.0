@@ -1,4 +1,7 @@
+from PIL import Image, ImageDraw, ImageFont, ImageFilter
+import random
 from django.shortcuts import render,redirect
+import json
 
 # Create your views here.
 from .models import *
@@ -20,6 +23,7 @@ def login(request):
         upwd = make_password(upwd, 'xiaochen', 'pbkdf2_sha256')
         # 获取验证码
         validateCode = request.POST.get('validateCode')
+        print(validateCode)
         # 获取记住密码单选框的状态
         remember = request.POST.get('remember')
         try:
@@ -27,11 +31,11 @@ def login(request):
             user = Info.objects.get(uname=uname, upwd=upwd)
             # 登录状态为真,刷新登录页面,禁止登录
             if user.is_alive:
-                resp = render(request, 'user/login.html', locals())
+                resp = HttpResponse('该用户已经注销')
                 return resp
             else:
                 if user.is_online:
-                    resp = render(request, 'user/login.html', locals())
+                    resp = HttpResponse('该用户已在其他地方登录')
                     return resp
                 else:
                     # 修改登录状态,发送seesion,cookie,返回首页
@@ -41,7 +45,7 @@ def login(request):
                         'uname': user.uname,
                         'id': user.id
                     }
-                    resp = HttpResponseRedirect('/', locals())
+                    resp = HttpResponse('登录成功', locals())
                     if remember:
                         resp.set_cookie('uname', uname, max_age=7 * 24 * 60 * 60)
                     else:
@@ -49,9 +53,41 @@ def login(request):
                     return resp
         except:
             # 出异常,说明用户名密码不正确,刷新当前登录页面
-            return render(request, 'user/login.html')
+            return HttpResponse('登录失败,请重新登录')
 
 
+# 验证码
+
+
+def yanzma(request):
+    """
+        登录图形图形验证码
+    """
+    img = Image.new("RGB", (110, 37), (255, 255, 255))
+    code = [chr(x) for x in range(97, 123)]+[str(x) for x in range(10)]
+    code = random.sample(code, 6)
+    code = ''.join(code)
+    draw = ImageDraw.Draw(img)
+    for _ in range(10):
+        draw.point(
+            (random.randint(0, 150), random.randint(0, 50)),  # 坐标
+            fill=(0, 0, 0))  # 颜色
+    for _ in range(10):
+        draw.line([(random.randint(0, 150), random.randint(0, 50)),
+                (random.randint(0, 150), random.randint(0, 50))],
+                fill=(150, 150, 2))
+
+    font = ImageFont.truetype(
+        "/usr/share/fonts/truetype/freefont/FreeSerif.ttf", 24)
+    draw.text((30, 10), code, font=font, fill="green")
+    src='static/images/logImg/code.jpg'
+    img.save(src)
+    src ='/static/images/logImg/code.jpg'
+    imgUrl = {
+        'url':src,
+        'code':code
+    }
+    return HttpResponse(json.dumps(imgUrl))
 
 #注册
 def register(request):
