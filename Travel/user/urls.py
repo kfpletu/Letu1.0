@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+from django.conf.urlsimport url
+=======
 from django.conf.urls import url
+>>>>>>> 1fa27331a444a122d6af357130a63e5025fc44e3
 from django.contrib import admin
 
 from.import views
@@ -26,7 +30,7 @@ urlpatterns += [
     url(r'^topUp$',views.topup),
 ]
 
-# 小凡凡的路由
+# 购物车的路由
 urlpatterns += [
     url(r'^balance', views.balance),
     url(r'^cart', views.cart, name = 'goodType'),
