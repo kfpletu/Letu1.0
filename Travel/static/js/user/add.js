@@ -24,18 +24,27 @@ $(function(){
         xhr.send(null);
     })
     $("#box1 .btnYes").click(function(){
-        $(".checkItem[checked]").each(function(){
-            var gId = $(this).parents(".item").find(".hid").html()
-            var xhr = createXhr()
-            var url = "/user/modif/" + gId 
-            xhr.open("get",url,true);
-            xhr.send(null);
-        })
         var msg = {
             totalPrice: $(".result .total-price").html()
         }
         $.get("/user/balance",msg,function(data){
-            $("#box3 .bal").html(data)
+            console.log(data)
+            if(data){
+                $("#box3").show()
+                $("#box3 .bal").html(data)
+            }
+            else{
+                $(".checkItem[checked]").each(function(){
+                    var gId = $(this).parents(".item").find(".hid").html()
+                    var xhr = createXhr()
+                    var url = "/user/modif/" + gId 
+                    xhr.open("get",url,true);
+                    xhr.send(null);
+                })
+            }
+            $("#box3 img").click(function(){
+                $("#box3").hide()
+            })
         },"json")
     })  
 })

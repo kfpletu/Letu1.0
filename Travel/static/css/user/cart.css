@@ -237,7 +237,7 @@
     border:2px solid red;
     display: none;
 }
-#box1 p,#box2 p,#box3 p{
+#box1 p,#box2 p,#box3 p:nth-child(2){
     margin-top:60px;
     text-align: center;
     font-size: 24px;
@@ -248,8 +248,18 @@
     margin-top:40px;
     margin-right:50px;
 }
-#box3 a{
-    margin: 40px auto;
+#box3 p:nth-child(3){
+    margin-top: 25px;
+    text-align: center;
+    font-size: 1.2em;
+    
+}
+#box3 img{
+    width:20px;
+    height: 20px;
+    background: red;
+    float: right;
+    border-radius: 50%;
 }
 #empty{
     width: 400px;
