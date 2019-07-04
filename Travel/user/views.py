@@ -294,8 +294,8 @@ def modif(request,g_id):
         )
     except:
         return HttpResponse('购买失败')
-    else:
-        return render(request,'user/payment.html')
+    # else:
+    #     return render(request,'user/payment.html')
     
     
 def payment(request):
@@ -335,14 +335,18 @@ def delete(request):
 #余额
 def balance(request):
     t_price = request.GET["totalPrice"]
+    t_price = int(t_price)
     u_id = request.session['userinfo']['id']
     balance = Info.objects.get(id=u_id)
     money = balance.price
-    try:
+    if money > t_price:
         money -= t_price
-    except:
-        return HttpResponse("亲!你的余额不足额")
-    else:
         balance.price = money
         balance.save()
-        return render(request, 'user/payment.html')   
+        return render(request, 'user/payment.html')  
+    else:
+        print('嘎嘎嘎嘎嘎嘎个',money)
+        msg = json.dumps("亲!你的余额不足额")
+        return HttpResponse(msg)
+        
+           
