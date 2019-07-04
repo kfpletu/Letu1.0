@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="../../static/css/hotel/information.css">
     <link rel="stylesheet" href="../../static/css/basic.css">
     <link rel="stylesheet" href="../../static/css/hotel/order_hotel.css">
-    <script src="/static/js/hotel/common.js"></script>
     <script type="text/javascript" src='/static/js/hotel/jquery.js'></script>
     <script type="text/javascript" src='/static/js/hotel/order_hotel.js'></script>
     <script src="/static/js/hotel/layDate-v5.0.9/laydate/laydate.js"></script>
@@ -25,7 +24,7 @@
             elem: '#to_date' //指定元素,即你要输入的框的id号即可
         });
     </script>
-    <script src="/static/js/hotel/data.js"></script>
+    <script src="/static/js/hotel/hotel_date.js"></script>
 </head>
 
 <body>
@@ -156,8 +155,9 @@
                 {% endfor %}
             </div>
             <div class="out-form">
-                <form action="room" method="post">
+                <form action="room" method="post"  id='form'>
                     <div class="form">
+                       {% csrf_token %}
                     <h2>酒店预订</h2>
                     <p>
                         <ul class="infor">
@@ -217,7 +217,8 @@
                     </div>
                     <div class="form-bottom">
                         <p>
-                            <button class="button">订房</button>
+                             <button class="button">订房</button>
+
                         </p>
 
                     </div>
@@ -246,7 +247,7 @@
                 <div class="hotel_imfor">
                 {% for hotel in hotel_list %}
                     <figure class="hotel_figure">
-                        <img src="/static/images/hotel/{{ hotel.hotel_p }}/11.png" alt="The Pulpit Rock" class="hotel_img">
+                        <img src="/static/images/hotel/{{ hotel.house.hotel_p }}/11.png" alt="The Pulpit Rock" class="hotel_img">
                         <span class="hotel_name">{{ hotel.hotel_name }}</span> {{ hotel.hotel_level }}
                         <a href="{{ hotel.id }}">点击进入</a>
                     </figure>

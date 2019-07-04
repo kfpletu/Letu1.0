@@ -85,24 +85,20 @@
     color: #333;
 }
 #paging{
-    width: 150px;
     height: 36px;
     line-height: 50px;
     margin: 5px auto;
     text-align: right;
     margin-right: 50px;
-    overflow: hidden;
 }
 #paging a{
     text-decoration: underline;
 }
 #paging>:first-child{
     margin-right: 10px;
-    float: left;
 }
 #paging>:last-child{
     margin-left: 10px;
-    float: right;
 }
 
 /*顶部工具栏*/
@@ -230,7 +226,7 @@
     color: gray;
     font-size: 16px;
 }
-#content #box1,#content #box2{
+#content #box1,#content #box2,#content #box3{
     width: 400px;
     height: 200px;
     background: orange;
@@ -241,7 +237,7 @@
     border:2px solid red;
     display: none;
 }
-#box1 p,#box2 p{
+#box1 p,#box2 p,#box3 p{
     margin-top:60px;
     text-align: center;
     font-size: 24px;
@@ -251,6 +247,9 @@
     float:right;
     margin-top:40px;
     margin-right:50px;
+}
+#box3 a{
+    margin: 40px auto;
 }
 #empty{
     width: 400px;
