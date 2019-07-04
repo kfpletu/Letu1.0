@@ -365,7 +365,7 @@ def balance(request):
         return render(request, 'user/payment.html')  
     else:
         print('嘎嘎嘎嘎嘎嘎个',money)
-        msg = json.dumps("亲!你的余额不足额")
+        msg = json.dumps("亲!你的余额不足额...")
         return HttpResponse(msg)
         
            
