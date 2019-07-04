@@ -180,6 +180,7 @@ def booking(request):
 # 购物车
 def cart(request):
     u_id = request.session['userinfo']['id']
+    balance = Info.objects.get(id=u_id)
     goods = Cart.objects.filter(user_id=u_id,is_pay=0)
     paginator = Paginator(goods, 4)
     cur_page = request.GET.get('page', 1)
@@ -206,7 +207,7 @@ def order(request):
 def del_goods(request, g_id):
     target = Cart.objects.get(id=g_id)
     target.delete()
-    return render(request, 'user/cart.html')
+    return render(request,'user/cart.html')
 
 
 # 数量加1
@@ -260,6 +261,7 @@ def modif(request,g_id):
     else:
         return render(request,'user/payment.html')
     
+    
 def payment(request):
     return render(request, 'user/payment.html')
 
@@ -282,7 +284,6 @@ def test(request):
     )
     return HttpResponse("ok")
 
-
 def delete(request):
     """
     用户删除自己的购买记录
@@ -294,3 +295,18 @@ def delete(request):
     data.update(is_del=0)
     return redirect('/user/order')
     # return render(request,'user/order.html')
+
+#余额
+def balance(request):
+    t_price = request.GET["totalPrice"]
+    u_id = request.session['userinfo']['id']
+    balance = Info.objects.get(id=u_id)
+    money = balance.price
+    try:
+        money -= t_price
+    except:
+        return HttpResponse("亲!你的余额不足额")
+    else:
+        balance.price = money
+        balance.save()
+        return render(request, 'user/payment.html')   
