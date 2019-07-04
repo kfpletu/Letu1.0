@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render, redirect
 
 # Create your views here.
 from .models import *
@@ -52,8 +52,7 @@ def login(request):
             return render(request, 'user/login.html')
 
 
-
-#注册
+# 注册
 def register(request):
     if request.method == 'GET':
         return render(request, 'user/register.html')
@@ -71,13 +70,15 @@ def register(request):
         except Exception as e:
             # 抛异常,刷新注册页面,重新注册
             return HttpResponse('注册失败,请重新注册')
-                
+
+
 # 检测当前用户名是否被注册
 def checkuname(request):
     uname = request.GET.get('uname')
     if Info.objects.filter(uname=uname):
         return HttpResponse('用户名已经存在')
     return HttpResponse('')
+
 
 # 检测当前手机号是否被注册
 def checkphone(request):
@@ -106,7 +107,9 @@ def getpwd(request):
             return render(request, 'user/forget_new.html')
         except:
             # 抛异常则输入信息不正确,刷新忘记密码页面
-            return render(request,'user/forget.html')
+            return render(request, 'user/forget.html')
+
+
 # 修改密码
 def updatepwd(request):
     if request.method == 'GET':
@@ -169,7 +172,28 @@ def cancel(request):
 
 
 def topup(request):
-    return render(request, 'pay/topUp.html')
+    # return render(request, 'pay/topUp.html')
+    uid = request.session['userinfo']['id']
+    if request.method == "GET":
+        return render(request, 'pay/topUp.html')
+    elif request.method == "POST":
+        uid = request.session['userinfo']['id']
+        money = float(request.POST['money'])
+        money1 = float(request.POST['money1'])
+        try:
+            if money == 0 and money1 != 0:
+                print(money1)
+                user = Info.objects.get(id=uid)
+                user.price = money1
+                user.save()
+            elif money1 == 0 and money != 0:
+                print(money)
+                user = Info.objects.get(id=uid)
+                user.price = money
+                user.save()
+            return HttpResponse("1")
+        except:
+            return HttpResponse("0")
 
 
 # 订购成功跳转页面
@@ -180,7 +204,7 @@ def booking(request):
 # 购物车
 def cart(request):
     u_id = request.session['userinfo']['id']
-    goods = Cart.objects.filter(user_id=u_id,is_pay=0)
+    goods = Cart.objects.filter(user_id=u_id, is_pay=0)
     paginator = Paginator(goods, 4)
     cur_page = request.GET.get('page', 1)
     page = paginator.page(cur_page)
@@ -190,16 +214,10 @@ def cart(request):
 # 历史记录
 def order(request):
     uid = request.session['userinfo']['id']
-    # page_num=request.GET.get('page')
-    # data=History_list.objects.filter(u_id=uid)
-    # data_counts=data.count()
-    # page_obj=Page(page_num,data_counts,url_prefix="/user/order/",per_page=4,max_page=6)
-    # all_data_order=History_list.objects.filter(u_id=uid)[page_obj.start:page_obj.end]
-    # page_html=page_obj.page_html()
-    data = History_list.objects.filter(u_id=uid,is_del='1').all()
+    data = History_list.objects.filter(u_id=uid, is_del='1').all()
     if data:
         return render(request, 'user/order.html', locals())
-    return render(request, 'user/order.html',locals())
+    return render(request, 'user/order.html', locals())
 
 
 # 删除购物车商品
@@ -236,30 +254,31 @@ def reduce(request, g_id):
     return render(request, 'user/cart.html')
 
 
-#订单结算
-def modif(request,g_id):
+# 订单结算
+def modif(request, g_id):
     target = Cart.objects.get(id=g_id)
     target.is_pay = 1
     target.save()
     try:
         a_order = History_list.objects.create(
-            u_id = target.user_id,
-            g_img = target.g_img,
-            g_name = target.g_name,
-            time1 = target.time1,
-            time2 = target.time2,
-            g_type = target.g_type,
-            price = target.price,
-            g_num = target.g_num,
-            total_price = target.total_price,
-            booking_time = '2019-2-2',
-            is_del = target.is_pay
+            u_id=target.user_id,
+            g_img=target.g_img,
+            g_name=target.g_name,
+            time1=target.time1,
+            time2=target.time2,
+            g_type=target.g_type,
+            price=target.price,
+            g_num=target.g_num,
+            total_price=target.total_price,
+            booking_time='2019-2-2',
+            is_del=target.is_pay
         )
     except:
         return HttpResponse('购买失败')
     else:
-        return render(request,'user/payment.html')
-    
+        return render(request, 'user/payment.html')
+
+
 def payment(request):
     return render(request, 'user/payment.html')
 
@@ -289,7 +308,7 @@ def delete(request):
     :param request: 前端的请求
     :return:
     """
-    id=request.GET['id']
+    id = request.GET['id']
     data = History_list.objects.filter(id=id)
     data.update(is_del=0)
     return redirect('/user/order')

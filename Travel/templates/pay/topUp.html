@@ -14,16 +14,17 @@
 
 <body>
     <div id="top">
-        <a href="../index.html">
+        <a href="/index">
             <img src="/static/images/home/logo.png" alt="logo">
         </a>
         <span>支付中心</span>
-        <a href="../index.html"><span class="s1">返回首页</span></a>
+        <a href="/index"><span class="s1">返回首页</span></a>
     </div>
     <div id="main">
         <!-- <div class="pin"> -->
         <div class="payimg">
             <img src="" class='imger' alt="">
+{#            <img src="/static/images/pay/weixin.jpg" class='imger' alt="">#}
         </div>
         <form action="" method="post">
             {% csrf_token %}
@@ -44,7 +45,7 @@
                         for="money4">1000</label>
                     <p class="other">
                         其他金额
-                        <input type="text" name="money" id="" value="0">
+                        <input type="text" name="money1" id="" value="0">
                     </p>
 
                 </div>
@@ -64,25 +65,39 @@
             </div>
 
         </form>
+        <div id="success">
+            <div class="closeimg">
+                <img src="/static/images/pay/close.png" alt="关闭">
+            </div>
+            <div class="ico">
+            <img src="/static/images/pay/payment.png" alt="状态">
+            </div>
+            <div class="ico1">
+                <strong>充值成功!</strong>
+                <p>恭喜您，您的充值已成功！</p>
+                <p>您可以点击这里进入<a href="/index" id="mypay"> 首页 </a>开始计划您的旅行啦！</p>
+                <p>如有其它问题，请立即与我们客服人员联系。</p>
+          </div>
+        </div>
         <!-- <div class="up">
             <p>已完成支付,充值成功</p>
         </div>    -->
 
     </div>
-    <div id="bottom">
-        <a href="../index.html">
-            <img src="/static/images/home/logo.png" alt="logo" id="logoImg">
-        </a>
-        <p>
-            <img src="/static/images/pay/letufont.png" alt="" id="fontImg">
-        </p>
-        <div class="img">
-            <div id="imgs">
-                <img src="/static/images/pay/erweima.jpg" alt="" width="124px;">
-            </div>
-        </div>
-
-    </div>
+{#    <div id="bottom">#}
+{#        <a href="../index.html">#}
+{#            <img src="/static/images/home/logo.png" alt="logo" id="logoImg">#}
+{#        </a>#}
+{#        <p>#}
+{#            <img src="/static/images/pay/letufont.png" alt="" id="fontImg">#}
+{#        </p>#}
+{#        <div class="img">#}
+{#            <div id="imgs">#}
+{#                <img src="/static/images/pay/erweima.jpg" alt="" width="124px;">#}
+{#            </div>#}
+{#        </div>#}
+{##}
+{#    </div>#}
     <div class="bottom">
         <p>Copyright ©LT 乐途旅行网 | 陕ICP备120110109号 | 旅行网经营许可证： L-LT-BK12345</p>
         <img src="/static/images/home/pic.gif" title="站长统计">
