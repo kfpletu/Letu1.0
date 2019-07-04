@@ -317,8 +317,13 @@ def test(request):
 
 
 def topup(request):
-    # return render(request, 'pay/topUp.html')
-    # uid = request.session['userinfo']['id']
+    """
+    充值功能的实现
+    成功:返回True 1
+    失败:返回False 0
+    :param request:
+    :return: 布尔值,前端进行判断使用
+    """
     if request.method == "GET":
         return render(request, 'pay/topUp.html')
     elif request.method == "POST":
