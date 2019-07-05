@@ -2,11 +2,14 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .trail_12306 import *
 from . import models
+import time
 
 
 # Create your views here.
 def trip_views(request):
-    return render(request, 'trip/order.html')
+    today = time.strftime("%Y-%m-%d", time.localtime())
+    tomorrow = time.strftime("%Y-%m-%d", time.localtime(time.time() + 86400))
+    return render(request, 'trip/order.html',locals())
 
 def add_code_views(request):
     """
