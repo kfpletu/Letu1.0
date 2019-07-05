@@ -88,7 +88,7 @@ def room(request):
             keyword=request.POST.get('room-keyword','')
             #通过价位找房间
             if request.POST['people-num']=='1':
-                rooms=models.Room.objects.filter(Q(iprice__range=price)&(Q(room_level=2)|Q(room_level=3)))
+                rooms=models.Room.objects.filter(Q(iprice__range=price)&(Q(room_level=1)|Q(room_level=3)))
             else:
                 rooms=models.Room.objects.filter(iprice__range=price)
             #通过关键字找匹配酒店
