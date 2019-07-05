@@ -174,15 +174,15 @@
                     <div class="form-top">
                         <p>
                             <label for="from_date">入住日期:</label>
-                            <input type="text" name="in-time" class="date_time" id="from_date" value="{{ today }}">
+                            <input type="text" name="from_date" class="date_time" id="from_date" value="{{ today }}">
                             <label for="to_date">退房日期:</label>
-                            <input type="text" name="out-time" class="date_time"  id="to_date" value="{{ tomorrow }}">
+                            <input type="text" name="to_date" class="date_time"  id="to_date" value="{{ tomorrow }}">
 
-                         <label>订房数量:</label>
-                            <select name="room-num">
+                         <label>房客数量:</label>
+                            <select name="people-num">
                                 <option value="2">2</option>
                                 <option value="3">3</option>
-                                <option value="4">4</option>
+                                <option value="4">大于4</option>
                                 <option value="1" selected>1</option>
                             </select>   
                         </p>
@@ -323,7 +323,6 @@
                     <img src="../../static/images/hotel/hotel_brand/yuehai.jpg" alt="">粤海集团
                 </a>
             </div>
-            <div class="more">加载更多...</div>
         </div>
     </div>
     <footer id="footer">

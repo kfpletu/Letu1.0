@@ -20,10 +20,12 @@ def get_time():
     tomorrow=time.strftime("%Y-%m-%d", time.localtime(time.time()+86400))
     return today,tomorrow
 
+
 #天气预报
 def city_weather(request):
     weather_str = weather.city_weather()
     return HttpResponse(weather_str)
+
 
 #hotel 预订首页
 def index(request):
@@ -76,16 +78,19 @@ def room(request):
     elif request.method=='POST':
         try:
             #入住时间
-            in_time=request.POST.get('in-time','')
+            from_date=request.POST.get('from_date','')
             #退房时间
-            out_time=request.POST.get('out-time','')
+            to_date=request.POST.get('to_date','')
             #获取表单信息
             # room_num=request.POST.get('room-num','')
             price=price_list[int(request.POST.get('room-price',''))]
             hotel_level=request.POST.get('hotel-level','')
             keyword=request.POST.get('room-keyword','')
             #通过价位找房间
-            rooms=models.Room.objects.filter(iprice__range=price)
+            if request.POST['people-num']=='1':
+                rooms=models.Room.objects.filter(Q(iprice__range=price)&(Q(room_level=2)|Q(room_level=3)))
+            else:
+                rooms=models.Room.objects.filter(iprice__range=price)
             #通过关键字找匹配酒店
             hotels=search(keyword,hotel_level)
             rooms=set(rooms)
@@ -196,6 +201,17 @@ def hotel_ticket(id):
     return locals()
 
 
+#计算住房天数
+def count_days(from_date,to_date):
+    from_date=from_date.split('-')
+    to_date=to_date.split('-')
+    if from_date[1]==to_date[1]:
+        days=int(to_date[2])-int(from_date[2])
+    else:
+        days=(int(to_date[1])-int(from_date[1]))*30+int(to_date[2])-int(from_date[2])
+    return days
+
+
 #酒店详情视图函数
 def hotel(request,id,level):
 
@@ -214,19 +230,20 @@ def hotel(request,id,level):
                 # print(request.session['userinfo']['id'])
                 serial_num= str(request.session['userinfo']['id']) + \
                           now_str + id+ level
-                from_data=request.POST.get("from_data", '')
-                to_data=request.POST.get("to_data", '')
+                from_date=request.POST.get("from_date", '')
+                to_date=request.POST.get("to_date", '')
+                days=count_days(from_date,to_date)
                 # 数据导入cart表
                 Cart.objects.create(
                     user_id=request.session['userinfo']['id'],
                     g_img="/static/images/hotel/%s/2%s.png" % (
                         dic['hotel_p'], level),
                     g_name=dic['hotel_name'],
-                    time1=from_data,
-                    time2=to_data,
+                    time1=from_date,
+                    time2=to_date,
                     g_type=dic['rooms'][int(level)-1].room_name,
-                    price=float(dic['rooms'][int(level)-1].price),
-                    total_price=float(dic['rooms'][int(level)-1].price),
+                    price=float(dic['rooms'][int(level)-1].price)*days,
+                    total_price=float(dic['rooms'][int(level)-1].price)*days,
                     serial_num=serial_num
 
                 )
