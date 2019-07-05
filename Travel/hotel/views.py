@@ -214,21 +214,22 @@ def hotel(request,id,level):
                 # print(request.session['userinfo']['id'])
                 serial_num= str(request.session['userinfo']['id']) + \
                           now_str + id+ level
+                from_data=request.POST.get("from_data", '')
+                to_data=request.POST.get("to_data", '')
                 # 数据导入cart表
                 Cart.objects.create(
                     user_id=request.session['userinfo']['id'],
                     g_img="/static/images/hotel/%s/2%s.png" % (
                         dic['hotel_p'], level),
                     g_name=dic['hotel_name'],
-                    time1=request.POST.get("from_data", ''),
-                    time2=request.POST.get("to_data", ''),
+                    time1=from_data,
+                    time2=to_data,
                     g_type=dic['rooms'][int(level)-1].room_name,
                     price=float(dic['rooms'][int(level)-1].price),
                     total_price=float(dic['rooms'][int(level)-1].price),
                     serial_num=serial_num
 
                 )
-
                 return render(request, 'hotel/booking.html', locals())
             except:
                 return render(request,'user/login.html')
