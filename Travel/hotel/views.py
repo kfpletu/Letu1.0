@@ -65,9 +65,9 @@ def index(request):
 #酒店价格首页
 price_list=[(0,200),(200,500),(500,100),(1000,2000),(2000,10000)]
 #关键字搜索
-def search(keyword,hotel_level):
+def search(keyword):
     if  keyword:
-        hotel=models.Hotel.objects.filter(Q(hotel_level=hotel_level)&Q(hotel_name__contains=keyword)|Q(address__contains=keyword)|Q(info__contains=keyword)|Q(hotel_level__contains=keyword))
+        hotel=models.Hotel.objects.filter(Q(hotel_name__contains=keyword)|Q(address__contains=keyword)|Q(info__contains=keyword)|Q(hotel_level__contains=keyword))
         return hotel
 #酒店首页搜索引擎
 def room(request):
@@ -86,20 +86,31 @@ def room(request):
             price=price_list[int(request.POST.get('room-price',''))]
             hotel_level=request.POST.get('hotel-level','')
             keyword=request.POST.get('room-keyword','')
-            #通过价位找房间
+            #通过价位和人数找房间
             if request.POST['people-num']=='1':
                 rooms=models.Room.objects.filter(Q(iprice__range=price)&(Q(room_level=1)|Q(room_level=3)))
             else:
                 rooms=models.Room.objects.filter(iprice__range=price)
+            #根据酒店级别筛选
+
+            for room in rooms:
+                print(room.hotel_id)
+                if room.hotel_id//10 !=int(hotel_level):
+                    room.delete()
+
             #通过关键字找匹配酒店
-            hotels=search(keyword,hotel_level)
+            hotels=search(keyword)
             rooms=set(rooms)
             # print(hotels)
+
             if  hotels:
                 for hotel in hotels:
                     for room in hotel.room_set.all():
+
                         rooms.add(room)
+
             today, tomorrow = get_time()
+
             return render(request,'hotel/order_room.html',locals())
         except:
             return HttpResponseRedirect('/hotel/')
