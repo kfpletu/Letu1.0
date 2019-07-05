@@ -7,9 +7,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{%block title%}欢迎登录{%endblock title%}</title>
     <link rel="stylesheet" href="/static/css/basic.css" type="text/css">
-    <link rel="stylesheet" href="/static/css/user/login.css" type="text/css"> {%block css%}{%endblock css%}
+    <link rel="stylesheet" href="/static/css/user/login.css" type="text/css"> 
+    {%block css%}{%endblock css%}
     <script src="/static/js/jquery.js"></script>
+    {% block loginJs %}
     <script src="/static/js/user/login.js"></script>
+    {% endblock loginJs %}
+    <script src="/static/js/user/validatecode.js"></script>
 </head>
 
 <body>
@@ -41,7 +45,9 @@
                     <img src="" alt="点击刷新验证码" id="yanzma" name='yanzma' style="color:red;font-size: 12px">
                     <input type="text" name="validateCode" placeholder="验证码输入" id="validateCode"> {%endblock email%}
                     <span id="showImg" style="display: none"></span>
+                    {% block span %}
                     <span id="show" style="color:red"></span>
+                    {% endblock span %}
                 </div>
                 {%block giveup%}
                 <div class="savePwd">
@@ -49,9 +55,8 @@
                     <a href="/user/forget">忘记密码?</a>
                 </div>
                 {%endblock giveup%}
-                <!-- <input type="submit" value="{%block value%}登录{%endblock value%}" class="login"
-                        {% block submit %}{% endblock submit %}> -->
-                <button class="login">登录</button>
+                {%block value%}<button class="login">登录</button>{%endblock value%}
+                
             </div>
         </div>
         {% block form %} {% endblock form %}

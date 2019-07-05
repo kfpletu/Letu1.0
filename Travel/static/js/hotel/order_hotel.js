@@ -37,7 +37,7 @@ $(function(){
 	})
 	$('#brandListFirst').mouseout(function(){
 		timerH=setInterval(function(){
-		listBoxMarginH-=20;	
+		listBoxMarginH-=2;	
 		$('.brandListBox:first').css('margin-left',(listBoxMarginH+'px'))
 		if (listBoxMarginH<-8400){
 			listBoxMarginH=0;
@@ -70,9 +70,7 @@ $(function(){
 	},100)
 	})	
 
-	$('#brandListFirst').load('/hotel/weather/',function(){
-		alert('换行')
-	})
+	$('#brandListFirst').load('/hotel/weather/')
 	// $.get('/hotel/weather/',function(data){
 	// 	alert('new FileReaderSyn')
 	// 	$('#brandListFirst').html(data)
