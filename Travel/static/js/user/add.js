@@ -36,13 +36,18 @@ $(function(){
             if(data){
                 $("#box3").show()
                 $("#box3 .bal").html(data)
-            }
-            else{
+            }else{
                 $(".checkItem[checked]").each(function(){
                     var gId = $(this).parents(".item").find(".hid").html()
                     var xhr = createXhr()
                     var url = "/user/modif/" + gId 
                     xhr.open("get",url,true);
+                    xhr.onreadystatechange = function(){
+                        if(xhr.readyState==4 && xhr.status==200){
+                            console.log(xhr.responseText)
+                            window.location.href = xhr.responseText
+                        }
+                    }  
                     xhr.send(null);
                 })
             }

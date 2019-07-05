@@ -19,7 +19,7 @@ urlpatterns = [
 
 # kavin的路由
 urlpatterns += [
-    url(r'^payment$', views.payment),
+    url(r'^payment', views.payment),
     url(r'^test', views.test), #用于测试
     url(r'^delete/', views.delete),
     url(r'^order$',views.order),

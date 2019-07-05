@@ -284,7 +284,7 @@ def modif(request, g_id):
     target.is_pay = 1
     target.save()
     try:
-        a_order = History_list.objects.create(
+        History_list.objects.create(
             u_id=target.user_id,
             g_img=target.g_img,
             g_name=target.g_name,
@@ -300,10 +300,17 @@ def modif(request, g_id):
     except:                 
         return HttpResponse('购买失败')
     else:
-        return render(request,'user/payment.html')
+        return HttpResponse('payment.html')
+    
+    
 
 
 def payment(request):
+    """
+    支付界面的返回
+    :param request:
+    :return:
+    """
     return render(request, 'user/payment.html')
 
 
@@ -336,6 +343,11 @@ def topup(request):
 
 
 def top_top(request):
+    """
+    充值金额的实现
+    :param request:
+    :return: 布尔值
+    """
     uid = request.session['userinfo']['id']
     user = Info.objects.get(id=uid)
     money = float(request.POST['money'])
@@ -374,7 +386,8 @@ def balance(request):
         money -= t_price
         balance.price = money
         balance.save()
-        # return render(request, 'user/payment.html')
+        msg = json.dumps("")
+        return HttpResponse(msg)
     else:
         msg = json.dumps("亲!你的余额不足额...")
         return HttpResponse(msg)
