@@ -28,13 +28,8 @@ def city_weather(request):
 #hotel 预订首页
 def index(request):
     if request.method=='GET':
-        # weather_str=weather.city_weather()
-        # print(weather_str)
         house_list=models.House.objects.order_by('-order_count')
-        house_list=house_list[0:9]#销量排名前9的酒店
-        # hotel_list=[]
-        # for house in house_list:
-        #     hotel_list.append(house.hotel)
+        house_list=house_list[0:12]#销量排名前9的酒店
         house_list_li=house_list[0:5]#热门品牌
         today,tomorrow=get_time()
         return render(request,'hotel/order_hotel.html',locals())
@@ -65,7 +60,7 @@ def index(request):
         #     return HttpResponseRedirect('/hotel/')
 
 
-#酒店首页
+#酒店价格首页
 price_list=[(0,200),(200,500),(500,100),(1000,2000),(2000,10000)]
 #关键字搜索
 def search(keyword,hotel_level):
@@ -200,6 +195,7 @@ def hotel_ticket(id):
     today, tomorrow = get_time()
     return locals()
 
+
 #酒店详情视图函数
 def hotel(request,id,level):
 
@@ -211,24 +207,29 @@ def hotel(request,id,level):
             try:
                 # user_id=request.session['userinfo']['uname']
                 # for i in range(15):
-                #数据导入cart表
+                # 创建流水号
+                now = str(time.ctime())
+                now_str=str(time.time()).split('.')
+                now_str=now_str[1]+now_str[0]
+                # print(request.session['userinfo']['id'])
+                serial_num= str(request.session['userinfo']['id']) + \
+                          now_str + id+ level
+                from_data=request.POST.get("from_data", '')
+                to_data=request.POST.get("to_data", '')
+                # 数据导入cart表
                 Cart.objects.create(
                     user_id=request.session['userinfo']['id'],
                     g_img="/static/images/hotel/%s/2%s.png" % (
                         dic['hotel_p'], level),
                     g_name=dic['hotel_name'],
-                    time1=request.POST.get("from_data", ''),
-                    time2=request.POST.get("to_data", ''),
+                    time1=from_data,
+                    time2=to_data,
                     g_type=dic['rooms'][int(level)-1].room_name,
                     price=float(dic['rooms'][int(level)-1].price),
-                    total_price=float(dic['rooms'][int(level)-1].price)
+                    total_price=float(dic['rooms'][int(level)-1].price),
+                    serial_num=serial_num
+
                 )
-                #创建流水号
-                now = time.ctime()
-                from_data = request.POST.get("from_data", '')
-                to_data = request.POST.get("to_data", '')
-                cart_id = str(request.session['userinfo']['id']) + \
-                    now+dic['rooms'][int(level)-1].room_name
                 return render(request, 'hotel/booking.html', locals())
             except:
                 return render(request,'user/login.html')

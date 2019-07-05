@@ -206,10 +206,10 @@
     font-size: 16px;
     color:#4f4e4d ;
 }
-#mypay:hover{
+.mypay:hover{
     color: #ff6600;
 }
-#mypay{
+.mypay{
     font-size: 18px;
     color: red;
 }
@@ -217,4 +217,10 @@
     float: right;
     width: 20px;
     height: 20px;
+}
+#top .s1:hover{
+    color: #ff6600;
+}
+#top .s2{
+    font-size: 20px;
 }
