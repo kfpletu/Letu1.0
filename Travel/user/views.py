@@ -324,7 +324,10 @@ def topup(request):
     :param request:
     :return:
     """
-    return render(request, 'pay/topUp.html')
+    u_id = request.session['userinfo']['id']
+    user = Info.objects.get(id = u_id)
+    price = float(user.price)
+    return render(request, 'pay/topUp.html',locals())
 
 
 
