@@ -1,19 +1,24 @@
 {% extends 'user/login.html' %}
 {%block title%}找回密码{%endblock title%}
 {%block head%}找回密码{%endblock head%}
-{%block post%}/user/forget{%endblock post%}
 {%block css%}<link rel="stylesheet" href="/static/css/user/forget.css">{%endblock css%}
+{% block loginJs %}<script src="/static/js/user/forget.js"></script>{% endblock loginJs %}
 {%block body_head%}找回密码<a href="/user/login">返回登录</a>{%endblock body_head%}
 {%block uname%}请输入您要找回的用户名{%endblock uname%}
 {%block img1%}{%endblock img1%}
 {%block img2%}{%endblock img2%}
-{%block phone%} type="text" name="phone" placeholder="请输入注册时的手机号" {%endblock phone%}
+{%block phone%} type="text" name="phone" placeholder="请输入注册时的手机号" id='phone'{%endblock phone%}
 {%block class%}text{%endblock class%}
-{%block email%}<input type="text" name="email" placeholder="请输入您的邮箱">{%endblock email%}
+{%block email%}<input type="text" name="email" placeholder="请输入您的邮箱" id="email">{%endblock email%}
+{% block span %}{% endblock span %}
 {%block giveup%}
     <div class="validateCode">
-    <img src="/static/images/user/logo.png" alt="验证码">
-    <input type="text" name="validateCode" placeholder="验证码输入">
+    <img src="" alt="点击获取验证码" id="yanzma" >
+    <input type="text" name="validateCode" placeholder="验证码输入" id="validateCode">
+    <span id="show" style="color:red"></span>
     </div>
 {%endblock giveup%}
-{%block value%}提交{%endblock value%}
+{%block value%}<button class="login">提交</button>{%endblock value%}
+{% block form %}
+</form>
+{% endblock form %}

@@ -18,6 +18,32 @@
 <script type="text/javascript" src="{% static 'js/scenic/zoom-slideshow.js' %}"></script>
 <script src="{% static 'js/scenic/tic.js' %}"></script>
 <script src="/static/js/scenic/WdatePicker时间插件/My97DatePicker/WdatePicker.js"></script>
+<script src="/static/js/scenic/common.js"></script>
+<script>
+    // $(function(){
+    //      $(".subm").click(function(){
+    //                 var xhr=createXhr()
+    //                 var time1=$(".t1").val()
+    //                 var time2=$(".t2").val()
+    //                 xhr.open("post","/scenic/checktime/",false)
+    //                 xhr.onreadystatechange=function(){
+    //                     if(xhr.readyState==4 && xhr.status==200){
+    //                         if(xhr.responseText=='0'){
+    //                         alert("有问题")
+    //                         }
+    //                     }
+    //                 }
+    //                 xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+    //                 var time1=$("#t1").val()
+    //                 var time2=$("#t2").val()
+    //                 var csrf = $("[name='csrfmiddlewaretoken']").val();
+    //                 var params ="time1="+time1+"&time2="+time2+"&csrfmiddlewaretoken="+csrf;
+    //                 xhr.send(params);
+    //         });
+    // });
+
+</script>
+
 <body>
     <header id="header">
         {% if request.session.userinfo %}
@@ -27,8 +53,8 @@
                     <li class="home"><a href="javascript:void(0)">欢迎您,{{ request.session.userinfo.uname }}</a>
                         <ol class='info1'>
                             <li><a href="/user/topUp">我的钱包</a></li>
-                            <li><a href="/user/cart">我的订单</a></li>
-                            <li><a href="/user/order">历史订单</a></li>
+                            <li><a href="/user/cart">购物车</a></li>
+                            <li><a href="/user/order">我的订单</a></li>
                             <li><a href="/user/logout">退出登录</a></li>
                             <li><a href="/user/cancel">注销账号</a></li>
                         </ol>
@@ -57,8 +83,8 @@
             <nav>
                 <ul class="link">
                     <h1 class="none">网站导航</h1>
-                    <li class="active"><a href="/">首页</a></li>
-                    <li><a href="/scenic">景点门票</a></li>
+                    <li><a href="/">首页</a></li>
+                    <li class="active"><a href="/scenic">景点门票</a></li>
                     <li><a href="/trip">交通出行</a></li>
                     <li><a href="/hotel">酒店预定</a></li>
                     <li><a href="/about">关于我们</a></li>
@@ -145,7 +171,8 @@
                 {% for tic in tics %}
                 <div class="item">
                     <form action="" method="post">
-
+                            {% csrf_token %}
+                       
                     <div class="gper" style="width:70px;">
                         <p>{{ tic.type }}</p>
                     </div>
@@ -153,14 +180,12 @@
                         <p>{{ tic.name }}</p>
                     </div>
                     <div class="gpt" style="width:190px;">
-                        <!--<input type="date" name="starttime">-->
-                        <input name="starttime" class="Wdate" type="text" onfocus="WdatePicker({dateFmt:'yyyy-M-d H:mm:ss',minDate: '%y-%M-%d 15:00:00',
-                        maxDate: '%y-%M-#{%d+60} 20:00:00' })" placeholder="请输入结束时间"/>
+                        <input name="starttime" class="Wdate t1" type="text" onfocus="WdatePicker({dateFmt:'yyyy-M-d H:mm:ss',minDate: '%y-%M-%d 15:00:00',
+                        maxDate: '%y-%M-#{%d+60} 20:00:00' })" placeholder="请输入开始时间" />
                     </div>
                     <div class="gpt2" style="width:190px;">
-                        <!--<input type="date" name="endtime">-->
-                        <input name="endtime" class="Wdate" type="text" onfocus="WdatePicker({dateFmt:'yyyy-M-d H:mm:ss',minDate: '%y-%M-%d 20:00:00',
-                        maxDate: '%y-%M-#{%d+63} 20:00:00' })" placeholder="请输入结束时间"/>
+                        <input name="endtime" class="Wdate t2" type="text" onfocus="WdatePicker({dateFmt:'yyyy-M-d H:mm:ss',minDate: '%y-%M-%d 20:00:00',
+                        maxDate: '%y-%M-#{%d+63} 20:00:00' })" placeholder="请输入结束时间" />
                     </div>
                     <div class="gprice" style="width:100px;">
                         <p>￥ {{ tic.price }}</p>
@@ -174,8 +199,8 @@
                     <div class="gsum">￥ {{ tic.price }}</div>
                     <div class="gor">
                         <!-- <a href="##">预定</a> -->
-                        <input type="submit" value='加入购物车'
-                        style='color:#000;background: crimson;outline:none;border-radius: 5px;border:0;height:30px;width:80px;line-height:36px;' name="sub">
+                        <input type="submit" value='加入购物车' id='subm'
+                        style='color:#000;background: crimson;outline:none;border-radius: 5px;border:0;height:30px;width:80px;line-height:36px;' class="sub">
                     </div>
                     </form>
                 </div>

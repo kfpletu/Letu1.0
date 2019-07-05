@@ -1,9 +1,11 @@
 $(function(){
 	$('#container .form ul li a').click(function(){
-		$('.form-third select option').removeAttr('selected')
-		for(var i =0 ;i<$('.form-third select option').length;i++){
-			if($(this).html()==$('.form-third select option').eq(i).html()){
-				$('.form-third select option').eq(i).prop('selected','selected')
+		$('#hotel-level option').removeAttr('selected')
+		
+		for(var i =0 ;i<$('#hotel-level option').length;i++){
+			if($(this).html()==$('#hotel-level option').eq(i).html()){
+				// console.log($('#hotel-level option').eq(i).html())
+				$('#hotel-level option').eq(i).prop('selected',true)
 			}
 		}
 
@@ -30,10 +32,10 @@ $(function(){
 		}
 	},100)
 
-	$('.brandListBox:first').mouseover(function(){
+	$('#brandListFirst').mouseover(function(){
 		clearInterval(timerH)
 	})
-	$('.brandListBox:first').mouseout(function(){
+	$('#brandListFirst').mouseout(function(){
 		timerH=setInterval(function(){
 		listBoxMarginH-=2;	
 		$('.brandListBox:first').css('margin-left',(listBoxMarginH+'px'))
@@ -53,12 +55,12 @@ $(function(){
 		}
 	},100)
 
-	$('.brandListBox:last').mouseover(function(){
+	$('#last_brand').mouseover(function(){
 		cursor = 'vertical-text'
 		clearInterval(timerF)
 	})
 
-	$('.brandListBox:last').mouseout(function(){
+	$('#last_brand').mouseout(function(){
 		timerF=setInterval(function(){
 		listBoxMarginF-=2;	
 		$('.brandListBox:last').css('margin-left',(listBoxMarginF+'px'))
@@ -66,9 +68,13 @@ $(function(){
 			listBoxMarginF=0;
 		}
 	},100)
-	})
-	
+	})	
 
-	
+	$('#brandListFirst').load('/hotel/weather/')
+	// $.get('/hotel/weather/',function(data){
+	// 	alert('new FileReaderSyn')
+	// 	$('#brandListFirst').html(data)
+	// })
+
 
 })

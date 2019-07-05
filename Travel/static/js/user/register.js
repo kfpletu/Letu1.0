@@ -83,12 +83,19 @@ $(function () {
                 xhr.open('post', '/user/register', true)
                 xhr.onreadystatechange = function () {
                     if (xhr.readyState == 4 && xhr.status == 200) {
-                        alert(xhr.responseText)
+                        if (xhr.responseText) {
+                            alert(xhr.responseText)
+                        } else {
+                            alert('注册成功,请登录')
+                            location.href = '/user/login'
+                        }
+                        
                     }
                 }
                 xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
                 var res = 'uname=' + $('#uname').val() + '&upwd=' + $('#upwd').val() +
                     '&phone=' + $('#phone').val() + '&email=' + $('#email').val()
+                    + '&csrfmiddlewaretoken=' + $('[name="csrfmiddlewaretoken"]').val()
                 console.log(res);
                 xhr.send(res)
             }

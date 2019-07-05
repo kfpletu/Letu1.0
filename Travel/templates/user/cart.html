@@ -26,8 +26,8 @@
                     <li class="home"><a href="javascript:void(0)">欢迎您,{{ request.session.userinfo.uname }}</a>
                         <ol class='info1'>
                             <li><a href="/user/topUp">我的钱包</a></li>
-                            <li><a href="/user/cart">我的订单</a></li>
-                            <li><a href="/user/order">历史订单</a></li>
+                            <li><a href="/user/cart">购物车</a></li>
+                            <li><a href="/user/order">我的订单</a></li>
                             <li><a href="/user/logout">退出登录</a></li>
                             <li><a href="/user/cancel">注销账号</a></li>
                         </ol>
@@ -101,9 +101,33 @@
                 <div class="gsum">金额</div>
                 <div class="action">操作</div>
             </div>
+        </div>
         <!--商品展示-->
         <div id="content">
             <!--商品记录-->
+            <div id="box1">
+                <p>是否要结算？</p>
+                <a href="javascript:void(0)">
+                    <button class="btnYes">是</button>
+                </a>
+                <button>否</button>
+            </div>
+            <div id="box2">
+                <p>请选择需要结算的订单!!</p>
+            </div> 
+            <div id="box3">
+                <img src="/static/images/user/close.png">
+                <p>
+                    <img src="/static/images/user/face.jpg">
+                    <span class="bal"></span>
+                </p>
+                <p>
+                    <a href="/user/topUp"><i>点击进行充值</i></a>  
+                </p>
+            </div>
+            <div id="empty">
+                <p>空空如也！</p>
+            </div>  
             {% for g in page %}
             <div class="item">
                 <div class="check">
@@ -123,37 +147,22 @@
                 <div class="gcount">
                     <!--阻止超链接默认事件-->
                     <a href="javascript:void(0)" class="minus">-</a>
-                    <input type="text" value="{{ g.g_num }}"">
+                    <input type="text" value="{{ g.g_num }}">
                     <a href="javascript:void(0)" class="add">+</a>
                 </div>
                 <div class="gsum">￥ {{ g.total_price }}</div>    
                 <div class="action" name='del'>
-                    <!-- <a href="/user/del/{{ g.id }}">删除</a> -->
                     <a href="javascript:void(0)" class="dele">删除</a>
                 </div>
             </div>
             {% endfor %}
-            <div id="box1">
-                <p>是否要结算？</p>
-                <a href="/user/payment">
-                    <button class="btnYes">是</button>
-                </a>
-                <button>否</button>
-            </div>
-            <div id="box2">
-                <p>没有要结算的订单!!</p>
-            </div> 
-            <img src="" class="wait">
-            <div id="empty">
-                <p>空空如也！</p>
-            </div>  
         </div>
         <div id="checkout">
             <div class="balance">
                 <div>
                     <b>账户余额:</b>
                     <b>
-                        <span>0.00</span>
+                    <span>{{ balance.price }}</span>
                     </b>
                     <b>元</b>
                 </div>
@@ -181,7 +190,6 @@
         <p>Copyright ©LT 乐途旅行网 | 陕ICP备120110109号 | 旅行网经营许可证： L-LT-BK12345</p>
         <img src="{% static '/images/home/pic.gif' %}" title="站长统计">
     </div>
-    
 </body>
 
 </html>

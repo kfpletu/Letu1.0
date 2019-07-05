@@ -1,9 +1,35 @@
 {% extends 'hotel/order_hotel.html' %}
 {% block block_css %}
     <link rel="stylesheet" href="/static/css/hotel/order_room.css">
+    <script src="/static/js/hotel/room_date.js"></script>
+    <script>
+                lay('#version').html('-v' + laydate.v);
+
+        //执行一个laydate实例
+                laydate.render({
+                    elem: '#from_date1'
+                });
+                laydate.render({
+                    elem: '#to_date1' //指定元素,即你要输入的框的id号即可
+                });
+                 laydate.render({
+                    elem: '#from_date2'
+                });
+                laydate.render({
+                    elem: '#to_date2' //指定元素,即你要输入的框的id号即可
+                });
+                 laydate.render({
+                    elem: '#from_date3'
+                });
+                laydate.render({
+                    elem: '#to_date3' //指定元素,即你要输入的框的id号即可
+                });
+
+    </script>
 {% endblock block_css %}
 
 {% block block_new %}
+
         <div class=daohang style="background:orange;">
             <a href="javascript:void(0)">房间订购</a>
             <a href="{% url 'hotel' %}">查看酒店</a>
@@ -12,7 +38,7 @@
         <!--顶部工具栏-->
         <div class="type">
             <div class="check">
-                {#                    <img src="../img/cart/product_normal.png" class="checkAll">#}
+                {# <img src="../img/cart/product_normal.png" class="checkAll">#}
                 全选
             </div>
             <!-- <div class=gper>人员</div> -->
@@ -32,20 +58,20 @@
 
                     </div>
                     <div class="gname">
-                        <img src="/static/images/hotel/{# { hotel_p }#}1/3/2{{ room.room_level }}.png">
-                        <p><b>{{ room.room_name }}</b></p>
+                        <img src="/static/images/hotel/{{ room.house.hotel_p }}/2{{ room.room_level }}.png">
+                        <p><b>{{ room.house.hotel_name }}</b></p>
                         <p>{#窗户  有#}{{ room.window }}</p>
                         <p>{#面积  43㎡#}{{ room.area }}</p>
                         <p>{#床型  大床1.8×2.0米1张#}{{ room.bed }}</p>
                     </div>
-                    <form action="{% url 'hotel'%}{{ id }}/{{ room.room_level }}" method="post">
+                    <form action="{% url 'hotel'%}{{ room.house.id }}/{{ room.room_level }}" method="post" class="form">
 
                         <div class=gpt>
-                            <p><label for="from_date{{ room.room_level }}">入住时间：</label><input type="text" id="from_date{{ room.room_level }}" name="from_data" value="{{ in_time }}"></p>
-                            <p><label for="to_date{{ room.room_level }}">预计搬出：</label><input type="text" id="to_date{{ room.room_level }}" name="to_data" value="{{ out_time }}"></p>
+                            <p><label for="from_date{{ room.room_level }}">入住时间：</label><input type="text" id="from_date{{ room.room_level }}" name="from_date" value="{{ today }}"></p>
+                            <p><label for="to_date{{ room.room_level }}">预计搬出：</label><input type="text" id="to_date{{ room.room_level }}" name="to_date" value="{{ tomorrow }}"></p>
                         </div>
                         <div class="gprice">
-                            <h3>乐途专享价</h3>
+                            <h3>{{ room.room_name }}</h3>
                             <p>￥ {#977.00#}{{ room.price }}</p>
                         </div>
                         <div class="gcount">

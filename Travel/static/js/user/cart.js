@@ -61,7 +61,7 @@ $(function(){
             $("#box2").css("display","block");
             setTimeout(function(){
                 $("#box2").css("display","none");
-            },2000)
+            },3000)
         }
     });
     $("#box1 button").click(function(){
@@ -93,7 +93,6 @@ function sum(){
     var num = 0; //保存总数量
     var price = 0; //保存总价格
     //数据遍历,each(function(){})
-    console.log($(".checkItem[checked]"))
     $(".checkItem[checked]").each(function(){
         //每取到一个元素就调用当前函数,this指代函数的调用者
         var n = $(this).parents(".item").find(".gcount input").val();
@@ -111,10 +110,6 @@ function sum(){
     }else{
         $(".result .sub").css("background","gray");
     }
-    //显示空空如也
-    if($("#content .item").length==0){
-        $("#empty").css("display","block");
-    }
 
 }
 //历史订单移除
@@ -122,6 +117,11 @@ $(".item .oaction").click(function(){
     //移除整个商品记录
     $(this).parents(".item").remove();
 });
+//显示空空如也
+if($("#content .item").length==0){
+    $("#empty").css("display","block");
+}
+
 });
 
 

@@ -353,6 +353,8 @@ body{
 .action input:hover{
     background:green;
     color:white;
+    cursor: pointer;
+
 
 }
 .action input:focus{

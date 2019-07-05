@@ -15,6 +15,7 @@
 {#<script type="text/javascript" src="/static/js/hotel/prefixfree.min.js"></script>#}
 <script type="text/javascript" src="/static/js/hotel/hotel_ticket.js"></script>
 <script src="/static/js/hotel/layDate-v5.0.9/laydate/laydate.js"></script>
+<script src="/static/js/hotel/room_date.js"></script>
 <body>
 <header id="header">
     {% if request.session.userinfo %}
@@ -24,8 +25,8 @@
                 <li class="home"><a href="javascript:void(0)">欢迎您,{{ request.session.userinfo.uname }}</a>
                     <ol class='info1'>
                         <li><a href="/user/topUp">我的钱包</a></li>
-                        <li><a href="/user/cart">我的订单</a></li>
-                        <li><a href="/user/order">历史订单</a></li>
+                        <li><a href="/user/cart">购物车</a></li>
+                        <li><a href="/user/order">我的订单</a></li>
                         <li><a href="/user/logout">退出登录</a></li>
                         <li><a href="/user/cancel">注销账号</a></li>
                     </ol>
@@ -54,10 +55,10 @@
         <nav>
             <ul class="link">
                 <h1 class="none">网站导航</h1>
-                <li class="active"><a href="/">首页</a></li>
+                <li><a href="/">首页</a></li>
                 <li><a href="/scenic">景点门票</a></li>
                 <li><a href="/trip">交通出行</a></li>
-                <li><a href="/hotel">酒店预定</a></li>
+                <li class="active"><a href="/hotel">酒店预定</a></li>
                 <li><a href="/about">关于我们</a></li>
             </ul>
         </nav>
@@ -115,7 +116,7 @@
 <div id="bodytickrt">
     <div class=daohang style="background:orange;">
         <a href="javascript:void(0)">房间订购</a>
-        <a href="/scenic/information">周围景点</a>
+        <a href="/scenic/">周围景点</a>
     </div>
 
     <div class=count>
@@ -162,11 +163,11 @@
                         <p>{#面积  43㎡#}{{ room.area }}</p>
                         <p>{#床型  大床1.8×2.0米1张#}{{ room.bed }}</p>
                     </div>
-                    <form action="{% url 'hotel'%}{{ id }}/{{ room.room_level }}" method="post">
+                    <form action="{% url 'hotel'%}{{ id }}/{{ room.room_level }}" method="post" class ="form">
 
                         <div class=gpt>
-                            <p>入住时间：<input type="text" id="from_date{{ room.room_level }}" name="from_data" placeholder="请选择入住日期"></p>
-                            <p>预计搬出：<input type="text" id="to_date{{ room.room_level }}" name="to_data" placeholder="请选择退房日期"></p>
+                            <p>入住时间：<input type="text" class="date_time" id="from_date{{ room.room_level }}" name="from_date" value="{{ today }}"></p>
+                            <p>预计搬出：<input type="text" class="date_time" id="to_date{{ room.room_level }}" name="to_date" value="{{ tomorrow }}"></p>
                         </div>
                         <div class="gprice">
                             <h3>乐途专享价</h3>

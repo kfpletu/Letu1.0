@@ -3,7 +3,7 @@ $(function(){
     var imgList = $("#imgd img");
     var liList = $("#imgd li");
     var index = 0;
-    var timer = setInterval(autoPlay,2000);
+    var timer = setInterval(autoPlay,3000);
     function autoPlay(){
         //当前图片隐藏
         imgList.eq(index).css("display","none");
@@ -20,7 +20,7 @@ $(function(){
         clearInterval(timer);
     });
     $("#imgd").mouseout(function (){
-        timer = setInterval(autoPlay,2000);
+        timer = setInterval(autoPlay,3000);
     });
     //向左翻动
     $("#imgd .left").click(function(){
@@ -59,7 +59,8 @@ $(function(){
             imgList.eq(index).css("display","block");  
         })
     }
-
+    
+    //搜索框
     $("#tour #search2 img").mouseover(function(){
         $(this).attr('src',"/static/images/home/search2.png")
     })

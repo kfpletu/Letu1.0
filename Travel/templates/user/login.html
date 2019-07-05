@@ -1,15 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{%block title%}欢迎登录{%endblock title%}</title>
     <link rel="stylesheet" href="/static/css/basic.css" type="text/css">
-    <link rel="stylesheet" href="/static/css/user/login.css" type="text/css">
+    <link rel="stylesheet" href="/static/css/user/login.css" type="text/css"> 
     {%block css%}{%endblock css%}
-
+    <script src="/static/js/jquery.js"></script>
+    {% block loginJs %}
+    <script src="/static/js/user/login.js"></script>
+    {% endblock loginJs %}
+    <script src="/static/js/user/validatecode.js"></script>
 </head>
+
 <body>
     <div id="top">
         <a href="/">
@@ -19,44 +25,41 @@
         <a href="/"><span class="s1">返回首页</span></a>
     </div>
     <div id="mian">
-        <form action="{%block post%}/user/login{%endblock post%}" method="post">
-            {% block blockname %}
-            {% csrf_token %}
-            {% endblock blockname %}
+        {%block post%} {%endblock post%} {% block blockname %} {% csrf_token %} {% endblock blockname %}
+        <div id="form">
             <div class="content">
                 <p>
-                    {%block body_head%}
-                    登录
-                    <a href="/user/register">新用户注册</a>
-                    {%endblock body_head%}
+                    {%block body_head%} 登录
+                    <a href="/user/register">新用户注册</a> {%endblock body_head%}
                 </p>
                 <div class="text">
                     {%block pwd%}
-                    <input type="text" name="uname" id="uname" placeholder="{%block uname%}请输入用户名(5~15个字母或数字){%endblock uname%}" minlength="5" maxlength="15">
-                    {%block img1%}<img src="/static/images/user/user.png" alt="">{%endblock img1%}
-                    {%endblock pwd%}
+                    <input type="text" name="uname" id="uname" placeholder="{%block uname%}请输入用户名(5~15个字母或数字){%endblock uname%}" minlength="5" maxlength="15"> {%block img1%}<img src="/static/images/user/user.png" alt="">{%endblock img1%} {%endblock pwd%}
                 </div>
                 <div class="text pwd">
                     {% block new_pwd %}
-                        <input {%block phone%} type="password" name="upwd" placeholder="请输入密码" {%endblock phone%}>
-                        {%block img2%}<img src="/static/images/user/password.png" alt="">{%endblock img2%}
-                    {% endblock new_pwd %}
+                    <input {%block phone%} type="password" name="upwd" id="upwd" placeholder="请输入密码" {%endblock phone%}> {%block img2%}<img src="/static/images/user/password.png" alt="">{%endblock img2%} {% endblock new_pwd %}
                 </div>
                 <div class="{%block class%}validateCode{%endblock class%}">
                     {%block email%}
-                    <img src="/static/images/user/logo.png" alt="验证码">
-                    <input type="text" name="validateCode" placeholder="验证码输入">
-                    {%endblock email%}
+                    <img src="" alt="点击获取验证码" id="yanzma" name='yanzma' style="color:red;font-size: 12px">
+                    <input type="text" name="validateCode" placeholder="验证码输入" id="validateCode"> {%endblock email%}
+                    <span id="showImg" style="display: none"></span>
+                    {% block span %}
+                    <span id="show" style="color:red"></span>
+                    {% endblock span %}
                 </div>
                 {%block giveup%}
                 <div class="savePwd">
-                    <input type="checkbox" name="remember" >记住密码
+                    <input type="checkbox" name="remember">记住密码
                     <a href="/user/forget">忘记密码?</a>
                 </div>
                 {%endblock giveup%}
-                <input type="submit"  value="{%block value%}登录{%endblock value%}" class="login" {% block submit %}{% endblock submit %}>
+                {%block value%}<button class="login">登录</button>{%endblock value%}
+                
             </div>
-        </form>
+        </div>
+        {% block form %} {% endblock form %}
     </div>
     <div id="bottom">
         <a href="/">
@@ -73,4 +76,5 @@
 
     </div>
 </body>
+
 </html>

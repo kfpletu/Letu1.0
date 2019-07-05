@@ -9,7 +9,6 @@
 
 }
 .ico img{
-    /*background-image: url(../../images/pay/payment.png);*/
     width: 50px;
     height: 50px;
     /*background: red;*/
@@ -27,4 +26,7 @@
 }
 #delect:hover{
     color: red;
+}
+#myorder{
+    font-size: 16px;
 }

@@ -79,30 +79,26 @@
 }
 #main .balance div{
     float: right;
-    margin-right: 20px; 
+    margin-right: 6px; 
     border-radius: 5%;
-    background: orange;
+    line-height: 26px;
     color: #333;
 }
 #paging{
-    width: 150px;
     height: 36px;
     line-height: 50px;
     margin: 5px auto;
     text-align: right;
     margin-right: 50px;
-    overflow: hidden;
 }
 #paging a{
     text-decoration: underline;
 }
 #paging>:first-child{
     margin-right: 10px;
-    float: left;
 }
 #paging>:last-child{
     margin-left: 10px;
-    float: right;
 }
 
 /*顶部工具栏*/
@@ -150,7 +146,7 @@
 #content{
     margin-top: 20px;
 }
-.item{
+.item{  
     height: 115px;
     background: #fff;
     text-align: center;
@@ -225,43 +221,57 @@
     margin-left: 51px;
 }
 .bottom{
+    width:1200px;
     height: 50px;
     text-align: center;
+    margin: 0 auto;
     color: gray;
     font-size: 16px;
 }
-#content #box1,#content #box2{
+#content #box1,#content #box2,#content #box3{
     width: 400px;
     height: 200px;
     background: orange;
     position: fixed;
-    margin-top: 20px;
+    margin-top: 150px;
     margin-left: 400px;
-}
-#content .wait{
-    width: 400px;
-    height: 200px;
-    display: none;
-    position: absolute;
-    margin-top: 80px;
-    margin-left: 400px;
-
-}
-#box1,#box2{
     border-radius:10px;
     border:2px solid red;
     display: none;
 }
-#box1 p,#box2 p{
+#box1 p,#box2 p,#box3 p:nth-child(2){
     margin-top:60px;
     text-align: center;
-    font-size: 24px;
+    font-size: 22px;
+    line-height: 32px;
+}
+#box2 p{
+    margin-top: 85px;
 }
 #box1 button{
     width: 50px;
     float:right;
     margin-top:40px;
     margin-right:50px;
+}
+#box3 p:nth-child(3){
+    margin-top: 20px;
+    text-align: center;
+    font-size: 1.2em;
+    text-decoration: underline;
+    
+}
+#box3 img{
+    width:22px;
+    height: 22px;
+    background: red;
+    border-radius: 50%;
+}
+#box3>img{
+    float: right;
+}
+#box3 p:nth-child(2) img{
+    margin-top: 10px; 
 }
 #empty{
     width: 400px;
@@ -273,7 +283,12 @@
     color: #ccc;
     text-align: center;
 }
-
+#buybuy{
+    width: 100px;
+    height: 100px;
+    float: left;
+    /* margin-right: 50px; */
+}
 
 
 /*历史订单*/

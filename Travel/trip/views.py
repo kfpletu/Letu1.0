@@ -2,13 +2,21 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .trail_12306 import *
 from . import models
+import time
 
 
 # Create your views here.
 def trip_views(request):
-    return render(request, 'trip/order.html')
+    today = time.strftime("%Y-%m-%d", time.localtime())
+    tomorrow = time.strftime("%Y-%m-%d", time.localtime(time.time() + 86400))
+    return render(request, 'trip/order.html',locals())
 
 def add_code_views(request):
+    """
+    增加12306车站数据
+    :param request:
+    :return:
+    """
     tt=TicketQuery()
     station_code=tt.get_station_name()[0]
     for station_name,code in station_code.items():
@@ -18,6 +26,11 @@ def add_code_views(request):
 
 
 def search_views(request):
+    """
+    爬取12306车票信息
+    :param request:
+    :return:
+    """
     if request.method == "GET":
         from_station = request.GET.get('from_city', '')
         to_station = request.GET.get('to_city', '')
