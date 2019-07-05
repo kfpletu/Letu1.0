@@ -15,7 +15,7 @@
 {#<script type="text/javascript" src="/static/js/hotel/prefixfree.min.js"></script>#}
 <script type="text/javascript" src="/static/js/hotel/hotel_ticket.js"></script>
 <script src="/static/js/hotel/layDate-v5.0.9/laydate/laydate.js"></script>
-<script src="/Travel/static/js/hotel/data.js"></script>
+<script src="/static/js/hotel/room_date.js"></script>
 <body>
 <header id="header">
     {% if request.session.userinfo %}
@@ -163,7 +163,7 @@
                         <p>{#面积  43㎡#}{{ room.area }}</p>
                         <p>{#床型  大床1.8×2.0米1张#}{{ room.bed }}</p>
                     </div>
-                    <form action="{% url 'hotel'%}{{ id }}/{{ room.room_level }}" method="post">
+                    <form action="{% url 'hotel'%}{{ id }}/{{ room.room_level }}" method="post" class ="form">
 
                         <div class=gpt>
                             <p>入住时间：<input type="text" class="date_time" id="from_date{{ room.room_level }}" name="from_data" value="{{ today }}"></p>

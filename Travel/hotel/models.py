@@ -22,7 +22,7 @@ class Hotel(models.Model):
     info=models.TextField('酒店详细信息')
     hotel_level=models.CharField('酒店级别',max_length=10)
     house=models.OneToOneField(House,models.CASCADE,null=True)
-    hotel_p=models.CharField('图片地址',max_length=25,default='/')
+    # hotel_p=models.CharField('图片地址',max_length=25,default='/')
     class Meta:
         db_table='hotel'
 

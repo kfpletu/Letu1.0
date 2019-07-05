@@ -35,6 +35,7 @@
     overflow: hidden;
 }
 #container .out-form img{
+    display: none;
     margin-left: 5px;
     width: 290px;
     height: 290px;
@@ -43,7 +44,7 @@
 }
 /*搜索框*/
 #container .out-form .form{
-    width: 600px;
+    width: 900px;
     border-radius: 10px;
     /*background:#e7e4e4;*/
     box-shadow: 0 5px 2px gray;
@@ -54,7 +55,7 @@
     float: left;
   
 }
-#container .form h2 {
+#container .out-form .form h2 {
     height: 40px;
     line-height: 40px;
     font-size: 30px;
@@ -67,24 +68,24 @@
 }
 
 /*搜索框酒店类型*/
-#container .form .infor {
+#container .out-form .form .infor {
     margin: 10px 0 0 0;
     background-color: #fff;
 }
-#container .form li,
+#container .out-form .form li,
 #container .new li {
     display: inline-block;
 }
-#container .form .infor li {
+#container .out-form .form .infor li {
     padding: 5px 10px;
 }
-#container .form ul li:nth-child(3) a{
+#container .out-form .form ul li:nth-child(3) a{
     color: #666;
 }
-#container .form ul li a{
+#container .out-form .form ul li a{
     color: #666;
 }
-#container .form ul li a:hover {
+#container .out-form .form ul li a:hover {
     display: block;
     /*height: 20px;*/
     /*line-height: 20px;*/
@@ -99,7 +100,7 @@ a:visited {
     color: #666;
 }
 /*搜索栏输入框*/
-#container .form input {
+#container .out-form .form input {
     width: 158px;
     height: 18px;
     border: 1px solid #ccc;
@@ -112,7 +113,7 @@ a:visited {
 
 }
 /*下拉框*/
-#container .form select {
+#container .out-form .form select {
     width: 170px;
     height: 30px;
     background-color: #fff;
@@ -120,14 +121,14 @@ a:visited {
     font-size: 15px;
     margin: 0 20px 0 16px;
 }
-#container .form select:focus,#container .form input:focus{
+#container .out-form .form select:focus,#container .form input:focus{
     outline: none;
 }
-#container .form p {
+#container .out-form .form p {
     line-height: 3;
 }
 
-#container .form .button {
+#container .out-form .form .button {
 
     display: inline-block;
     width: 100px;

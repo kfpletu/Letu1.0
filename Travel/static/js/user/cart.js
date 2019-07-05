@@ -61,7 +61,7 @@ $(function(){
             $("#box2").css("display","block");
             setTimeout(function(){
                 $("#box2").css("display","none");
-            },2000)
+            },3000)
         }
     });
     $("#box1 button").click(function(){

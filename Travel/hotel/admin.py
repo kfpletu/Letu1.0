@@ -4,8 +4,8 @@ from . import models
 
 
 class HotelManager(admin.ModelAdmin):
-    list_display = ['id','hotel_name','hotel_p']
-    list_editable = ['hotel_p']
+    list_display = ['id','hotel_name']
+    list_editable = []
 
 
 class RoomManager(admin.ModelAdmin):
