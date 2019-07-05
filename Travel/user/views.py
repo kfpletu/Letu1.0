@@ -294,6 +294,11 @@ def modif(request, g_id):
 
 
 def payment(request):
+    """
+    支付界面的返回
+    :param request:
+    :return:
+    """
     return render(request, 'user/payment.html')
 
 
@@ -326,6 +331,11 @@ def topup(request):
 
 
 def top_top(request):
+    """
+    充值金额的实现
+    :param request:
+    :return: 布尔值
+    """
     uid = request.session['userinfo']['id']
     user = Info.objects.get(id=uid)
     money = float(request.POST['money'])
