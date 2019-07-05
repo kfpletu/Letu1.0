@@ -302,9 +302,7 @@ def modif(request, g_id):
     else:
         return HttpResponse('payment.html')
     
-    
-
-
+#支付成功跳转页面
 def payment(request):
     return render(request, 'user/payment.html')
 
@@ -372,7 +370,7 @@ def balance(request):
     u_id = request.session['userinfo']['id']
     balance = Info.objects.get(id=u_id)
     money = balance.price
-    if money > t_price:
+    if money >= t_price:
         money -= t_price
         balance.price = money
         balance.save()
