@@ -8,7 +8,6 @@ $(function() {
             var jsObj = {
                 uname: $('#uname').val(),
                 upwd: $('#upwd').val(),
-                validateCode: $('#validateCode').val(),
                 csrfmiddlewaretoken: $("[name='csrfmiddlewaretoken']").val()
             }
             $.ajax({
@@ -47,7 +46,6 @@ $(function() {
     $('#validateCode').blur(function(){
         code = $('#showImg').html()
         inputCode = $('#validateCode').val()
-        console.log(code,inputCode)
         if(inputCode){
             if(code == inputCode){
                 $('#show').html('')
