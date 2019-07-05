@@ -89,4 +89,5 @@ def ticket(request,s):
 
 def scenic2(request):
     if request.method == 'GET':
-        return render(request,'scenic/information02.html')
+        scens = models.Scen.objects.all()
+        return render(request,'scenic/information02.html',locals())

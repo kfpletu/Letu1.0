@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'scenic',
     'trip',
     'user',
-    'index'
+    'index',
+    'scenic2',
 ]
 
 MIDDLEWARE = [
