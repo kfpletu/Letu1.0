@@ -217,7 +217,9 @@ def booking(request):
 # 购物车
 def cart(request):
     u_id = request.session['userinfo']['id']
+    #获取账户余额
     balance = Info.objects.get(id=u_id)
+    #获取该用户购物车商品对象
     goods = Cart.objects.filter(user_id=u_id, is_pay=0)
     paginator = Paginator(goods, 4)
     cur_page = request.GET.get('page', 1)
@@ -238,7 +240,15 @@ def order(request):
 def del_goods(request, g_id):
     target = Cart.objects.get(id=g_id)
     target.delete()
-    return render(request, 'user/cart.html')
+
+    u_id = request.session['userinfo']['id']
+    balance = Info.objects.get(id=u_id)
+    goods = Cart.objects.filter(user_id=u_id, is_pay=0)
+    paginator = Paginator(goods, 4)
+    cur_page = request.GET.get('page', 1)
+    page = paginator.page(cur_page)
+
+    return render(request, 'user/cart.html',locals())
 
 
 # 数量加1
@@ -274,7 +284,7 @@ def modif(request, g_id):
     target.is_pay = 1
     target.save()
     try:
-        a_order = History_list.objects.create(
+        History_list.objects.create(
             u_id=target.user_id,
             g_img=target.g_img,
             g_name=target.g_name,
@@ -287,10 +297,12 @@ def modif(request, g_id):
             booking_time='2019-2-2',
             is_del=target.is_pay
         )
-    except:
+    except:                 
         return HttpResponse('购买失败')
-    # else:
-    #     return render(request,'user/payment.html')
+    else:
+        return HttpResponse('payment.html')
+    
+    
 
 
 def payment(request):
@@ -374,8 +386,8 @@ def balance(request):
         money -= t_price
         balance.price = money
         balance.save()
-        return render(request, 'user/payment.html')
+        msg = json.dumps("")
+        return HttpResponse(msg)
     else:
-        print('嘎嘎嘎嘎嘎嘎个',money)
         msg = json.dumps("亲!你的余额不足额...")
         return HttpResponse(msg)

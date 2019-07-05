@@ -79,10 +79,9 @@
 }
 #main .balance div{
     float: right;
-    margin-right: 10px; 
+    margin-right: 6px; 
     border-radius: 5%;
     line-height: 26px;
-    background: orange;
     color: #333;
 }
 #paging{
@@ -222,8 +221,10 @@
     margin-left: 51px;
 }
 .bottom{
+    width:1200px;
     height: 50px;
     text-align: center;
+    margin: 0 auto;
     color: gray;
     font-size: 16px;
 }
@@ -241,8 +242,11 @@
 #box1 p,#box2 p,#box3 p:nth-child(2){
     margin-top:60px;
     text-align: center;
-    font-size: 24px;
-    line-height: 30px;
+    font-size: 22px;
+    line-height: 32px;
+}
+#box2 p{
+    margin-top: 85px;
 }
 #box1 button{
     width: 50px;
@@ -251,19 +255,23 @@
     margin-right:50px;
 }
 #box3 p:nth-child(3){
-    margin-top: 25px;
+    margin-top: 20px;
     text-align: center;
     font-size: 1.2em;
+    text-decoration: underline;
     
 }
 #box3 img{
-    width:25px;
-    height: 25px;
+    width:22px;
+    height: 22px;
     background: red;
     border-radius: 50%;
 }
 #box3>img{
     float: right;
+}
+#box3 p:nth-child(2) img{
+    margin-top: 10px; 
 }
 #empty{
     width: 400px;
@@ -275,7 +283,12 @@
     color: #ccc;
     text-align: center;
 }
-
+#buybuy{
+    width: 100px;
+    height: 100px;
+    float: left;
+    /* margin-right: 50px; */
+}
 
 
 /*历史订单*/
