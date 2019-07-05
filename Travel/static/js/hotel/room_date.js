@@ -1,6 +1,6 @@
 window.onload=function(){
 	today=$('[name=from_data]').val();
-	console.log(today);
+	// console.log(today);
 	$('.form').submit(function () {
 		if ($(this).find('[name=from_data]').val()>=today && $(this).find('[name=from_data]').val()<$(this).find('[name=to_data]').val()) {
 			return true
