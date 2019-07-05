@@ -132,7 +132,7 @@ STATICFILES_DIRS = [
 
 
 ]
-SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SESSION_COOKIE_AGE = 24 * 60 * 60
 
 #hotel 文件上传测试代码
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images/hotel')

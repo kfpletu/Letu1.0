@@ -42,6 +42,7 @@ def login(request):
                         'uname': user.uname,
                         'id': user.id
                     }
+
                     resp = HttpResponse('登录成功', locals())
                     if remember:
                         resp.set_cookie('uname', uname, max_age=7 * 24 * 60 * 60)
