@@ -50,6 +50,11 @@ ul,ol {
     color: #eee;
 
 }
+#header a img{
+    width: 40px;
+    height: 40px;
+}
+
 
 #header .active a {
     background-color:#d61e41;

@@ -2,7 +2,7 @@ from PIL import Image, ImageDraw, ImageFont, ImageFilter
 import random
 from django.shortcuts import render, redirect
 import json
-
+import os
 # Create your views here.
 from .models import *
 from django.http import HttpResponse,Http404
@@ -394,19 +394,23 @@ def balance(request):
         return HttpResponse(msg)
 def change(request):
     if request.method == "GET":
+        print('get')
         return render(request,'user/change.html')
-    elif: request.method == "POST":       
+    elif request.method == "POST":
+        # print('1')
         u_id = request.session['userinfo']['id']
-        user_info= Info.objects.get(id=u_id) 
+        user_info= Info.objects.get(id=u_id)
+        # print('2')
         u_img_fd = request.FILES["uimg"]
         change_name='%s.png'%u_id
+        # print('3')
         change_name=os.path.join(settings.CHANGE_MEDIA_ROOT,change_name)
         try:
             with open(change_name,'wb') as f:
                 f.write(u_img_fd.file.read())
                 user_info.head_img=change_name
                 user_info.save()
-                return HttpResponseRedirect('\')
+                return HttpResponseRedirect('/')
         except:
             raise Http404
 
