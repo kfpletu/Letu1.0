@@ -144,7 +144,7 @@ def message(request):
     request.add_query_param('RegionId', "cn-hangzhou")
     request.add_query_param('PhoneNumbers', phone)
     request.add_query_param('SignName', "letu")
-    request.add_query_param('TemplateCode', "SMS_169897404")
+    request.add_query_param('TemplateCode', "SMS_169897609")
     request.add_query_param('TemplateParam', "{'code':%s}" % number)
 
     response = client.do_action(request)
