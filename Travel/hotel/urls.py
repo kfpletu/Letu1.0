@@ -10,5 +10,5 @@ urlpatterns = [
     # url(r'^copy',views.backup)#数据库备份专用路由
     # url(r'book',views.test_book)#测试路由
     # url(r'upload_picture',views.upload_picture)#商家文件上传
-    # url(r'^test',views.house_p)#测试数据库
+    # url(r'^test',views.init_house_iprice)#测试数据库
 ]

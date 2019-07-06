@@ -26,7 +26,7 @@ $(function(){
 	var timerH=setInterval(function(){
 		listBoxMarginH-=2;
 		// console.log(listBoxMargin+'px')
-		$('.brandListBox:first').css('margin-left',(listBoxMarginH+'px'))
+		$('#brandListFirst').css('margin-left',(listBoxMarginH+'px'))
 		if (listBoxMarginH<-1400) {
 			listBoxMarginH=0;
 		}
@@ -38,7 +38,7 @@ $(function(){
 	$('#brandListFirst').mouseout(function(){
 		timerH=setInterval(function(){
 		listBoxMarginH-=2;	
-		$('.brandListBox:first').css('margin-left',(listBoxMarginH+'px'))
+		$('#brandListFirst').css('margin-left',(listBoxMarginH+'px'))
 		if (listBoxMarginH<-8400){
 			listBoxMarginH=0;
 		}
@@ -49,7 +49,7 @@ $(function(){
 	var timerF=setInterval(function(){
 		listBoxMarginF-=2;
 		// console.log(listBoxMargin+'px')
-		$('.brandListBox:last').css('margin-left',(listBoxMarginF+'px'))
+		$('#last_brand').css('margin-left',(listBoxMarginF+'px'))
 		if (listBoxMarginF<-1400) {
 			listBoxMarginF=0;
 		}
@@ -63,7 +63,7 @@ $(function(){
 	$('#last_brand').mouseout(function(){
 		timerF=setInterval(function(){
 		listBoxMarginF-=2;	
-		$('.brandListBox:last').css('margin-left',(listBoxMarginF+'px'))
+		$('#last_brand').css('margin-left',(listBoxMarginF+'px'))
 		if (listBoxMarginF<-1400) {
 			listBoxMarginF=0;
 		}
