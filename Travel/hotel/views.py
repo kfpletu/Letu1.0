@@ -9,8 +9,12 @@ import time
 from django.conf import settings
 from django.http import HttpResponseRedirect
 from user.models import Cart
+<<<<<<< HEAD
 from . import weather
 from django.core.paginator import Paginator
+=======
+# from . import weather
+>>>>>>> 3ed367d4bfa68f3a9e81d54bca0cbe636a556880
 # Create your views here.
 
 
@@ -23,9 +27,15 @@ def get_time():
 
 
 #天气预报
+<<<<<<< HEAD
 def city_weather(request):
     weather_str = weather.city_weather()
     return HttpResponse(weather_str+'这是天气信息,浏览信息请登录主页')
+=======
+# def city_weather(request):
+#     weather_str = weather.city_weather()
+#     return HttpResponse(weather_str)
+>>>>>>> 3ed367d4bfa68f3a9e81d54bca0cbe636a556880
 
 
 #hotel 预订首页
