@@ -5,12 +5,12 @@ import json
 
 # Create your views here.
 from .models import *
-from django.http import HttpResponse
+from django.http import HttpResponse,Http404
 from django.http import HttpResponseRedirect
 from django.core.paginator import Paginator
 from .page_helper import *
 from django.contrib.auth.hashers import make_password, check_password
-
+from django.conf import settings
 
 # 登录
 def login(request):
@@ -100,7 +100,8 @@ def register(request):
         email = request.POST.get('email')
         # 尝试向数据库添加用户信息,成功返回到登录页面进行登录
         try:
-            Info.objects.create(uname=uname, upwd=upwd, phone=phone, email=email)
+            Info.objects.create(uname=uname, upwd=upwd, phone=phone, email=email,
+                                head_img='/static/images/user/head.jpg')
             return HttpResponse('')
         except Exception as e:
             # 抛异常,刷新注册页面,重新注册
@@ -375,3 +376,25 @@ def balance(request):
     else:
         msg = json.dumps("亲!你的余额不足额...")
         return HttpResponse(msg)
+def change(request):
+    if request.method == "GET":
+        return render(request,'user/change.html')
+    elif: request.method == "POST":       
+        u_id = request.session['userinfo']['id']
+        user_info= Info.objects.get(id=u_id) 
+        u_img_fd = request.FILES["uimg"]
+        change_name='%s.png'%u_id
+        change_name=os.path.join(settings.CHANGE_MEDIA_ROOT,change_name)
+        try:
+            with open(change_name,'wb') as f:
+                f.write(u_img_fd.file.read())
+                user_info.head_img=change_name
+                user_info.save()
+                return HttpResponseRedirect('\')
+        except:
+            raise Http404
+
+
+
+        
+

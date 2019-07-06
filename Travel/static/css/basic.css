@@ -62,6 +62,32 @@ ul,ol {
     color: #eee;
     line-height: 25px;
 }
+#cart ul{
+    width:200px;
+}
+#cart ol{
+    width: 70px;
+    margin-left: 60px;
+}
+/* 头像 */
+#cart ul img{
+    width: 46px;
+    height: 46px;
+    float: left;
+    margin-top: 12px;
+    margin-right: 5px;
+}
+#cart .down{
+    width:0;
+	height:0;
+    border:10px solid transparent;
+    border-top:10px solid orange;;
+    float: left;
+    margin-top: 30px;
+    margin-left: 10px;
+    margin-right: 0;
+}
+
 ul,ol{
 	/*取消默认的内边距*/
 	padding:0;
@@ -85,7 +111,7 @@ ul,ol{
     color: #eee;
     text-align: center;
 }
-#cart .home{
+#cart ul{
     line-height: 70px;
 }
 #cart .home .info1{

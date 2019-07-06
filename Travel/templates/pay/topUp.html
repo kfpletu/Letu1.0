@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>支付中心</title>
+    {% block head %}
     <link rel="stylesheet" href="/static/css/base.css" type="text/css">
     <link rel="stylesheet" href="/static/css/pay/topUp.css" type="text/css">
     <script src="/static/js/jquery.js"></script>
@@ -13,6 +14,7 @@
     <script>
 
     </script>
+    {% endblock head %}
 </head>
 
 <body>
@@ -31,6 +33,7 @@
         {#            <img src="/static/images/pay/weixin.jpg" class='imger' alt="">#}
     </div>
     {#    <form action="" method="" onsubmit="return judge()">#}
+    {% block change %}
     <div id="form">
         {% csrf_token %}
 
@@ -69,6 +72,7 @@
             <button class="button">确认</button>
         </div>
     </div>
+    {% endblock change %}
     <div id="success">
         <div class="closeimg">
             <img src="/static/images/pay/close.png" alt="关闭" class="clo">

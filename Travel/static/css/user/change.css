@@ -1,0 +1,30 @@
+#change{
+    width: 400px;
+    height: 400px;
+    background: #ddd;
+    float: right;
+    margin-top: 80px;
+    color: #333;
+    font-size: 1.4em;
+    
+}
+#change table{
+    margin-top: 20px;
+    width:400px;
+    line-height: 40px;
+}
+#change tr td:nth-child(1){
+    text-align: center;
+}
+#change .subImg{
+    margin-top: 40px;
+}
+#change .subImg input{
+    margin-left: 80px;
+}
+#change .fImg{
+    margin-top: 20px;     
+}
+#change .fImg input{
+    margin-left: 80px;
+}

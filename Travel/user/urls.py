@@ -36,4 +36,5 @@ urlpatterns += [
     url(r'^add/(\d+)$', views.add),
     url(r'^reduce/(\d+)$', views.reduce),
     url(r'^modif/(\d+)$', views.modif),
+    url(r'^change',views.change),
 ]

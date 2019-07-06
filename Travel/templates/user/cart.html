@@ -79,7 +79,6 @@
                     <a href="{% url 'goodType' %}?page={{ p }}">{{p}}</a>
                     {% endif %}
                 {% endfor %}
-            
                 {#下一页功能#}
                 {% if page.has_next %}
                 <a href="{% url 'goodType' %}?page={{ page.next_page_number }}">下一页</a>
@@ -96,9 +95,9 @@
                     全选
                 </div>
                 <div class="gname">商品</div>
-                <div class="gprice">单价(元)</div>
+                <div class="gprice">商品价格(元)</div>
                 <div class="gcount">数量</div>
-                <div class="gsum">金额</div>
+                <div class="gsum">应付金额</div>
                 <div class="action">操作</div>
             </div>
         </div>
