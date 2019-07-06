@@ -10,6 +10,8 @@ from django.conf import settings
 from django.http import HttpResponseRedirect
 from user.models import Cart
 from . import weather
+from django.core.paginator import Paginator
+# from . import weather
 # Create your views here.
 
 
@@ -24,14 +26,17 @@ def get_time():
 #天气预报
 def city_weather(request):
     weather_str = weather.city_weather()
-    return HttpResponse(weather_str)
+    return HttpResponse(weather_str+'这是天气信息,浏览信息请登录主页')
+# def city_weather(request):
+#     weather_str = weather.city_weather()
+#     return HttpResponse(weather_str)
 
 
 #hotel 预订首页
 def index(request):
     if request.method=='GET':
         house_list=models.House.objects.order_by('-order_count')
-        house_list=house_list[0:12]#销量排名前9的酒店
+        # house_list=house_list[0:12]#销量排名前9的酒店
         house_list_li=house_list[0:5]#热门品牌
         today,tomorrow=get_time()
         return render(request,'hotel/order_hotel.html',locals())
@@ -63,11 +68,11 @@ def index(request):
 
 
 #酒店价格首页
-price_list=[(0,200),(200,500),(500,100),(1000,2000),(2000,10000)]
+price_list=[(0,200),(200,500),(500,100),(1000,2000),(2000,10000),(0,10000)]
 #关键字搜索
-def search(keyword,hotel_level):
+def search(keyword):
     if  keyword:
-        hotel=models.Hotel.objects.filter(Q(hotel_level=hotel_level)&Q(hotel_name__contains=keyword)|Q(address__contains=keyword)|Q(info__contains=keyword)|Q(hotel_level__contains=keyword))
+        hotel=models.Hotel.objects.filter(Q(hotel_name__contains=keyword)|Q(address__contains=keyword)|Q(info__contains=keyword)|Q(hotel_level__contains=keyword))
         return hotel
 #酒店首页搜索引擎
 def room(request):
@@ -86,20 +91,38 @@ def room(request):
             price=price_list[int(request.POST.get('room-price',''))]
             hotel_level=request.POST.get('hotel-level','')
             keyword=request.POST.get('room-keyword','')
-            #通过价位找房间
+            #通过价位和人数找房间
             if request.POST['people-num']=='1':
-                rooms=models.Room.objects.filter(Q(iprice__range=price)&(Q(room_level=1)|Q(room_level=3)))
+                 rooms=models.Room.objects.filter(Q(iprice__range=price)&(Q(room_level=1)|Q(room_level=3)))
             else:
+            # print(price)
                 rooms=models.Room.objects.filter(iprice__range=price)
+            #根据酒店级别筛选
+            rooms=list(rooms)
+            # print(len(rooms))
+            for room in rooms:
+                # print('hotel_id',room.hotel_id//10)
+                # print('hotel_level',hotel_level)
+                if  hotel_level=='5':
+                    break
+                if room.hotel_id//10 !=int(hotel_level):
+                    rooms.remove(room)
+            # print(len(rooms))
             #通过关键字找匹配酒店
-            hotels=search(keyword,hotel_level)
+            hotels=search(keyword)
+            # print(set(rooms))
             rooms=set(rooms)
             # print(hotels)
+            # print('2')
             if  hotels:
                 for hotel in hotels:
+                    # print('3')
                     for room in hotel.room_set.all():
+
                         rooms.add(room)
+
             today, tomorrow = get_time()
+
             return render(request,'hotel/order_room.html',locals())
         except:
             return HttpResponseRedirect('/hotel/')
@@ -221,8 +244,6 @@ def hotel(request,id,level):
         elif request.method == 'POST':
             #将房间加入购物车
             try:
-                # user_id=request.session['userinfo']['uname']
-                # for i in range(15):
                 # 创建流水号
                 now = str(time.ctime())
                 now_str=str(time.time()).split('.')

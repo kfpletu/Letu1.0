@@ -12,7 +12,8 @@ class Info(models.Model):
     is_online = models.BooleanField('登录状态', default=0)
     join_time = models.DateTimeField('注册时间', auto_now_add=True)
     is_alive = models.BooleanField('是否注销', default=0)
-
+    head_img = models.ImageField('用户头像',upload_to="static/images/user/change",null=True)
+    
     def __str__(self):
         return '姓名%s 电话%s 邮箱%s 余额%s 登录状态%s' \
         % (self.uname, self.phone, self.email, self.price, self.is_online)

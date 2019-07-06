@@ -11,6 +11,7 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/scenic/information2.css' %}">
     <link rel="stylesheet" href="{% static 'css/basic.css' %}">
+    <script src="{% static 'js/jquery.js' %}"></script>
 </head>
 
 <body>
@@ -153,46 +154,52 @@
             </ul>
         </div>
         <!-- 加载子条目 -->
-
+        <!-- {% for sen in scens %} -->
         <figure class="tour">
-            <img src="/static/images/scenic/information2/兵马俑.jpg" alt="热门旅游">
+            <a href="{% url 'scenic1' %}{{ sen.id }}"> <img src="{{ sen.img }}" alt="限时特价"></a>
+            <!-- <img src="/static/images/scenic/information2/兵马俑.jpg" alt="热门旅游"> -->
             <figcaption>
                 <article>
                     <header>
                         <hgroup>
-                            <h2>秦始皇兵马俑博物馆</h2>
-                            <h3>世界八大奇迹之一。举世闻名的秦兵马俑，重现两千年前军队的姿态。</h3>
+                            <h2>{{ sce_topic}}</h2>
+                            <h3>{{ brief_des }}</h3>
                         </hgroup>
-
                     </header>
                     <ol>
                         <li>
-                            <mark>地址</mark>
-                            西安市临潼区秦始皇陵以东1.5公里处
+                            <mark>地址</mark>{{ address }}
                         </li>
                         <li>
-                            <mark>5A级</mark>
-                            乐途旅行口碑榜，最佳战略合作伙伴
+                            <mark>5A级</mark>{{ assessment }}
                         </li>
-
                     </ol>
 
                     <footer>
-                        本团游由乐途旅行网赞助提供，截止于
-                        <time>2019-10-10</time>
+                        本团游由乐途旅行网赞助提供，截止于<time>{{ cut_off_time }}</time>
                     </footer>
-
                 </article>
                 <div class="buy">
-                    <div class="price">￥<strong>120</strong>起</div>
+                    <div class="price">￥<strong>{{ price }}</strong>起</div>
                     <div class="reserve"><a href="###">立即抢购</a></div>
                 </div>
-                <div class="type">兵马俑</div>
+                <div class="type">{{ sce_name }}</div>
                 <!-- <div class="disc"><span>4.7折</span></div> -->
             </figcaption>
-
         </figure>
-        <figure class="tour">
+        <!-- {% endfor %} -->
+        <div class="more"><a href="###">加载更多...</a></div>
+        </div>
+
+
+
+
+
+
+
+
+
+        <!-- <figure class="tour">
             <img src="/static/images/scenic/information2/博物馆.jpg" alt="热门旅游">
             <figcaption>
                 <article>
@@ -223,10 +230,9 @@
                     <div class="price">￥<strong>30</strong>起</div>
                     <div class="reserve"><a href="###">立即抢购</a></div>
                 </div>
-                <div class="type">博物馆</div>
+                <div class="type">博物馆</div> -->
                 <!--  <div class="disc"><span>4.7折</span></div> -->
-            </figcaption>
-
+            <!-- </figcaption>
         </figure>
         <figure class="tour">
             <img src="/static/images/scenic/information2/tour1.jpg" alt="热门旅游">
@@ -260,9 +266,9 @@
                     <div class="price">￥<strong>54</strong>起</div>
                     <div class="reserve"><a href="###">立即抢购</a></div>
                 </div>
-                <div class="type">城墙</div>
+                <div class="type">城墙</div> -->
                 <!-- <div class="disc"><span>4.7折</span></div> -->
-            </figcaption>
+            <!-- </figcaption>
 
         </figure>
         <figure class="tour">
@@ -297,9 +303,9 @@
                     <div class="price">￥<strong>108</strong>起</div>
                     <div class="reserve"><a href="###">立即抢购</a></div>
                 </div>
-                <div class="type">大唐芙蓉园</div>
+                <div class="type">大唐芙蓉园</div> -->
                 <!-- <div class="disc"><span>4.7折</span></div> -->
-            </figcaption>
+            <!-- </figcaption>
 
         </figure>
         <figure class="tour">
@@ -331,9 +337,9 @@
                     <div class="price">￥<strong>218</strong>起</div>
                     <div class="reserve"><a href="###">立即抢购</a></div>
                 </div>
-                <div class="type">歌舞剧</div>
+                <div class="type">歌舞剧</div> -->
                 <!-- <div class="disc"><span>4.7折</span></div> -->
-            </figcaption>
+            <!-- </figcaption>
 
         </figure>
         <figure class="tour">
@@ -365,9 +371,9 @@
                     <div class="price">￥<strong>15</strong>起</div>
                     <div class="reserve"><a href="###">立即抢购</a></div>
                 </div>
-                <div class="type">回民街</div>
+                <div class="type">回民街</div> -->
                 <!-- <div class="disc"><span>4.7折</span></div> -->
-            </figcaption>
+            <!-- </figcaption>
 
         </figure>
         <figure class="tour">
@@ -401,9 +407,9 @@
                     <div class="price">￥<strong>158</strong>起</div>
                     <div class="reserve"><a href="###">立即抢购</a></div>
                 </div>
-                <div class="type">极地海洋馆</div>
+                <div class="type">极地海洋馆</div> -->
                 <!-- <div class="disc"><span>4.7折</span></div> -->
-            </figcaption>
+            <!-- </figcaption>
 
         </figure>
         <figure class="tour">
@@ -436,12 +442,12 @@
                     <div class="reserve"><a href="###">立即抢购</a></div>
                 </div>
                 <div class="type" 乐华城>
-    </div>
+    </div> -->
     <!-- <div class="disc"><span>4.7折</span></div> -->
-    </figcaption>
+    <!-- </figcaption>
 
-    </figure>
-    <figure class="tour">
+        </figure>
+        <figure class="tour">
         <img src="/static/images/scenic/information2/tour6.jpg" alt="热门旅游">
         <figcaption>
             <article>
@@ -473,14 +479,20 @@
                 <div class="price">￥<strong>95</strong>起</div>
                 <div class="reserve"><a href="###">立即抢购</a></div>
             </div>
-            <div class="type">动物园</div>
+            <div class="type">动物园</div> -->
             <!-- <div class="disc"><span>4.7折</span></div> -->
-        </figcaption>
+        <!-- </figcaption>
 
-    </figure>
-    <div class="more"><a href="###">加载更多...</a></div>
+        </figure>
+    <div class="more"><a href="###">加载更多...</a></div> -->
 
-</div>
+
+
+
+
+
+
+
 </div>
 <footer id="footer">
     <div class="top">

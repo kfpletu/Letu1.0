@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    {% extends 'pay/topUp.html' %}
+    {% block head %}
+    <link rel="stylesheet" href="/static/css/base.css" type="text/css">
+    <link rel="stylesheet" href="/static/css/pay/topUp.css" type="text/css">
+    <script src="/static/js/jquery.js"></script>
+    <script src="/static/js/pay/topUP.js"></script>
+    <link rel="stylesheet" href="/static/css/user/change.css">
+    {% endblock head %}
+</head>
+<body>
+    {% block change %}
+    <div id="change">
+    <form action="/user/change" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div>
+            <table>
+                <tr>
+                    <th>个人信息</th>
+                </tr>
+                <tr>
+                    <td>用户名:</td>
+                    <td>sdfsdfsf</td>
+                </tr>
+                <tr>
+                    <td>手机号:</td>
+                    <td>sdfdsfs</td>
+                </tr>
+                <tr>
+                    <td>邮箱:</td>
+                    <td>sdfsfs</td>
+                </tr>
+                <tr>
+                    <td>余额:</td>
+                    <td>sdfsdf</td>
+                </tr>
+            </table>
+
+                <p class="fImg" >
+                    <input type="file" name="uimg">
+                </p>
+                <p class='subImg'>
+                    <input type="submit" value="上传头像">
+                </p>
+            
+       </div> 
+    </form>
+    </div>
+    {% endblock change %}
+</body>
+</html>

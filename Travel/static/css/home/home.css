@@ -248,3 +248,8 @@
     letter-spacing: 1px;
     border-bottom-right-radius: 4px;
 }
+#changImg{
+    background: #ddd;
+    width: 400px;
+    height: 200px;
+}

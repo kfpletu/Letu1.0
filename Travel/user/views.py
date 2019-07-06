@@ -4,15 +4,15 @@ from PIL import Image, ImageDraw, ImageFont, ImageFilter
 import random
 from django.shortcuts import render, redirect
 import json
-
+import os
 # Create your views here.
 from .models import *
-from django.http import HttpResponse
+from django.http import HttpResponse,Http404
 from django.http import HttpResponseRedirect
 from django.core.paginator import Paginator
 from .page_helper import *
 from django.contrib.auth.hashers import make_password, check_password
-
+from django.conf import settings
 
 # 登录
 def login(request):
@@ -101,7 +101,8 @@ def register(request):
         email = request.POST.get('email')
         # 尝试向数据库添加用户信息,成功返回到登录页面进行登录
         try:
-            Info.objects.create(uname=uname, upwd=upwd, phone=phone, email=email)
+            Info.objects.create(uname=uname, upwd=upwd, phone=phone, email=email,
+                                head_img='/static/images/user/head.jpg')
             return HttpResponse('')
         except Exception as e:
             # 抛异常,刷新注册页面,重新注册
@@ -298,11 +299,21 @@ def reduce(request, g_id):
 
 
 # 订单结算
+from hotel.models import House
 def modif(request, g_id):
     target = Cart.objects.get(id=g_id)
     target.is_pay = 1
     target.save()
     try:
+
+        # print(type(target.g_img))
+        # print('int(target.g_img[-8])',(str(target.g_img)[-8]))
+        # print('int(target.g_img[-10]) * 10',(target.g_img)[-10])
+        house_id = int(str(target.g_img)[-8]) + int(str(target.g_img)[-10]) * 10
+        print(house_id)
+        house = House.objects.get(id=house_id)
+        house.order_count=house.order_count+1
+        house.save()
         History_list.objects.create(
             u_id=target.user_id,
             g_img=target.g_img,
@@ -316,6 +327,8 @@ def modif(request, g_id):
             booking_time='2019-2-2',
             is_del=target.is_pay
         )
+
+
     except:                 
         return HttpResponse('购买失败')
     else:
@@ -411,3 +424,29 @@ def balance(request):
     else:
         msg = json.dumps("亲!你的余额不足额...")
         return HttpResponse(msg)
+def change(request):
+    if request.method == "GET":
+        print('get')
+        return render(request,'user/change.html')
+    elif request.method == "POST":
+        # print('1')
+        u_id = request.session['userinfo']['id']
+        user_info= Info.objects.get(id=u_id)
+        # print('2')
+        u_img_fd = request.FILES["uimg"]
+        change_name='%s.png'%u_id
+        # print('3')
+        change_name=os.path.join(settings.CHANGE_MEDIA_ROOT,change_name)
+        try:
+            with open(change_name,'wb') as f:
+                f.write(u_img_fd.file.read())
+                user_info.head_img=change_name
+                user_info.save()
+                return HttpResponseRedirect('/')
+        except:
+            raise Http404
+
+
+
+        
+
