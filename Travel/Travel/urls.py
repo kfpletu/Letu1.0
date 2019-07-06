@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from . import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -25,3 +26,5 @@ urlpatterns = [
     url(r'^about/', include("about.urls")),
     url(r'^trip/', include("trip.urls")),
 ]
+#发布,找不到网页返回404页面
+handler404 = views.page_not_found #改动2

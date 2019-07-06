@@ -23,7 +23,7 @@ urlpatterns += [
     url(r'^payment', views.payment),
     url(r'^test', views.test), #用于测试
     url(r'^delete/', views.delete),
-    url(r'^order$',views.order),
+    url(r'^order',views.order,name='order'),
     url(r'^topUp$',views.topup),
     url(r'^top-top/$',views.top_top),
 ]

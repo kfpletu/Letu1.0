@@ -22,7 +22,7 @@
                     {% if request.session.userinfo %}
                         <a href="/user/change.html">
                             {% if  u_id  %}
-                                <img src= '/static/images/user/change/{{ u_id }}.png' sytel = "opacity:1" title="点击修改头像">
+                                <img src= '/static/images/user/change/{{ user.head_img }}' sytel = "opacity:1" title="点击修改头像">
                             {% else %}
                                 <img src='/static/images/user/head.jpg' sytel = "opacity:1" title="点击修改头像">
                             {% endif %}
@@ -112,7 +112,7 @@
         <h2 class="">热门旅游搜索</h2>
 
         <div id="search2">
-            <form action="" name="demo">
+            <form action="/search" name="demo" method="get">
                 {% csrf_token %}
                 <input type="text" name="search" placeholder="请输入关键字，景点，机票，酒店信息...">
                 <img src="../static/images/home/search1.png" onclick="demo.submit();">

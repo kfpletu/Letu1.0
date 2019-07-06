@@ -237,9 +237,9 @@ def booking(request):
 # 购物车
 def cart(request):
     u_id = request.session['userinfo']['id']
-    #获取账户余额
+    # 获取账户余额
     balance = Info.objects.get(id=u_id)
-    #获取该用户购物车商品对象
+    # 获取该用户购物车商品对象
     goods = Cart.objects.filter(user_id=u_id, is_pay=0)
     paginator = Paginator(goods, 4)
     cur_page = request.GET.get('page', 1)
@@ -250,9 +250,11 @@ def cart(request):
 # 历史记录
 def order(request):
     uid = request.session['userinfo']['id']
-    data = History_list.objects.filter(u_id=uid, is_del='1').all()
-    if data:
-        return render(request, 'user/order.html', locals())
+    datas = History_list.objects.filter(u_id=uid, is_del='1')
+    paginator = Paginator(datas, 4)
+    print(paginator.page_range)
+    cur_page = request.GET.get('page', 1)
+    page = paginator.page(cur_page)
     return render(request, 'user/order.html', locals())
 
 
@@ -268,7 +270,7 @@ def del_goods(request, g_id):
     cur_page = request.GET.get('page', 1)
     page = paginator.page(cur_page)
 
-    return render(request, 'user/cart.html',locals())
+    return render(request, 'user/cart.html', locals())
 
 
 # 数量加1
@@ -374,7 +376,6 @@ def topup(request):
     return render(request, 'pay/topUp.html',locals())
 
 
-
 def top_top(request):
     """
     充值金额的实现
@@ -387,12 +388,11 @@ def top_top(request):
     try:
         change_money = float(user.price)
         change_money = change_money + money
-        user.price=change_money
+        user.price = change_money
         user.save()
         return HttpResponse("1")
     except:
         return HttpResponse("0")
-
 
 
 def delete(request):
@@ -405,7 +405,6 @@ def delete(request):
     data = History_list.objects.filter(id=id)
     data.update(is_del=0)
     return redirect('/user/order')
-    # return render(request,'user/order.html')
 
 
 # 余额
@@ -424,23 +423,38 @@ def balance(request):
     else:
         msg = json.dumps("亲!你的余额不足额...")
         return HttpResponse(msg)
+#制作图片名
+def picture_name(file_name):
+    file_name_list=file_name.split('.')
+    file_style=file_name_list[-1]
+    return file_style
+
+#用户 信息页面以及头像上传
 def change(request):
     if request.method == "GET":
-        print('get')
-        return render(request,'user/change.html')
+        if hasattr(request, 'session') and 'userinfo' in request.session:
+             try:
+                u_id = request.session['userinfo']['id']
+                user = Info.objects.get(id=u_id)
+                return render(request,'user/change.html',locals())
+             except:
+                return HttpResponseRedirect('/')
+        else:
+            return HttpResponseRedirect('/')
     elif request.method == "POST":
         # print('1')
         u_id = request.session['userinfo']['id']
         user_info= Info.objects.get(id=u_id)
         # print('2')
         u_img_fd = request.FILES["uimg"]
-        change_name='%s.png'%u_id
+        file_style=picture_name(u_img_fd.name)
+        change_name_m='%s.%s'%(u_id,file_style)
         # print('3')
-        change_name=os.path.join(settings.CHANGE_MEDIA_ROOT,change_name)
+        change_name=os.path.join(settings.CHANGE_MEDIA_ROOT,change_name_m)
         try:
             with open(change_name,'wb') as f:
                 f.write(u_img_fd.file.read())
-                user_info.head_img=change_name
+                user_info.head_img=change_name_m
                 user_info.save()
                 return HttpResponseRedirect('/')
         except:

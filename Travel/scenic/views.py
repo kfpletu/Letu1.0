@@ -1,20 +1,22 @@
 from django.shortcuts import render
 from . import models
-from django.http import HttpResponse,Http404,HttpResponseRedirect
+from django.http import HttpResponse, Http404, HttpResponseRedirect
 from user.models import Cart
-import time,random
+import time, random
 import datetime
 import json
 
+
 # Create your views here.
 # Create your views here.
+
 
 def index(request):
     if request.method == 'GET':
         scens = models.Scen.objects.all()
         return render(request,'scenic/information.html',locals())
 
-def ticket(request,s):
+def ticket(request, s):
     s = int(s)
     ts = models.Scbr.objects.get(id=s)
     tics = ts.ticket_set.all()
@@ -25,12 +27,12 @@ def ticket(request,s):
     today,tomorrow=get_time()
     if 'userinfo' not in request.session:
         return HttpResponseRedirect('/user/login')
-    if request.method =='GET':
-        return render(request,'scenic/ticket.html',locals())
-    elif request.method =='POST':
+    if request.method == 'GET':
+        return render(request, 'scenic/ticket.html', locals())
+    elif request.method == 'POST':
         for tic in tics:
             pass
-        if request.POST.get('sub')!='':
+        if request.POST.get('sub') != '':
             retime = time.ctime()
             num=request.POST.get('number','')
             sttime=request.POST.get('starttime','')
