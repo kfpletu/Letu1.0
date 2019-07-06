@@ -11,6 +11,6 @@ urlpatterns = [
     # url(r'^addss$',views.add_s2),
     url(r'^$',views.index,name='scenic1'),
     url(r'^(\d+)/$',views.ticket),
-    # url(r'^scenic2$',views.scenic2,name='scenic2'),
+    url(r'^scenic2$',views.scenic2,name='scenic2'),
 
 ]
