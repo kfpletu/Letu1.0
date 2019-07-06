@@ -42,6 +42,7 @@ def login(request):
                         'uname': user.uname,
                         'id': user.id
                     }
+
                     resp = HttpResponse('登录成功', locals())
                     if remember:
                         resp.set_cookie('uname', uname, max_age=7 * 24 * 60 * 60)
@@ -266,11 +267,21 @@ def reduce(request, g_id):
 
 
 # 订单结算
+from hotel.models import House
 def modif(request, g_id):
     target = Cart.objects.get(id=g_id)
     target.is_pay = 1
     target.save()
     try:
+
+        # print(type(target.g_img))
+        # print('int(target.g_img[-8])',(str(target.g_img)[-8]))
+        # print('int(target.g_img[-10]) * 10',(target.g_img)[-10])
+        house_id = int(str(target.g_img)[-8]) + int(str(target.g_img)[-10]) * 10
+        print(house_id)
+        house = House.objects.get(id=house_id)
+        house.order_count=house.order_count+1
+        house.save()
         History_list.objects.create(
             u_id=target.user_id,
             g_img=target.g_img,
@@ -284,6 +295,8 @@ def modif(request, g_id):
             booking_time='2019-2-2',
             is_del=target.is_pay
         )
+
+
     except:                 
         return HttpResponse('购买失败')
     else:
@@ -323,7 +336,10 @@ def topup(request):
     :param request:
     :return:
     """
-    return render(request, 'pay/topUp.html')
+    u_id = request.session['userinfo']['id']
+    user = Info.objects.get(id = u_id)
+    price = float(user.price)
+    return render(request, 'pay/topUp.html',locals())
 
 
 

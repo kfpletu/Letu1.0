@@ -65,7 +65,9 @@
     float: right;
     text-align: center;
 }
-
+#checkout .result div:hover{
+    cursor: pointer;
+}
 #main .balance{
     margin-top: 20px;
     overflow: hidden;;

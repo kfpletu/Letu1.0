@@ -67,8 +67,8 @@
                     <form action="{% url 'hotel'%}{{ room.house.id }}/{{ room.room_level }}" method="post" class="form">
 
                         <div class=gpt>
-                            <p><label for="from_date{{ room.room_level }}">入住时间：</label><input type="text" id="from_date{{ room.room_level }}" name="from_data" value="{{ today }}"></p>
-                            <p><label for="to_date{{ room.room_level }}">预计搬出：</label><input type="text" id="to_date{{ room.room_level }}" name="to_data" value="{{ tomorrow }}"></p>
+                            <p><label for="from_date{{ room.room_level }}">入住时间：</label><input type="text" id="from_date{{ room.room_level }}" name="from_date" value="{{ today }}"></p>
+                            <p><label for="to_date{{ room.room_level }}">预计搬出：</label><input type="text" id="to_date{{ room.room_level }}" name="to_date" value="{{ tomorrow }}"></p>
                         </div>
                         <div class="gprice">
                             <h3>{{ room.room_name }}</h3>
@@ -86,7 +86,10 @@
                         <div class="action"><input type="submit" value="直接订房"></div>
                     </form>
                 </div>
-            {% endfor %}
+
+           {% empty  %}
+               <h1>对不起,亲,没有相对应的房间,请点击查看酒店返回.......</h1>
+           {% endfor %}
 
         </div>
     </div>
