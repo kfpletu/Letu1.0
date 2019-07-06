@@ -5,8 +5,6 @@ from user.models import Cart
 import time, random
 import datetime
 import json
-
-
 # Create your views here.
 
 #石霏霏的 views
@@ -50,7 +48,6 @@ def add_intro(request):
         intro.save()
     db4.close()
     return HttpResponse('插入成功')
-
 def index(request):
     if request.method == 'GET':
         scens = models.Scen.objects.all()
@@ -104,6 +101,9 @@ def get_time():
     tomorrow=time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(time.time()+86400))
     return today,tomorrow
 
+def scenic2(request):
+    if request.method == 'GET':
+        return render(request,'scenic/information02.html')
 
 
 
