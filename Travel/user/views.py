@@ -1,16 +1,18 @@
+from aliyunsdkcore.client import AcsClient
+from aliyunsdkcore.request import CommonRequest
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 import random
 from django.shortcuts import render, redirect
 import json
-
+import os
 # Create your views here.
 from .models import *
-from django.http import HttpResponse
+from django.http import HttpResponse,Http404
 from django.http import HttpResponseRedirect
 from django.core.paginator import Paginator
 from .page_helper import *
 from django.contrib.auth.hashers import make_password, check_password
-
+from django.conf import settings
 
 # 登录
 def login(request):
@@ -42,6 +44,7 @@ def login(request):
                         'uname': user.uname,
                         'id': user.id
                     }
+
                     resp = HttpResponse('登录成功', locals())
                     if remember:
                         resp.set_cookie('uname', uname, max_age=7 * 24 * 60 * 60)
@@ -54,8 +57,6 @@ def login(request):
 
 
 # 验证码
-
-
 def yanzma(request):
     """
         登录图形图形验证码
@@ -100,7 +101,8 @@ def register(request):
         email = request.POST.get('email')
         # 尝试向数据库添加用户信息,成功返回到登录页面进行登录
         try:
-            Info.objects.create(uname=uname, upwd=upwd, phone=phone, email=email)
+            Info.objects.create(uname=uname, upwd=upwd, phone=phone, email=email,
+                                head_img='/static/images/user/head.jpg')
             return HttpResponse('')
         except Exception as e:
             # 抛异常,刷新注册页面,重新注册
@@ -121,6 +123,38 @@ def checkphone(request):
     if Info.objects.filter(phone=phone):
         return HttpResponse('该手机号码已经被注册')
     return HttpResponse('')
+
+# 短信验证码
+
+
+def message(request):
+    phone = request.GET.get('phone')
+    number = random.randint(100000, 999999)
+
+    client = AcsClient('LTAIxo8uU7FoZPog',
+                       '5fhRNu2256WxUF5dP9QdSmqqbZ50ul', 'cn-hangzhou')
+    request = CommonRequest()
+    request.set_accept_format('json')
+    request.set_domain('dysmsapi.aliyuncs.com')
+    request.set_method('POST')
+    request.set_protocol_type('https')  # https | http
+    request.set_version('2017-05-25')
+    request.set_action_name('SendSms')
+
+    request.add_query_param('RegionId', "cn-hangzhou")
+    request.add_query_param('PhoneNumbers', phone)
+    request.add_query_param('SignName', "letu")
+    request.add_query_param('TemplateCode', "SMS_169897404")
+    request.add_query_param('TemplateParam', "{'code':%s}" % number)
+
+    response = client.do_action(request)
+    # python2:  print(response)
+    print(str(response, encoding='utf-8'))
+
+    jsonStr = {
+        'num':number
+    }
+    return HttpResponse(json.dumps(jsonStr))
 
 
 # 忘记密码
@@ -267,11 +301,21 @@ def reduce(request, g_id):
 
 
 # 订单结算
+from hotel.models import House
 def modif(request, g_id):
     target = Cart.objects.get(id=g_id)
     target.is_pay = 1
     target.save()
     try:
+
+        # print(type(target.g_img))
+        # print('int(target.g_img[-8])',(str(target.g_img)[-8]))
+        # print('int(target.g_img[-10]) * 10',(target.g_img)[-10])
+        house_id = int(str(target.g_img)[-8]) + int(str(target.g_img)[-10]) * 10
+        print(house_id)
+        house = House.objects.get(id=house_id)
+        house.order_count=house.order_count+1
+        house.save()
         History_list.objects.create(
             u_id=target.user_id,
             g_img=target.g_img,
@@ -285,12 +329,14 @@ def modif(request, g_id):
             booking_time='2019-2-2',
             is_del=target.is_pay
         )
-    except:
+
+
+    except:                 
         return HttpResponse('购买失败')
     else:
         return HttpResponse('payment.html')
-
-
+    
+#支付成功跳转页面
 def payment(request):
     """
     支付界面的返回
@@ -324,7 +370,10 @@ def topup(request):
     :param request:
     :return:
     """
-    return render(request, 'pay/topUp.html')
+    u_id = request.session['userinfo']['id']
+    user = Info.objects.get(id = u_id)
+    price = float(user.price)
+    return render(request, 'pay/topUp.html',locals())
 
 
 def top_top(request):
@@ -365,7 +414,7 @@ def balance(request):
     u_id = request.session['userinfo']['id']
     balance = Info.objects.get(id=u_id)
     money = balance.price
-    if money > t_price:
+    if money >= t_price:
         money -= t_price
         balance.price = money
         balance.save()
@@ -374,3 +423,29 @@ def balance(request):
     else:
         msg = json.dumps("亲!你的余额不足额...")
         return HttpResponse(msg)
+def change(request):
+    if request.method == "GET":
+        print('get')
+        return render(request,'user/change.html')
+    elif request.method == "POST":
+        # print('1')
+        u_id = request.session['userinfo']['id']
+        user_info= Info.objects.get(id=u_id)
+        # print('2')
+        u_img_fd = request.FILES["uimg"]
+        change_name='%s.png'%u_id
+        # print('3')
+        change_name=os.path.join(settings.CHANGE_MEDIA_ROOT,change_name)
+        try:
+            with open(change_name,'wb') as f:
+                f.write(u_img_fd.file.read())
+                user_info.head_img=change_name
+                user_info.save()
+                return HttpResponseRedirect('/')
+        except:
+            raise Http404
+
+
+
+        
+

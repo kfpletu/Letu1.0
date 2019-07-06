@@ -15,7 +15,13 @@ from scenic.models import Scen
 
 def index(request):
     uname = ''
-    return render(request, 'index.html', locals())
+    try:
+        if hasattr(request,'session') and 'userinfo' in request.session:
+            u_id = request.session['userinfo']['id']
+            user=models.Info.objects.get(id=u_id)
+        return render(request, 'index.html', locals())
+    except:
+        return render(request, 'index.html', locals())
 
 
 def find(keyword):
