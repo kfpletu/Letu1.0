@@ -55,10 +55,10 @@
         <nav>
             <ul class="link">
                 <h1 class="none">网站导航</h1>
-                <li class="active"><a href="/">首页</a></li>
+                <li><a href="/">首页</a></li>
                 <li><a href="/scenic">景点门票</a></li>
                 <li><a href="/trip">交通出行</a></li>
-                <li><a href="/hotel">酒店预定</a></li>
+                <li class="active"><a href="/hotel">酒店预定</a></li>
                 <li><a href="/about">关于我们</a></li>
             </ul>
         </nav>
@@ -116,7 +116,7 @@
 <div id="bodytickrt">
     <div class=daohang style="background:orange;">
         <a href="javascript:void(0)">房间订购</a>
-        <a href="/scenic/information">周围景点</a>
+        <a href="/scenic/">周围景点</a>
     </div>
 
     <div class=count>
@@ -166,8 +166,8 @@
                     <form action="{% url 'hotel'%}{{ id }}/{{ room.room_level }}" method="post" class ="form">
 
                         <div class=gpt>
-                            <p>入住时间：<input type="text" class="date_time" id="from_date{{ room.room_level }}" name="from_data" value="{{ today }}"></p>
-                            <p>预计搬出：<input type="text" class="date_time" id="to_date{{ room.room_level }}" name="to_data" value="{{ tomorrow }}"></p>
+                            <p>入住时间：<input type="text" class="date_time" id="from_date{{ room.room_level }}" name="from_date" value="{{ today }}"></p>
+                            <p>预计搬出：<input type="text" class="date_time" id="to_date{{ room.room_level }}" name="to_date" value="{{ tomorrow }}"></p>
                         </div>
                         <div class="gprice">
                             <h3>乐途专享价</h3>

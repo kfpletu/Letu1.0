@@ -21,9 +21,6 @@ def login(request):
         uname = request.POST.get('uname')
         upwd = request.POST.get('upwd')
         upwd = make_password(upwd, 'xiaochen', 'pbkdf2_sha256')
-        # 获取验证码
-        validateCode = request.POST.get('validateCode')
-        print(validateCode)
         # 获取记住密码单选框的状态
         remember = request.POST.get('remember')
         try:
@@ -45,6 +42,7 @@ def login(request):
                         'uname': user.uname,
                         'id': user.id
                     }
+
                     resp = HttpResponse('登录成功', locals())
                     if remember:
                         resp.set_cookie('uname', uname, max_age=7 * 24 * 60 * 60)
@@ -131,50 +129,39 @@ def getpwd(request):
     if request.method == 'GET':
         return render(request, 'user/forget.html')
     elif request.method == 'POST':
-
         # 获取用户输入的信息
         uname = request.POST.get('uname')
         phone = request.POST.get('phone')
         email = request.POST.get('email')
-        validateCode = request.POST.get('validateCode')
-
         # 将用户输入的信息与数据库进行比对,正确则发送seesion,返回重置密码页面
         try:
             info = Info.objects.get(uname=uname, phone=phone, email=email)
             request.session['uname'] = info.uname
-            return render(request, 'user/forget_new.html')
+            return HttpResponse('')
         except:
             # 抛异常则输入信息不正确,刷新忘记密码页面
-            return render(request, 'user/forget.html')
+            return HttpResponse('输入信息有误,请重新输入')
 
 
 # 修改密码
 def updatepwd(request):
     if request.method == 'GET':
-        return render(request, 'user/forget.html')
+        return render(request, 'user/forget_new.html')
     elif request.method == 'POST':
         # 获取用户输入的新密码
-        uname = request.session['uname']
         new_pwd = request.POST.get('new_pwd')
         new_pwd = make_password(new_pwd, 'xiaochen', 'pbkdf2_sha256')
-        new_pwd_again = request.POST.get('new_pwd_again')
-        new_pwd_again = make_password(new_pwd_again, 'xiaochen', 'pbkdf2_sha256')
-        # 判断两次密码是否一致
-        if new_pwd == new_pwd_again:
-            try:
-                # 修改相应用户的密码,删除seesion,返回登录页面
-                abook = Info.objects.get(uname=uname)
-                abook.upwd = new_pwd
-                abook.save()
-                del request.session['uname']
-                return HttpResponseRedirect('/user/login')
-            except:
-                # 重新返回忘记密码页面
-                return render(request, 'user/forget.html')
-        else:
-            # 如果两次密码不一致,刷新忘记密码页面,返回错误信息
-            pwd_error = '密码不一致'
-            return render(request, 'user/forget_new.html', locals())
+        try:
+            uname = request.session['uname']
+            # 修改相应用户的密码,删除seesion,返回登录页面
+            abook = Info.objects.get(uname=uname)
+            abook.upwd = new_pwd
+            abook.save()
+            del request.session['uname']
+            return HttpResponse('ok')
+        except:
+            # 重新返回忘记密码页面
+            return HttpResponse('')
 
 
 # 退出登录
@@ -279,11 +266,21 @@ def reduce(request, g_id):
 
 
 # 订单结算
+from hotel.models import House
 def modif(request, g_id):
     target = Cart.objects.get(id=g_id)
     target.is_pay = 1
     target.save()
     try:
+
+        # print(type(target.g_img))
+        # print('int(target.g_img[-8])',(str(target.g_img)[-8]))
+        # print('int(target.g_img[-10]) * 10',(target.g_img)[-10])
+        house_id = int(str(target.g_img)[-8]) + int(str(target.g_img)[-10]) * 10
+        print(house_id)
+        house = House.objects.get(id=house_id)
+        house.order_count=house.order_count+1
+        house.save()
         History_list.objects.create(
             u_id=target.user_id,
             g_img=target.g_img,
@@ -297,15 +294,20 @@ def modif(request, g_id):
             booking_time='2019-2-2',
             is_del=target.is_pay
         )
+
+
     except:                 
         return HttpResponse('购买失败')
     else:
         return HttpResponse('payment.html')
     
-    
-
-
+#支付成功跳转页面
 def payment(request):
+    """
+    支付界面的返回
+    :param request:
+    :return:
+    """
     return render(request, 'user/payment.html')
 
 
@@ -333,11 +335,19 @@ def topup(request):
     :param request:
     :return:
     """
-    return render(request, 'pay/topUp.html')
+    u_id = request.session['userinfo']['id']
+    user = Info.objects.get(id = u_id)
+    price = float(user.price)
+    return render(request, 'pay/topUp.html',locals())
 
 
 
 def top_top(request):
+    """
+    充值金额的实现
+    :param request:
+    :return: 布尔值
+    """
     uid = request.session['userinfo']['id']
     user = Info.objects.get(id=uid)
     money = float(request.POST['money'])
@@ -372,7 +382,7 @@ def balance(request):
     u_id = request.session['userinfo']['id']
     balance = Info.objects.get(id=u_id)
     money = balance.price
-    if money > t_price:
+    if money >= t_price:
         money -= t_price
         balance.price = money
         balance.save()

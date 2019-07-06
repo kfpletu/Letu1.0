@@ -62,9 +62,10 @@ def get_time():
     tomorrow=time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(time.time()+86400))
     return today,tomorrow
 
-def scenic2(request):
-    if request.method == 'GET':
-        return render(request,'scenic/information02.html')
+# def scenic2(request):
+#     if request.method == 'GET':
+# <<<<<<< HEAD
+#         return render(request,'scenic/information02.html')
 
 # def add_s1(request):
 #     db1=open('/home/tarena/Letu1.0/Travel/static/images/scenic/text/s1','r+',encoding='UTF-8')
@@ -115,3 +116,7 @@ def scenic2(request):
 #         intro.save()
 #     db4.close()
 #     return HttpResponse('插入成功')
+# =======
+#         scens = models.Scen.objects.all()
+#         return render(request,'scenic/information02.html',locals())
+# >>>>>>> c941d3f711dcf8435e8f3515257b61a9601a1d46
