@@ -1,9 +1,11 @@
 from django.shortcuts import render
 from . import models
-from django.http import HttpResponse,Http404,HttpResponseRedirect
+from django.http import HttpResponse, Http404, HttpResponseRedirect
 from user.models import Cart
-import time,random
+import time, random
 import datetime
+import json
+
 
 # Create your views here.
 
@@ -53,46 +55,32 @@ def index(request):
     if request.method == 'GET':
         scens = models.Scen.objects.all()
         return render(request,'scenic/information.html',locals())
-def get_time():
-    today = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(time.time()+3600))
-    tomorrow=time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(time.time()+86400))
-    return today,tomorrow
-# def checktime(request):
-#     stime = request.POST['time1']
-#     print('st:',stime)
-#     etime = request.POST['time2']
-#     print('en:',etime)
-#     if etime<stime:
-#         return HttpResponse("0")
-#     else:
-#         return HttpResponse("1")
 
-def ticket(request,s):
+def ticket(request, s):
     s = int(s)
     ts = models.Scbr.objects.get(id=s)
     tics = ts.ticket_set.all()
     intr = ts.introduce.sce_details
+    maps=ts.map
+    jingdu=maps.jingdu
+    weidu=maps.weidu
     today,tomorrow=get_time()
     if 'userinfo' not in request.session:
         return HttpResponseRedirect('/user/login')
-    if request.method =='GET':
-        return render(request,'scenic/ticket.html',locals())
-    elif request.method =='POST':
+    if request.method == 'GET':
+        return render(request, 'scenic/ticket.html', locals())
+    elif request.method == 'POST':
         for tic in tics:
             pass
-        if request.POST.get('sub')!='':
+        if request.POST.get('sub') != '':
             retime = time.ctime()
             num=request.POST.get('number','')
             sttime=request.POST.get('starttime','')
             entime=request.POST.get('endtime','')
-            if sttime is '' or entime is '' or sttime>entime:
-                return render(request,'scenic/error.html',locals())
-
-            else:
-                suprice=int(num)*tic.price
-                import decimal
-                suprice=decimal.Decimal(suprice)
-                ord=Cart.objects.create(
+            suprice=int(num)*tic.price
+            import decimal
+            suprice=decimal.Decimal(suprice)
+            ord=Cart.objects.create(
                                 user_id=request.session['userinfo']['id'],
                                 g_img=ts.img1,
                                 g_name=tic.name,
@@ -106,11 +94,15 @@ def ticket(request,s):
                                 serial_num=str(request.session['userinfo']['id']) +retime
 
                                         )
-                now = retime
-                from_data = sttime
-                to_data = entime
-                cart_id = str(request.session['userinfo']['id']) + now+str(random.uniform(5,10))
-                return render(request,'scenic/booking.html',locals())
+            now = retime
+            from_data = sttime
+            to_data = entime
+            cart_id = str(request.session['userinfo']['id']) + now+str(random.uniform(5,10))
+            return render(request,'scenic/booking.html',locals())
+def get_time():
+    today = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(time.time()+3600))
+    tomorrow=time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(time.time()+86400))
+    return today,tomorrow
 
 
 

@@ -86,7 +86,10 @@
                         <div class="action"><input type="submit" value="直接订房"></div>
                     </form>
                 </div>
-            {% endfor %}
+
+           {% empty  %}
+               <h1>对不起,亲,没有相对应的房间,请点击查看酒店返回.......</h1>
+           {% endfor %}
 
         </div>
     </div>

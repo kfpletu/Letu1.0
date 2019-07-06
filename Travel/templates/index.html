@@ -19,6 +19,16 @@
         <div id="cart">
             <b>
                 <ul>
+                    {% if request.session.userinfo %}
+                        <a href="/user/change.html">
+                            {% if  u_id  %}
+                                <img src= '/static/images/user/change/{{ user.head_img }}' sytel = "opacity:1" title="点击修改头像">
+                            {% else %}
+                                <img src='/static/images/user/head.jpg' sytel = "opacity:1" title="点击修改头像">
+                            {% endif %}
+                        </a>
+                    {% endif %}
+                    <div class="down"></div>
                     <li class="home">
                         <a href="javascript:void(0)">
                             欢迎您,{{ request.session.userinfo.uname }}
@@ -66,22 +76,23 @@
 </header>
 <div id="search">
     <div id="imgd">
-        <a href="../travel/html/dayanta.html" id="src1">
+        <a href="/scenic/12/" id="src1">
             <img src="../static/images/home/banner01.jpg">
         </a>
+        <a href="/scenic/4/">
         <a href="scenic/4/">
             <img src="../static/images/home/banner02.jpg">
         </a>
-        <a href="../travel/html/datangfurongyuan.html">
+        <a href="/scenic/14/">
             <img src="../static/images/home/banner03.jpg">
         </a>
-        <a href="../travel/html/bingmayong.html">
+        <a href="/scenic/13/">
             <img src="../static/images/home/banner04.jpg">
         </a>
-        <a href="../travel/html/huashan.html">
+        <a href="/scenic/11/">
             <img src="../static/images/home/banner05.jpg">
         </a>
-        <a href="../travel/html/zhonglou.html">
+        <a href="/scenic/10/">
             <img src="../static/images/home/banner06.jpg">
         </a>
         <ul>
@@ -101,7 +112,7 @@
         <h2 class="">热门旅游搜索</h2>
 
         <div id="search2">
-            <form action="" name="demo">
+            <form action="/search" name="demo" method="get">
                 {% csrf_token %}
                 <input type="text" name="search" placeholder="请输入关键字，景点，机票，酒店信息...">
                 <img src="../static/images/home/search1.png" onclick="demo.submit();">
