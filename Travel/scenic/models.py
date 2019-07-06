@@ -10,8 +10,7 @@ class Scen(models.Model):
     pre_price=models.DecimalField("原价",max_digits=6,decimal_places=2)
     local_price=models.DecimalField("现价",max_digits=6,decimal_places=2)
     low_time=models.DateField("优惠截止时间",default='2019-09-20')
-    img=models.ImageField('景点图片',null=True)
-    
+    img=models.ImageField('景点图片',null=True) 
     class Meta:
         verbose_name='景点信息表1'
         verbose_name_plural = verbose_name
