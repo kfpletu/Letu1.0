@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # Create your models here.
 class Scen(models.Model):
     sce_name=models.CharField('景点名称',max_length=8,unique=True)
@@ -12,10 +13,13 @@ class Scen(models.Model):
     low_time=models.DateField("优惠截止时间",default='2019-09-20')
     img=models.ImageField('景点图片',null=True) 
     class Meta:
-        verbose_name='景点信息表1'
+        verbose_name = '景点信息表1'
         verbose_name_plural = verbose_name
+
     def __str__(self):
-        return (self.id,self.sce_name)
+        return (self.id, self.sce_name)
+
+
 class Scbr(models.Model):
     sce_name = models.CharField('景点名称', max_length=8)
     grage=models.CharField('景区级别',default='AAAA',max_length=10)
@@ -30,7 +34,7 @@ class Scbr(models.Model):
     word2=models.CharField('主题词1',max_length=5,null=True)
     scen=models.OneToOneField(Scen,null=True)
     class Meta:
-        verbose_name='景点信息表2'
+        verbose_name = '景点信息表2'
         verbose_name_plural = verbose_name
     def __str__(self):
         return (self.id,self.sce_name)

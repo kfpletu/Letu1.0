@@ -137,3 +137,4 @@ SESSION_COOKIE_AGE = 24 * 60 * 60
 
 #hotel 文件上传测试代码
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images/hotel')
+CHANGE_MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images/user/change')
