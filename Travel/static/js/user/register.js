@@ -49,7 +49,11 @@ $(function () {
                 xhr.open('get', url, true)
                 xhr.onreadystatechange = function () {
                     if (xhr.readyState == 4 && xhr.status == 200) {
-                        $('#uphone').html(xhr.responseText)
+                        if (xhr.responseText) {
+                            $('#uphone').html(xhr.responseText)
+                        } else {
+                            $('#uphone').html('请获取手机验证码')
+                        }
                     }
                 }
                 xhr.send(null)
@@ -61,7 +65,7 @@ $(function () {
 
     $('#btnPhone').click(function () { 
         if ($('#phone').val()) {
-            if ($('#uphone').html()) {
+            if ($('#uphone').html() != '请获取手机验证码') {
                 $('#uphone').html('请输入正确的手机号码')
             } else {
                 $('#showMess').css('display', 'block');
@@ -104,9 +108,10 @@ $(function () {
         setmes = String($('#mes').val());
         getmes = String($('#showMes').html())
         if (getmes == setmes) {
+            $('#uphone').html('')
             $('#showMess').css('display', 'none');
             $('#subReg').css('background', '#997679');
-            $('#getMes').attr('disabled', false);
+            $('#subReg').attr('disabled', false);
         } else {
             alert('验证码输入错误')
             $('#mes').val('');
@@ -131,7 +136,7 @@ $(function () {
 
     $('#subReg').click(function () { 
         if ($('#uname').val() && $('#upwd').val() && $('#phone').val() && $('#email').val()) {
-            if ($('#name').html() || $('#pwd').html() || $('#upone').html() || $('#uemail').html()) {
+            if ($('#name').html() || $('#pwd').html() || $('#uphone').html() || $('#uemail').html()) {
                 alert('注册失败')
             } else {
                 var xhr = createXhr()
