@@ -6,7 +6,8 @@ import time,random
 import datetime
 
 # Create your views here.
-# Create your views here.
+
+#石霏霏的 views
 def add_s1(request):
     db1=open('/home/tarena/Letu1.0/Travel/static/images/scenic/text/s1','r+',encoding='UTF-8')
     for line in db1:
@@ -111,7 +112,37 @@ def ticket(request,s):
                 cart_id = str(request.session['userinfo']['id']) + now+str(random.uniform(5,10))
                 return render(request,'scenic/booking.html',locals())
 
+
+
+
+#唐琳莎的视图（views）
+def data1(request):
+        models.Scen2.objects.create(sce_name='兵马俑',
+                                   sce_topic='秦始皇陵兵马俑',
+                                   brief_des='世界八大奇迹之一,重现两千年前军队的姿态。',
+                                   address='陕西省西安市临潼区秦始皇陵以东1.5公里处',
+                                   assessment='乐途旅行口碑榜，最佳战略合作伙伴',
+                                   price=120,
+                                   cut_off_time='2019-10-10',
+                                   img='/static/images/scenic/information2/bingmayong.jpg'
+                                   )
+        #return render(request,'scenic/information02.html',locals())
+        return HttpResponse('ok')
+
 def scenic2(request):
-    if request.method == 'GET':
-        scens = models.Scen.objects.all()
-        return render(request,'scenic/information02.html',locals())
+    scens = models.Scen2.objects.all()
+    return render(request,'scenic/information02.html',locals())
+
+def add_info(request):
+    db1=open('/home/tarena/桌面/project/Letu1.0/Travel/static/images/scenic/text/scenic2_infor','r+',encoding='UTF-8')
+    for text in db1:
+        list = text.split('#')
+        scens = models.Scen2(sce_name=list[8],sce_topic=list[2],brief_des=list[3],
+                            address=list[4],assessment=list[5],price=list[7],
+                            cut_off_time=list[6],img=list[1])
+        scens.save()
+    db1.close()
+    return HttpResponse('插入成功')
+
+
+

@@ -40,3 +40,18 @@ class Ticket(models.Model):
     name=models.CharField("景点名称",max_length=20)
     price=models.DecimalField("门票价格",max_digits=6,decimal_places=2)
     scbr= models.ForeignKey(Scbr,models.CASCADE,null=True)
+
+##########唐琳莎的models
+from django.db import models
+
+# Create your models here.
+class Scen2(models.Model):
+    sce_name=models.CharField('景点名称',max_length=8,default='')
+    sce_topic=models.CharField('主题名称',max_length=15,default='')
+    brief_des=models.CharField('景点简述',max_length=40,default='')
+    address=models.CharField('地址',max_length=100,default='')
+    assessment=models.CharField('评价',max_length=100,default='')
+    price=models.DecimalField("价格",max_digits=6,decimal_places=0,default=100)
+    cut_off_time=models.DateField("优惠截止时间",default='2019-09-20')
+    img=models.ImageField('景点图片',null=True)
+
