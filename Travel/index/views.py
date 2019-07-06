@@ -4,7 +4,7 @@ from django.shortcuts import render, render_to_response, redirect
 from django.http import Http404
 # from ..scenic.models import *
 # from ..hotel.models import *
-
+from user.models import *
 
 # Create your views here.
 from hotel.models import Hotel
@@ -18,7 +18,7 @@ def index(request):
     try:
         if hasattr(request,'session') and 'userinfo' in request.session:
             u_id = request.session['userinfo']['id']
-            user=models.Info.objects.get(id=u_id)
+            user=Info.objects.get(id=u_id)
         return render(request, 'index.html', locals())
     except:
         return render(request, 'index.html', locals())
