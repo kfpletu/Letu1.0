@@ -392,23 +392,38 @@ def balance(request):
     else:
         msg = json.dumps("亲!你的余额不足额...")
         return HttpResponse(msg)
+#制作图片名
+def picture_name(file_name):
+    file_name_list=file_name.split('.')
+    file_style=file_name_list[-1]
+    return file_style
+
+#用户 信息页面以及头像上传
 def change(request):
     if request.method == "GET":
-        print('get')
-        return render(request,'user/change.html')
+        if hasattr(request, 'session') and 'userinfo' in request.session:
+             try:
+                u_id = request.session['userinfo']['id']
+                user = Info.objects.get(id=u_id)
+                return render(request,'user/change.html',locals())
+             except:
+                return HttpResponseRedirect('/')
+        else:
+            return HttpResponseRedirect('/')
     elif request.method == "POST":
         # print('1')
         u_id = request.session['userinfo']['id']
         user_info= Info.objects.get(id=u_id)
         # print('2')
         u_img_fd = request.FILES["uimg"]
-        change_name='%s.png'%u_id
+        file_style=picture_name(u_img_fd.name)
+        change_name_m='%s.%s'%(u_id,file_style)
         # print('3')
-        change_name=os.path.join(settings.CHANGE_MEDIA_ROOT,change_name)
+        change_name=os.path.join(settings.CHANGE_MEDIA_ROOT,change_name_m)
         try:
             with open(change_name,'wb') as f:
                 f.write(u_img_fd.file.read())
-                user_info.head_img=change_name
+                user_info.head_img=change_name_m
                 user_info.save()
                 return HttpResponseRedirect('/')
         except:
