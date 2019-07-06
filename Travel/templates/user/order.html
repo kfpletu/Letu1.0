@@ -6,11 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>我的订单</title>
     <style>
-        .item>.oaction>.del{
+        .item > .oaction > .del {
             color: #666666;
         }
-        .item>.oaction>.del:hover{
-            color:#ff6600;
+
+        .item > .oaction > .del:hover {
+            color: #ff6600;
         }
     </style>
     <script src="/static/js/jquery.js"></script>
@@ -18,10 +19,10 @@
     <script>
         $(function () {
             $(".item>.oaction>.del").click(function () {
-                var id=$(this).parents(".item").find(".hid").html();
+                var id = $(this).parents(".item").find(".hid").html();
                 console.log(id);
-                var xhr=createXhr();
-                xhr.open("get","/user/delete?id="+id,true);
+                var xhr = createXhr();
+                xhr.open("get", "/user/delete?id=" + id, true);
                 xhr.send(null);
             })
         })
@@ -68,9 +69,9 @@
                 <div class="oaction">操作</div>
             </div>
             <!--商品展示-->
-            <div id="content">
-                {% if data %}
-                    {% for datum in data %}
+            <div id="content" style="position: relative">
+                {% if page %}
+                    {% for datum in page%}
                         <!--商品记录-->
                         <div class="item">
 
@@ -100,6 +101,32 @@
                             </div>
                         </div>
                     {% endfor %}
+                    <!-- 分页 -->
+                    <div id='page' style="position: absolute;bottom: 35px;left: 550px">
+                        {# 分页功能 #}
+                        {# 上一页功能 #}
+                        {% if page.has_previous %}
+                            <a href="{% url 'order' %}?page={{ page.previous_page_number }}">上一页</a>
+                        {% else %}
+                            上一页
+                        {% endif %}
+
+                        {# 以下增加各页的超链接 #}
+                        {% for p in paginator.page_range %}
+                            {# 判断p是否是当前页，如果是当前面，不加超链接#}
+                            {% if p == page.number %}
+                                {{ p }}
+                            {% else %}
+                                <a href="{% url 'order' %}?page={{ p }}">{{ p }}</a>
+                            {% endif %}
+                        {% endfor %}
+                        {#下一页功能#}
+                        {% if page.has_next %}
+                            <a href="{% url 'order' %}?page={{ page.next_page_number }}">下一页</a>
+                        {% else %}
+                            下一页
+                        {% endif %}
+                    </div>
                 {% else %}
                     <div id="boxx">
                         <div class="boxx">

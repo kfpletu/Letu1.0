@@ -1,3 +1,5 @@
+from aliyunsdkcore.client import AcsClient
+from aliyunsdkcore.request import CommonRequest
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 import random
 from django.shortcuts import render, redirect
@@ -55,8 +57,6 @@ def login(request):
 
 
 # 验证码
-
-
 def yanzma(request):
     """
         登录图形图形验证码
@@ -123,6 +123,38 @@ def checkphone(request):
     if Info.objects.filter(phone=phone):
         return HttpResponse('该手机号码已经被注册')
     return HttpResponse('')
+
+# 短信验证码
+
+
+def message(request):
+    phone = request.GET.get('phone')
+    number = random.randint(100000, 999999)
+
+    client = AcsClient('LTAIxo8uU7FoZPog',
+                       '5fhRNu2256WxUF5dP9QdSmqqbZ50ul', 'cn-hangzhou')
+    request = CommonRequest()
+    request.set_accept_format('json')
+    request.set_domain('dysmsapi.aliyuncs.com')
+    request.set_method('POST')
+    request.set_protocol_type('https')  # https | http
+    request.set_version('2017-05-25')
+    request.set_action_name('SendSms')
+
+    request.add_query_param('RegionId', "cn-hangzhou")
+    request.add_query_param('PhoneNumbers', phone)
+    request.add_query_param('SignName', "letu")
+    request.add_query_param('TemplateCode', "SMS_169897404")
+    request.add_query_param('TemplateParam', "{'code':%s}" % number)
+
+    response = client.do_action(request)
+    # python2:  print(response)
+    print(str(response, encoding='utf-8'))
+
+    jsonStr = {
+        'num':number
+    }
+    return HttpResponse(json.dumps(jsonStr))
 
 
 # 忘记密码
@@ -205,9 +237,9 @@ def booking(request):
 # 购物车
 def cart(request):
     u_id = request.session['userinfo']['id']
-    #获取账户余额
+    # 获取账户余额
     balance = Info.objects.get(id=u_id)
-    #获取该用户购物车商品对象
+    # 获取该用户购物车商品对象
     goods = Cart.objects.filter(user_id=u_id, is_pay=0)
     paginator = Paginator(goods, 4)
     cur_page = request.GET.get('page', 1)
@@ -218,9 +250,11 @@ def cart(request):
 # 历史记录
 def order(request):
     uid = request.session['userinfo']['id']
-    data = History_list.objects.filter(u_id=uid, is_del='1').all()
-    if data:
-        return render(request, 'user/order.html', locals())
+    datas = History_list.objects.filter(u_id=uid, is_del='1')
+    paginator = Paginator(datas, 4)
+    print(paginator.page_range)
+    cur_page = request.GET.get('page', 1)
+    page = paginator.page(cur_page)
     return render(request, 'user/order.html', locals())
 
 
@@ -236,7 +270,7 @@ def del_goods(request, g_id):
     cur_page = request.GET.get('page', 1)
     page = paginator.page(cur_page)
 
-    return render(request, 'user/cart.html',locals())
+    return render(request, 'user/cart.html', locals())
 
 
 # 数量加1
@@ -342,7 +376,6 @@ def topup(request):
     return render(request, 'pay/topUp.html',locals())
 
 
-
 def top_top(request):
     """
     充值金额的实现
@@ -355,12 +388,11 @@ def top_top(request):
     try:
         change_money = float(user.price)
         change_money = change_money + money
-        user.price=change_money
+        user.price = change_money
         user.save()
         return HttpResponse("1")
     except:
         return HttpResponse("0")
-
 
 
 def delete(request):
@@ -373,7 +405,6 @@ def delete(request):
     data = History_list.objects.filter(id=id)
     data.update(is_del=0)
     return redirect('/user/order')
-    # return render(request,'user/order.html')
 
 
 # 余额

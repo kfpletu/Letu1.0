@@ -208,3 +208,11 @@
 #last:hover{
     color: #f60;
 }
+#content{
+    position: relative;
+}
+#page{
+    position: absolute;
+    bottom: 120px;
+    text-align: center;
+}
