@@ -154,344 +154,43 @@
             </ul>
         </div>
         <!-- 加载子条目 -->
-        <!-- {% for sen in scens %} -->
+         {% for sen in scens %}
         <figure class="tour">
-            <a href="{% url 'scenic1' %}{{ sen.id }}"> <img src="{{ sen.img }}" alt="限时特价"></a>
+            <a href="{% url 'scenic1' %}"><img src="{{ sen.img }}" alt="限时特价"></a>
             <!-- <img src="/static/images/scenic/information2/兵马俑.jpg" alt="热门旅游"> -->
             <figcaption>
                 <article>
                     <header>
                         <hgroup>
-                            <h2>{{ sce_topic}}</h2>
-                            <h3>{{ brief_des }}</h3>
+                            <h2>{{ sen.sce_topic }}</h2>
+                            <h3>{{ sen.brief_des }}</h3>
                         </hgroup>
                     </header>
                     <ol>
                         <li>
-                            <mark>地址</mark>{{ address }}
+                            <mark>地址</mark>{{ sen.address }}
                         </li>
                         <li>
-                            <mark>5A级</mark>{{ assessment }}
+                            <mark>5A级</mark>{{ sen.assess
+                                ment }}
                         </li>
                     </ol>
 
                     <footer>
-                        本团游由乐途旅行网赞助提供，截止于<time>{{ cut_off_time }}</time>
+                        本团游由乐途旅行网赞助提供，截止于<time>{{ sen.cut_off_time }}</time>
                     </footer>
                 </article>
                 <div class="buy">
-                    <div class="price">￥<strong>{{ price }}</strong>起</div>
-                    <div class="reserve"><a href="###">立即抢购</a></div>
+                    <div class="price">￥<strong>{{ sen.price }}</strong>起</div>
+                    <div class="reserve"><a href="{% url 'scenic1' %}{{ sen.id }}">立即抢购</a></div>
                 </div>
-                <div class="type">{{ sce_name }}</div>
-                <!-- <div class="disc"><span>4.7折</span></div> -->
+                <div class="type">{{ sen.sce_name }}</div>
+<!--                 <div class="disc"><span>4.7折</span></div>-->
             </figcaption>
         </figure>
-        <!-- {% endfor %} -->
+         {% endfor %}
         <div class="more"><a href="###">加载更多...</a></div>
         </div>
-
-
-
-
-
-
-
-
-
-        <!-- <figure class="tour">
-            <img src="/static/images/scenic/information2/博物馆.jpg" alt="热门旅游">
-            <figcaption>
-                <article>
-                    <header>
-                        <hgroup>
-                            <h2>陕西历史博物馆</h2>
-                            <h3>中国古代文明的艺术殿堂。中国第一座大型现代化博物馆。</h3>
-                        </hgroup>
-
-                    </header>
-                    <ol>
-                        <li>
-                            <mark>地址</mark>
-                            西安市雁塔区小寨东路91号（大雁塔西北侧）
-                        </li>
-                        <li>
-                            <mark>5A级</mark>
-                            乐途旅行口碑榜第二名
-                        </li>
-                    </ol>
-
-                    <footer>
-                        本团游由乐途旅行网赞助提供，截止于
-                        <time>2019-10-10</time>
-                    </footer>
-                </article>
-                <div class="buy">
-                    <div class="price">￥<strong>30</strong>起</div>
-                    <div class="reserve"><a href="###">立即抢购</a></div>
-                </div>
-                <div class="type">博物馆</div> -->
-                <!--  <div class="disc"><span>4.7折</span></div> -->
-            <!-- </figcaption>
-        </figure>
-        <figure class="tour">
-            <img src="/static/images/scenic/information2/tour1.jpg" alt="热门旅游">
-            <figcaption>
-                <article>
-                    <header>
-                        <hgroup>
-                            <h2>西安城墙</h2>
-                            <h3>中国保存较完整的古城墙
-                                触摸历史遗迹，感受历史沧桑</h3>
-                        </hgroup>
-
-                    </header>
-                    <ol>
-                        <li>
-                            <mark>地址</mark>
-                            主要游玩的城门：永宁门（碑林区南大街2号）
-                        </li>
-                        <li>
-                            <mark>5A级</mark>
-                            乐途口碑榜最受媒体青睐景区
-                        </li>
-                    </ol>
-
-                    <footer>
-                        本团游由乐途旅行网赞助提供，截止于
-                        <time>2019-10-10</time>
-                    </footer>
-                </article>
-                <div class="buy">
-                    <div class="price">￥<strong>54</strong>起</div>
-                    <div class="reserve"><a href="###">立即抢购</a></div>
-                </div>
-                <div class="type">城墙</div> -->
-                <!-- <div class="disc"><span>4.7折</span></div> -->
-            <!-- </figcaption>
-
-        </figure>
-        <figure class="tour">
-            <img src="/static/images/scenic/information2/tour5.jpg" alt="热门旅游">
-            <figcaption>
-                <article>
-                    <header>
-                        <hgroup>
-                            <h2>大唐芙蓉园</h2>
-                            <h3>昔日皇家御苑
-                                感受盛唐气象和璀璨的华美夜景.</h3>
-                        </hgroup>
-
-                    </header>
-                    <ol>
-                        <li>
-                            <mark>地址</mark>
-                            西安市曲江新区芙蓉西路99号
-                        </li>
-                        <li>
-                            <mark>5A级</mark>
-                            乐途口碑榜最具影响力景区
-                        </li>
-                    </ol>
-
-                    <footer>
-                        本团游由乐途旅行网赞助提供，截止于
-                        <time>2019-10-10</time>
-                    </footer>
-                </article>
-                <div class="buy">
-                    <div class="price">￥<strong>108</strong>起</div>
-                    <div class="reserve"><a href="###">立即抢购</a></div>
-                </div>
-                <div class="type">大唐芙蓉园</div> -->
-                <!-- <div class="disc"><span>4.7折</span></div> -->
-            <!-- </figcaption>
-
-        </figure>
-        <figure class="tour">
-            <img src="/static/images/scenic/information2/tour7.jpg" alt="热门旅游">
-            <figcaption>
-                <article>
-                    <header>
-                        <hgroup>
-                            <h2>《长恨歌》演出</h2>
-                            <h3>华清池上的山水实景演出
-                                演绎了李杨的爱情悲剧、唐朝的盛衰转变..</h3>
-                        </hgroup>
-
-                    </header>
-                    <ol>
-                        <li>
-                            <mark>地址</mark>
-                            西安市临潼区华清路38号
-                        </li>
-                        <li>乐途口碑榜最受大家喜爱的歌舞剧</li>
-                    </ol>
-
-                    <footer>
-                        本团游由乐途旅行网赞助提供，截止于
-                        <time>2019-10-10</time>
-                    </footer>
-                </article>
-                <div class="buy">
-                    <div class="price">￥<strong>218</strong>起</div>
-                    <div class="reserve"><a href="###">立即抢购</a></div>
-                </div>
-                <div class="type">歌舞剧</div> -->
-                <!-- <div class="disc"><span>4.7折</span></div> -->
-            <!-- </figcaption>
-
-        </figure>
-        <figure class="tour">
-            <img src="/static/images/scenic/information2/tour8.jpg" alt="热门旅游">
-            <figcaption>
-                <article>
-                    <header>
-                        <hgroup>
-                            <h2>回民街</h2>
-                            <h3>回民老街区，浓厚的穆斯林气息
-                                有着几百年历史的街区。.</h3>
-                        </hgroup>
-
-                    </header>
-                    <ol>
-                        <li>
-                            <mark>地址</mark>
-                            西安市莲湖区西大街1号
-                        </li>
-                        <li>乐途口碑榜最受大家喜爱的吃货一条街</li>
-                    </ol>
-
-                    <footer>
-                        本团游由乐途旅行网赞助提供，截止于
-                        <time>2019-10-10</time>
-                    </footer>
-                </article>
-                <div class="buy">
-                    <div class="price">￥<strong>15</strong>起</div>
-                    <div class="reserve"><a href="###">立即抢购</a></div>
-                </div>
-                <div class="type">回民街</div> -->
-                <!-- <div class="disc"><span>4.7折</span></div> -->
-            <!-- </figcaption>
-
-        </figure>
-        <figure class="tour">
-            <img src="/static/images/scenic/information2/海洋馆.jpg" alt="热门旅游">
-            <figcaption>
-                <article>
-                    <header>
-                        <hgroup>
-                            <h2>曲江海洋极地公园</h2>
-                            <h3>海洋景观与极地风光于一体，西北地区较大规模的海洋主题公园。</h3>
-                        </hgroup>
-
-                    </header>
-                    <ol>
-                        <li>
-                            <mark>地址</mark>
-                            西安市雁塔区曲江二路1号
-                        </li>
-                        <li>
-                            <mark>4A级</mark>
-                            乐途口碑榜最受儿童喜欢的景点
-                        </li>
-                    </ol>
-
-                    <footer>
-                        本团游由乐途旅行网赞助提供，截止于
-                        <time>2019-10-10</time>
-                    </footer>
-                </article>
-                <div class="buy">
-                    <div class="price">￥<strong>158</strong>起</div>
-                    <div class="reserve"><a href="###">立即抢购</a></div>
-                </div>
-                <div class="type">极地海洋馆</div> -->
-                <!-- <div class="disc"><span>4.7折</span></div> -->
-            <!-- </figcaption>
-
-        </figure>
-        <figure class="tour">
-            <img src="/static/images/scenic/information2/tour4.jpg" alt="热门旅游">
-            <figcaption>
-                <article>
-                    <header>
-                        <hgroup>
-                            <h2>乐华城 乐华欢乐世界</h2>
-                            <h3>大型集群游乐场所，亲子游玩好去处。
-                                过山车主题公园</h3>
-                        </hgroup>
-
-                    </header>
-                    <ol>
-                        <li>
-                            <mark>地址</mark>
-                            西安市西咸新区乐华城
-                        </li>
-                        <li>乐途口碑榜全球卓越主题公园</li>
-                    </ol>
-
-                    <footer>
-                        本团游由乐途旅行网赞助提供，截止于
-                        <time>2019-10-10</time>
-                    </footer>
-                </article>
-                <div class="buy">
-                    <div class="price">￥<strong>98</strong>起</div>
-                    <div class="reserve"><a href="###">立即抢购</a></div>
-                </div>
-                <div class="type" 乐华城>
-    </div> -->
-    <!-- <div class="disc"><span>4.7折</span></div> -->
-    <!-- </figcaption>
-
-        </figure>
-        <figure class="tour">
-        <img src="/static/images/scenic/information2/tour6.jpg" alt="热门旅游">
-        <figcaption>
-            <article>
-                <header>
-                    <hgroup>
-                        <h2>秦岭野生动物园</h2>
-                        <h3>全国野生动物保护科普教育基地。
-                            秦岭绝美生态旅游区。</h3>
-                    </hgroup>
-
-                </header>
-                <ol>
-                    <li>
-                        <mark>地址</mark>
-                        西安市长安区滦镇
-                    </li>
-                    <li>
-                        <mark>4A级</mark>
-                        乐途口碑榜最佳自然景区
-                    </li>
-                </ol>
-
-                <footer>
-                    本团游由乐途旅行网赞助提供，截止于
-                    <time>2019-10-10</time>
-                </footer>
-            </article>
-            <div class="buy">
-                <div class="price">￥<strong>95</strong>起</div>
-                <div class="reserve"><a href="###">立即抢购</a></div>
-            </div>
-            <div class="type">动物园</div> -->
-            <!-- <div class="disc"><span>4.7折</span></div> -->
-        <!-- </figcaption>
-
-        </figure>
-    <div class="more"><a href="###">加载更多...</a></div> -->
-
-
-
-
-
-
-
 
 </div>
 <footer id="footer">
