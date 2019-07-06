@@ -203,9 +203,9 @@ def booking(request):
 # 购物车
 def cart(request):
     u_id = request.session['userinfo']['id']
-    #获取账户余额
+    # 获取账户余额
     balance = Info.objects.get(id=u_id)
-    #获取该用户购物车商品对象
+    # 获取该用户购物车商品对象
     goods = Cart.objects.filter(user_id=u_id, is_pay=0)
     paginator = Paginator(goods, 4)
     cur_page = request.GET.get('page', 1)
@@ -216,9 +216,11 @@ def cart(request):
 # 历史记录
 def order(request):
     uid = request.session['userinfo']['id']
-    data = History_list.objects.filter(u_id=uid, is_del='1').all()
-    if data:
-        return render(request, 'user/order.html', locals())
+    datas = History_list.objects.filter(u_id=uid, is_del='1')
+    paginator = Paginator(datas, 4)
+    print(paginator.page_range)
+    cur_page = request.GET.get('page', 1)
+    page = paginator.page(cur_page)
     return render(request, 'user/order.html', locals())
 
 
@@ -234,7 +236,7 @@ def del_goods(request, g_id):
     cur_page = request.GET.get('page', 1)
     page = paginator.page(cur_page)
 
-    return render(request, 'user/cart.html',locals())
+    return render(request, 'user/cart.html', locals())
 
 
 # 数量加1
@@ -283,12 +285,10 @@ def modif(request, g_id):
             booking_time='2019-2-2',
             is_del=target.is_pay
         )
-    except:                 
+    except:
         return HttpResponse('购买失败')
     else:
         return HttpResponse('payment.html')
-    
-    
 
 
 def payment(request):
@@ -327,7 +327,6 @@ def topup(request):
     return render(request, 'pay/topUp.html')
 
 
-
 def top_top(request):
     """
     充值金额的实现
@@ -340,12 +339,11 @@ def top_top(request):
     try:
         change_money = float(user.price)
         change_money = change_money + money
-        user.price=change_money
+        user.price = change_money
         user.save()
         return HttpResponse("1")
     except:
         return HttpResponse("0")
-
 
 
 def delete(request):
@@ -358,7 +356,6 @@ def delete(request):
     data = History_list.objects.filter(id=id)
     data.update(is_del=0)
     return redirect('/user/order')
-    # return render(request,'user/order.html')
 
 
 # 余额
