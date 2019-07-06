@@ -9,7 +9,7 @@ import time
 from django.conf import settings
 from django.http import HttpResponseRedirect
 from user.models import Cart
-from . import weather
+# from . import weather
 # Create your views here.
 
 
@@ -21,9 +21,9 @@ def get_time():
     return today,tomorrow
 
 #天气预报
-def city_weather(request):
-    weather_str = weather.city_weather()
-    return HttpResponse(weather_str)
+# def city_weather(request):
+#     weather_str = weather.city_weather()
+#     return HttpResponse(weather_str)
 
 #hotel 预订首页
 def index(request):
