@@ -20,7 +20,7 @@
         <a href="/"><span class="s1">返回首页</span></a>
     </div>
     <div id="mian">
-        <!-- <form action="/user/register" method="post"> -->
+            
             <div id="form">
                 {% csrf_token %}
                 <div class="content">
@@ -39,7 +39,8 @@
                         <label for="" id="pwd" style="color: red"></label>
                     </div>
                     <div class="text phon">
-                        <input type="text" name="phone" id='phone' placeholder="请输入手机号码">
+                        <input type="text" name="phone" id='phone' placeholder="请输入手机号码" style="width: 120px;">
+                        <button id="btnPhone">获取验证码</button>
                         <label for="" id="uphone" style="color: red"></label>
                     </div>
                     <div class="text email">
@@ -47,9 +48,16 @@
                         <label for="" id="uemail" style="color: red"></label>
                     </div>
                     <input type="submit" id="subReg" value="注册" class="login">
+                    
                 </div>
             </div>
-        <!-- </form> -->
+            <div id="showMess">
+                <p id="p1">获取短信验证码</p>
+                <input type="text" id="mes">
+                <button id="getMes">点击获取</button>
+                <p><button id="setMes">确定</button></p>
+                <label for="" id="showMes" style="display: none"></label>
+            </div>
     </div>
     <div id="bottom">
         <a href="/">
@@ -65,5 +73,6 @@
         </div>
 
     </div>
+    
 </body>
 </html>

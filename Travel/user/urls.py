@@ -15,6 +15,7 @@ urlpatterns = [
     url(r'^checkuname$', views.checkuname),
     url(r'^checkphone$', views.checkphone),
     url(r'^yanzma/$', views.yanzma),
+    url(r'^message/$',views.message)
 ]
 
 # kavin的路由

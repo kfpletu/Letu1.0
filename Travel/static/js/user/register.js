@@ -39,7 +39,7 @@ $(function () {
 
     $('#phone').blur(function () {
         var phone = $('#phone').val()
-        var re = /^[1][3,4,5,7,8][0-9]{9}$/
+        var re = /^[1][3,4,5,7,8,9][0-9]{9}$/
         if (phone) {
             if (!re.exec(phone)) {
                 $('#uphone').html('请输入正确的手机号码!')
@@ -58,6 +58,61 @@ $(function () {
             $('#uphone').html('请输入手机号码!')
         }
     })
+
+    $('#btnPhone').click(function () { 
+        if ($('#phone').val()) {
+            if ($('#uphone').html()) {
+                $('#uphone').html('请输入正确的手机号码')
+            } else {
+                $('#showMess').css('display', 'block');
+                $('#subReg').attr('disabled', true);
+                $('#subReg').css('background', 'gray');
+            }
+        } else {
+            $('#uphone').html('请输入手机号码')
+        }
+
+    });
+
+    $('#getMes').click(function () { 
+        var i = 60
+        var timer = setInterval(function () {
+            $('#getMes').html(i+'s后可再获取')
+            i--
+            if (i < 0) {
+                clearInterval(timer)
+                $('#getMes').html('点击获取');
+                $('#getMes').attr('disabled', false);
+            }
+        }, 1000)
+        var jsObj = {
+            phone: $('#phone').val(),
+        }
+        $.ajax({
+            type: "get",
+            url: "/user/message",
+            data:jsObj,
+            dataType: 'json',
+            success: function (response) {
+                $('#showMes').html(response.num);
+            }
+        });
+        $('#getMes').attr('disabled', true);
+    });
+
+    $('#setMes').click(function () { 
+        setmes = String($('#mes').val());
+        getmes = String($('#showMes').html())
+        if (getmes == setmes) {
+            $('#showMess').css('display', 'none');
+            $('#subReg').css('background', '#997679');
+            $('#getMes').attr('disabled', false);
+        } else {
+            alert('验证码输入错误')
+            $('#mes').val('');
+            $('#subReg').attr('disabled', true);
+        }
+    });
 
     $('#email').blur(function () { 
         var email = $('#email').val()

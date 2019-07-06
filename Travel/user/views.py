@@ -1,3 +1,5 @@
+from aliyunsdkcore.client import AcsClient
+from aliyunsdkcore.request import CommonRequest
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 import random
 from django.shortcuts import render, redirect
@@ -55,8 +57,6 @@ def login(request):
 
 
 # 验证码
-
-
 def yanzma(request):
     """
         登录图形图形验证码
@@ -122,6 +122,38 @@ def checkphone(request):
     if Info.objects.filter(phone=phone):
         return HttpResponse('该手机号码已经被注册')
     return HttpResponse('')
+
+# 短信验证码
+
+
+def message(request):
+    phone = request.GET.get('phone')
+    number = random.randint(100000, 999999)
+
+    client = AcsClient('LTAIxo8uU7FoZPog',
+                       '5fhRNu2256WxUF5dP9QdSmqqbZ50ul', 'cn-hangzhou')
+    request = CommonRequest()
+    request.set_accept_format('json')
+    request.set_domain('dysmsapi.aliyuncs.com')
+    request.set_method('POST')
+    request.set_protocol_type('https')  # https | http
+    request.set_version('2017-05-25')
+    request.set_action_name('SendSms')
+
+    request.add_query_param('RegionId', "cn-hangzhou")
+    request.add_query_param('PhoneNumbers', phone)
+    request.add_query_param('SignName', "letu")
+    request.add_query_param('TemplateCode', "SMS_169897404")
+    request.add_query_param('TemplateParam', "{'code':%s}" % number)
+
+    response = client.do_action(request)
+    # python2:  print(response)
+    print(str(response, encoding='utf-8'))
+
+    jsonStr = {
+        'num':number
+    }
+    return HttpResponse(json.dumps(jsonStr))
 
 
 # 忘记密码
