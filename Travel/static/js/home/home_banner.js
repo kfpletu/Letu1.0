@@ -68,10 +68,6 @@ $(function(){
         $(this).attr('src',"/static/images/home/search1.png")
         $(this).prev().css('outline','none')
     })
-    //修改头像
-    $("#cart img").click(function(){
-        window.location.href = ''
-    })
 })
 
 

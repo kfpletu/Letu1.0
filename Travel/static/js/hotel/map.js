@@ -1,7 +1,11 @@
 $(function(){
         // 百度地图API功能
         var map = new BMap.Map("allmap");
-        map.centerAndZoom(new BMap.Point(108.861481, 34.058903), 12);
+       
+
+        map.centerAndZoom(new BMap.Point($('#longitude').html(),$('#latitude').html()), 20);
+       
+        // map.centerAndZoom(new BMap.Point(108.861481, 34.058903), 12);
         map.enableScrollWheelZoom(true);
         
         //单击获取点击的经纬度
@@ -25,7 +29,10 @@ $(function(){
             );
             
             var start=new BMap.Point(e.point.lng,e.point.lat);
-            var end = new BMap.Point(108.861481, 34.058903);
+            var end = new BMap.Point($('#longitude').html(),$('#latitude').html());
+            // console.log($('#longitude').html())
+            // console.log($('#latitude').html())
+            // var end = new BMap.Point(108.861481, 34.058903);
             transit.search(start, end);
         });
     }
