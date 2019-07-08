@@ -7,12 +7,13 @@ import json
 import os
 # Create your views here.
 from .models import *
-from django.http import HttpResponse,Http404
+from django.http import HttpResponse, Http404
 from django.http import HttpResponseRedirect
 from django.core.paginator import Paginator
 from .page_helper import *
 from django.contrib.auth.hashers import make_password, check_password
 from django.conf import settings
+
 
 # 登录
 def login(request):
@@ -56,13 +57,13 @@ def login(request):
             return HttpResponse('登录失败,请重新登录')
 
 
-# 验证码
+# 图片验证码
 def yanzma(request):
     """
         登录图形图形验证码
     """
     img = Image.new("RGB", (110, 37), (255, 255, 255))
-    code = [chr(x) for x in range(97, 123)] + [str(x) for x in range(10)]
+    code = [chr(x) for x in range(97, 122)] + [str(x) for x in range(2,10)]+[chr(x) for x in range(65,90)]
     code = random.sample(code, 6)
     code = ''.join(code)
     draw = ImageDraw.Draw(img)
@@ -86,6 +87,84 @@ def yanzma(request):
         'code': code
     }
     return HttpResponse(json.dumps(imgUrl))
+
+
+# 手机验证码登录
+def phoneLogin(request):
+    if request.method == 'GET':
+        return render(request, 'user/phoneLogin.html')
+    elif request.method == 'POST':
+        phone = request.POST.get('phone')
+        print(phone)
+        try:
+            # 从数据库获取phone
+            user = Info.objects.get(phone=phone)
+            # 登录状态为真,刷新登录页面,禁止登录
+            if user.is_alive:
+                resp = HttpResponse('该用户已经注销')
+                return resp
+            else:
+                if user.is_online:
+                    resp = HttpResponse('该用户已在其他地方登录')
+                    return resp
+                else:
+                    # 修改登录状态,发送seesion,cookie,返回首页
+
+                    request.session['userinfo'] = {
+                        'uname': user.uname,
+                        'id': user.id
+                    }
+                    user.is_online = 1
+                    user.save()
+                    return HttpResponse('', locals())
+        except:
+            # 出异常,说明用户名密码不正确,刷新当前登录页面
+            return HttpResponse('1')
+
+
+# 检测登录手机是否注册
+def check_phone_login(request):
+    if request.method == 'POST':
+        phone = request.POST.get('phone')
+        if not Info.objects.filter(phone=phone):
+            jsonStr = {
+                'mes': '手机号没有注册'
+            }
+        else:
+            jsonStr = {
+                'mes': ''
+            }
+        return HttpResponse(json.dumps(jsonStr))
+
+
+# 获取登录验证码
+def getMes(request):
+    phone = request.GET.get('phone')
+    number = random.randint(100000, 999999)
+    client = AcsClient('LTAIxo8uU7FoZPog',
+                       '5fhRNu2256WxUF5dP9QdSmqqbZ50ul', 'cn-hangzhou')
+    request = CommonRequest()
+    request.set_accept_format('json')
+    request.set_domain('dysmsapi.aliyuncs.com')
+    request.set_method('POST')
+    request.set_protocol_type('https')  # https | http
+    request.set_version('2017-05-25')
+    request.set_action_name('SendSms')
+
+    request.add_query_param('RegionId', "cn-hangzhou")
+    request.add_query_param('PhoneNumbers', phone)
+    request.add_query_param('SignName', "letu")
+    request.add_query_param('TemplateCode', "SMS_169902712")
+    request.add_query_param('TemplateParam', "{'code':%s}" % number)
+
+    response = client.do_action(request)
+    # python2:  print(response)
+    print(str(response, encoding='utf-8'))
+
+    jsonStr = {
+        'num': number
+    }
+    return HttpResponse(json.dumps(jsonStr))
 
 
 # 注册
@@ -124,9 +203,8 @@ def checkphone(request):
         return HttpResponse('该手机号码已经被注册')
     return HttpResponse('')
 
-# 短信验证码
 
-
+# 注册短信验证码
 def message(request):
     phone = request.GET.get('phone')
     number = random.randint(100000, 999999)
@@ -144,7 +222,7 @@ def message(request):
     request.add_query_param('RegionId', "cn-hangzhou")
     request.add_query_param('PhoneNumbers', phone)
     request.add_query_param('SignName', "letu")
-    request.add_query_param('TemplateCode', "SMS_169897404")
+    request.add_query_param('TemplateCode', "SMS_169897609")
     request.add_query_param('TemplateParam', "{'code':%s}" % number)
 
     response = client.do_action(request)
@@ -152,7 +230,7 @@ def message(request):
     print(str(response, encoding='utf-8'))
 
     jsonStr = {
-        'num':number
+        'num': number
     }
     return HttpResponse(json.dumps(jsonStr))
 
@@ -237,10 +315,10 @@ def booking(request):
 # 购物车
 def cart(request):
     u_id = request.session['userinfo']['id']
-    # 获取账户余额
+    # 获取用户对象
     balance = Info.objects.get(id=u_id)
     # 获取该用户购物车商品对象
-    goods = Cart.objects.filter(user_id=u_id, is_pay=0)
+    goods = Cart.objects.filter(user_id=u_id, is_pay=0).order_by("-add_time")
     paginator = Paginator(goods, 4)
     cur_page = request.GET.get('page', 1)
     page = paginator.page(cur_page)
@@ -250,6 +328,7 @@ def cart(request):
 # 历史记录
 def order(request):
     uid = request.session['userinfo']['id']
+    user = Info.objects.get(id=uid)
     datas = History_list.objects.filter(u_id=uid, is_del='1')
     paginator = Paginator(datas, 4)
     print(paginator.page_range)
@@ -259,17 +338,13 @@ def order(request):
 
 
 # 删除购物车商品
-def del_goods(request, g_id):
+def del_goods(request, g_id,num):
     target = Cart.objects.get(id=g_id)
     target.delete()
-
     u_id = request.session['userinfo']['id']
-    balance = Info.objects.get(id=u_id)
     goods = Cart.objects.filter(user_id=u_id, is_pay=0)
     paginator = Paginator(goods, 4)
-    cur_page = request.GET.get('page', 1)
-    page = paginator.page(cur_page)
-
+    page = paginator.page(num)
     return render(request, 'user/cart.html', locals())
 
 
@@ -302,39 +377,46 @@ def reduce(request, g_id):
 
 # 订单结算
 from hotel.models import House
+
+
 def modif(request, g_id):
     target = Cart.objects.get(id=g_id)
     target.is_pay = 1
     target.save()
     try:
-
-        # print(type(target.g_img))
-        # print('int(target.g_img[-8])',(str(target.g_img)[-8]))
-        # print('int(target.g_img[-10]) * 10',(target.g_img)[-10])
         house_id = int(str(target.g_img)[-8]) + int(str(target.g_img)[-10]) * 10
-        print(house_id)
+        # print(house_id)
         house = House.objects.get(id=house_id)
-        house.order_count=house.order_count+1
+        house.order_count = house.order_count + 1
         house.save()
-        History_list.objects.create(
-            u_id=target.user_id,
-            g_img=target.g_img,
-            g_name=target.g_name,
-            time1=target.time1,
-            time2=target.time2,
-            g_type=target.g_type,
-            price=target.price,
-            g_num=target.g_num,
-            total_price=target.total_price,
-            booking_time='2019-2-2',
-            is_del=target.is_pay
-        )
+    except:
+        pass
+    finally:
+
+        try:
+
+            # print(type(target.g_img))
+            # print('int(target.g_img[-8])',(str(target.g_img)[-8]))
+            # print('int(target.g_img[-10]) * 10',(target.g_img)[-10])
+            History_list.objects.create(
+                u_id=target.user_id,
+                g_img=target.g_img,
+                g_name=target.g_name,
+                time1=target.time1,
+                time2=target.time2,
+                g_type=target.g_type,
+                price=target.price,
+                g_num=target.g_num,
+                total_price=target.total_price,
+                booking_time='2019-2-2',
+                is_del=target.is_pay
+            )
 
 
-    except:                 
-        return HttpResponse('购买失败')
-    else:
-        return HttpResponse('payment.html')
+        except:
+            return HttpResponse('购买失败')
+        else:
+            return HttpResponse('payment.html')
     
 #支付成功跳转页面
 def payment(request):
@@ -343,7 +425,9 @@ def payment(request):
     :param request:
     :return:
     """
-    return render(request, 'user/payment.html')
+    uid = request.session['userinfo']['id']
+    user = Info.objects.get(id=uid)
+    return render(request, 'user/payment.html',locals())
 
 
 def test(request):
@@ -371,9 +455,9 @@ def topup(request):
     :return:
     """
     u_id = request.session['userinfo']['id']
-    user = Info.objects.get(id = u_id)
+    user = Info.objects.get(id=u_id)
     price = float(user.price)
-    return render(request, 'pay/topUp.html',locals())
+    return render(request, 'pay/topUp.html', locals())
 
 
 def top_top(request):
@@ -423,44 +507,42 @@ def balance(request):
     else:
         msg = json.dumps("亲!你的余额不足额...")
         return HttpResponse(msg)
-#制作图片名
+
+
+# 制作图片名
 def picture_name(file_name):
-    file_name_list=file_name.split('.')
-    file_style=file_name_list[-1]
+    file_name_list = file_name.split('.')
+    file_style = file_name_list[-1]
     return file_style
 
-#用户 信息页面以及头像上传
+
+# 用户 信息页面以及头像上传
 def change(request):
     if request.method == "GET":
         if hasattr(request, 'session') and 'userinfo' in request.session:
-             try:
+            try:
                 u_id = request.session['userinfo']['id']
                 user = Info.objects.get(id=u_id)
-                return render(request,'user/change.html',locals())
-             except:
+                return render(request, 'user/change.html', locals())
+            except:
                 return HttpResponseRedirect('/')
         else:
             return HttpResponseRedirect('/')
     elif request.method == "POST":
         # print('1')
         u_id = request.session['userinfo']['id']
-        user_info= Info.objects.get(id=u_id)
+        user_info = Info.objects.get(id=u_id)
         # print('2')
         u_img_fd = request.FILES["uimg"]
-        file_style=picture_name(u_img_fd.name)
-        change_name_m='%s.%s'%(u_id,file_style)
+        file_style = picture_name(u_img_fd.name)
+        change_name_m = '%s.%s' % (u_id, file_style)
         # print('3')
-        change_name=os.path.join(settings.CHANGE_MEDIA_ROOT,change_name_m)
+        change_name = os.path.join(settings.CHANGE_MEDIA_ROOT, change_name_m)
         try:
-            with open(change_name,'wb') as f:
+            with open(change_name, 'wb') as f:
                 f.write(u_img_fd.file.read())
-                user_info.head_img=change_name_m
+                user_info.head_img = change_name_m
                 user_info.save()
                 return HttpResponseRedirect('/')
         except:
             raise Http404
-
-
-
-        
-

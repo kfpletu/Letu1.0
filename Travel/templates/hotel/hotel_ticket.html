@@ -22,13 +22,16 @@
     <div id="cart">
         <b>
             <ul>
-                <li class="home"><a href="javascript:void(0)">欢迎您,{{ request.session.userinfo.uname }}</a>
+                <li class="home">
+                    <a href="javascript:void(0)">
+                        欢迎您,{{ request.session.userinfo.uname }}
+                    </a>
                     <ol class='info1'>
                         <li><a href="/user/topUp">我的钱包</a></li>
+                        <li><a href="/user/change">个人信息</a></li>
                         <li><a href="/user/cart">购物车</a></li>
                         <li><a href="/user/order">我的订单</a></li>
                         <li><a href="/user/logout">退出登录</a></li>
-                        <li><a href="/user/cancel">注销账号</a></li>
                     </ol>
                 </li>
             </ul>
@@ -151,6 +154,7 @@
         <div class="conten">
             <!--购票信息-->
             {% for room in rooms %}
+
                 <div class="item">
                     <div class="check">
 
@@ -164,7 +168,7 @@
                         <p>{#床型  大床1.8×2.0米1张#}{{ room.bed }}</p>
                     </div>
                     <form action="{% url 'hotel'%}{{ id }}/{{ room.room_level }}" method="post" class ="form">
-
+                        {% csrf_token %}
                         <div class=gpt>
                             <p>入住时间：<input type="text" class="date_time" id="from_date{{ room.room_level }}" name="from_date" value="{{ today }}"></p>
                             <p>预计搬出：<input type="text" class="date_time" id="to_date{{ room.room_level }}" name="to_date" value="{{ tomorrow }}"></p>
@@ -205,6 +209,8 @@
         </div>
         <div id="JTZN">
             <div class="c-wrapper-style">
+                <span id="longitude" style="display: none">{{ longitude }}</span>
+                <span id="latitude" style="display: none">{{ latitude }}</span>
                 <i class="detail-icon-3">交通指南</i>
                 <span id="map_td"></span>
             </div>

@@ -39,6 +39,7 @@ def city_weather(request):
 # hotel 预订首页
 def index(request):
     if request.method=='GET':
+        print(request)
         house_list=models.House.objects.order_by('-order_count')
         # house_list=house_list[0:12]#销量排名前9的酒店
         house_list_li=house_list[0:5]#热门品牌
@@ -229,6 +230,8 @@ def hotel_ticket(id):
     address = hotel.address  # '新城区东新街199号（近民乐园）'
     infor = hotel.info  # '西安富力希尔顿酒店坐落于古城西安市中心，周边繁华购物区林立，是商务出行和休闲度假的理想之选。步行即可到达闻名于世的明城墙和西安地标建筑钟楼。乘坐出租车仅需5分钟即可到达东大街、骡马市步行街及回民街，这里有西安特色的餐厅、购物及娱乐场所。 拥有城中稀缺宽敞大容量客房，西安富力希尔顿酒店客房面积均大于43平方米。酒店高雅的客房别出心裁将唐朝元素融入其中，并突出了房间的温馨舒适。所有客房均配备高速宽带无线上网及高水准的客用品。 西安富力希尔顿酒店将成为您在西安的会议和用餐新选择。三间风格各异的餐厅及酒吧、一间1200平方米的大宴会厅及6间多功能厅可为您提供多种规模的会议及宴会需求。'
     rooms = hotel.room_set.all()
+    longitude=hotel.jingdu
+    latitude=hotel.weidu
     today, tomorrow = get_time()
     return locals()
 
@@ -242,6 +245,12 @@ def count_days(from_date,to_date):
     else:
         days=(int(to_date[1])-int(from_date[1]))*30+int(to_date[2])-int(from_date[2])
     return days
+
+def map(request):
+    if hasattr(request,'session') and request.session['userinfo']:
+        id=request.session['userinfo']['id']
+
+    return HttpResponseRedirect('/hotel')
 
 
 #酒店详情视图函数

@@ -15,7 +15,11 @@ urlpatterns = [
     url(r'^checkuname$', views.checkuname),
     url(r'^checkphone$', views.checkphone),
     url(r'^yanzma/$', views.yanzma),
-    url(r'^message/$',views.message)
+    url(r'^message/$', views.message),
+    url(r'^phoneLogin/$', views.phoneLogin),
+    url(r'^check_phone_login/$', views.check_phone_login),
+    url(r'^getMes/$', views.getMes),
+    # url(r'^plogin/$', views.plogin)
 ]
 
 # kavin的路由
@@ -33,7 +37,7 @@ urlpatterns += [
     url(r'^balance', views.balance),
     url(r'^cart', views.cart, name = 'goodType'),
     url(r'^booking$', views.booking),
-    url(r'^del/(\d+)$', views.del_goods),
+    url(r'^del/(\d+)/(\d+)$', views.del_goods),
     url(r'^add/(\d+)$', views.add),
     url(r'^reduce/(\d+)$', views.reduce),
     url(r'^modif/(\d+)$', views.modif),

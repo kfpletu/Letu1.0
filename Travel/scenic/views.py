@@ -1,12 +1,10 @@
 from django.shortcuts import render
 from . import models
 from django.http import HttpResponse, Http404, HttpResponseRedirect
-from user.models import Cart
+from user.models import Cart, Info
 import time, random
 import datetime
 import json
-
-
 # Create your views here.
 
 #石霏霏的 views
@@ -50,10 +48,11 @@ def add_intro(request):
         intro.save()
     db4.close()
     return HttpResponse('插入成功')
-
 def index(request):
     if request.method == 'GET':
         scens = models.Scen.objects.all()
+        uid = request.session['userinfo']['id']
+        user = Info.objects.get(id=uid)
         return render(request,'scenic/information.html',locals())
 
 def ticket(request,s):
@@ -104,6 +103,9 @@ def get_time():
     tomorrow=time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(time.time()+86400))
     return today,tomorrow
 
+def scenic2(request):
+    if request.method == 'GET':
+        return render(request,'scenic/information02.html')
 
 
 
@@ -123,6 +125,8 @@ def data1(request):
 
 def scenic2(request):
     scens = models.Scen2.objects.all()
+    uid = request.session['userinfo']['id']
+    user = Info.objects.get(id=uid)
     return render(request,'scenic/information02.html',locals())
 
 def add_info(request):

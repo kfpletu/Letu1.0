@@ -2,23 +2,21 @@ from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import render, render_to_response, redirect
 from django.http import Http404
-# from ..scenic.models import *
-# from ..hotel.models import *
-from user.models import *
+
 
 # Create your views here.
 from hotel.models import Hotel
 from scenic.models import Scbr
-
 from scenic.models import Scen
+from user.models import Info
 
 
 def index(request):
     uname = ''
     try:
-        if hasattr(request,'session') and 'userinfo' in request.session:
+        if hasattr(request, 'session') and 'userinfo' in request.session:
             u_id = request.session['userinfo']['id']
-            user=Info.objects.get(id=u_id)
+            user = Info.objects.get(id=u_id)
         return render(request, 'index.html', locals())
     except:
         return render(request, 'index.html', locals())
@@ -26,15 +24,16 @@ def index(request):
 
 def find(keyword):
     if keyword:
-        values = Hotel.objects.filter(Q(hotel_name__contains=keyword)| Q(hotel_level__contains=keyword))
+        values = Hotel.objects.filter(Q(hotel_name__contains=keyword) | Q(hotel_level__contains=keyword))
         return values
 
 
 def find1(keyword):
+    print(keyword)
     if keyword:
-        values = Scbr.objects.filter(Q(sce_name__contains=keyword) | Q(sce_addr__contains=keyword) | Q(word1__contains=keyword) | Q(word2__contains=keyword))
-        print(values)
-        return values
+        val=Scbr.objects.filter(Q(sce_name__contains=keyword)|Q(word1__contains=keyword)|Q(sce_addr__contains=keyword))
+        return val
+
 
 
 def search(request):
@@ -74,21 +73,19 @@ def search(request):
         elif search_s in keyword_scen:
             scen = Scbr.objects.all()
             ss = Scen.objects.all()
+            print(len(scen))
+            print(len(ss))
             data = {}
-            for h in scen:
+            for h in range(len(scen)):
                 deatil = []
-                deatil.append(h.img1)
-                deatil.append(h.sce_name)
-                for s in ss:
-                    deatil.append(s.brief_des[0:50])
-                    break
+                deatil.append(scen[h].img1)
+                deatil.append(scen[h].sce_name)
+                deatil.append(ss[h].brief_des[0:50])
                 # deatil.append(h.scen.sce_topic)
-                deatil.append(h.sce_addr)
-                deatil.append(h.grage)
-                for s in ss:
-                    deatil.append(s.local_price)
-                    break
-                deatil.append(h.id)
+                deatil.append(scen[h].sce_addr)
+                deatil.append(scen[h].grage)
+                deatil.append(ss[h].pre_price)
+                deatil.append(scen[h].id)
                 data[h] = deatil
 
             return render(request, 'about/search1.html', locals())
@@ -111,26 +108,26 @@ def search(request):
                 deatil.append(h.id)
                 data[h] = deatil
             return render(request, 'about/search.html', locals())
+
         elif find1(search_s):
             scen = find1(search_s)
-            print(scen)
             ss = Scen.objects.all()
             data = {}
-            for h in scen:
+            for h in range(len(scen)):
                 deatil = []
-                deatil.append(h.img1)
-                deatil.append(h.sce_name)
-                for s in ss:
-                    deatil.append(s.brief_des[0:50])
-                    break
-                deatil.append(h.sce_addr)
-                deatil.append(h.grage)
-                for s in ss:
-                    deatil.append(s.local_price)
-                    break
-                deatil.append(h.id)
+                deatil.append(scen[h].img1)
+                deatil.append(scen[h].sce_name)
+                deatil.append(ss[h].brief_des[0:50])
+                # deatil.append(h.scen.sce_topic)
+                deatil.append(scen[h].sce_addr)
+                deatil.append(scen[h].grage)
+                deatil.append(ss[h].pre_price)
+                deatil.append(scen[h].id)
                 data[h] = deatil
 
             return render(request, 'about/search1.html', locals())
+        else:
+            data=0
+            return render(request, 'about/search.html', locals())
     elif request.method == "POST":
         pass

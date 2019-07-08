@@ -22,13 +22,23 @@
         <div id="cart">
             <b>
                 <ul>
+                    {% if request.session.userinfo %}
+                        <a href="/user/change.html">
+                            {% if  user.head_img %}
+                                <img src='/static/images/user/change/{{ user.head_img }}' sytel = "opacity:1" title="点击修改头像">
+                            {% else %}
+                                <img src='/static/images/user/head.jpg' sytel = "opacity:1" title="点击修改头像">
+                            {% endif %}
+                        </a>
+                    {% endif %}
+                    <div class="down"></div>
                     <li class="home"><a href="javascript:void(0)">欢迎您,{{ request.session.userinfo.uname }}</a>
                         <ol class='info1'>
                             <li><a href="/user/topUp">我的钱包</a></li>
+                            <li><a href="/user/change">个人信息</a></li>
                             <li><a href="/user/cart">购物车</a></li>
                             <li><a href="/user/order">我的订单</a></li>
                             <li><a href="/user/logout">退出登录</a></li>
-                            <li><a href="/user/cancel">注销账号</a></li>
                         </ol>
                     </li>
                 </ul>
@@ -69,29 +79,29 @@
     <aside class="sidebar">
         <div class="sidebox recommend">
             <h2>美景推荐</h2>
-            <div class="tag">
-                <a href="###">陕西(10)</a>
-                <a href="###">四川(10)</a>
-                <a href="###">浙江(10)</a>
-                <a href="###">广东(10)</a>
-                <a href="###">云南(10)</a>
-                <a href="###">江苏(10)</a>
-                <a href="###">山东(10)</a>
-                <a href="###">河南(10)</a>
-                <a href="###">湖北(10)</a>
-                <a href="###">甘肃(10)</a>
-                <a href="###">河北(10)</a>
-                <a href="###">湖南(10)</a>
-                <a href="###">广西(10)</a>
-                <a href="###">新疆(10)</a>
-                <a href="###">内蒙古(10)</a>
-                <a href="###">北京(10)</a>
-                <a href="###">海南(10)</a>
-                <a href="###">贵州(10)</a>
-                <a href="###">安徽(10)</a>
-                <a href="###">青海(10)</a>
-                <a href="###">上海(10)</a>
-            </div>
+                <div class="tag">
+                    <a href="https://vacations.ctrip.com/tours/d-shaanxi-100057?salecity=1">陕西(10)</a>
+                    <a href="https://vacations.ctrip.com/tours/d-sichuan-100009?salecity=1">四川(10)</a>
+                    <a href="https://vacations.ctrip.com/tours/d-zhejiang-100065?salecity=1">浙江(10)</a>
+                    <a href="https://vacations.ctrip.com/tours/d-guangdong-100051?salecity=1">广东(10)</a>
+                    <a href="https://vacations.ctrip.com/tours/d-yunnan-100007?salecity=1">云南(10)</a>
+                    <a href="https://vacations.ctrip.com/tours/d-jiangsu-100066?salecity=1">江苏(10)</a>
+                    <a href="https://vacations.ctrip.com/tours/d-shandong-100039?salecity=1">山东(10)</a>
+                    <a href="https://vacations.ctrip.com/tours/d-henan-100058?salecity=1">河南(10)</a>
+                    <a href="https://vacations.ctrip.com/tours/d-hubei-100067?salecity=1">湖北(10)</a>
+                    <a href="https://vacations.ctrip.com/tours/d-gansu-100060?salecity=1">甘肃(10)</a>
+                    <a href="https://vacations.ctrip.com/tours/d-hebei-100059?salecity=1">河北(10)</a>
+                    <a href="https://vacations.ctrip.com/tours/d-hunan-100053?salecity=1">湖南(10)</a>
+                    <a href="https://vacations.ctrip.com/tours/d-guangxi-100052?salecity=1">广西(10)</a>
+                    <a href="https://vacations.ctrip.com/tours/d-xinjiang-100008?salecity=1">新疆(10)</a>
+                    <a href="https://vacations.ctrip.com/tours/d-innermongolia-100062?salecity=1">内蒙古(10)</a>
+                    <a href="https://vacations.ctrip.com/tours/d-beijing-1?salecity=1">北京(10)</a>
+                    <a href="https://vacations.ctrip.com/whole-1b126/?searchvalue=%E6%B5%B7%E5%8D%97&searchtext=%E6%B5%B7%E5%8D%97">海南(10)</a>
+                    <a href="https://vacations.ctrip.com/tours/d-guizhou-100064?salecity=1">贵州(10)</a>
+                    <a href="https://vacations.ctrip.com/tours/d-anhui-100068?salecity=1">安徽(10)</a>
+                    <a href="https://vacations.ctrip.com/tours/d-qinghai-100032?salecity=1">青海(10)</a>
+                    <a href="https://vacations.ctrip.com/tours/d-shanghai-2?salecity=1">上海(10)</a>
+                </div>
 
         </div>
         <div class="sidebox popular">
