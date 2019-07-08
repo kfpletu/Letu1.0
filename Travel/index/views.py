@@ -113,23 +113,21 @@ def search(request):
             scen = find1(search_s)
             ss = Scen.objects.all()
             data = {}
-            for h in scen:
+            for h in range(len(scen)):
                 deatil = []
-                deatil.append(h.img1)
-                deatil.append(h.sce_name)
-                for s in ss:
-                    deatil.append(s.brief_des[0:50])
-                    break
-                deatil.append(h.sce_addr)
-                deatil.append(h.grage)
-                for s in ss:
-                    deatil.append(s.pre_price)
-                    break
-                deatil.append(h.id)
+                deatil.append(scen[h].img1)
+                deatil.append(scen[h].sce_name)
+                deatil.append(ss[h].brief_des[0:50])
+                # deatil.append(h.scen.sce_topic)
+                deatil.append(scen[h].sce_addr)
+                deatil.append(scen[h].grage)
+                deatil.append(ss[h].pre_price)
+                deatil.append(scen[h].id)
                 data[h] = deatil
 
             return render(request, 'about/search1.html', locals())
         else:
+            data=0
             return render(request, 'about/search.html', locals())
     elif request.method == "POST":
         pass

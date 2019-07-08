@@ -37,7 +37,7 @@ urlpatterns += [
     url(r'^balance', views.balance),
     url(r'^cart', views.cart, name = 'goodType'),
     url(r'^booking$', views.booking),
-    url(r'^del/(\d+)$', views.del_goods),
+    url(r'^del/(\d+)/(\d+)$', views.del_goods),
     url(r'^add/(\d+)$', views.add),
     url(r'^reduce/(\d+)$', views.reduce),
     url(r'^modif/(\d+)$', views.modif),

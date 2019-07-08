@@ -65,7 +65,7 @@
                         <p>{#床型  大床1.8×2.0米1张#}{{ room.bed }}</p>
                     </div>
                     <form action="{% url 'hotel'%}{{ room.house.id }}/{{ room.room_level }}" method="post" class="form">
-
+                        {% csrf_token %}
                         <div class=gpt>
                             <p><label for="from_date{{ room.room_level }}">入住时间：</label><input type="text" id="from_date{{ room.room_level }}" name="from_date" value="{{ today }}"></p>
                             <p><label for="to_date{{ room.room_level }}">预计搬出：</label><input type="text" id="to_date{{ room.room_level }}" name="to_date" value="{{ tomorrow }}"></p>

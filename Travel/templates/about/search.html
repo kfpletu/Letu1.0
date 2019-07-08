@@ -22,10 +22,17 @@
         <div id="cart">
             <b>
                 <ul>
-                    <li class="home">
-                        <a href="javascript:void(0)">
-                            欢迎您,{{ request.session.userinfo.uname }}
+                    {% if request.session.userinfo %}
+                        <a href="/user/change.html">
+                            {% if  user.head_img %}
+                                <img src='/static/images/user/change/{{ user.head_img }}' sytel = "opacity:1" title="点击修改头像">
+                            {% else %}
+                                <img src='/static/images/user/head.jpg' sytel = "opacity:1" title="点击修改头像">
+                            {% endif %}
                         </a>
+                    {% endif %}
+                    <div class="down"></div>
+                    <li class="home"><a href="javascript:void(0)">欢迎您,{{ request.session.userinfo.uname }}</a>
                         <ol class='info1'>
                             <li><a href="/user/topUp">我的钱包</a></li>
                             <li><a href="/user/change">个人信息</a></li>
@@ -70,7 +77,7 @@
 
 <div id="container">
     <aside class="sidebar">
-        <div class="sidebox recommend">
+        <div class="sidebox recommend">px
             <h2>美景推荐</h2>
             <div class="tag">
                 <a href="###">陕西(10)</a>
@@ -146,7 +153,8 @@
             <img src="../static/images/home/search1.png" onclick="demo.submit();">
         </form>
     </div>
-    <div class="list" style="overflow: auto">
+    <div class="list" style="overflow: auto" id="list">
+        {% if data %}
         {% for foo in data.values %}
             <figure class="tour">
                     <img src="/static/images/hotel/{{ foo.0 }}/11.png" alt="热门旅游">
@@ -186,11 +194,16 @@
 
             </figure>
         {% endfor %}
+        {% else %}
+        <div id="oth">
+            <h3>您的搜索 乐途 没法执行哦!</h3>
+            <h3>请您换个关键词试试!</h3>
+        </div>
+        {% endif %}
 
 
     </div>
 </div>
-
 </body>
 
 </html>

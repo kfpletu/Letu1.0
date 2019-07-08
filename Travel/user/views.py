@@ -7,12 +7,13 @@ import json
 import os
 # Create your views here.
 from .models import *
-from django.http import HttpResponse,Http404
+from django.http import HttpResponse, Http404
 from django.http import HttpResponseRedirect
 from django.core.paginator import Paginator
 from .page_helper import *
 from django.contrib.auth.hashers import make_password, check_password
 from django.conf import settings
+
 
 # 登录
 def login(request):
@@ -87,6 +88,7 @@ def yanzma(request):
     }
     return HttpResponse(json.dumps(imgUrl))
 
+
 # 手机验证码登录
 def phoneLogin(request):
     if request.method == 'GET':
@@ -107,7 +109,7 @@ def phoneLogin(request):
                     return resp
                 else:
                     # 修改登录状态,发送seesion,cookie,返回首页
-                    
+
                     request.session['userinfo'] = {
                         'uname': user.uname,
                         'id': user.id
@@ -118,7 +120,6 @@ def phoneLogin(request):
         except:
             # 出异常,说明用户名密码不正确,刷新当前登录页面
             return HttpResponse('1')
-        
 
 
 # 检测登录手机是否注册
@@ -127,13 +128,14 @@ def check_phone_login(request):
         phone = request.POST.get('phone')
         if not Info.objects.filter(phone=phone):
             jsonStr = {
-                'mes':'手机号没有注册'
+                'mes': '手机号没有注册'
             }
         else:
             jsonStr = {
                 'mes': ''
             }
         return HttpResponse(json.dumps(jsonStr))
+
 
 # 获取登录验证码
 def getMes(request):
@@ -163,6 +165,7 @@ def getMes(request):
         'num': number
     }
     return HttpResponse(json.dumps(jsonStr))
+
 
 # 注册
 def register(request):
@@ -200,6 +203,7 @@ def checkphone(request):
         return HttpResponse('该手机号码已经被注册')
     return HttpResponse('')
 
+
 # 注册短信验证码
 def message(request):
     phone = request.GET.get('phone')
@@ -226,7 +230,7 @@ def message(request):
     print(str(response, encoding='utf-8'))
 
     jsonStr = {
-        'num':number
+        'num': number
     }
     return HttpResponse(json.dumps(jsonStr))
 
@@ -311,10 +315,10 @@ def booking(request):
 # 购物车
 def cart(request):
     u_id = request.session['userinfo']['id']
-    # 获取账户余额
+    # 获取用户对象
     balance = Info.objects.get(id=u_id)
     # 获取该用户购物车商品对象
-    goods = Cart.objects.filter(user_id=u_id, is_pay=0)
+    goods = Cart.objects.filter(user_id=u_id, is_pay=0).order_by("-add_time")
     paginator = Paginator(goods, 4)
     cur_page = request.GET.get('page', 1)
     page = paginator.page(cur_page)
@@ -324,6 +328,7 @@ def cart(request):
 # 历史记录
 def order(request):
     uid = request.session['userinfo']['id']
+    user = Info.objects.get(id=uid)
     datas = History_list.objects.filter(u_id=uid, is_del='1')
     paginator = Paginator(datas, 4)
     print(paginator.page_range)
@@ -333,17 +338,13 @@ def order(request):
 
 
 # 删除购物车商品
-def del_goods(request, g_id):
+def del_goods(request, g_id,num):
     target = Cart.objects.get(id=g_id)
     target.delete()
-
     u_id = request.session['userinfo']['id']
-    balance = Info.objects.get(id=u_id)
     goods = Cart.objects.filter(user_id=u_id, is_pay=0)
     paginator = Paginator(goods, 4)
-    cur_page = request.GET.get('page', 1)
-    page = paginator.page(cur_page)
-
+    page = paginator.page(num)
     return render(request, 'user/cart.html', locals())
 
 
@@ -376,6 +377,8 @@ def reduce(request, g_id):
 
 # 订单结算
 from hotel.models import House
+
+
 def modif(request, g_id):
     target = Cart.objects.get(id=g_id)
     target.is_pay = 1
@@ -422,7 +425,9 @@ def payment(request):
     :param request:
     :return:
     """
-    return render(request, 'user/payment.html')
+    uid = request.session['userinfo']['id']
+    user = Info.objects.get(id=uid)
+    return render(request, 'user/payment.html',locals())
 
 
 def test(request):
@@ -450,9 +455,9 @@ def topup(request):
     :return:
     """
     u_id = request.session['userinfo']['id']
-    user = Info.objects.get(id = u_id)
+    user = Info.objects.get(id=u_id)
     price = float(user.price)
-    return render(request, 'pay/topUp.html',locals())
+    return render(request, 'pay/topUp.html', locals())
 
 
 def top_top(request):
@@ -502,44 +507,42 @@ def balance(request):
     else:
         msg = json.dumps("亲!你的余额不足额...")
         return HttpResponse(msg)
-#制作图片名
+
+
+# 制作图片名
 def picture_name(file_name):
-    file_name_list=file_name.split('.')
-    file_style=file_name_list[-1]
+    file_name_list = file_name.split('.')
+    file_style = file_name_list[-1]
     return file_style
 
-#用户 信息页面以及头像上传
+
+# 用户 信息页面以及头像上传
 def change(request):
     if request.method == "GET":
         if hasattr(request, 'session') and 'userinfo' in request.session:
-             try:
+            try:
                 u_id = request.session['userinfo']['id']
                 user = Info.objects.get(id=u_id)
-                return render(request,'user/change.html',locals())
-             except:
+                return render(request, 'user/change.html', locals())
+            except:
                 return HttpResponseRedirect('/')
         else:
             return HttpResponseRedirect('/')
     elif request.method == "POST":
         # print('1')
         u_id = request.session['userinfo']['id']
-        user_info= Info.objects.get(id=u_id)
+        user_info = Info.objects.get(id=u_id)
         # print('2')
         u_img_fd = request.FILES["uimg"]
-        file_style=picture_name(u_img_fd.name)
-        change_name_m='%s.%s'%(u_id,file_style)
+        file_style = picture_name(u_img_fd.name)
+        change_name_m = '%s.%s' % (u_id, file_style)
         # print('3')
-        change_name=os.path.join(settings.CHANGE_MEDIA_ROOT,change_name_m)
+        change_name = os.path.join(settings.CHANGE_MEDIA_ROOT, change_name_m)
         try:
-            with open(change_name,'wb') as f:
+            with open(change_name, 'wb') as f:
                 f.write(u_img_fd.file.read())
-                user_info.head_img=change_name_m
+                user_info.head_img = change_name_m
                 user_info.save()
                 return HttpResponseRedirect('/')
         except:
             raise Http404
-
-
-
-        
-

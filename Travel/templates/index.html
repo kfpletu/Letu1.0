@@ -22,9 +22,9 @@
                     {% if request.session.userinfo %}
                         <a href="/user/change">
                             {% if  user.head_img %}
-                                <img src='/static/images/user/change/{{ user.head_img }}' sytel = "opacity:1" title="点击修改头像">
+                                <img src='/static/images/user/change/{{ user.head_img }}' style = "opacity:1" title="点击修改头像">
                             {% else %}
-                                <img src='/static/images/user/head.jpg' sytel = "opacity:1" title="点击修改头像">
+                                <img src='/static/images/user/head.jpg' style="opacity:1" title="点击修改头像">
                             {% endif %}
                         </a>
                     {% endif %}

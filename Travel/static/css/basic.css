@@ -68,25 +68,25 @@ ul,ol {
     line-height: 25px;
 }
 #cart ul{
-    width:200px;
+    width:160px;
 }
 #cart ol{
     width: 70px;
-    margin-left: 60px;
+    margin-left: 45px;
 }
 /* 头像 */
 #cart ul img{
-    width: 46px;
-    height: 46px;
+    width: 30px;
+    height: 30px;
     float: left;
-    margin-top: 12px;
+    margin-top: 22px;
     margin-right: 5px;
 }
 #cart .down{
     width:0;
 	height:0;
-    border:10px solid transparent;
-    border-top:10px solid orange;;
+    border:6px solid transparent;
+    border-top:6px solid orange;;
     float: left;
     margin-top: 30px;
     margin-left: 10px;

@@ -160,6 +160,7 @@
             </div>
             <div class="out-form">
                 <form action="room" method="post"  id='form'>
+                    {% csrf_token %}
                     <div class="form">
                        {% csrf_token %}
                     <h2>酒店预订</h2>
