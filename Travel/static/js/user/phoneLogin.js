@@ -55,8 +55,7 @@ $(function () {
                     data: jsObj,
                     dataType: "json",
                     success: function (response) {
-                        console.log(response.num);
-                        console.log('发送成功');
+                        $('#uphone').html('验证码已发送至您的手机,请查看')
                         $('#showMes').html(response.num);
                     }
                 });
@@ -67,7 +66,11 @@ $(function () {
         }
     });
 
-    $('#mes').blur(function () { 
+    $('#mes').focus(function (e) { 
+        $('#uphone').html('')
+    });
+
+    $('#mes').blur(function () {
         if ($('#mes').val()) {
             if (String($('#mes').val()) == String($('#showMes').html())) {
                 $('#umes').html('')
