@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from . import models
 from django.http import HttpResponse, Http404, HttpResponseRedirect
-from user.models import Cart
+from user.models import Cart, Info
 import time, random
 import datetime
 import json
@@ -51,6 +51,8 @@ def add_intro(request):
 def index(request):
     if request.method == 'GET':
         scens = models.Scen.objects.all()
+        uid = request.session['userinfo']['id']
+        user = Info.objects.get(id=uid)
         return render(request,'scenic/information.html',locals())
 
 def ticket(request, s):
@@ -123,6 +125,8 @@ def data1(request):
 
 def scenic2(request):
     scens = models.Scen2.objects.all()
+    uid = request.session['userinfo']['id']
+    user = Info.objects.get(id=uid)
     return render(request,'scenic/information02.html',locals())
 
 def add_info(request):
