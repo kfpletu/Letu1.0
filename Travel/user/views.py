@@ -56,13 +56,13 @@ def login(request):
             return HttpResponse('登录失败,请重新登录')
 
 
-# 验证码
+# 图片验证码
 def yanzma(request):
     """
         登录图形图形验证码
     """
     img = Image.new("RGB", (110, 37), (255, 255, 255))
-    code = [chr(x) for x in range(97, 123)] + [str(x) for x in range(10)]
+    code = [chr(x) for x in range(97, 122)] + [str(x) for x in range(2,10)]+[chr(x) for x in range(65,90)]
     code = random.sample(code, 6)
     code = ''.join(code)
     draw = ImageDraw.Draw(img)
@@ -97,7 +97,6 @@ def phoneLogin(request):
         try:
             # 从数据库获取phone
             user = Info.objects.get(phone=phone)
-            print(user.uname,user.id)
             # 登录状态为真,刷新登录页面,禁止登录
             if user.is_alive:
                 resp = HttpResponse('该用户已经注销')
