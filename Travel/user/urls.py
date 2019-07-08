@@ -15,6 +15,11 @@ urlpatterns = [
     url(r'^checkuname$', views.checkuname),
     url(r'^checkphone$', views.checkphone),
     url(r'^yanzma/$', views.yanzma),
+    url(r'^message/$', views.message),
+    url(r'^phoneLogin/$', views.phoneLogin),
+    url(r'^check_phone_login/$', views.check_phone_login),
+    url(r'^getMes/$', views.getMes),
+    # url(r'^plogin/$', views.plogin)
 ]
 
 # kavin的路由
@@ -22,7 +27,7 @@ urlpatterns += [
     url(r'^payment', views.payment),
     url(r'^test', views.test), #用于测试
     url(r'^delete/', views.delete),
-    url(r'^order$',views.order),
+    url(r'^order',views.order,name='order'),
     url(r'^topUp$',views.topup),
     url(r'^top-top/$',views.top_top),
 ]

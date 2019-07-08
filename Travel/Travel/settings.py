@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'trip',
     'user',
     'index',
-    'scenic2',
 ]
 
 MIDDLEWARE = [
@@ -137,3 +136,7 @@ SESSION_COOKIE_AGE = 24 * 60 * 60
 
 #hotel 文件上传测试代码
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images/hotel')
+<<<<<<< HEAD
+=======
+CHANGE_MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images/user/change')
+>>>>>>> 18579e2d90a1ee6adb9892d0b359ef363954cbe7

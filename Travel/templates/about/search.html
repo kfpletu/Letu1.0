@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>乐途旅行</title>
+    <!--<link rel="stylesheet" href="../css/information.css">-->
+    <!--<link rel="stylesheet" href="../css/basic.css">-->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/scenic/information2.css' %}">
+    <link rel="stylesheet" href="{% static 'css/basic.css' %}">
+    <link rel="stylesheet" href="{% static 'css/search/search.css' %}">
+    <script src="/static/js/jquery.js"></script>
+    <script src="/static/js/search.js"></script>
+</head>
+
+<body>
+<header id="header">
+    {% if request.session.userinfo %}
+        <div id="cart">
+            <b>
+                <ul>
+                    <li class="home"><a href="javascript:void(0)">欢迎您,{{ request.session.userinfo.uname }}</a>
+                        <ol class='info1'>
+                            <li><a href="/user/topUp">我的钱包</a></li>
+                            <li><a href="/user/cart">购物车</a></li>
+                            <li><a href="/user/order">我的订单</a></li>
+                            <li><a href="/user/logout">退出登录</a></li>
+                            <li><a href="/user/cancel">注销账号</a></li>
+                        </ol>
+                    </li>
+                </ul>
+            </b>
+        </div>
+    {% else %}
+        <div class="login">
+            <b>
+                <div id="register">
+                    <a href="/user/register">免费注册</a>
+                </div>
+            </b>
+            <b>
+                <div id="login">
+                    <a href="/user/login">您好,请登录</a>
+                </div>
+            </b>
+        </div>
+    {% endif %}
+    <div class="center">
+        <h1 class="logo">
+            <a href="/" id="logoA">乐途旅行网</a>
+        </h1>
+        <nav>
+            <ul class="link">
+                <h1 class="none">网站导航</h1>
+                <li><a href="/">首页</a></li>
+                <li class="active"><a href="/scenic">景点门票</a></li>
+                <li><a href="/trip">交通出行</a></li>
+                <li><a href="/hotel">酒店预定</a></li>
+                <li><a href="/about">关于我们</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<div id="container">
+    <aside class="sidebar">
+        <div class="sidebox recommend">
+            <h2>美景推荐</h2>
+            <div class="tag">
+                <a href="###">陕西(10)</a>
+                <a href="###">四川(10)</a>
+                <a href="###">浙江(10)</a>
+                <a href="###">广东(10)</a>
+                <a href="###">云南(10)</a>
+                <a href="###">江苏(10)</a>
+                <a href="###">山东(10)</a>
+                <a href="###">河南(10)</a>
+                <a href="###">湖北(10)</a>
+                <a href="###">甘肃(10)</a>
+                <a href="###">河北(10)</a>
+                <a href="###">湖南(10)</a>
+                <a href="###">广西(10)</a>
+                <a href="###">新疆(10)</a>
+                <a href="###">内蒙古(10)</a>
+                <a href="###">北京(10)</a>
+                <a href="###">海南(10)</a>
+                <a href="###">贵州(10)</a>
+                <a href="###">安徽(10)</a>
+                <a href="###">青海(10)</a>
+                <a href="###">上海(10)</a>
+            </div>
+
+        </div>
+        <div class="sidebox popular">
+            <h2>热卖旅游</h2>
+            <div class="figure">
+                <figure>
+                    <img src="/static/images/recommend/xian.jpg" alt="西安 2 日游">
+                    <figcaption>西安 2 日游</figcaption>
+                </figure>
+                <figure><img src="/static/images/recommend/beijing.jpg" alt="北京 5日 4晚 游">
+                    <figcaption>北京 5日 4晚 游</figcaption>
+                </figure>
+                <figure><img src="/static/images/recommend/zhejiang.jpg" alt="浙江双飞 3 日游">
+                    <figcaption>浙江双飞 3 日游</figcaption>
+                </figure>
+                <figure><img src="/static/images/recommend/yunnan.gif" alt="云南丽江 6 日游">
+                    <figcaption>云南丽江 6 日游</figcaption>
+                </figure>
+                <figure><img src="/static/images/recommend/shandong.gif" alt="山东青岛 5 日游">
+                    <figcaption>山东青岛 5 日游</figcaption>
+                </figure>
+                <figure><img src="/static/images/recommend/guangxi.jpg" alt="广西 6 日半游">
+                    <figcaption>广西 6 日半游</figcaption>
+                </figure>
+                <figure><img src="/static/images/recommend/qinghai.jpg" alt="青海新疆 9 日游">
+                    <figcaption>青海新疆 9 日游</figcaption>
+                </figure>
+                <figure><img src="/static/images/recommend/hainan.gif" alt="海南三亚 4日 5夜游">
+                    <figcaption>海南三亚 4日 5夜游</figcaption>
+                </figure>
+            </div>
+        </div>
+        <div class="sidebox treasure">
+            <h2>旅游百宝箱</h2>
+            <div class="box">
+                <a href="###" class="trea1">天气预报</a>
+                <a href="/trip" class="trea2">火车票查询</a>
+                <a href="###" class="trea3">航空查询</a>
+                <a href="###" class="trea4">地铁线路查询</a>
+            </div>
+        </div>
+    </aside>
+
+    <div id="search2">
+        <form action="/search" name="demo" method="get">
+            {% csrf_token %}
+            <input type="text" name="search" placeholder="请输入关键字，景点，机票，酒店信息..." autocomplete="off"
+                   value="{{ search_s }}">
+            <img src="../static/images/home/search1.png" onclick="demo.submit();">
+        </form>
+    </div>
+    <div class="list" style="overflow: auto">
+        {% for foo in data.values %}
+            <figure class="tour">
+                    <img src="/static/images/hotel/{{ foo.0 }}/11.png" alt="热门旅游">
+                <figcaption>
+                    <article>
+                        <header>
+                            <hgroup>
+                                <h2>{{ foo.1 }}</h2>
+                                <h3>{{ foo.2 }}</h3>
+                            </hgroup>
+
+                        </header>
+                        <ol>
+                            <li>
+                                <mark>地址</mark>
+                                {{ foo.3 }}
+                            </li>
+                            <li>
+                                <mark>{{ foo.4 }}</mark>
+                                乐途旅行口碑榜，最佳战略合作伙伴
+                            </li>
+
+                        </ol>
+
+                        <footer>
+                            本团游由乐途旅行网赞助提供，截止于
+                            <time>2019-10-10</time>
+                        </footer>
+
+                    </article>
+                    <div class="buy">
+                        <div class="price">￥<strong>{{ foo.5 }}</strong>起</div>
+                        <div class="reserve"><a href="/hotel/{{ foo.6 }}">立即抢购</a></div>
+                    </div>
+                    <div class="type">{{ foo.1 }}</div>
+                </figcaption>
+
+            </figure>
+        {% endfor %}
+
+
+    </div>
+</div>
+
+</body>
+
+</html>

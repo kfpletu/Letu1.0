@@ -21,7 +21,11 @@
                 <ul>
                     {% if request.session.userinfo %}
                         <a href="/user/change.html">
-                            <img src= {{ head_img }} style="opacity: 1" title="点击修改头像">
+                            {% if  user.head_img %}
+                                <img src='/static/images/user/change/{{ user.head_img }}' sytel = "opacity:1" title="点击修改头像">
+                            {% else %}
+                                <img src='/static/images/user/head.jpg' sytel = "opacity:1" title="点击修改头像">
+                            {% endif %}
                         </a>
                     {% endif %}
                     <div class="down"></div>
@@ -75,11 +79,8 @@
         <a href="/scenic/12/" id="src1">
             <img src="../static/images/home/banner01.jpg">
         </a>
-<<<<<<< HEAD
         <a href="/scenic/4/">
-=======
         <a href="scenic/4/">
->>>>>>> c941d3f711dcf8435e8f3515257b61a9601a1d46
             <img src="../static/images/home/banner02.jpg">
         </a>
         <a href="/scenic/14/">
@@ -111,7 +112,7 @@
         <h2 class="">热门旅游搜索</h2>
 
         <div id="search2">
-            <form action="" name="demo">
+            <form action="/search" name="demo" method="get">
                 {% csrf_token %}
                 <input type="text" name="search" placeholder="请输入关键字，景点，机票，酒店信息...">
                 <img src="../static/images/home/search1.png" onclick="demo.submit();">

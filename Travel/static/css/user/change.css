@@ -6,7 +6,8 @@
     margin-top: 80px;
     color: #333;
     font-size: 1.4em;
-    
+    border: 1px solid #ddd;
+    border-radius: 20px;
 }
 #change table{
     margin-top: 20px;

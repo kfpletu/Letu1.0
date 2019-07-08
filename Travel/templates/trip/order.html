@@ -18,34 +18,34 @@
 <body>
 <header id="header">
     {% if request.session.userinfo %}
-    <div id="cart">
-        <b>
-            <ul>
-                <li class="home"><a href="javascript:void(0)">欢迎您,{{ request.session.userinfo.uname }}</a>
-                    <ol class='info1'>
-                        <li><a href="/user/topUp">我的钱包</a></li>
-                        <li><a href="/user/cart">购物车</a></li>
-                        <li><a href="/user/order">我的订单</a></li>
-                        <li><a href="/user/logout">退出登录</a></li>
-                        <li><a href="/user/cancel">注销账号</a></li>
-                    </ol>
-                </li>
-            </ul>
-        </b>
-    </div>
+        <div id="cart">
+            <b>
+                <ul>
+                    <li class="home"><a href="javascript:void(0)">欢迎您,{{ request.session.userinfo.uname }}</a>
+                        <ol class='info1'>
+                            <li><a href="/user/topUp">我的钱包</a></li>
+                            <li><a href="/user/cart">购物车</a></li>
+                            <li><a href="/user/order">我的订单</a></li>
+                            <li><a href="/user/logout">退出登录</a></li>
+                            <li><a href="/user/cancel">注销账号</a></li>
+                        </ol>
+                    </li>
+                </ul>
+            </b>
+        </div>
     {% else %}
-    <div class="login">
-        <b>
-            <div id="register">
-                <a href="/user/register">免费注册</a>
-            </div>
-        </b>
-        <b>
-            <div id="login">
-                <a href="/user/login">您好,请登录</a>
-            </div>
-        </b>
-    </div>
+        <div class="login">
+            <b>
+                <div id="register">
+                    <a href="/user/register">免费注册</a>
+                </div>
+            </b>
+            <b>
+                <div id="login">
+                    <a href="/user/login">您好,请登录</a>
+                </div>
+            </b>
+        </div>
     {% endif %}
     <div class="center">
         <h1 class="logo">
@@ -63,227 +63,593 @@
         </nav>
     </div>
 </header>
-    <div id="headline">
-        <div class="center">
-            <hgroup>
-                <h2>交通出行资讯</h2>
-                <h3>介绍各种最新交通出行信息、资讯要闻等，为顾客的出行提供最好的服务</h3>
-            </hgroup>
+<div id="headline">
+    <div class="center">
+        <hgroup>
+            <h2>交通出行资讯</h2>
+            <h3>介绍各种最新交通出行信息、资讯要闻等，为顾客的出行提供最好的服务</h3>
+        </hgroup>
 
+    </div>
+</div>
+<div id="container">
+    <aside class="sidebar">
+        <div class="sidebox recommend">
+            <h2>美景推荐</h2>
+            <div class="tag">
+                <a href="###">陕西(10)</a>
+                <a href="###">四川(10)</a>
+                <a href="###">浙江(10)</a>
+                <a href="###">广东(10)</a>
+                <a href="###">云南(10)</a>
+                <a href="###">江苏(10)</a>
+                <a href="###">山东(10)</a>
+                <a href="###">河南(10)</a>
+                <a href="###">湖北(10)</a>
+                <a href="###">甘肃(10)</a>
+                <a href="###">河北(10)</a>
+                <a href="###">湖南(10)</a>
+                <a href="###">广西(10)</a>
+                <a href="###">新疆(10)</a>
+                <a href="###">内蒙古(10)</a>
+                <a href="###">北京(10)</a>
+                <a href="###">海南(10)</a>
+                <a href="###">贵州(10)</a>
+                <a href="###">安徽(10)</a>
+                <a href="###">青海(10)</a>
+                <a href="###">上海(10)</a>
+            </div>
+
+        </div>
+        <div class="sidebox popular">
+            <h2>热卖旅游</h2>
+            <div class="figure">
+                <figure>
+                    <img src="/static/images/recommend/xian.jpg" alt="西安 2 日游">
+                    <figcaption>西安 2 日游</figcaption>
+                </figure>
+                <figure><img src="/static/images/recommend/beijing.jpg" alt="北京 5日 4晚 游">
+                    <figcaption>北京 5日 4晚 游</figcaption>
+                </figure>
+                <figure><img src="/static/images/recommend/zhejiang.jpg" alt="浙江双飞 3 日游">
+                    <figcaption>浙江双飞 3 日游</figcaption>
+                </figure>
+                <figure><img src="/static/images/recommend/yunnan.gif" alt="云南丽江 6 日游">
+                    <figcaption>云南丽江 6 日游</figcaption>
+                </figure>
+                <figure><img src="/static/images/recommend/shandong.gif" alt="山东青岛 5 日游">
+                    <figcaption>山东青岛 5 日游</figcaption>
+                </figure>
+                <figure><img src="/static/images/recommend/guangxi.jpg" alt="广西 6 日半游">
+                    <figcaption>广西 6 日半游</figcaption>
+                </figure>
+                <figure><img src="/static/images/recommend/qinghai.jpg" alt="青海新疆 9 日游">
+                    <figcaption>青海新疆 9 日游</figcaption>
+                </figure>
+                <figure><img src="/static/images/recommend/hainan.gif" alt="海南三亚 4日 5夜游">
+                    <figcaption>海南三亚 4日 5夜游</figcaption>
+                </figure>
+            </div>
+        </div>
+        <div class="sidebox treasure">
+            <h2>旅游百宝箱</h2>
+            <div class="box">
+                <a href="###" class="trea1">天气预报</a>
+                <a href="/trip" class="trea2">火车票查询</a>
+                <a href="###" class="trea3">航空查询</a>
+                <a href="###" class="trea4">地铁线路查询</a>
+            </div>
+        </div>
+    </aside>
+    <div class="list order">
+        <div class="form">
+            <h2>高铁预订</h2>
+            <p>
+            <ul class="infor">
+                <li>车票类型</li>
+                <li class="li"><a href="javascript:void (0)" class="bb">单程</a></li>
+                <li class="li"><a href="javascript:void (0)" class="bb">回程</a></li>
+                <li class="li"><a href="javascript:void (0)" class="bb" id="d1">切换</a></li>
+            </ul>
+            </p>
+
+            <form action="/trip/search" method="get">
+                {% csrf_token %}
+                <div class="left">
+                    <p>
+                        <label for="from_city">出发城市</label>
+                        <input type="text" name="from_city" id="from_city" class="cityinput" autocomplete="off">
+                        <label for="to_city">到达城市</label>
+                        <input type="text" name="to_city" id="to_city" value="西安" autocomplete="off">
+                    </p>
+                </div>
+                <div class="center">
+                    <p>
+                        <label for="from_day">出发时间</label>
+                        <input type="text" name="from_day" class="demo-input" placeholder="请选择日期" id="from_date"
+                               autocomplete="off" value="{{ today }}">
+                        <label for="to_day">返回时间</label>
+                        <input type="text" name="to_day" class="demo-input" placeholder="请选择日期" id="to_date"
+                               autocomplete="off" value="{{ tomorrow }}">
+                    </p>
+
+                </div>
+                <div class="right">
+                    <p>
+                        <button class="button">查询</button>
+                    </p>
+
+                </div>
+            </form>
+        </div>
+        <div class="new">
+            <h2>最新车票</h2>
+            <ul id="city">
+                <li>热门城市：</li>
+                <li class="li"><a href="javascript:void (0)" class="aa">西安</a></li>
+                <li class="li"><a href="javascript:void (0)" class="aa">北京</a></li>
+                <li class="li"><a href="javascript:void (0)" class="aa">上海</a></li>
+                <li class="li"><a href="javascript:void (0)" class="aa">广州</a></li>
+                <li class="li"><a href="javascript:void (0)" class="aa">深圳</a></li>
+                <li class="li"><a href="javascript:void (0)" class="aa">重庆</a></li>
+                <li class="li"><a href="javascript:void (0)" class="aa">成都</a></li>
+                <li class="li"><a href="javascript:void (0)" class="aa">杭州</a></li>
+            </ul>
+            <form action="" id="formtab">
+                {% csrf_token %}
+                <table id="tab">
+                    <thead>
+                    <tr class="th" id="float">
+                        <th width="90" colspan="1" rowspan="1">车次</th>
+                        <th width="100" colspan="1" rowspan="1">出发站<br clear="none">
+                            到达站
+                        </th>
+                        <th width="82" colspan="1" rowspan="1" id="startendtime"><span class="b1" id="s_time"
+                                                                                       style="cursor: pointer;">出发时间</span><br><span
+                                class="b2" id="r_time"
+                                style="cursor: pointer;">到达时间</span></th>
+                        <th width="82" colspan="1" rowspan="1"><span class="b3" id="l_s"
+                                                                     style="cursor: pointer;">历时</span>
+                        </th>
+                        <th width="66" colspan="1" rowspan="1">商务座<br clear="none">
+                            特等座
+                        </th>
+                        <th width="66" colspan="1" rowspan="1">一等座</th>
+                        <th width="66" colspan="1" rowspan="1">二等座</th>
+                        <th width="66" colspan="1" rowspan="1">高级<br clear="none">
+                            软卧
+                        </th>
+                        <th width="66" colspan="1" rowspan="1">软卧<br clear="none">
+                            一等卧
+                        </th>
+                        <th width="66" colspan="1" rowspan="1">动卧</th>
+                        <th width="66" colspan="1" rowspan="1">硬卧<br clear="none">
+                            二等卧
+                        </th>
+                        <th width="66" colspan="1" rowspan="1">软座</th>
+                        <th width="66" colspan="1" rowspan="1">硬座</th>
+                        <th width="66" colspan="1" rowspan="1">无座</th>
+                        <th width="66" colspan="1" rowspan="1">其他</th>
+                        <th class="last" colspan="1" rowspan="1">备注</th>
+                    </tr>
+                    </thead>
+                    <tbody id="queryLeftTable">
+                    <tbody>
+                    <tr class="th1" id="detail">
+                        <td width="90" colspan="1" rowspan="1">G1970</td>
+                        <td width="100" colspan="1" rowspan="1">上海虹桥<br clear="none">
+                            西安北
+                        </td>
+                        <td width="82" colspan="1" rowspan="1" id="startendtime"><span class="b1" id="s_time"
+                                                                                       style="cursor: pointer;">06:10</span><br><span
+                                class="b2" id="r_time" style="cursor: pointer;">13:22</span></td>
+                        <td width="82" colspan="1" rowspan="1"><span class="b3" id="l_s"
+                                                                     style="cursor: pointer;">07:12</span>
+                        </td>
+                        <td width="66" colspan="1" rowspan="1">5</td>
+                        <td width="66" colspan="1" rowspan="1">无</td>
+                        <td width="66" colspan="1" rowspan="1">无</td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td widthcitySelect="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td class="last" colspan="1" rowspan="1"><a href="javascript:void (0)" id="last">预订</a></td>
+                    </tr>
+
+
+                    <tr class="th1" id="detail">
+                        <td width="90" colspan="1" rowspan="1">G1974</td>
+                        <td width="100" colspan="1" rowspan="1">上海虹桥<br clear="none">
+                            西安北
+                        </td>
+                        <td width="82" colspan="1" rowspan="1" id="startendtime"><span class="b1" id="s_time"
+                                                                                       style="cursor: pointer;">07:17</span><br><span
+                                class="b2" id="r_time" style="cursor: pointer;">14:26</span></td>
+                        <td width="82" colspan="1" rowspan="1"><span class="b3" id="l_s"
+                                                                     style="cursor: pointer;">07:09</span>
+                        </td>
+                        <td width="66" colspan="1" rowspan="1">无</td>
+                        <td width="66" colspan="1" rowspan="1">无</td>
+                        <td width="66" colspan="1" rowspan="1">无</td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td widthcitySelect="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td class="last" colspan="1" rowspan="1"><a href="javascript:void (0)" id="last">预订</a></td>
+                    </tr>
+
+
+                    <tr class="th1" id="detail">
+                        <td width="90" colspan="1" rowspan="1">G360</td>
+                        <td width="100" colspan="1" rowspan="1">上海虹桥<br clear="none">
+                            西安北
+                        </td>
+                        <td width="82" colspan="1" rowspan="1" id="startendtime"><span class="b1" id="s_time"
+                                                                                       style="cursor: pointer;">08:36</span><br><span
+                                class="b2" id="r_time" style="cursor: pointer;">14:32</span></td>
+                        <td width="82" colspan="1" rowspan="1"><span class="b3" id="l_s"
+                                                                     style="cursor: pointer;">05:56</span>
+                        </td>
+                        <td width="66" colspan="1" rowspan="1">12</td>
+                        <td width="66" colspan="1" rowspan="1">无</td>
+                        <td width="66" colspan="1" rowspan="1">无</td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td widthcitySelect="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td class="last" colspan="1" rowspan="1"><a href="javascript:void (0)" id="last">预订</a></td>
+                    </tr>
+
+
+                    <tr class="th1" id="detail">
+                        <td width="90" colspan="1" rowspan="1">K376</td>
+                        <td width="100" colspan="1" rowspan="1">上海<br clear="none">
+                            西安
+                        </td>
+                        <td width="82" colspan="1" rowspan="1" id="startendtime"><span class="b1" id="s_time"
+                                                                                       style="cursor: pointer;">08:57</span><br><span
+                                class="b2" id="r_time" style="cursor: pointer;">04:42</span></td>
+                        <td width="82" colspan="1" rowspan="1"><span class="b3" id="l_s"
+                                                                     style="cursor: pointer;">19:45</span>
+                        </td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1">无</td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td widthcitySelect="66" colspan="1" rowspan="1">无</td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1">无</td>
+                        <td width="66" colspan="1" rowspan="1">有</td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td class="last" colspan="1" rowspan="1"><a href="javascript:void (0)" id="last">预订</a></td>
+                    </tr>
+
+
+                    <tr class="th1" id="detail">
+                        <td width="90" colspan="1" rowspan="1">K360</td>
+                        <td width="100" colspan="1" rowspan="1">上海<br clear="none">
+                            西安
+                        </td>
+                        <td width="82" colspan="1" rowspan="1" id="startendtime"><span class="b1" id="s_time"
+                                                                                       style="cursor: pointer;">09:23</span><br><span
+                                class="b2" id="r_time" style="cursor: pointer;">06:15</span></td>
+                        <td width="82" colspan="1" rowspan="1"><span class="b3" id="l_s"
+                                                                     style="cursor: pointer;">20:52</span>
+                        </td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1">无</td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td widthcitySelect="66" colspan="1" rowspan="1">无</td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1">无</td>
+                        <td width="66" colspan="1" rowspan="1">有</td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td class="last" colspan="1" rowspan="1"><a href="javascript:void (0)" id="last">预订</a></td>
+                    </tr>
+
+
+                    <tr class="th1" id="detail">
+                        <td width="90" colspan="1" rowspan="1">G1920</td>
+                        <td width="100" colspan="1" rowspan="1">上海虹桥<br clear="none">
+                            西安北
+                        </td>
+                        <td width="82" colspan="1" rowspan="1" id="startendtime"><span class="b1" id="s_time"
+                                                                                       style="cursor: pointer;">09:24</span><br><span
+                                class="b2" id="r_time" style="cursor: pointer;">16:25</span></td>
+                        <td width="82" colspan="1" rowspan="1"><span class="b3" id="l_s"
+                                                                     style="cursor: pointer;">07:01</span>
+                        </td>
+                        <td width="66" colspan="1" rowspan="1">10</td>
+                        <td width="66" colspan="1" rowspan="1">无</td>
+                        <td width="66" colspan="1" rowspan="1">无</td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td widthcitySelect="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td class="last" colspan="1" rowspan="1"><a href="javascript:void (0)" id="last">预订</a></td>
+                    </tr>
+
+
+                    <tr class="th1" id="detail">
+                        <td width="90" colspan="1" rowspan="1">K2186</td>
+                        <td width="100" colspan="1" rowspan="1">上海<br clear="none">
+                            西安
+                        </td>
+                        <td width="82" colspan="1" rowspan="1" id="startendtime"><span class="b1" id="s_time"
+                                                                                       style="cursor: pointer;">11:03</span><br><span
+                                class="b2" id="r_time" style="cursor: pointer;">08:57</span></td>
+                        <td width="82" colspan="1" rowspan="1"><span class="b3" id="l_s"
+                                                                     style="cursor: pointer;">21:54</span>
+                        </td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1">无</td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td widthcitySelect="66" colspan="1" rowspan="1">无</td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1">无</td>
+                        <td width="66" colspan="1" rowspan="1">有</td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td class="last" colspan="1" rowspan="1"><a href="javascript:void (0)" id="last">预订</a></td>
+                    </tr>
+
+
+                    <tr class="th1" id="detail">
+                        <td width="90" colspan="1" rowspan="1">G1924</td>
+                        <td width="100" colspan="1" rowspan="1">上海虹桥<br clear="none">
+                            西安北
+                        </td>
+                        <td width="82" colspan="1" rowspan="1" id="startendtime"><span class="b1" id="s_time"
+                                                                                       style="cursor: pointer;">11:40</span><br><span
+                                class="b2" id="r_time" style="cursor: pointer;">19:06</span></td>
+                        <td width="82" colspan="1" rowspan="1"><span class="b3" id="l_s"
+                                                                     style="cursor: pointer;">07:26</span>
+                        </td>
+                        <td width="66" colspan="1" rowspan="1">10</td>
+                        <td width="66" colspan="1" rowspan="1">6</td>
+                        <td width="66" colspan="1" rowspan="1">无</td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td widthcitySelect="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td class="last" colspan="1" rowspan="1"><a href="javascript:void (0)" id="last">预订</a></td>
+                    </tr>
+
+
+                    <tr class="th1" id="detail">
+                        <td width="90" colspan="1" rowspan="1">T204</td>
+                        <td width="100" colspan="1" rowspan="1">上海<br clear="none">
+                            西安
+                        </td>
+                        <td width="82" colspan="1" rowspan="1" id="startendtime"><span class="b1" id="s_time"
+                                                                                       style="cursor: pointer;">12:04</span><br><span
+                                class="b2" id="r_time" style="cursor: pointer;">05:23</span></td>
+                        <td width="82" colspan="1" rowspan="1"><span class="b3" id="l_s"
+                                                                     style="cursor: pointer;">17:19</span>
+                        </td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1">无</td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td widthcitySelect="66" colspan="1" rowspan="1">无</td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1">无</td>
+                        <td width="66" colspan="1" rowspan="1">无</td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td class="last" colspan="1" rowspan="1"><a href="javascript:void (0)" id="last">预订</a></td>
+                    </tr>
+
+
+                    <tr class="th1" id="detail">
+                        <td width="90" colspan="1" rowspan="1">G1928</td>
+                        <td width="100" colspan="1" rowspan="1">上海虹桥<br clear="none">
+                            西安北
+                        </td>
+                        <td width="82" colspan="1" rowspan="1" id="startendtime"><span class="b1" id="s_time"
+                                                                                       style="cursor: pointer;">12:55</span><br><span
+                                class="b2" id="r_time" style="cursor: pointer;">20:19</span></td>
+                        <td width="82" colspan="1" rowspan="1"><span class="b3" id="l_s"
+                                                                     style="cursor: pointer;">07:24</span>
+                        </td>
+                        <td width="66" colspan="1" rowspan="1">12</td>
+                        <td width="66" colspan="1" rowspan="1">无</td>
+                        <td width="66" colspan="1" rowspan="1">无</td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td widthcitySelect="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td class="last" colspan="1" rowspan="1"><a href="javascript:void (0)" id="last">预订</a></td>
+                    </tr>
+
+
+                    <tr class="th1" id="detail">
+                        <td width="90" colspan="1" rowspan="1">G1932</td>
+                        <td width="100" colspan="1" rowspan="1">上海虹桥<br clear="none">
+                            西安北
+                        </td>
+                        <td width="82" colspan="1" rowspan="1" id="startendtime"><span class="b1" id="s_time"
+                                                                                       style="cursor: pointer;">13:44</span><br><span
+                                class="b2" id="r_time" style="cursor: pointer;">20:31</span></td>
+                        <td width="82" colspan="1" rowspan="1"><span class="b3" id="l_s"
+                                                                     style="cursor: pointer;">06:47</span>
+                        </td>
+                        <td width="66" colspan="1" rowspan="1">11</td>
+                        <td width="66" colspan="1" rowspan="1">7</td>
+                        <td width="66" colspan="1" rowspan="1">无</td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td widthcitySelect="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td class="last" colspan="1" rowspan="1"><a href="javascript:void (0)" id="last">预订</a></td>
+                    </tr>
+
+
+                    <tr class="th1" id="detail">
+                        <td width="90" colspan="1" rowspan="1">K560</td>
+                        <td width="100" colspan="1" rowspan="1">上海<br clear="none">
+                            西安
+                        </td>
+                        <td width="82" colspan="1" rowspan="1" id="startendtime"><span class="b1" id="s_time"
+                                                                                       style="cursor: pointer;">14:48</span><br><span
+                                class="b2" id="r_time" style="cursor: pointer;">11:36</span></td>
+                        <td width="82" colspan="1" rowspan="1"><span class="b3" id="l_s"
+                                                                     style="cursor: pointer;">20:48</span>
+                        </td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1">无</td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td widthcitySelect="66" colspan="1" rowspan="1">无</td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1">无</td>
+                        <td width="66" colspan="1" rowspan="1">有</td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td class="last" colspan="1" rowspan="1"><a href="javascript:void (0)" id="last">预订</a></td>
+                    </tr>
+
+
+                    <tr class="th1" id="detail">
+                        <td width="90" colspan="1" rowspan="1">T116</td>
+                        <td width="100" colspan="1" rowspan="1">上海<br clear="none">
+                            西安
+                        </td>
+                        <td width="82" colspan="1" rowspan="1" id="startendtime"><span class="b1" id="s_time"
+                                                                                       style="cursor: pointer;">15:33</span><br><span
+                                class="b2" id="r_time" style="cursor: pointer;">08:12</span></td>
+                        <td width="82" colspan="1" rowspan="1"><span class="b3" id="l_s"
+                                                                     style="cursor: pointer;">16:39</span>
+                        </td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1">无</td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td widthcitySelect="66" colspan="1" rowspan="1">无</td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1">无</td>
+                        <td width="66" colspan="1" rowspan="1">有</td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td class="last" colspan="1" rowspan="1"><a href="javascript:void (0)" id="last">预订</a></td>
+                    </tr>
+
+
+                    <tr class="th1" id="detail">
+                        <td width="90" colspan="1" rowspan="1">Z252</td>
+                        <td width="100" colspan="1" rowspan="1">上海<br clear="none">
+                            西安
+                        </td>
+                        <td width="82" colspan="1" rowspan="1" id="startendtime"><span class="b1" id="s_time"
+                                                                                       style="cursor: pointer;">15:52</span><br><span
+                                class="b2" id="r_time" style="cursor: pointer;">07:57</span></td>
+                        <td width="82" colspan="1" rowspan="1"><span class="b3" id="l_s"
+                                                                     style="cursor: pointer;">16:05</span>
+                        </td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1">无</td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td widthcitySelect="66" colspan="1" rowspan="1">无</td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td width="66" colspan="1" rowspan="1">无</td>
+                        <td width="66" colspan="1" rowspan="1">有</td>
+                        <td width="66" colspan="1" rowspan="1"></td>
+                        <td class="last" colspan="1" rowspan="1"><a href="javascript:void (0)" id="last">预订</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </form>
         </div>
     </div>
-    <div id="container">
-        <aside class="sidebar">
-            <div class="sidebox recommend">
-                <h2>美景推荐</h2>
-                <div class="tag">
-                    <a href="###">陕西(10)</a>
-                    <a href="###">四川(10)</a>
-                    <a href="###">浙江(10)</a>
-                    <a href="###">广东(10)</a>
-                    <a href="###">云南(10)</a>
-                    <a href="###">江苏(10)</a>
-                    <a href="###">山东(10)</a>
-                    <a href="###">河南(10)</a>
-                    <a href="###">湖北(10)</a>
-                    <a href="###">甘肃(10)</a>
-                    <a href="###">河北(10)</a>
-                    <a href="###">湖南(10)</a>
-                    <a href="###">广西(10)</a>
-                    <a href="###">新疆(10)</a>
-                    <a href="###">内蒙古(10)</a>
-                    <a href="###">北京(10)</a>
-                    <a href="###">海南(10)</a>
-                    <a href="###">贵州(10)</a>
-                    <a href="###">安徽(10)</a>
-                    <a href="###">青海(10)</a>
-                    <a href="###">上海(10)</a>
-                </div>
-
-            </div>
-            <div class="sidebox popular">
-                <h2>热卖旅游</h2>
-                <div class="figure">
-                    <figure>
-                        <img src="/static/images/recommend/xian.jpg" alt="西安 2 日游">
-                        <figcaption>西安 2 日游</figcaption>
-                    </figure>
-                    <figure><img src="/static/images/recommend/beijing.jpg" alt="北京 5日 4晚 游">
-                        <figcaption>北京 5日 4晚 游</figcaption>
-                    </figure>
-                    <figure><img src="/static/images/recommend/zhejiang.jpg" alt="浙江双飞 3 日游">
-                        <figcaption>浙江双飞 3 日游</figcaption>
-                    </figure>
-                    <figure><img src="/static/images/recommend/yunnan.gif" alt="云南丽江 6 日游">
-                        <figcaption>云南丽江 6 日游</figcaption>
-                    </figure>
-                    <figure><img src="/static/images/recommend/shandong.gif" alt="山东青岛 5 日游">
-                        <figcaption>山东青岛 5 日游</figcaption>
-                    </figure>
-                    <figure><img src="/static/images/recommend/guangxi.jpg" alt="广西 6 日半游">
-                        <figcaption>广西 6 日半游</figcaption>
-                    </figure>
-                    <figure><img src="/static/images/recommend/qinghai.jpg" alt="青海新疆 9 日游">
-                        <figcaption>青海新疆 9 日游</figcaption>
-                    </figure>
-                    <figure><img src="/static/images/recommend/hainan.gif" alt="海南三亚 4日 5夜游">
-                        <figcaption>海南三亚 4日 5夜游</figcaption>
-                    </figure>
-                </div>
-            </div>
-            <div class="sidebox treasure">
-                <h2>旅游百宝箱</h2>
-                <div class="box">
-                    <a href="###" class="trea1">天气预报</a>
-                    <a href="/trip" class="trea2">火车票查询</a>
-                    <a href="###" class="trea3">航空查询</a>
-                    <a href="###" class="trea4">地铁线路查询</a>
-                </div>
-            </div>
-        </aside>
-        <div class="list order">
-            <div class="form">
-                <h2>高铁预订</h2>
-                <p>
-                    <ul class="infor">
-                        <li>车票类型</li>
-                        <li class="li"><a href="javascript:void (0)" class="bb" >单程</a></li>
-                        <li class="li"><a href="javascript:void (0)" class="bb">回程</a></li>
-                        <li class="li"><a href="javascript:void (0)" class="bb" id="d1">切换</a></li>
-                    </ul>
-                </p>
-
-                <form action="/trip/search" method="get">
-                    {% csrf_token %}
-                    <div class="left">
-                        <p>
-                            <label for="from_city">出发城市</label>
-                            <input type="text" name="from_city" id="from_city" class="cityinput" autocomplete="off">
-                            <label for="to_city">到达城市</label>
-                            <input type="text" name="to_city" id="to_city" value="西安" autocomplete="off">
-                        </p>
-                    </div>
-                    <div class="center">
-                        <p>
-                            <label for="from_day">出发时间</label>
-                            <input type="text" name="from_day" class="demo-input" placeholder="请选择日期" id="from_date"
-                                autocomplete="off" value="{{ today }}">
-                            <label for="to_day">返回时间</label>
-                            <input type="text" name="to_day" class="demo-input" placeholder="请选择日期" id="to_date"
-                                autocomplete="off" value="{{ tomorrow }}">
-                        </p>
-
-                    </div>
-                    <div class="right">
-                        <p>
-                            <button class="button">查询</button>
-                        </p>
-
-                    </div>
-                </form>
-            </div>
-            <div class="new">
-                <h2>最新车票</h2>
-                <ul id="city">
-                    <li>热门城市：</li>
-                    <li class="li"><a href="javascript:void (0)" class="aa">西安</a></li>
-                    <li class="li"><a href="javascript:void (0)" class="aa">北京</a></li>
-                    <li class="li"><a href="javascript:void (0)" class="aa">上海</a></li>
-                    <li class="li"><a href="javascript:void (0)" class="aa">广州</a></li>
-                    <li class="li"><a href="javascript:void (0)" class="aa">深圳</a></li>
-                    <li class="li"><a href="javascript:void (0)" class="aa">重庆</a></li>
-                    <li class="li"><a href="javascript:void (0)" class="aa">成都</a></li>
-                    <li class="li"><a href="javascript:void (0)" class="aa">杭州</a></li>
-                </ul>
-                <form action="" id="formtab">
-                    {% csrf_token %}
-                    <table id="tab">
-                        <thead>
-                            <tr class="th" id="float">
-                                <th width="90" colspan="1" rowspan="1">车次</th>
-                                <th width="100" colspan="1" rowspan="1">出发站<br clear="none">
-                                    到达站
-                                </th>
-                                <th width="82" colspan="1" rowspan="1" id="startendtime"><span class="b1" id="s_time"
-                                        style="cursor: pointer;">出发时间</span><br><span class="b2" id="r_time"
-                                        style="cursor: pointer;">到达时间</span></th>
-                                <th width="82" colspan="1" rowspan="1"><span class="b3" id="l_s"
-                                        style="cursor: pointer;">历时</span>
-                                </th>
-                                <th width="66" colspan="1" rowspan="1">商务座<br clear="none">
-                                    特等座
-                                </th>
-                                <th width="66" colspan="1" rowspan="1">一等座</th>
-                                <th width="66" colspan="1" rowspan="1">二等座</th>
-                                <th width="66" colspan="1" rowspan="1">高级<br clear="none">
-                                    软卧
-                                </th>
-                                <th width="66" colspan="1" rowspan="1">软卧<br clear="none">
-                                    一等卧
-                                </th>
-                                <th width="66" colspan="1" rowspan="1">动卧</th>
-                                <th width="66" colspan="1" rowspan="1">硬卧<br clear="none">
-                                    二等卧
-                                </th>
-                                <th width="66" colspan="1" rowspan="1">软座</th>
-                                <th width="66" colspan="1" rowspan="1">硬座</th>
-                                <th width="66" colspan="1" rowspan="1">无座</th>
-                                <th width="66" colspan="1" rowspan="1">其他</th>
-                                <th class="last" colspan="1" rowspan="1">备注</th>
-                            </tr>
-                        </thead>
-                    </table>
-                </form>
-            </div>
+</div>
+<footer id="footer">
+    <div class="top">
+        <div class="block left">
+            <h2>合作伙伴</h2>
+            <hr>
+            <p><a href="http://www.tuniu.com">途牛旅游网</a></p>
+            <p><a href="http://www.lvmama.com">驴妈妈旅游网</a></p>
+            <p><a href="http://www.ctrip.com">携程旅行网</a></p>
+            <p><a href="http://www.cytsonline.com">中国青年旅行社</a></p>
+        </div>
+        <div class="block center">
+            <h2>旅游 FAQ</h2>
+            <hr>
+            <p><a href="/about/travelContract">旅游合同签订方式？</a></p>
+            <p><a href="/about/childPrice">儿童价是基于什么制定的？</a></p>
+            <p><a href="/about/touristRoute">旅游的线路品质怎么界定的？</a></p>
+            <p><a href="/about/singleRoom">单房差是什么？</a></p>
+            <p><a href="/about/travelInsuranceCategory">旅游保险有那些种类？</a></p>
+        </div>
+        <div class="block right">
+            <h2>联系方式</h2>
+            <hr>
+            <ul>
+                <li>微博：weibo.com/letu</li>
+                <li>邮件：letu@letu.com</li>
+                <li>地址：陕西西安碑林区中铁第一国际9层</li>
+            </ul>
         </div>
     </div>
-    <footer id="footer">
-        <div class="top">
-            <div class="block left">
-                <h2>合作伙伴</h2>
-                <hr>
-                <p><a href="http://www.tuniu.com">途牛旅游网</a></p>
-                <p><a href="http://www.lvmama.com">驴妈妈旅游网</a></p>
-                <p><a href="http://www.ctrip.com">携程旅行网</a></p>
-                <p><a href="http://www.cytsonline.com">中国青年旅行社</a></p>
-            </div>
-            <div class="block center">
-                <h2>旅游 FAQ</h2>
-                <hr>
-                <p><a href="/about/travelContract">旅游合同签订方式？</a></p>
-                <p><a href="/about/childPrice">儿童价是基于什么制定的？</a></p>
-                <p><a href="/about/touristRoute">旅游的线路品质怎么界定的？</a></p>
-                <p><a href="/about/singleRoom">单房差是什么？</a></p>
-                <p><a href="/about/travelInsuranceCategory">旅游保险有那些种类？</a></p>
-            </div>
-            <div class="block right">
-                <h2>联系方式</h2>
-                <hr>
-                <ul>
-                    <li>微博：weibo.com/letu</li>
-                    <li>邮件：letu@letu.com</li>
-                    <li>地址：陕西西安碑林区中铁第一国际9层</li>
-                </ul>
-            </div>
-        </div>
-        <div class="bottom">
-            <p>Copyright ©LT 乐途旅行网 | 陕ICP备120110109号 | 旅行网经营许可证： L-LT-BK12345</p>
-            <img src="/static/images/home/pic.gif" title="站长统计">
-        </div>
-    </footer>
-    <script src="../../static/js/hotel/layDate-v5.0.9/laydate/laydate.js"></script>
-    <script>
-        lay('#version').html('-v' + laydate.v);
+    <div class="bottom">
+        <p>Copyright ©LT 乐途旅行网 | 陕ICP备120110109号 | 旅行网经营许可证： L-LT-BK12345</p>
+        <img src="/static/images/home/pic.gif" title="站长统计">
+    </div>
+</footer>
+<script src="../../static/js/hotel/layDate-v5.0.9/laydate/laydate.js"></script>
+<script>
+    lay('#version').html('-v' + laydate.v);
 
-        //执行一个laydate实例
-        laydate.render({
-            elem: '#from_date'
-        });
-        laydate.render({
-            elem: '#to_date' //指定元素,即你要输入的框的id号即可
-        });
-    </script>
-    
+    //执行一个laydate实例
+    laydate.render({
+        elem: '#from_date'
+    });
+    laydate.render({
+        elem: '#to_date' //指定元素,即你要输入的框的id号即可
+    });
+</script>
+
 
 </body>
 
