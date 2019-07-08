@@ -38,9 +38,11 @@ class Scbr(models.Model):
         verbose_name_plural = verbose_name
     def __str__(self):
         return (self.id,self.sce_name)
+
 class Introduce(models.Model):
     sce_details=models.TextField('景区介绍')
     scbr=models.OneToOneField(Scbr,models.CASCADE,null=True)
+
 class Map(models.Model):
     # add=models.CharField("经纬度",max_length=30,null=True)
     jingdu=models.DecimalField("经度",max_digits=9,decimal_places=6,null=True)
