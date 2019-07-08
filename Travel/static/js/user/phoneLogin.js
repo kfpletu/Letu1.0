@@ -55,7 +55,7 @@ $(function () {
                     data: jsObj,
                     dataType: "json",
                     success: function (response) {
-                        console.log(response.num);
+                        $('#uphone').html('验证码已发送至您的手机,请查看')
                         $('#showMes').html(response.num);
                     }
                 });
@@ -66,7 +66,11 @@ $(function () {
         }
     });
 
-    $('#mes').blur(function () { 
+    $('#mes').focus(function (e) { 
+        $('#uphone').html('')
+    });
+
+    $('#mes').blur(function () {
         if ($('#mes').val()) {
             if (String($('#mes').val()) == String($('#showMes').html())) {
                 $('#umes').html('')
@@ -80,12 +84,14 @@ $(function () {
     
     $('#btn').click(function () {
         if (!$('#phone').val() && !$('#mes').val()) {
-            alert('请输入正确的信息')
+            alert('请输入正确信息')
         } else {
             if (!$('#phone').val() || !$('#mes').val()) {
                 alert('登录失败')
             } else {
-                if (!$('#uphone').html() || !$('#umes').html()) {
+                if ($('#uphone').html() || $('#umes').html()) {
+                    alert('登录失败')
+                } else {
                     var jsObj = {
                         phone: $('#phone').val(),
                         csrfmiddlewaretoken: $("[name='csrfmiddlewaretoken']").val()
@@ -97,15 +103,13 @@ $(function () {
                         success: function (response) {
                             if (response) {
                                 alert('登录失败,请重新登录')
-                                location.href ='/user/phoneLogin'
+                                location.href = '/user/phoneLogin'
                             } else {
                                 alert('登录成功')
                                 location.href = '/'
                             }
                         }
                     });
-                } else {
-                    alert('登录失败')
                 }
             }
         }

@@ -68,11 +68,11 @@ $(function(){
         $("#box1").css("display","none");
         $("#content .wait").css("display","block");
         setTimeout(function(){
-            $("#content .wait").css("display","none")//删除
-        }, 2000)
-    
-    });
-function countPrice(that,value){
+            $("#content .wait").css(number"display","none")//删除
+        }, 2000)number
+    number
+    });number
+function countPrice(that,value){number
     //价格联动 单价*数量 ，修改总金额
     var str = that.parents(".item").find(".gprice p").html();//￥ 299.00
     var price = str.substring(2);
