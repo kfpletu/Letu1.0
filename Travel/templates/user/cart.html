@@ -83,8 +83,8 @@
                 {# 以下增加各页的超链接 #}
                 {% for p in paginator.page_range %}
                     {# 判断p是否是当前页，如果是当前面，不加超链接#}
-                    {% if p == page.number %}
-                    {{ p }}
+                    {% if p == page.number %}  
+                    <span>{{ p }}</span>
                     {% else %}
                     <a href="{% url 'goodType' %}?page={{ p }}">{{p}}</a>
                     {% endif %}
