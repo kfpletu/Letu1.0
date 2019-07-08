@@ -23,6 +23,8 @@ class Hotel(models.Model):
     hotel_level=models.CharField('酒店级别',max_length=10)
     house=models.OneToOneField(House,models.CASCADE,null=True)
     # hotel_p=models.CharField('图片地址',max_length=25,default='/')
+    jingdu = models.DecimalField("经度", max_digits=9, decimal_places=6, null=True)
+    weidu = models.DecimalField("纬度", max_digits=8, decimal_places=6, null=True)
     class Meta:
         db_table='hotel'
 

@@ -15,7 +15,11 @@ urlpatterns = [
     url(r'^checkuname$', views.checkuname),
     url(r'^checkphone$', views.checkphone),
     url(r'^yanzma/$', views.yanzma),
-    url(r'^message/$',views.message)
+    url(r'^message/$', views.message),
+    url(r'^phoneLogin/$', views.phoneLogin),
+    url(r'^check_phone_login/$', views.check_phone_login),
+    url(r'^getMes/$', views.getMes),
+    # url(r'^plogin/$', views.plogin)
 ]
 
 # kavin的路由
