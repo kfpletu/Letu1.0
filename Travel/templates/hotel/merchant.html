@@ -16,6 +16,7 @@
     <a href="{% url 'hotel' %}">返回酒店首页</a>
     <h1>请上传文件</h1>
     <form action="{% url 'hotel' %}upload_picture" enctype="multipart/form-data" method="post">
+        {% csrf_token %}
         <input id="input_file" type="file" name="myfile">
         <select name="level">
             <option value="3">星级酒店</option>
