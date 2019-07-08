@@ -28,10 +28,14 @@
         {%block post%} {%endblock post%} {% block blockname %} {% csrf_token %} {% endblock blockname %}
         <div id="form">
             <div class="content">
+                
+                  
+                
                 <p>
                     {%block body_head%} 登录
                     <a href="/user/register">新用户注册</a> {%endblock body_head%}
                 </p>
+                {% block phoneLogin %}
                 <div class="text">
                     {%block pwd%}
                     <input type="text" name="uname" id="uname" placeholder="{%block uname%}请输入用户名(5~15个字母或数字){%endblock uname%}" minlength="5" maxlength="15"> {%block img1%}<img src="/static/images/user/user.png" alt="">{%endblock img1%} {%endblock pwd%}
@@ -51,12 +55,13 @@
                 </div>
                 {%block giveup%}
                 <div class="savePwd">
-                    <input type="checkbox" name="remember">记住密码
                     <a href="/user/forget">忘记密码?</a>
+                    <a href="/user/phoneLogin" style="margin-right: 75px;">手机验证码登录</a>
                 </div>
                 {%endblock giveup%}
-                {%block value%}<button class="login">登录</button>{%endblock value%}
-                
+                {%block value%}<button class="login" style="margin-top:25px;">登录</button>{%endblock value%}
+
+                {% endblock phoneLogin %}
             </div>
         </div>
         {% block form %} {% endblock form %}

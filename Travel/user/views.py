@@ -87,6 +87,83 @@ def yanzma(request):
     }
     return HttpResponse(json.dumps(imgUrl))
 
+# 手机验证码登录
+def phoneLogin(request):
+    if request.method == 'GET':
+        return render(request, 'user/phoneLogin.html')
+    elif request.method == 'POST':
+        phone = request.POST.get('phone')
+        print(phone)
+        try:
+            # 从数据库获取phone
+            user = Info.objects.get(phone=phone)
+            print(user.uname,user.id)
+            # 登录状态为真,刷新登录页面,禁止登录
+            if user.is_alive:
+                resp = HttpResponse('该用户已经注销')
+                return resp
+            else:
+                if user.is_online:
+                    resp = HttpResponse('该用户已在其他地方登录')
+                    return resp
+                else:
+                    # 修改登录状态,发送seesion,cookie,返回首页
+                    
+                    request.session['userinfo'] = {
+                        'uname': user.uname,
+                        'id': user.id
+                    }
+                    user.is_online = 1
+                    user.save()
+                    return HttpResponse('', locals())
+        except:
+            # 出异常,说明用户名密码不正确,刷新当前登录页面
+            return HttpResponse('1')
+        
+
+
+# 检测登录手机是否注册
+def check_phone_login(request):
+    if request.method == 'POST':
+        phone = request.POST.get('phone')
+        if not Info.objects.filter(phone=phone):
+            jsonStr = {
+                'mes':'手机号没有注册'
+            }
+        else:
+            jsonStr = {
+                'mes': ''
+            }
+        return HttpResponse(json.dumps(jsonStr))
+
+# 获取登录验证码
+def getMes(request):
+    phone = request.GET.get('phone')
+    number = random.randint(100000, 999999)
+    client = AcsClient('LTAIxo8uU7FoZPog',
+                       '5fhRNu2256WxUF5dP9QdSmqqbZ50ul', 'cn-hangzhou')
+    request = CommonRequest()
+    request.set_accept_format('json')
+    request.set_domain('dysmsapi.aliyuncs.com')
+    request.set_method('POST')
+    request.set_protocol_type('https')  # https | http
+    request.set_version('2017-05-25')
+    request.set_action_name('SendSms')
+
+    request.add_query_param('RegionId', "cn-hangzhou")
+    request.add_query_param('PhoneNumbers', phone)
+    request.add_query_param('SignName', "letu")
+    request.add_query_param('TemplateCode', "SMS_169902712")
+    request.add_query_param('TemplateParam', "{'code':%s}" % number)
+
+    response = client.do_action(request)
+    # python2:  print(response)
+    print(str(response, encoding='utf-8'))
+
+    jsonStr = {
+        'num': number
+    }
+    return HttpResponse(json.dumps(jsonStr))
 
 # 注册
 def register(request):
@@ -124,9 +201,7 @@ def checkphone(request):
         return HttpResponse('该手机号码已经被注册')
     return HttpResponse('')
 
-# 短信验证码
-
-
+# 注册短信验证码
 def message(request):
     phone = request.GET.get('phone')
     number = random.randint(100000, 999999)
@@ -144,7 +219,7 @@ def message(request):
     request.add_query_param('RegionId', "cn-hangzhou")
     request.add_query_param('PhoneNumbers', phone)
     request.add_query_param('SignName', "letu")
-    request.add_query_param('TemplateCode', "SMS_169897404")
+    request.add_query_param('TemplateCode', "SMS_169897609")
     request.add_query_param('TemplateParam', "{'code':%s}" % number)
 
     response = client.do_action(request)
