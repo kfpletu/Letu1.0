@@ -2,8 +2,15 @@ $(function(){
     // 删除
     $(".item .dele").click(function(){
         var gId = $(this).parents('.item').find(".hid").html()
+        var spanList = $("#paging span")
+        for(var i=0;i<spanList.length;i++){
+            tSpan = Number($(spanList[i]).html())
+            if(!(!tSpan)){
+                num = tSpan
+            }
+        } 
         var xhr = createXhr()
-        var url = "/user/del/" + gId
+        var url = "/user/del/" + gId + '/' + num
         xhr.open('get',url,true)
         xhr.onreadystatechange = function(){
             if(xhr.readyState==4 && xhr.status==200){
