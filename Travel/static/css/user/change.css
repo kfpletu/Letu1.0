@@ -6,7 +6,7 @@
     margin-top: 80px;
     color: #333;
     font-size: 1.4em;
-    border: 1px solid #ddd;
+    border: 5px solid orange;
     border-radius: 20px;
 }
 #change table{
@@ -15,6 +15,11 @@
     line-height: 40px;
 }
 #change tr td:nth-child(1){
+    width: 110px;
+    text-align: right;
+}
+#change tr td:nth-child(2){
+    width: 220px;
     text-align: center;
 }
 #change .subImg{

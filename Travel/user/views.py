@@ -312,10 +312,10 @@ def booking(request):
 # 购物车
 def cart(request):
     u_id = request.session['userinfo']['id']
-    # 获取账户余额
+    # 获取用户对象
     balance = Info.objects.get(id=u_id)
     # 获取该用户购物车商品对象
-    goods = Cart.objects.filter(user_id=u_id, is_pay=0)
+    goods = Cart.objects.filter(user_id=u_id, is_pay=0).order_by("-add_time")
     paginator = Paginator(goods, 4)
     cur_page = request.GET.get('page', 1)
     page = paginator.page(cur_page)
@@ -404,8 +404,6 @@ def modif(request, g_id):
             booking_time='2019-2-2',
             is_del=target.is_pay
         )
-
-
     except:                 
         return HttpResponse('购买失败')
     else:
