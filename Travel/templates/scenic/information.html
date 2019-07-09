@@ -12,32 +12,43 @@
     <link rel="stylesheet" href="{% static 'css/scenic/ticket.css' %}">
     <script src="{% static 'js/jquery.js' %}"></script>
     <style>
-        #container .infor .right a:hover{
+        #container .infor .right a:hover {
             background: #f60;
-            color:#fff;
-            }
+            color: #fff;
+        }
     </style>
 </head>
 
 <body>
-    <header id="header">
-        {% if request.session.userinfo %}
+<header id="header">
+    {% if request.session.userinfo %}
         <div id="cart">
             <b>
                 <ul>
+                    {% if request.session.userinfo %}
+                        <a href="/user/change.html">
+                            {% if  user.head_img %}
+                                <img src='/static/images/user/change/{{ user.head_img }}' sytel="opacity:1"
+                                     title="点击修改头像">
+                            {% else %}
+                                <img src='/static/images/user/head.jpg' sytel="opacity:1" title="点击修改头像">
+                            {% endif %}
+                        </a>
+                    {% endif %}
+                    <div class="down"></div>
                     <li class="home"><a href="javascript:void(0)">欢迎您,{{ request.session.userinfo.uname }}</a>
                         <ol class='info1'>
                             <li><a href="/user/topUp">我的钱包</a></li>
+                            <li><a href="/user/change">个人信息</a></li>
                             <li><a href="/user/cart">购物车</a></li>
                             <li><a href="/user/order">我的订单</a></li>
                             <li><a href="/user/logout">退出登录</a></li>
-                            <li><a href="/user/cancel">注销账号</a></li>
                         </ol>
                     </li>
                 </ul>
             </b>
         </div>
-        {% else %}
+    {% else %}
         <div class="login">
             <b>
                 <div id="register">
@@ -50,136 +61,136 @@
                 </div>
             </b>
         </div>
-        {% endif %}
-        <div class="center">
-            <h1 class="logo">
-                <a href="/" id="logoA">乐途旅行网</a>
-            </h1>
-            <nav>
-                <ul class="link">
-                    <h1 class="none">网站导航</h1>
-                    <li><a href="/">首页</a></li>
-                    <li class="active"><a href="/scenic">景点门票</a></li>
-                    <li><a href="/trip">交通出行</a></li>
-                    <li><a href="/hotel">酒店预定</a></li>
-                    <li><a href="/about">关于我们</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-    {% load static %}
-    <div id="headline" style="background-image:url({% static 'images/scenic/information2/headline.jpg' %})">
-        <div class="center">
-            <hgroup>
-                <h2>景点门票</h2>
-                <h3>介绍各种最新旅游信息、资讯要闻、景点攻略、门票购买等</h3>
-            </hgroup>
-
-        </div>
+    {% endif %}
+    <div class="center">
+        <h1 class="logo">
+            <a href="/" id="logoA">乐途旅行网</a>
+        </h1>
+        <nav>
+            <ul class="link">
+                <h1 class="none">网站导航</h1>
+                <li><a href="/">首页</a></li>
+                <li class="active"><a href="/scenic">景点门票</a></li>
+                <li><a href="/trip">交通出行</a></li>
+                <li><a href="/hotel">酒店预定</a></li>
+                <li><a href="/about">关于我们</a></li>
+            </ul>
+        </nav>
     </div>
-    <div id="container">
-        <aside class="sidebar">
-            <div class="sidebox recommend">
-                <h2>美景推荐</h2>
-                <div class="tag">
-                    <a href="###">陕西(10)</a>
-                    <a href="###">四川(10)</a>
-                    <a href="###">浙江(10)</a>
-                    <a href="###">广东(10)</a>
-                    <a href="###">云南(10)</a>
-                    <a href="###">江苏(10)</a>
-                    <a href="###">山东(10)</a>
-                    <a href="###">河南(10)</a>
-                    <a href="###">湖北(10)</a>
-                    <a href="###">甘肃(10)</a>
-                    <a href="###">河北(10)</a>
-                    <a href="###">湖南(10)</a>
-                    <a href="###">广西(10)</a>
-                    <a href="###">新疆(10)</a>
-                    <a href="###">内蒙古(10)</a>
-                    <a href="###">北京(10)</a>
-                    <a href="###">海南(10)</a>
-                    <a href="###">贵州(10)</a>
-                    <a href="###">安徽(10)</a>
-                    <a href="###">青海(10)</a>
-                    <a href="###">上海(10)</a>
+</header>
+{% load static %}
+<div id="headline" style="background-image:url({% static 'images/scenic/information2/headline.jpg' %})">
+    <div class="center">
+        <hgroup>
+            <h2>景点门票</h2>
+            <h3>介绍各种最新旅游信息、资讯要闻、景点攻略、门票购买等</h3>
+        </hgroup>
+
+    </div>
+</div>
+<div id="container">
+    <aside class="sidebar">
+        <div class="sidebox recommend">
+            <h2>美景推荐</h2>
+            <div class="tag">
+                    <a href="https://vacations.ctrip.com/tours/d-shaanxi-100057?salecity=1">陕西(10)</a>
+                    <a href="https://vacations.ctrip.com/tours/d-sichuan-100009?salecity=1">四川(10)</a>
+                    <a href="https://vacations.ctrip.com/tours/d-zhejiang-100065?salecity=1">浙江(10)</a>
+                    <a href="https://vacations.ctrip.com/tours/d-guangdong-100051?salecity=1">广东(10)</a>
+                    <a href="https://vacations.ctrip.com/tours/d-yunnan-100007?salecity=1">云南(10)</a>
+                    <a href="https://vacations.ctrip.com/tours/d-jiangsu-100066?salecity=1">江苏(10)</a>
+                    <a href="https://vacations.ctrip.com/tours/d-shandong-100039?salecity=1">山东(10)</a>
+                    <a href="https://vacations.ctrip.com/tours/d-henan-100058?salecity=1">河南(10)</a>
+                    <a href="https://vacations.ctrip.com/tours/d-hubei-100067?salecity=1">湖北(10)</a>
+                    <a href="https://vacations.ctrip.com/tours/d-gansu-100060?salecity=1">甘肃(10)</a>
+                    <a href="https://vacations.ctrip.com/tours/d-hebei-100059?salecity=1">河北(10)</a>
+                    <a href="https://vacations.ctrip.com/tours/d-hunan-100053?salecity=1">湖南(10)</a>
+                    <a href="https://vacations.ctrip.com/tours/d-guangxi-100052?salecity=1">广西(10)</a>
+                    <a href="https://vacations.ctrip.com/tours/d-xinjiang-100008?salecity=1">新疆(10)</a>
+                    <a href="https://vacations.ctrip.com/tours/d-innermongolia-100062?salecity=1">内蒙古(10)</a>
+                    <a href="https://vacations.ctrip.com/tours/d-beijing-1?salecity=1">北京(10)</a>
+                    <a href="https://vacations.ctrip.com/whole-1b126/?searchvalue=%E6%B5%B7%E5%8D%97&searchtext=%E6%B5%B7%E5%8D%97">海南(10)</a>
+                    <a href="https://vacations.ctrip.com/tours/d-guizhou-100064?salecity=1">贵州(10)</a>
+                    <a href="https://vacations.ctrip.com/tours/d-anhui-100068?salecity=1">安徽(10)</a>
+                    <a href="https://vacations.ctrip.com/tours/d-qinghai-100032?salecity=1">青海(10)</a>
+                    <a href="https://vacations.ctrip.com/tours/d-shanghai-2?salecity=1">上海(10)</a>
                 </div>
 
+        </div>
+        <div class="sidebox popular">
+            <h2>热卖旅游</h2>
+            <div class="figure">
+                <figure>
+                    <img src="{% static 'images/scenic/recommend/xian.jpg' %}" alt="西安 2 日游">
+                    <figcaption>西安 2 日游</figcaption>
+                </figure>
+                <figure><img src="{% static 'images/scenic/recommend/beijing.jpg' %}" alt="北京 5日 4晚 游">
+                    <figcaption>北京 5日 4晚 游</figcaption>
+                </figure>
+                <figure><img src="{% static 'images/scenic/recommend/zhejiang.jpg' %}" alt="浙江双飞 3 日游">
+                    <figcaption>浙江双飞 3 日游</figcaption>
+                </figure>
+                <figure><img src="{% static 'images/scenic/recommend/yunnan.gif' %}" alt="云南丽江 6 日游">
+                    <figcaption>云南丽江 6 日游</figcaption>
+                </figure>
+                <figure><img src="{% static 'images/scenic/recommend/shandong.gif' %}" alt="山东青岛 5 日游">
+                    <figcaption>山东青岛 5 日游</figcaption>
+                </figure>
+                <figure><img src="{% static 'images/scenic/recommend/guangxi.jpg' %}" alt="广西 6 日半游">
+                    <figcaption>广西 6 日半游</figcaption>
+                </figure>
+                <figure><img src="{% static 'images/scenic/recommend/qinghai.jpg' %}" alt="青海新疆 9 日游">
+                    <figcaption>青海新疆 9 日游</figcaption>
+                </figure>
+                <figure><img src="{% static 'images/scenic/recommend/hainan.gif' %}" alt="海南三亚 4日 5夜游">
+                    <figcaption>海南三亚 4日 5夜游</figcaption>
+                </figure>
             </div>
-            <div class="sidebox popular">
-                <h2>热卖旅游</h2>
-                <div class="figure">
-                    <figure>
-                        <img src="{% static 'images/scenic/recommend/xian.jpg' %}" alt="西安 2 日游">
-                        <figcaption>西安 2 日游</figcaption>
-                    </figure>
-                    <figure> <img src="{% static 'images/scenic/recommend/beijing.jpg' %}" alt="北京 5日 4晚 游">
-                        <figcaption>北京 5日 4晚 游</figcaption>
-                    </figure>
-                    <figure> <img src="{% static 'images/scenic/recommend/zhejiang.jpg' %}" alt="浙江双飞 3 日游">
-                        <figcaption>浙江双飞 3 日游</figcaption>
-                    </figure>
-                    <figure> <img src="{% static 'images/scenic/recommend/yunnan.gif' %}" alt="云南丽江 6 日游">
-                        <figcaption>云南丽江 6 日游</figcaption>
-                    </figure>
-                    <figure> <img src="{% static 'images/scenic/recommend/shandong.gif' %}" alt="山东青岛 5 日游">
-                        <figcaption>山东青岛 5 日游</figcaption>
-                    </figure>
-                    <figure> <img src="{% static 'images/scenic/recommend/guangxi.jpg' %}" alt="广西 6 日半游">
-                        <figcaption>广西 6 日半游</figcaption>
-                    </figure>
-                    <figure> <img src="{% static 'images/scenic/recommend/qinghai.jpg' %}" alt="青海新疆 9 日游">
-                        <figcaption>青海新疆 9 日游</figcaption>
-                    </figure>
-                    <figure> <img src="{% static 'images/scenic/recommend/hainan.gif' %}" alt="海南三亚 4日 5夜游">
-                        <figcaption>海南三亚 4日 5夜游</figcaption>
-                    </figure>
-                </div>
+        </div>
+        <div class="sidebox treasure">
+            <h2>旅游百宝箱</h2>
+            <div class="box">
+                <a href="###" class="trea1">天气预报</a>
+                <a href="/trip" class="trea2">火车票查询</a>
+                <a href="###" class="trea3">航空查询</a>
+                <a href="###" class="trea4">地铁线路查询</a>
             </div>
-            <div class="sidebox treasure">
-                <h2>旅游百宝箱</h2>
-                <div class="box">
-                    <a href="###" class="trea1">天气预报</a>
-                    <a href="/trip" class="trea2">火车票查询</a>
-                    <a href="###" class="trea3">航空查询</a>
-                    <a href="###" class="trea4">地铁线路查询</a>
-                </div>
+        </div>
+        <div class='sidebox addcomment' id='commen'>
+            <form action="" enctype="multipart/form-data">
+                <h2>插入评论</h2>
+                <textarea name="uinfo" cols="37" rows="10" style="outline:none" id='neirong'></textarea>
+                <input type="file" value='插入图片' id='addimg' name='myfile'>
+                <input type="submit" id='submit'>
+            </form>
+        </div>
+        <div class='sidebox checkcomment'>
+            <h2>游客评论</h2>
+            <div class='commm' style="background-color:white;height:800px;overflow: scroll">
+
             </div>
-            <div class='sidebox addcomment' id='commen'>
-                <form action="" enctype="multipart/form-data">
-                 <h2>插入评论</h2>
-                 <textarea name="uinfo" cols="37" rows="10" style="outline:none" id='neirong'></textarea>
-                 <input type="file" value='插入图片' id='addimg' name='myfile'>
-                 <input type="submit" id='submit'>
-                 </form>
-             </div>
-             <div class='sidebox checkcomment'>
-                 <h2>游客评论</h2>
-                 <div class='commm' style="background-color:white;height:800px;overflow: scroll">
- 
-                 </div>
- 
-             </div>
-        </aside>
-        <div class="list">
-            <!-- 子导航栏 -->
-            <div class="infor">
-                <ul class="left">
-                    <li><a href="/scenic">限时特价</a></li>
-                    <li><a href="/scenic/scenic2">热门推荐</a></li>
-                    <!-- <li><a href="##">景点门票</a></li> -->
-                </ul>
-                <ul class="right">
-                    <li><a href="###" class="select">旅游攻略</a></li>
-                    <li><a href="###">最新咨讯</a></li>
-                    <li><a href="#commen">游客评论</a></li>
-                </ul>
-            </div>
-            <!-- 加载子条目 -->
-            {% for sen in scens %}
+
+        </div>
+    </aside>
+    <div class="list">
+        <!-- 子导航栏 -->
+        <div class="infor">
+            <ul class="left">
+                <li><a href="/scenic">限时特价</a></li>
+                <li><a href="/scenic/scenic2">热门推荐</a></li>
+                <!-- <li><a href="##">景点门票</a></li> -->
+            </ul>
+            <ul class="right">
+                <li><a href="###" class="select">旅游攻略</a></li>
+                <li><a href="###">最新咨讯</a></li>
+                <li><a href="#commen">游客评论</a></li>
+            </ul>
+        </div>
+        <!-- 加载子条目 -->
+        {% for sen in scens %}
             <figure class="tour">
-               <a href="{% url 'scenic1' %}{{ sen.id }}"> <img src="{{ sen.img }}" alt="限时特价"></a>
-               <figcaption>                   
+                <a href="{% url 'scenic1' %}{{ sen.id }}"> <img src="{{ sen.img }}" alt="限时特价"></a>
+                <figcaption>
                     <article>
                         <header>
                             <hgroup>
@@ -189,12 +200,17 @@
 
                         </header>
                         <ol>
-                            <li><mark>公车</mark>{{ sen.bus_go }}</li>
-                            <li><mark>自驾</mark>{{ sen.car_go }}</li>
+                            <li>
+                                <mark>公车</mark>
+                                {{ sen.bus_go }}</li>
+                            <li>
+                                <mark>自驾</mark>
+                                {{ sen.car_go }}</li>
                         </ol>
 
                         <footer>
-                            由乐途旅行网赞助提供，截止于 <time>{{ sen.low_time}}</time>
+                            由乐途旅行网赞助提供，截止于
+                            <time>{{ sen.low_time }}</time>
                         </footer>
                     </article>
                     <div class="buy">
@@ -204,45 +220,45 @@
                     <div class="type">{{ sen.sce_name }}</div>
                 </figcaption>
             </figure>
-            {% endfor %}
-            <div class="more"><a href="###">加载更多...</a></div>
+        {% endfor %}
+        <div class="more"><a href="###">加载更多...</a></div>
 
+    </div>
+</div>
+<footer id="footer">
+    <div class="top">
+        <div class="block left">
+            <h2>合作伙伴</h2>
+            <hr>
+            <p><a href="http://www.tuniu.com">途牛旅游网</a></p>
+            <p><a href="http://www.lvmama.com">驴妈妈旅游网</a></p>
+            <p><a href="http://www.ctrip.com">携程旅行网</a></p>
+            <p><a href="http://www.cytsonline.com">中国青年旅行社</a></p>
+        </div>
+        <div class="block center">
+            <h2>旅游 FAQ</h2>
+            <hr>
+            <p><a href="/about/travelContract">旅游合同签订方式？</a></p>
+            <p><a href="/about/childPrice">儿童价是基于什么制定的？</a></p>
+            <p><a href="/about/touristRoute">旅游的线路品质怎么界定的？</a></p>
+            <p><a href="/about/singleRoom">单房差是什么？</a></p>
+            <p><a href="/about/travelInsuranceCategory">旅游保险有那些种类？</a></p>
+        </div>
+        <div class="block right">
+            <h2>联系方式</h2>
+            <hr>
+            <ul>
+                <li>微博：weibo.com/letu</li>
+                <li>邮件：letu@letu.com</li>
+                <li>地址：陕西西安碑林区中铁第一国际9层</li>
+            </ul>
         </div>
     </div>
-    <footer id="footer">
-        <div class="top">
-            <div class="block left">
-                <h2>合作伙伴</h2>
-                <hr>
-                <p><a href="http://www.tuniu.com">途牛旅游网</a></p>
-                <p><a href="http://www.lvmama.com">驴妈妈旅游网</a></p>
-                <p><a href="http://www.ctrip.com">携程旅行网</a></p>
-                <p><a href="http://www.cytsonline.com">中国青年旅行社</a></p>
-            </div>
-            <div class="block center">
-                <h2>旅游 FAQ</h2>
-                <hr>
-                <p><a href="/about/travelContract">旅游合同签订方式？</a></p>
-                <p><a href="/about/childPrice">儿童价是基于什么制定的？</a></p>
-                <p><a href="/about/touristRoute">旅游的线路品质怎么界定的？</a></p>
-                <p><a href="/about/singleRoom">单房差是什么？</a></p>
-                <p><a href="/about/travelInsuranceCategory">旅游保险有那些种类？</a></p>
-            </div>
-            <div class="block right">
-                <h2>联系方式</h2>
-                <hr>
-                <ul>
-                    <li>微博：weibo.com/letu</li>
-                    <li>邮件：letu@letu.com</li>
-                    <li>地址：陕西西安碑林区中铁第一国际9层</li>
-                </ul>
-            </div>
-        </div>
-        <div class="bottom">
-                <p>Copyright ©LT 乐途旅行网 | 陕ICP备120110109号 | 旅行网经营许可证： L-LT-BK12345</p>
-                <img src="/static/images/scenic/pic.gif" title="站长统计">
-            </div>
-    </footer>
+    <div class="bottom">
+        <p>Copyright ©LT 乐途旅行网 | 陕ICP备120110109号 | 旅行网经营许可证： L-LT-BK12345</p>
+        <img src="/static/images/scenic/pic.gif" title="站长统计">
+    </div>
+</footer>
 </body>
 
 </html>
