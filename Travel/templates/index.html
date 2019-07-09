@@ -20,12 +20,7 @@
             <b>
                 <ul>
                     {% if request.session.userinfo %}
-<<<<<<< HEAD
                         <a href="/user/change.html">
-=======
-                        <a href="/user/change">
-                            {% if  user.head_img %}
->>>>>>> cf098c515d53ac888c45eeec2db63010758aa0c3
                                 <img src='/static/images/user/change/{{ user.head_img }}' style = "opacity:1" title="点击修改头像">
                         </a>
                     {% endif %}
