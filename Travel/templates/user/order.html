@@ -18,11 +18,17 @@
     <script src="/static/js/common.js"></script>
     <script>
         $(function () {
-            $(".item>.oaction>.del").click(function () {
+            $(".item .oaction .del").click(function () {
                 var id = $(this).parents(".item").find(".hid").html();
-                console.log(id);
+                var tSpan = $("#page span").html() 
                 var xhr = createXhr();
-                xhr.open("get", "/user/delete?id=" + id, true);
+                url = "/user/delete?id=" + id + '&num=' + tSpan
+                xhr.open("get",url, true);
+                xhr.onreadystatechange = function(){
+                    if(xhr.readyState==4 && xhr.status==200){
+                        $("body").html(xhr.responseText)
+                    }
+                }  
                 xhr.send(null);
             })
         })
@@ -35,13 +41,23 @@
     <div id="cart">
         <b>
             <ul>
+                {% if request.session.userinfo %}
+                        <a href="/user/change.html">
+                            {% if  user.head_img %}
+                                <img src='/static/images/user/change/{{ user.head_img }}' sytel = "opacity:1" title="点击修改头像">
+                            {% else %}
+                                <img src='/static/images/user/head.jpg' sytel = "opacity:1" title="点击修改头像">
+                            {% endif %}
+                        </a>
+                    {% endif %}
+                    <div class="down"></div>
                 <li class="home"><a href="javascript:void(0)">欢迎您,{{ request.session.userinfo.uname }}</a>
                     <ol class='info1'>
                         <li><a href="/user/topUp">我的钱包</a></li>
+                        <li><a href="/user/change">个人信息</a></li>
                         <li><a href="/user/cart">购物车</a></li>
                         <li><a href="/user/order">我的订单</a></li>
                         <li><a href="/user/logout">退出登录</a></li>
-                        <li><a href="/user/cancel">注销账号</a></li>
                     </ol>
                 </li>
             </ul>
@@ -114,8 +130,8 @@
                         {# 以下增加各页的超链接 #}
                         {% for p in paginator.page_range %}
                             {# 判断p是否是当前页，如果是当前面，不加超链接#}
-                            {% if p == page.number %}
-                                {{ p }}
+                            {% if p == page.number %}  
+                            <span>{{ p }}</span>
                             {% else %}
                                 <a href="{% url 'order' %}?page={{ p }}">{{ p }}</a>
                             {% endif %}

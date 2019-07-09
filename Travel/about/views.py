@@ -1,21 +1,65 @@
+from django.http import Http404
 from django.shortcuts import render
 
 # Create your views here.
+from user.models import Info
+
 
 def about_views(request):
-    return render(request,'about/about.html')
+    try:
+        if hasattr(request, 'session') and 'userinfo' in request.session:
+            uid = request.session['userinfo']['id']
+            user = Info.objects.get(id=uid)
+    except:
+        raise Http404
+    return render(request, 'about/about.html', locals())
+
 
 def travelContract_views(request):
-    return render(request,'about/travelContract.html')
+    try:
+        if hasattr(request, 'session') and 'userinfo' in request.session:
+            uid = request.session['userinfo']['id']
+            user = Info.objects.get(id=uid)
+    except:
+        raise Http404
+    return render(request, 'about/travelContract.html', locals())
+
 
 def childPrice_views(request):
-    return render(request,'about/childPrice.html')
+    try:
+        if hasattr(request, 'session') and 'userinfo' in request.session:
+            uid = request.session['userinfo']['id']
+            user = Info.objects.get(id=uid)
+    except:
+        raise Http404
+    return render(request, 'about/childPrice.html', locals())
+
 
 def touristRoute_views(request):
-    return render(request,'about/touristRoute.html')
+    try:
+        if hasattr(request, 'session') and 'userinfo' in request.session:
+            uid = request.session['userinfo']['id']
+            user = Info.objects.get(id=uid)
+    except:
+        raise Http404
+    return render(request, 'about/touristRoute.html', locals())
+
 
 def singleRoom_views(request):
-    return render(request,'about/singleRoom.html')
+    try:
+        if hasattr(request, 'session') and 'userinfo' in request.session:
+            uid = request.session['userinfo']['id']
+            user = Info.objects.get(id=uid)
+    except:
+        raise Http404
+    return render(request, 'about/singleRoom.html', locals())
+
 
 def travelInsuranceCategory_views(request):
-    return render(request,'about/travelInsuranceCategory.html')
+    try:
+        if hasattr(request, 'session') and 'userinfo' in request.session:
+            uid = request.session['userinfo']['id']
+            user = Info.objects.get(id=uid)
+    except:
+        raise Http404
+    return render(request, 'about/travelInsuranceCategory.html', locals())

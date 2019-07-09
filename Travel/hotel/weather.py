@@ -9,6 +9,7 @@
 # 爬取天气信息
 import requests
 # from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup
 
 
 def KnowWeather(url):
