@@ -390,12 +390,7 @@ def modif(request, g_id):
     except:
         pass
     finally:
-
         try:
-
-            # print(type(target.g_img))
-            # print('int(target.g_img[-8])',(str(target.g_img)[-8]))
-            # print('int(target.g_img[-10]) * 10',(target.g_img)[-10])
             History_list.objects.create(
                 u_id=target.user_id,
                 g_img=target.g_img,
@@ -409,11 +404,10 @@ def modif(request, g_id):
                 booking_time='2019-2-2',
                 is_del=target.is_pay
             )
-
-
         except:
             return HttpResponse('购买失败')
         else:
+
             return HttpResponse('payment.html')
     
 #支付成功跳转页面
