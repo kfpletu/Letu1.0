@@ -57,13 +57,13 @@ def login(request):
             return HttpResponse('登录失败,请重新登录')
 
 
-# 验证码
+# 图片验证码
 def yanzma(request):
     """
         登录图形图形验证码
     """
     img = Image.new("RGB", (110, 37), (255, 255, 255))
-    code = [chr(x) for x in range(97, 123)] + [str(x) for x in range(10)]
+    code = [chr(x) for x in range(97, 122)] + [str(x) for x in range(2,10)]+[chr(x) for x in range(65,90)]
     code = random.sample(code, 6)
     code = ''.join(code)
     draw = ImageDraw.Draw(img)
@@ -99,7 +99,6 @@ def phoneLogin(request):
         try:
             # 从数据库获取phone
             user = Info.objects.get(phone=phone)
-            print(user.uname, user.id)
             # 登录状态为真,刷新登录页面,禁止登录
             if user.is_alive:
                 resp = HttpResponse('该用户已经注销')
@@ -393,12 +392,7 @@ def modif(request, g_id):
     except:
         pass
     finally:
-
         try:
-
-            # print(type(target.g_img))
-            # print('int(target.g_img[-8])',(str(target.g_img)[-8]))
-            # print('int(target.g_img[-10]) * 10',(target.g_img)[-10])
             History_list.objects.create(
                 u_id=target.user_id,
                 g_img=target.g_img,
@@ -412,15 +406,19 @@ def modif(request, g_id):
                 booking_time='2019-2-2',
                 is_del=target.is_pay
             )
-
-
         except:
             return HttpResponse('购买失败')
         else:
+
             return HttpResponse('payment.html')
+<<<<<<< HEAD
 
 
 # 支付成功跳转页面
+=======
+    
+#支付成功跳转页面
+>>>>>>> f90d15714ce04aba68c94a9a3018e6ce2c0b25df
 def payment(request):
     """
     支付界面的返回
