@@ -20,8 +20,6 @@ def index(request):
         except:
             raise Http404
         return render(request, 'scenic/information.html', locals())
-
-
 def ticket(request,s):
     s = int(s)
     ts = models.Scbr.objects.get(id=s)
@@ -68,6 +66,7 @@ def ticket(request,s):
             to_data = entime
             cart_id = str(request.session['userinfo']['id']) + now+str(random.uniform(5,10))
             return render(request,'scenic/booking.html',locals())
+
 # def add_s1(request):
 #     db1 = open('/home/tarena/Letu1.0/Travel/static/images/scenic/text/s1', 'r+', encoding='UTF-8')
 #     for line in db1:
