@@ -12,25 +12,97 @@
     <link rel="stylesheet" href="{% static 'css/scenic/ticket.css' %}">
 </head>
 <script src="/static/js/scenic/mapp.js"></script>
-<script src="/static/js/scenic/order.js"></script>
+<!-- <script src="/static/js/scenic/order.js"></script> -->
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=DVz4AM0f5tDaH8dZwBCjRzHxuaKn3x7x"></script>
 <script type="text/javascript" src="{% static 'js/scenic/prefixfree.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/scenic/zoom-slideshow.js' %}"></script>
 <script src="{% static 'js/scenic/tic.js' %}"></script>
-<script src="/static/js/scenic/WdatePicker时间插件/My97DatePicker/WdatePicker.js"></script>
-<script src="/static/js/scenic/common.js"></script>
-<script>
-window.onload=function(){
-    today=$('[name=starttime]').val();
-	$('.subm').submit(function () {
-		if ($(this).find('[name=starttime]').val()>=today && $(this).find('[name=endtime]').val()>$(this).find('[name=starttime]').val()){
-			return true
-		}
-		alert('时间输入有问题，请重新选择');
-		return false
+<script src="/static/js/scenic/WdatePicker/My97DatePicker/WdatePicker.js"></script>
+<script type='text/javascript'>
+$(function (){
+    //	1.数量增减
+        $(".add").click(function (){
+            var value = $(this).prev().val();
+            value++;
+            $(this).prev().val(value);
+            countPrice($(this),value);
+        })
+        $(".minus").click(function (){
+            var value = $(this).next().val();
+            if(value > 1){
+                value--;
+            }
+            $(this).next().val(value);
+            countPrice($(this),value)
+        })
+        //价格联动
+        function countPrice(that,value){
+            var str = that.parents(".item").find(".gprice input").val();
+            var price = str;//"299.00"
+            var sum = price * value;
+            sum = sum.toFixed(2);
+             that.parents(".item").find(".gsum input").val(sum);
+        }
     })
-}
 </script>
+<script type='text/javascript'>
+$(function(){
+	$('#submm').submit(function () {
+        var starttime=$('#st1').val()
+        var endtime=$('#et1').val()
+        var stype=$('#stype').val()
+        var sname=$('#sname').val()
+        var sprice=$('#sprice').val()
+        var tprice=$('#tprice').val()
+        var num=$('#nu1').val()
+        if(starttime==''|| endtime==''){
+            alert("日期不能为空");
+                return false;
+        }
+        
+        else if(starttime!=''&& endtime!=''){
+            starttime=starttime.split('-');                //用的是时间控件格式是yyyy-MM-dd
+            endtime=endtime.split('-');
+            var starttime1=new Date(starttime[0],starttime[1],starttime[2]);  
+            var endtime1=new Date(endtime[0],endtime[1],endtime[2]);
+            if(starttime1>endtime1){
+                alert("结束日期不能在开始日期之后！");
+                return false;
+                 }
+        }	   
+    })
+})
+</script>
+<script type='text/javascript'>
+$(function(){ 
+    $('#submm2').submit(function () {
+        var starttime=$('#st2').val()
+        var endtime=$('#et2').val()
+        var stype=$('#stype2').val()
+        var sname=$('#sname2').val()
+        var sprice=$('#sprice2').val()
+        var tprice=$('#tprice2').val()
+        var num=$('#nu2').val()
+        if(starttime==''|| endtime==''){
+            alert("日期不能为空");
+                return false;
+        }
+        
+        else if(starttime!=''&& endtime!=''){
+            starttime2=starttime.split('-');                //用的是时间控件格式是yyyy-MM-dd
+            endtime2=endtime.split('-');
+            var starttime3=new Date(starttime2[0],starttime2[1],starttime2[2]);  
+            var endtime3=new Date(endtime2[0],endtime2[1],endtime2[2]);
+            if(starttime3>endtime3){
+                alert("结束日期不能在开始日期之后！");
+                return false;
+                 }
+        }	
+    
+    })
+})
+</script>
+
 <body>
     <header id="header">
         {% if request.session.userinfo %}
@@ -81,9 +153,6 @@ window.onload=function(){
     </header>
 
     <div id="bodyer1">
-        <!-- <div class="imgs">
-            <img src="../img/info/qinlingdongwuyuan.jpg" alt="图片加载中">
-        </div> -->
         <div id="content">
             <div id="view">
                 <img src="{{ ts.img1 }}" alt="" />
@@ -147,58 +216,91 @@ window.onload=function(){
                 <div class="gname" style="width:180px;">景点名称</div>
                 <div class=gpt style="width:190px;">游玩开始时间</div>
                 <div class=gpt2 style="width:190px;">游玩结束时间</div>
-                <div class="gprice" style="width:100px;">单价（元）</div>
+                <div class="gprice" style="width:100px;margin-left:15px">单价（元）</div>
                 <div class="gcount">数量</div>
-                <div class="gsum">金额</div>
+                <div class="gsum"style="margin-left:-12px" >金额</div>
                 <div class="gor">预定</div>
             </div>
 
             <div class="conten">
                 <!--购票信息-->
-                {% for tic in tics %}
+          
                 <div class="item">
-                    <form action="" method="post" class="subm">
+                    <form action="" method="post" id="submm">
                             {% csrf_token %}
                        
-                    <div class="gper" style="width:70px;">
-                        <p>{{ tic.type }}</p>
+                    <div class="gper"  style="width:70px;">
+                        <input type="text" id='stype' name='stype' value="{{ stype }}" readonly="readonly" style='text-align:center;width:70px;outline:none;border:0px;font-size:15px '>
                     </div>
                     <div class="gname" style="width:180px;">
-                        <p>{{ tic.name }}</p>
+                        <input type="text" id='sname' name='sname' value="{{ sname }}" readonly="readonly" style='text-align:center;width:170px;outline:none;border:0px;font-size:15px' >
                     </div>
                     
                     <div class="gpt" style="width:190px;">
-                        <input name="starttime" class="Wdate" type="text" onfocus="WdatePicker({dateFmt:'yyyy-M-d H:mm:ss',minDate: '%y-%M-%d 15:00:00',
-                        maxDate: '%y-%M-#{%d+60} 20:00:00' })" placeholder="请输入开始时间" value="{{ today }}"" />
+                        <input class="Wdate" name="starttime" id='st1' type="text" onfocus="WdatePicker({minDate: '%y-%M-%d' })" style='text-align:center;font-size:15px;width:180px;'/>
                     </div>
                     
                     <div class="gpt2" style="width:190px;">
-                        <input name="endtime" class="Wdate" type="text" onfocus="WdatePicker({dateFmt:'yyyy-M-d H:mm:ss',minDate: '%y-%M-%d 20:00:00',
-                        maxDate: '%y-%M-#{%d+63} 20:00:00' })" placeholder="请输入结束时间"  value="{{ tomorrow }}" />
+                        <input class="Wdate" name="endtime" id='et1' type="text" onfocus="WdatePicker({minDate: '%y-%M-%d' })" style='text-align:center;font-size:15px;width:180px;'/>
                     </div>
                     <div class="gprice" style="width:100px;">
-                        <p>￥ {{ tic.price }}</p>
+                        <input type="text" id='sprice' name='sprice' value="{{ sprice }}" readonly="readonly" style="text-align:center;width:130px;outline:none;border:0px;font-size:15px">
                     </div>
                     <div class="gcount">
-                        <!--阻止超链接默认事件-->
                         <a href="javascript:void(0)" class="minus">-</a>
-                        <input type="text" value="1" name='number' required>
+                        <input type="text" value="1" name='number' id='nu1' required>
                         <a href="javascript:void(0)" class="add">+</a>
                     </div>
-                    <div class="gsum">￥ {{ tic.price }}</div>
+                    <div class="gsum" >
+                        <input type="text" id='tprice' name='tprice' value='{{ sprice }}' style="text-align:center;width:130px;outline:none;border:0px;font-size:15px">
+                    </div>
                     <div class="gor">
-                        <!-- <a href="##">预定</a> -->
-                        <input type="submit" value='加入购物车'
-                        style='color:#000;background: crimson;outline:none;border-radius: 5px;border:0;height:30px;width:80px;line-height:36px;' class="sub">
+                        <input type="submit" value='加入购物车' id='sub1'
+                        style='color:#000;background: crimson;outline:none;border-radius: 5px;border:0;height:30px;width:80px;line-height:36px;'>
                     </div>
                     </form>
                 </div>
-                {% endfor %}
+          
+                
+                <div class="item">
+                    <form action="" method="post" id="submm2">
+                            {% csrf_token %}
+                       
+                    <div class="gper" style="width:70px;">
+                        <input type="text" id='stype2' name='stype' value="{{ stype2 }}" readonly="readonly" style='text-align:center;width:70px;outline:none;border:0px;font-size:15px' >
+                    </div>
+                    <div class="gname" style="width:180px;">
+                        <input type="text" id='sname2' name='sname' value="{{ sname2 }}" readonly="readonly" style='text-align:center;width:170px;outline:none;border:0px;font-size:15px' >
+                    </div>
+                    
+                    <div class="gpt" style="width:190px;">
+                        <input class="Wdate" name="starttime" id='st2' type="text" onfocus="WdatePicker({minDate: '%y-%M-%d' })" style='text-align:center;font-size:15px;width:180px;'/>
+                    </div>
+                    
+                    <div class="gpt2" style="width:190px;">
+                        <input class="Wdate" name="endtime" id='et2' type="text" onfocus="WdatePicker({minDate: '%y-%M-%d' })" style='text-align:center;font-size:15px;width:180px;'/>
+                    </div>
+                    <div class="gprice" style="width:100px;">
+                        <input type="text" id='sprice2' name='sprice' value="{{ sprice2 }}" readonly="readonly" style="text-align:center;width:130px;outline:none;border:0px;font-size:15px">
+                    </div>
+                    <div class="gcount">
+                        <a href="javascript:void(0)" class="minus">-</a>
+                        <input type="text" value="1" name='number' id='nu2' required>
+                        <a href="javascript:void(0)" class="add">+</a>
+                    </div>
+                    <div class="gsum">
+                        <input type="text" id='tprice2' name='tprice' value='{{ sprice2 }}' style="text-align:center;width:130px;outline:none;border:0px;font-size:15px">
+                    </div>
+                    <div class="gor">
+                        <input type="submit" value='加入购物车' id='sub2'
+                        style='color:#000;background: crimson;outline:none;border-radius: 5px;border:0;height:30px;width:80px;line-height:36px;'>
+                    </div>
+                    </form>
+                </div>
+            
             </div>
         </div>
     </div>
-    <div id="tishi" style="width:1200px;margin:20px auto">温馨提示：您可提前预定未来60天之内的门票,开始和结束时间必填</div>
-
     <div id=guid>
         <div class=daohang style="background:orange;">
             <a href="##">景点简介</a>
