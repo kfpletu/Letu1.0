@@ -14,8 +14,26 @@
     <link rel="stylesheet" href="/static/css/user/change.css">
     <script src="/static/js/user/change.js"></script>
     {% endblock head %}
+    <script>
+        $(function(){
+            $(".userDel").click(function(){
+                $.ajax({
+                    "type":"get",
+                    "url":"user/cancel"
+                })
+            })
+        })
+    </script>
 </head>
 <body>
+    {% block del %}
+    <a href="/index">
+        <img src="/static/images/home/logo.png" alt="logo">
+    </a>
+    <span>个人中心</span>
+    <a href="/index"><span class="s1">返回首页</span></a>
+    <a href="/user/cart"><span class="s1 s2">购物车</span></a>
+    {% endblock del %}
     {% block change %}
     <div id="change">
     <form action="/user/change" method="POST" enctype="multipart/form-data">
@@ -42,15 +60,15 @@
                     <td>{{ user.price }}</td>
                 </tr>
             </table>
-                <p class="fImg" >
-                    <input type="file" name="uimg">
-                </p>
-                <p class='subImg'>
-                    <input type="submit" value="上传头像">
-                </p>
-            
+            <p class="fImg" >
+                <input type="file" name="uimg">
+                <input type="submit" value="上传头像">
+            </p>  
        </div> 
     </form>
+    <p class='subDel'>
+            <button class="userDel">注销账户</button>
+    </p> 
     </div>
     {% endblock change %}
 </body>
