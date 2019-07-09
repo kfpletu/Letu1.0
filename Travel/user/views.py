@@ -181,7 +181,7 @@ def register(request):
         # 尝试向数据库添加用户信息,成功返回到登录页面进行登录
         try:
             Info.objects.create(uname=uname, upwd=upwd, phone=phone, email=email,
-                                head_img='/static/images/user/head.jpg')
+                                head_img='head.jpg')
             return HttpResponse('')
         except Exception as e:
             # 抛异常,刷新注册页面,重新注册
@@ -208,26 +208,27 @@ def checkphone(request):
 def message(request):
     phone = request.GET.get('phone')
     number = random.randint(100000, 999999)
+    print(number)
 
-    client = AcsClient('LTAIxo8uU7FoZPog',
-                       '5fhRNu2256WxUF5dP9QdSmqqbZ50ul', 'cn-hangzhou')
-    request = CommonRequest()
-    request.set_accept_format('json')
-    request.set_domain('dysmsapi.aliyuncs.com')
-    request.set_method('POST')
-    request.set_protocol_type('https')  # https | http
-    request.set_version('2017-05-25')
-    request.set_action_name('SendSms')
-
-    request.add_query_param('RegionId', "cn-hangzhou")
-    request.add_query_param('PhoneNumbers', phone)
-    request.add_query_param('SignName', "letu")
-    request.add_query_param('TemplateCode', "SMS_169897609")
-    request.add_query_param('TemplateParam', "{'code':%s}" % number)
-
-    response = client.do_action(request)
-    # python2:  print(response)
-    print(str(response, encoding='utf-8'))
+    # client = AcsClient('LTAIxo8uU7FoZPog',
+    #                    '5fhRNu2256WxUF5dP9QdSmqqbZ50ul', 'cn-hangzhou')
+    # request = CommonRequest()
+    # request.set_accept_format('json')
+    # request.set_domain('dysmsapi.aliyuncs.com')
+    # request.set_method('POST')
+    # request.set_protocol_type('https')  # https | http
+    # request.set_version('2017-05-25')
+    # request.set_action_name('SendSms')
+    #
+    # request.add_query_param('RegionId', "cn-hangzhou")
+    # request.add_query_param('PhoneNumbers', phone)
+    # request.add_query_param('SignName', "letu")
+    # request.add_query_param('TemplateCode', "SMS_169897609")
+    # request.add_query_param('TemplateParam', "{'code':%s}" % number)
+    #
+    # response = client.do_action(request)
+    # # python2:  print(response)
+    # print(str(response, encoding='utf-8'))
 
     jsonStr = {
         'num': number
