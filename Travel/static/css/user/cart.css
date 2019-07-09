@@ -360,3 +360,6 @@
     text-align: center;
     color: red;
 }
+#page a{
+    text-decoration: underline;
+}

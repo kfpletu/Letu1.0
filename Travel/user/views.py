@@ -412,8 +412,14 @@ def modif(request, g_id):
         else:
 
             return HttpResponse('payment.html')
+<<<<<<< HEAD
+
+
+# 支付成功跳转页面
+=======
     
 #支付成功跳转页面
+>>>>>>> f90d15714ce04aba68c94a9a3018e6ce2c0b25df
 def payment(request):
     """
     支付界面的返回
@@ -473,7 +479,7 @@ def top_top(request):
     except:
         return HttpResponse("0")
 
-
+#删除历史订单
 def delete(request):
     """
     用户删除自己的购买记录
@@ -481,9 +487,14 @@ def delete(request):
     :return:
     """
     id = request.GET['id']
+    num = request.GET['num']
     data = History_list.objects.filter(id=id)
     data.update(is_del=0)
-    return redirect('/user/order')
+    user_id = request.session['userinfo']['id']
+    order = History_list.objects.filter(u_id=user_id, is_del=1)
+    paginator = Paginator(order, 4)
+    page = paginator.page(num)
+    return render(request,'user/order.html',locals())
 
 
 # 余额
