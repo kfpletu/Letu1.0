@@ -69,16 +69,16 @@ def yanzma(request):
     draw = ImageDraw.Draw(img)
     for _ in range(10):
         draw.point(
-            (random.randint(0, 150), random.randint(0, 50)),  # 坐标
+            (random.randint(0, 110), random.randint(0, 37)),  # 坐标
             fill=(0, 0, 0))  # 颜色
     for _ in range(10):
-        draw.line([(random.randint(0, 150), random.randint(0, 50)),
-                   (random.randint(0, 150), random.randint(0, 50))],
+        draw.line([(random.randint(0, 110), random.randint(0, 37)),
+                   (random.randint(0, 110), random.randint(0, 37))],
                   fill=(150, 150, 2))
 
     font = ImageFont.truetype(
         "/usr/share/fonts/truetype/freefont/FreeSerif.ttf", 24)
-    draw.text((30, 10), code, font=font, fill="green")
+    draw.text((5, 5), code, font=font, fill="green")
     src = 'static/images/logImg/code.jpg'
     img.save(src)
     src = '/static/images/logImg/code.jpg'
