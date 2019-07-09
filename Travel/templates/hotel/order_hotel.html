@@ -6,12 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>OrderHotel</title>
-    <link rel="stylesheet" href="../../static/css/hotel/information.css">
-    <link rel="stylesheet" href="../../static/css/basic.css">
-    <link rel="stylesheet" href="../../static/css/hotel/order_hotel.css">
-    <script type="text/javascript" src='/static/js/hotel/jquery.js'></script>
-    <script type="text/javascript" src='/static/js/hotel/order_hotel.js'></script>
-    <script src="/static/js/hotel/layDate-v5.0.9/laydate/laydate.js"></script>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/hotel/information.css' %}">
+    <link rel="stylesheet" href="{% static 'css/basic.css'%}">
+    <link rel="stylesheet" href="{% static 'css/hotel/order_hotel.css' %}">
+    <script type="text/javascript" src='{% static "js/hotel/jquery.js"%}'></script>
+    <script type="text/javascript" src='{% static "js/hotel/order_hotel.js" %}'></script>
+    <script src="{% static 'js/hotel/layDate-v5.0.9/laydate/laydate.js'%}"></script>
     {% block block_css %}
         <script>
         lay('#version').html('-v' + laydate.v);
@@ -24,7 +25,7 @@
             elem: '#to_date' //指定元素,即你要输入的框的id号即可
         });
     </script>
-    <script src="/static/js/hotel/hotel_date.js"></script>
+    <script src="{% static 'js/hotel/hotel_date.js' %}"></script>
     {% endblock block_css %}
 </head>
 
@@ -270,11 +271,11 @@
             {% endblock block_new %}
             <div class="brandListBox" id="last_brand">
                 <a class="brandList">
-                    <img src="../../static/images/hotel/hotel_brand/xed.jpg" alt="">
+                    <img src="{% static 'images/hotel/hotel_brand/xed.jpg' %}" alt="">
                     希尔顿
                 </a>
                 <a class="brandList">
-                    <img src="../../static/images/hotel/hotel_brand/biguiyuan.jpg" alt="">碧桂园
+                    <img src="{% static 'images/hotel/hotel_brand/biguiyuan.jpg'%}" alt="">碧桂园
                 </a>
                 <a class="brandList">
                     <img src="../../static/images/hotel/hotel_brand/hengdajiudian.png" alt="">恒大酒店
@@ -366,7 +367,7 @@
         </div>
         <div class="bottom">
             <p>Copyright ©LT 乐途旅行网 | 陕ICP备120110109号 | 旅行网经营许可证： L-LT-BK12345</p>
-            <img src="../../static/images/hotel/pic.gif" title="站长统计">
+            <img src="{% static 'images/hotel/pic.gif' %}" title="站长统计">
         </div>
     </footer>
 </body>

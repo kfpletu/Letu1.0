@@ -1,5 +1,4 @@
 import json
-
 from django.shortcuts import render
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.db.models import F
@@ -12,12 +11,7 @@ from django.conf import settings
 from django.http import HttpResponseRedirect
 from user.models import Cart
 from . import weather
-from django.core.paginator import Paginator
-# from . import weather
-# Create your views here.
 
-
-# Create your views here.
 
 
 # 获得今天明天的日期
@@ -41,7 +35,6 @@ def city_weather(request):
 # hotel 预订首页
 def index(request):
     if request.method=='GET':
-        print(request)
         house_list=models.House.objects.order_by('-order_count')
         # house_list=house_list[0:12]#销量排名前9的酒店
         house_list_li=house_list[0:5]#热门品牌
@@ -49,30 +42,6 @@ def index(request):
         return render(request,'hotel/order_hotel.html',locals())
     elif request.method=='POST':
         pass
-        # try:
-        #     #入住时间
-        #     in_time=request.POST.get('in-time','')
-        #     #退房时间
-        #     out_time=request.POST.get('out-time','')
-        #     #获取表单信息
-        #     # room_num=request.POST.get('room-num','')
-        #     price=price_list[int(request.POST.get('room-price',''))]
-        #     hotel_level=request.POST.get('hotel-level','')
-        #     keyword=request.POST.get('room-keyword','')
-        #     #通过价位找房间
-        #     rooms=models.Room.objects.filter(iprice__range=price)
-        #     #通过关键字找匹配酒店
-        #     hotels=search(keyword,hotel_level)
-        #     rooms=set(rooms)
-        #     # print(hotels)
-        #     if  hotels:
-        #         for hotel in hotels:
-        #             for room in hotel.room_set.all():
-        #                 rooms.add(room)
-        #     return render(request,'hotel/order_room.html',locals())
-        # except:
-        #     return HttpResponseRedirect('/hotel/')
-
 
 #酒店价格首页
 price_list=[(0,200),(200,500),(500,100),(1000,2000),(2000,10000),(0,10000)]

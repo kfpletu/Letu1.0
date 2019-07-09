@@ -236,7 +236,7 @@ def checkphone(request):
 def message(request):
     phone = request.GET.get('phone')
     number = random.randint(100000, 999999)
-
+    
     phone_check(phone,"SMS_169897609",number)
 
     jsonStr = {
@@ -430,7 +430,6 @@ def modif(request, g_id):
         else:
 
             return HttpResponse('payment.html')
-
 #支付成功跳转页面
 def payment(request):
     """

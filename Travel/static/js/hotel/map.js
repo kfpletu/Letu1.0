@@ -3,7 +3,7 @@ $(function(){
         var map = new BMap.Map("allmap");
        
 
-        map.centerAndZoom(new BMap.Point($('#longitude').html(),$('#latitude').html()), 20);
+        map.centerAndZoom(new BMap.Point($('#longitude').html(),$('#latitude').html()), 16);
        
         // map.centerAndZoom(new BMap.Point(108.861481, 34.058903), 12);
         map.enableScrollWheelZoom(true);
