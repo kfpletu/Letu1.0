@@ -1,3 +1,5 @@
+import json
+
 from django.shortcuts import render
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.db.models import F
@@ -88,6 +90,7 @@ def room(request):
         # today, tomorrow = get_time()
         return HttpResponseRedirect('/hotel')
     elif request.method == 'POST':
+        # print(request.body)
         try:
             #入住时间
             from_date=request.POST.get('from_date','')
@@ -260,6 +263,8 @@ def hotel(request,id,level):
         if request.method == 'GET':
             return render(request, 'hotel/hotel_ticket.html',dic)
         elif request.method == 'POST':
+            print(type(request.body))
+
             #将房间加入购物车
             try:
                 # 创建流水号

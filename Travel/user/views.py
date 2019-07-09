@@ -181,7 +181,7 @@ def register(request):
         # 尝试向数据库添加用户信息,成功返回到登录页面进行登录
         try:
             Info.objects.create(uname=uname, upwd=upwd, phone=phone, email=email,
-                                head_img='/static/images/user/head.jpg')
+                                head_img='head.jpg')
             return HttpResponse('')
         except Exception as e:
             # 抛异常,刷新注册页面,重新注册
@@ -208,26 +208,27 @@ def checkphone(request):
 def message(request):
     phone = request.GET.get('phone')
     number = random.randint(100000, 999999)
+    print(number)
 
-    client = AcsClient('LTAIxo8uU7FoZPog',
-                       '5fhRNu2256WxUF5dP9QdSmqqbZ50ul', 'cn-hangzhou')
-    request = CommonRequest()
-    request.set_accept_format('json')
-    request.set_domain('dysmsapi.aliyuncs.com')
-    request.set_method('POST')
-    request.set_protocol_type('https')  # https | http
-    request.set_version('2017-05-25')
-    request.set_action_name('SendSms')
-
-    request.add_query_param('RegionId', "cn-hangzhou")
-    request.add_query_param('PhoneNumbers', phone)
-    request.add_query_param('SignName', "letu")
-    request.add_query_param('TemplateCode', "SMS_169897609")
-    request.add_query_param('TemplateParam', "{'code':%s}" % number)
-
-    response = client.do_action(request)
-    # python2:  print(response)
-    print(str(response, encoding='utf-8'))
+    # client = AcsClient('LTAIxo8uU7FoZPog',
+    #                    '5fhRNu2256WxUF5dP9QdSmqqbZ50ul', 'cn-hangzhou')
+    # request = CommonRequest()
+    # request.set_accept_format('json')
+    # request.set_domain('dysmsapi.aliyuncs.com')
+    # request.set_method('POST')
+    # request.set_protocol_type('https')  # https | http
+    # request.set_version('2017-05-25')
+    # request.set_action_name('SendSms')
+    #
+    # request.add_query_param('RegionId', "cn-hangzhou")
+    # request.add_query_param('PhoneNumbers', phone)
+    # request.add_query_param('SignName', "letu")
+    # request.add_query_param('TemplateCode', "SMS_169897609")
+    # request.add_query_param('TemplateParam', "{'code':%s}" % number)
+    #
+    # response = client.do_action(request)
+    # # python2:  print(response)
+    # print(str(response, encoding='utf-8'))
 
     jsonStr = {
         'num': number
@@ -392,12 +393,7 @@ def modif(request, g_id):
     except:
         pass
     finally:
-
         try:
-
-            # print(type(target.g_img))
-            # print('int(target.g_img[-8])',(str(target.g_img)[-8]))
-            # print('int(target.g_img[-10]) * 10',(target.g_img)[-10])
             History_list.objects.create(
                 u_id=target.user_id,
                 g_img=target.g_img,
@@ -411,13 +407,12 @@ def modif(request, g_id):
                 booking_time='2019-2-2',
                 is_del=target.is_pay
             )
-
-
         except:
             return HttpResponse('购买失败')
         else:
+
             return HttpResponse('payment.html')
-    
+
 #支付成功跳转页面
 def payment(request):
     """
@@ -478,7 +473,7 @@ def top_top(request):
     except:
         return HttpResponse("0")
 
-
+#删除历史订单
 def delete(request):
     """
     用户删除自己的购买记录
@@ -486,9 +481,14 @@ def delete(request):
     :return:
     """
     id = request.GET['id']
+    num = request.GET['num']
     data = History_list.objects.filter(id=id)
     data.update(is_del=0)
-    return redirect('/user/order')
+    user_id = request.session['userinfo']['id']
+    order = History_list.objects.filter(u_id=user_id, is_del=1)
+    paginator = Paginator(order, 4)
+    page = paginator.page(num)
+    return render(request,'user/order.html',locals())
 
 
 # 余额

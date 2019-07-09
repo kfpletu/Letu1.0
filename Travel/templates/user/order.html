@@ -18,11 +18,17 @@
     <script src="/static/js/common.js"></script>
     <script>
         $(function () {
-            $(".item>.oaction>.del").click(function () {
+            $(".item .oaction .del").click(function () {
                 var id = $(this).parents(".item").find(".hid").html();
-                console.log(id);
+                var tSpan = $("#page span").html() 
                 var xhr = createXhr();
-                xhr.open("get", "/user/delete?id=" + id, true);
+                url = "/user/delete?id=" + id + '&num=' + tSpan
+                xhr.open("get",url, true);
+                xhr.onreadystatechange = function(){
+                    if(xhr.readyState==4 && xhr.status==200){
+                        $("body").html(xhr.responseText)
+                    }
+                }  
                 xhr.send(null);
             })
         })
@@ -124,8 +130,8 @@
                         {# 以下增加各页的超链接 #}
                         {% for p in paginator.page_range %}
                             {# 判断p是否是当前页，如果是当前面，不加超链接#}
-                            {% if p == page.number %}
-                                {{ p }}
+                            {% if p == page.number %}  
+                            <span>{{ p }}</span>
                             {% else %}
                                 <a href="{% url 'order' %}?page={{ p }}">{{ p }}</a>
                             {% endif %}
