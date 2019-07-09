@@ -66,13 +66,10 @@ $(function () {
         }
     });
 
-    $('#mes').focus(function (e) { 
-        $('#uphone').html('')
-    });
-
     $('#mes').blur(function () {
         if ($('#mes').val()) {
             if (String($('#mes').val()) == String($('#showMes').html())) {
+                $('#uphone').html('')
                 $('#umes').html('')
             } else {
                 $('#umes').html('验证码输入错误')
@@ -107,6 +104,18 @@ $(function () {
                             } else {
                                 alert('登录成功')
                                 location.href = '/'
+                                // refer_url = document.referrer
+                                // //如果是项目内部的请求，回跳到上一步
+                                // console.log(refer_url);
+                                // if (refer_url.search('127.0.0.1') != -1){
+
+                                //     window.location = refer_url;
+
+                                // }else{
+
+                                //     window.location =  '/' + result.username + '/topics';
+                                // }
+
                             }
                         }
                     });

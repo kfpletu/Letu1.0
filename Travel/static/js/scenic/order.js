@@ -23,11 +23,12 @@ $(function (){
 	//价格联动
 	function countPrice(that,value){
 		//价格联动 单价*数量，修改总金额
-		var str = that.parents(".item").find(".gprice p").html();
-		var price = str.substring(2);//"299.00"
+		var str = that.parents(".item").find(".gprice input").val();
+		var price = str;//"299.00"
 		var sum = price * value;
 		sum = sum.toFixed(2);
-		that.parent().next().html("￥ "+sum);
+	 	that.parents(".item").find(".gsum input").val(sum);
+		// that.parent().next().html("￥ "+sum);
 
 	}
 

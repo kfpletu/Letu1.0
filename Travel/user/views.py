@@ -69,16 +69,16 @@ def yanzma(request):
     draw = ImageDraw.Draw(img)
     for _ in range(10):
         draw.point(
-            (random.randint(0, 150), random.randint(0, 50)),  # 坐标
+            (random.randint(0, 110), random.randint(0, 37)),  # 坐标
             fill=(0, 0, 0))  # 颜色
     for _ in range(10):
-        draw.line([(random.randint(0, 150), random.randint(0, 50)),
-                   (random.randint(0, 150), random.randint(0, 50))],
+        draw.line([(random.randint(0, 110), random.randint(0, 37)),
+                   (random.randint(0, 110), random.randint(0, 37))],
                   fill=(150, 150, 2))
 
     font = ImageFont.truetype(
         "/usr/share/fonts/truetype/freefont/FreeSerif.ttf", 24)
-    draw.text((30, 10), code, font=font, fill="green")
+    draw.text((5, 5), code, font=font, fill="green")
     src = 'static/images/logImg/code.jpg'
     img.save(src)
     src = '/static/images/logImg/code.jpg'
@@ -208,7 +208,10 @@ def checkphone(request):
 def message(request):
     phone = request.GET.get('phone')
     number = random.randint(100000, 999999)
+<<<<<<< HEAD
+=======
     print(number)
+>>>>>>> 4fd620e9d1517ced83364ea234c5afd9c7891640
 
     # client = AcsClient('LTAIxo8uU7FoZPog',
     #                    '5fhRNu2256WxUF5dP9QdSmqqbZ50ul', 'cn-hangzhou')
@@ -219,16 +222,28 @@ def message(request):
     # request.set_protocol_type('https')  # https | http
     # request.set_version('2017-05-25')
     # request.set_action_name('SendSms')
+<<<<<<< HEAD
+
+=======
     #
+>>>>>>> 4fd620e9d1517ced83364ea234c5afd9c7891640
     # request.add_query_param('RegionId', "cn-hangzhou")
     # request.add_query_param('PhoneNumbers', phone)
     # request.add_query_param('SignName', "letu")
     # request.add_query_param('TemplateCode', "SMS_169897609")
     # request.add_query_param('TemplateParam', "{'code':%s}" % number)
+<<<<<<< HEAD
+
+    # response = client.do_action(request)
+    # # python2:  print(response)
+    # print(str(response, encoding='utf-8'))
+    print('啥地方叫师傅',number)
+=======
     #
     # response = client.do_action(request)
     # # python2:  print(response)
     # print(str(response, encoding='utf-8'))
+>>>>>>> 4fd620e9d1517ced83364ea234c5afd9c7891640
 
     jsonStr = {
         'num': number
@@ -412,7 +427,10 @@ def modif(request, g_id):
         else:
 
             return HttpResponse('payment.html')
-
+<<<<<<< HEAD
+    
+=======
+>>>>>>> 4fd620e9d1517ced83364ea234c5afd9c7891640
 #支付成功跳转页面
 def payment(request):
     """

@@ -179,10 +179,15 @@
           <content-type name="DTD" enabled="true" />
           <content-type name="HTML" enabled="true" />
           <content-type name="XHTML" enabled="true" />
+<<<<<<< HEAD
+          <content-type name="SQL" enabled="true" />
+          <content-type name="PL/SQL" enabled="true" />
+=======
           <content-type name="CSS" enabled="true" />
           <content-type name="SQL" enabled="true" />
           <content-type name="PL/SQL" enabled="true" />
           <content-type name="JavaScript" enabled="true" />
+>>>>>>> add8804823f8786f7376bfa66841235076edacf8
           <content-type name="YAML" enabled="true" />
         </content-types>
       </qualified-text-editor>

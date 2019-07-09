@@ -7,6 +7,8 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
+<<<<<<< HEAD
+=======
   <component name="TemplatesService">
     <option name="TEMPLATE_CONFIGURATION" value="Jinja2" />
     <option name="TEMPLATE_FOLDERS">
@@ -15,6 +17,7 @@
       </list>
     </option>
   </component>
+>>>>>>> add8804823f8786f7376bfa66841235076edacf8
   <component name="TestRunnerService">
     <option name="projectConfiguration" value="Twisted Trial" />
     <option name="PROJECT_TEST_RUNNER" value="Twisted Trial" />
