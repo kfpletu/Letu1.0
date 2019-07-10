@@ -455,7 +455,7 @@ def modif(request, g_id):
         else:
 
             return HttpResponse('payment.html')
-
+    
 #支付成功跳转页面
 
 def payment(request):
