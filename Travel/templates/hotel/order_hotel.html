@@ -34,6 +34,12 @@
         <div id="cart">
             <b>
                 <ul>
+                    {% if request.session.userinfo %}
+                        <a href="/user/change.html">
+                                <img src='/static/images/user/change/{{ user.head_img }}' style = "opacity:1" title="点击修改头像">
+                        </a>
+                    {% endif %}
+                    <div class="down"></div>
                     <li class="home">
                         <a href="javascript:void(0)">
                             欢迎您,{{ request.session.userinfo.uname }}

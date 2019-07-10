@@ -10,11 +10,10 @@ import os
 import time
 from django.conf import settings
 from django.http import HttpResponseRedirect
-from user.models import Cart
+from user.models import Cart, Info
 from . import weather
 from django.core.paginator import Paginator
-# from . import weather
-# Create your views here.
+
 
 
 # Create your views here.
@@ -46,6 +45,12 @@ def index(request):
         # house_list=house_list[0:12]#销量排名前9的酒店
         house_list_li=house_list[0:5]#热门品牌
         today,tomorrow=get_time()
+        try:
+            if hasattr(request, 'session') and 'userinfo' in request.session:
+                uid = request.session['userinfo']['id']
+                user = Info.objects.get(id=uid)
+        except:
+            raise Http404
         return render(request,'hotel/order_hotel.html',locals())
     elif request.method=='POST':
         pass
@@ -261,7 +266,13 @@ def hotel(request,id,level):
 
         dic=hotel_ticket(id)
         if request.method == 'GET':
-            return render(request, 'hotel/hotel_ticket.html',dic)
+            try:
+                if hasattr(request, 'session') and 'userinfo' in request.session:
+                    uid = request.session['userinfo']['id']
+                    user = Info.objects.get(id=uid)
+            except:
+                raise Http404
+            return render(request, 'hotel/hotel_ticket.html',locals())
         elif request.method == 'POST':
             print(type(request.body))
 

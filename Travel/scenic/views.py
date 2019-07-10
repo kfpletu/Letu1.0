@@ -73,7 +73,7 @@ def index(request):
         return render(request, 'scenic/information.html', locals())
 
 
-def ticket(request,s):
+def ticket(request, s):
     s = int(s)
     ts = models.Scbr.objects.get(id=s)
     tics = ts.ticket_set.all()
@@ -166,42 +166,48 @@ def add_info(request):
     db1.close()
     return HttpResponse('插入成功')
 
+
 def add_desc(request):
     db2 = open('/home/tarena/桌面/project/Letu1.0/Travel/static/images/scenic/text/scenic2_desc', 'r+', encoding='UTF-8')
     for line in db2:
         list2 = line.split('#')
         if len(list2) == 13:
             scen2 = models.Scbr(id=list2[0], sce_name=list2[1], grage=list2[2], sce_addr=list2[3],
-                                open_time=list2[4],img1=list2[5], img2=list2[6], img3=list2[7],
-                                img4=list2[8], img5=list2[9],word1=list2[10],word2=list2[11],scen_id=list2[12])
+                                open_time=list2[4], img1=list2[5], img2=list2[6], img3=list2[7],
+                                img4=list2[8], img5=list2[9], word1=list2[10], word2=list2[11], scen_id=list2[12])
             scen2.save()
     db2.close()
     return HttpResponse('插入ok')
 
+
 def add_ticket(request):
-    db3 = open('/home/tarena/桌面/project/Letu1.0/Travel/static/images/scenic/text/ticket','r+', encoding='UTF-8')
+    db3 = open('/home/tarena/桌面/project/Letu1.0/Travel/static/images/scenic/text/ticket', 'r+', encoding='UTF-8')
     for line in db3:
         list3 = line.split('#')
-        if len(list3) ==5:
-           tic = models.Ticket(id=list3[0],type=list3[1],name=list3[2],price=list3[3],scbr_id=list3[4])
-           tic.save()
-        else:return HttpResponse('有错误')
+        if len(list3) == 5:
+            tic = models.Ticket(id=list3[0], type=list3[1], name=list3[2], price=list3[3], scbr_id=list3[4])
+            tic.save()
+        else:
+            return HttpResponse('有错误')
     db3.close()
     return HttpResponse('插入成功')
+
+
 def add_introduction(request):
     db4 = open('/home/tarena/桌面/project/Letu1.0/Travel/static/images/scenic/text/introduction', 'r+', encoding='UTF-8')
     data = ''
     for line in db4:
         data += line
-    list3 =data.split('###')
+    list3 = data.split('###')
     for i in range(len(list3)):
         intro = models.Introduce(sce_details=list3[i])
         intro.save()
     db4.close()
     return HttpResponse('插入成功')
 
+
 def add_map(request):
-    db5=open('/home/tarena/桌面/project/Letu1.0/Travel/static/images/scenic/text/mapmap')
+    db5 = open('/home/tarena/桌面/project/Letu1.0/Travel/static/images/scenic/text/mapmap')
     for line in db5:
         list5 = line.split('#')
         if len(list5) == 4:
