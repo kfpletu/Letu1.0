@@ -155,15 +155,13 @@ def check_phone_login(request):
 def getMes(request):
     phone = request.GET.get('phone')
     number = random.randint(100000, 999999)
-
     phone_check(phone,"SMS_169902712",number)
-
     jsonStr = {
         'num': number
     }
     return HttpResponse(json.dumps(jsonStr))
 
-
+# 发送手机验证码
 def phone_check(phone,code,number):
     client = AcsClient('LTAIxo8uU7FoZPog',
                        '5fhRNu2256WxUF5dP9QdSmqqbZ50ul', 'cn-hangzhou')
@@ -236,34 +234,7 @@ def checkphone(request):
 def message(request):
     phone = request.GET.get('phone')
     number = random.randint(100000, 999999)
-    print(number)
-
-    # client = AcsClient('LTAIxo8uU7FoZPog',
-    #                    '5fhRNu2256WxUF5dP9QdSmqqbZ50ul', 'cn-hangzhou')
-    # request = CommonRequest()
-    # request.set_accept_format('json')
-    # request.set_domain('dysmsapi.aliyuncs.com')
-    # request.set_method('POST')
-    # request.set_protocol_type('https')  # https | http
-    # request.set_version('2017-05-25')
-    # request.set_action_name('SendSms')
-
-    
-    # request.add_query_param('RegionId', "cn-hangzhou")
-    # request.add_query_param('PhoneNumbers', phone)
-    # request.add_query_param('SignName', "letu")
-    # request.add_query_param('TemplateCode', "SMS_169897609")
-    # request.add_query_param('TemplateParam', "{'code':%s}" % number)
-
-    # response = client.do_action(request)
-    # # python2:  print(response)
-    # print(str(response, encoding='utf-8'))
-    print('啥地方叫师傅',number)
-    #
-    # response = client.do_action(request)
-    # # python2:  print(response)
-    # print(str(response, encoding='utf-8'))
-
+    phone_check(phone,"SMS_169897609",number)
     jsonStr = {
         'num': number
     }
