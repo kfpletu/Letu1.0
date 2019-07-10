@@ -247,25 +247,18 @@ def message(request):
     # request.set_protocol_type('https')  # https | http
     # request.set_version('2017-05-25')
     # request.set_action_name('SendSms')
-<<<<<<< HEAD
 
     
-=======
-    #
->>>>>>> 6eb4a8c563f4411208077e48f72be0ad7d4d48bd
     # request.add_query_param('RegionId', "cn-hangzhou")
     # request.add_query_param('PhoneNumbers', phone)
     # request.add_query_param('SignName', "letu")
     # request.add_query_param('TemplateCode', "SMS_169897609")
     # request.add_query_param('TemplateParam', "{'code':%s}" % number)
-<<<<<<< HEAD
 
     # response = client.do_action(request)
     # # python2:  print(response)
     # print(str(response, encoding='utf-8'))
     print('啥地方叫师傅',number)
-=======
->>>>>>> 6eb4a8c563f4411208077e48f72be0ad7d4d48bd
     #
     # response = client.do_action(request)
     # # python2:  print(response)
