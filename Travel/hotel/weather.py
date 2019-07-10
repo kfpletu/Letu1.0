@@ -55,7 +55,6 @@ def KnowWeather(url):
     #     print(value, end="\n")
     return findall_dict
 
-import random
 def city_weather():
     xian = KnowWeather(url='http://www.weather.com.cn/weather/101110101.shtml')  # 西安
     baoji = KnowWeather(url='http://www.weather.com.cn/weather/101110901.shtml')  # 宝鸡
@@ -82,6 +81,5 @@ def city_weather():
         list='  '.join(list)
         weather_str +=list
 
-    # print(type(xian))
     return weather_str
 # print(city_weather())

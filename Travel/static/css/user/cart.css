@@ -310,7 +310,7 @@
     background-color: #f1f3f4;
 }
 .ocount{
-    width: 11%;
+    width: 8%;
     background-color: #f1f3f4;
 }
 .osum{
@@ -318,7 +318,7 @@
     background-color: #f1f3f4;
 }
 .otime{
-    width: 12%;
+    width: 15%;
     background-color: #f1f3f4;
 }
 .oaction{
@@ -333,10 +333,10 @@
     text-align: left;
 }
 .item .oname img{
-    width: 84px;
+    width: 130px;
     height: 84px;
     float: left; 
-    margin-left: 20%;
+    margin-left: 50px;;
     margin-right: 20px;
     margin-top: 15px;
 }
