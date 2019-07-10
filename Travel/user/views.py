@@ -1,18 +1,22 @@
-from aliyunsdkcore.client import AcsClient
-from aliyunsdkcore.request import CommonRequest
-from PIL import Image, ImageDraw, ImageFont, ImageFilter
-import random
-from django.shortcuts import render, redirect
+import hashlib
 import json
 import os
-# Create your views here.
-from .models import *
-from django.http import HttpResponse, Http404
-from django.http import HttpResponseRedirect
-from django.core.paginator import Paginator
-from .page_helper import *
-from django.contrib.auth.hashers import make_password, check_password
+import random
+
+from aliyunsdkcore.client import AcsClient
+from aliyunsdkcore.request import CommonRequest
 from django.conf import settings
+from django.contrib.auth.hashers import check_password, make_password
+from django.core.paginator import Paginator
+from django.http import Http404, HttpResponse, HttpResponseRedirect
+from django.shortcuts import redirect, render
+from PIL import Image, ImageDraw, ImageFilter, ImageFont
+
+# 订单结算
+from hotel.models import House
+
+from .models import *
+from .page_helper import *
 
 
 # 登录
@@ -23,7 +27,18 @@ def login(request):
         # 获取登录页面form表单提交的uname和upwd
         uname = request.POST.get('uname')
         upwd = request.POST.get('upwd')
-        upwd = make_password(upwd, 'xiaochen', 'pbkdf2_sha256')
+        
+        # 将密码进行hash
+        s = 'letuTravel'
+        h_p = hashlib.sha1()
+        s_p = hashlib.sha1()
+        h_p.update(upwd.encode())
+        s_p.update(s.encode())
+        upwd = h_p.hexdigest()+s_p.hexdigest()
+        h_p = hashlib.sha1()
+        h_p.update(upwd.encode())
+        upwd = h_p.hexdigest()
+
         # 获取记住密码单选框的状态
         remember = request.POST.get('remember')
         try:
@@ -95,7 +110,6 @@ def phoneLogin(request):
         return render(request, 'user/phoneLogin.html')
     elif request.method == 'POST':
         phone = request.POST.get('phone')
-        print(phone)
         try:
             # 从数据库获取phone
             user = Info.objects.get(phone=phone)
@@ -141,6 +155,16 @@ def check_phone_login(request):
 def getMes(request):
     phone = request.GET.get('phone')
     number = random.randint(100000, 999999)
+
+    phone_check(phone,"SMS_169902712",number)
+
+    jsonStr = {
+        'num': number
+    }
+    return HttpResponse(json.dumps(jsonStr))
+
+
+def phone_check(phone,code,number):
     client = AcsClient('LTAIxo8uU7FoZPog',
                        '5fhRNu2256WxUF5dP9QdSmqqbZ50ul', 'cn-hangzhou')
     request = CommonRequest()
@@ -151,21 +175,14 @@ def getMes(request):
     request.set_version('2017-05-25')
     request.set_action_name('SendSms')
 
-    request.add_query_param('RegionId', "cn-hangzhou")
+    request.add_query_param('RegionId', 'cn-hangzhou')
     request.add_query_param('PhoneNumbers', phone)
     request.add_query_param('SignName', "letu")
-    request.add_query_param('TemplateCode', "SMS_169902712")
+    request.add_query_param('TemplateCode', code)
     request.add_query_param('TemplateParam', "{'code':%s}" % number)
 
     response = client.do_action(request)
-    # python2:  print(response)
     print(str(response, encoding='utf-8'))
-
-    jsonStr = {
-        'num': number
-    }
-    return HttpResponse(json.dumps(jsonStr))
-
 
 # 注册
 def register(request):
@@ -175,7 +192,18 @@ def register(request):
         # 获取用户注册输入的信息
         uname = request.POST.get('uname')
         upwd = request.POST.get('upwd')
-        upwd = make_password(upwd, 'xiaochen', 'pbkdf2_sha256')
+        
+        # 将密码进行hash
+        s = 'letuTravel'
+        h_p = hashlib.sha1()
+        s_p = hashlib.sha1()
+        h_p.update(upwd.encode())
+        s_p.update(s.encode())
+        upwd = h_p.hexdigest()+s_p.hexdigest()
+        h_p = hashlib.sha1()
+        h_p.update(upwd.encode())
+        upwd = h_p.hexdigest()
+
         phone = request.POST.get('phone')
         email = request.POST.get('email')
         # 尝试向数据库添加用户信息,成功返回到登录页面进行登录
@@ -219,18 +247,25 @@ def message(request):
     # request.set_protocol_type('https')  # https | http
     # request.set_version('2017-05-25')
     # request.set_action_name('SendSms')
+<<<<<<< HEAD
 
     
+=======
+    #
+>>>>>>> 6eb4a8c563f4411208077e48f72be0ad7d4d48bd
     # request.add_query_param('RegionId', "cn-hangzhou")
     # request.add_query_param('PhoneNumbers', phone)
     # request.add_query_param('SignName', "letu")
     # request.add_query_param('TemplateCode', "SMS_169897609")
     # request.add_query_param('TemplateParam', "{'code':%s}" % number)
+<<<<<<< HEAD
 
     # response = client.do_action(request)
     # # python2:  print(response)
     # print(str(response, encoding='utf-8'))
     print('啥地方叫师傅',number)
+=======
+>>>>>>> 6eb4a8c563f4411208077e48f72be0ad7d4d48bd
     #
     # response = client.do_action(request)
     # # python2:  print(response)
@@ -268,12 +303,23 @@ def updatepwd(request):
     elif request.method == 'POST':
         # 获取用户输入的新密码
         new_pwd = request.POST.get('new_pwd')
-        new_pwd = make_password(new_pwd, 'xiaochen', 'pbkdf2_sha256')
+
+        # 将密码进行hash
+        s = 'letuTravel'
+        h_p = hashlib.sha1()
+        s_p = hashlib.sha1()
+        h_p.update(new_pwd.encode())
+        s_p.update(s.encode())
+        upwd = h_p.hexdigest()+s_p.hexdigest()
+        h_p = hashlib.sha1()
+        h_p.update(upwd.encode())
+        upwd = h_p.hexdigest()
+
         try:
             uname = request.session['uname']
             # 修改相应用户的密码,删除seesion,返回登录页面
             abook = Info.objects.get(uname=uname)
-            abook.upwd = new_pwd
+            abook.upwd = upwd
             abook.save()
             del request.session['uname']
             return HttpResponse('ok')
@@ -308,7 +354,7 @@ def cancel(request):
         user.is_alive = True
         user.save()
         del request.session['userinfo']
-        return HttpResponseRedirect('/')
+        return HttpResponse('/')
     except:
         # 直接返回首页,但不删除seesion
         return HttpResponseRedirect('/')
@@ -382,8 +428,6 @@ def reduce(request, g_id):
     return render(request, 'user/cart.html')
 
 
-# 订单结算
-from hotel.models import House
 
 
 def modif(request, g_id):
@@ -418,8 +462,13 @@ def modif(request, g_id):
         else:
 
             return HttpResponse('payment.html')
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 6eb4a8c563f4411208077e48f72be0ad7d4d48bd
 #支付成功跳转页面
+
 def payment(request):
     """
     支付界面的返回

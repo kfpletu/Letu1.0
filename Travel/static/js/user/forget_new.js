@@ -29,7 +29,7 @@ $(function () {
             }
             $.ajax({
                 type: "post",
-                url: "/user/getpwd",
+                url: "/user/getpwd/",
                 data: jsObj,
                 success: function (response) {
                     if (response) {
