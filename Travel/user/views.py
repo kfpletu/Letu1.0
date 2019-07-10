@@ -236,8 +236,33 @@ def checkphone(request):
 def message(request):
     phone = request.GET.get('phone')
     number = random.randint(100000, 999999)
+    print(number)
+
+    # client = AcsClient('LTAIxo8uU7FoZPog',
+    #                    '5fhRNu2256WxUF5dP9QdSmqqbZ50ul', 'cn-hangzhou')
+    # request = CommonRequest()
+    # request.set_accept_format('json')
+    # request.set_domain('dysmsapi.aliyuncs.com')
+    # request.set_method('POST')
+    # request.set_protocol_type('https')  # https | http
+    # request.set_version('2017-05-25')
+    # request.set_action_name('SendSms')
+
     
-    phone_check(phone,"SMS_169897609",number)
+    # request.add_query_param('RegionId', "cn-hangzhou")
+    # request.add_query_param('PhoneNumbers', phone)
+    # request.add_query_param('SignName', "letu")
+    # request.add_query_param('TemplateCode', "SMS_169897609")
+    # request.add_query_param('TemplateParam', "{'code':%s}" % number)
+
+    # response = client.do_action(request)
+    # # python2:  print(response)
+    # print(str(response, encoding='utf-8'))
+    print('啥地方叫师傅',number)
+    #
+    # response = client.do_action(request)
+    # # python2:  print(response)
+    # print(str(response, encoding='utf-8'))
 
     jsonStr = {
         'num': number
@@ -322,7 +347,7 @@ def cancel(request):
         user.is_alive = True
         user.save()
         del request.session['userinfo']
-        return HttpResponseRedirect('/')
+        return HttpResponse('/')
     except:
         # 直接返回首页,但不删除seesion
         return HttpResponseRedirect('/')
@@ -430,7 +455,13 @@ def modif(request, g_id):
         else:
 
             return HttpResponse('payment.html')
+<<<<<<< HEAD
+    
+=======
+
+>>>>>>> 6eb4a8c563f4411208077e48f72be0ad7d4d48bd
 #支付成功跳转页面
+
 def payment(request):
     """
     支付界面的返回
