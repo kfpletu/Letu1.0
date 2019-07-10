@@ -341,10 +341,10 @@ def cancel(request):
         user.is_alive = True
         user.save()
         del request.session['userinfo']
-        return HttpResponse('/')
+        return HttpResponse('login')
     except:
         # 直接返回首页,但不删除seesion
-        return HttpResponseRedirect('/')
+        return HttpResponseRedirect('')
 
 
 # 订购成功跳转页面
@@ -449,10 +449,7 @@ def modif(request, g_id):
         else:
 
             return HttpResponse('payment.html')
-<<<<<<< HEAD
-
-=======
->>>>>>> eef351c7e2d4d952ac816ec94e72b4cc6e78febe
+            
 #支付成功跳转页面
 def payment(request):
     """

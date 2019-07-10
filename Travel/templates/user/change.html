@@ -17,11 +17,19 @@
     <script>
         $(function(){
             $(".userDel").click(function(){
-                confirm('注销后将无法登录，是否继续注销？')
-                $.ajax({
-                    type:"get",
-                    url:"cancel",
-                })
+                if(confirm('注销后将无法登录，是否继续注销？')){
+                    console.log('sjdfjksf')
+                    $.ajax({
+                        type:"get",
+                        url:"cancel",
+                        success:function(res){
+                            console.log(res)
+                            if(res){
+                                window.location.href = '/user/'+res
+                            }
+                        }
+                    })
+                }  
             })
         })
     </script>
@@ -35,7 +43,7 @@
     </a>
     <span>个人中心</span>
     <!-- <a href="javascript:void(0)"><span class="userDel">注销账户</span></a>  -->
-    <a href="login" class="userDel">注销账户</a>
+    <a href="javascript:void(0)" class="userDel">注销账户</a>
     <a href="/index"><span class="s1">返回首页</span></a>
     <a href="/user/cart"><span class="s2">购物车</span></a>
     </div>
