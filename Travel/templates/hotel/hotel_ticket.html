@@ -4,8 +4,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>酒店详情</title>
-<link rel="stylesheet" href="/static/css/hotel/home.css">
-<link rel="stylesheet" href="/static/css/hotel/basic.css">
+<link rel="stylesheet" href="/static/css/home/home.css">
+<link rel="stylesheet" href="/static/css/basic.css">
 <link rel="stylesheet" href="/static/css/hotel/hotel_ticket.css">
 <script src="/static/js/hotel/common.js"></script>
 <script src="/static/js/hotel/jquery.js"></script>
@@ -22,10 +22,10 @@
         <div id="cart">
             <b>
                 <ul>
-{#                    <a href="/user/change.html">#}
-{#                        <img src='/static/images/user/change/{{ user.head_img }}' style="opacity:1" title="点击修改头像">#}
-{#                    </a>#}
-{#                    <div class="down"></div>#}
+                    <a href="/user/change.html">
+                       <img src='/static/images/user/change/{{ user.head_img }}' style="opacity:1" title="点击修改头像">
+                    </a>
+                    <div class="down"></div>
                     <li class="home">
                         <a href="javascript:void(0)">
                             欢迎您,{{ request.session.userinfo.uname }}
