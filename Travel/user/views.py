@@ -6,17 +6,15 @@ import random
 from aliyunsdkcore.client import AcsClient
 from aliyunsdkcore.request import CommonRequest
 from django.conf import settings
-from django.contrib.auth.hashers import check_password, make_password
 from django.core.paginator import Paginator
 from django.http import Http404, HttpResponse, HttpResponseRedirect
-from django.shortcuts import redirect, render
-from PIL import Image, ImageDraw, ImageFilter, ImageFont
+from django.shortcuts import render
+from PIL import Image, ImageDraw, ImageFont
 
 # 订单结算
 from hotel.models import House
 
 from .models import *
-from .page_helper import *
 
 
 # 登录
