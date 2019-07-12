@@ -15,7 +15,7 @@ $(function() {
                 success: function(response) {
                     alert(response)
                     if (response == '登录成功') {
-                        window.location = document.referrer
+                        location.href = '/'
                     } else {
                         location.href = '/user/login'
                     }

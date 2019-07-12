@@ -109,6 +109,8 @@ ul,ol{
 #cart ul .home:hover .info1{
     display:block;
     background: #d61e41;
+    position:absolute;
+    z-index:999;
     }
     
 #cart{
