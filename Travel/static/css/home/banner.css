@@ -1,0 +1,141 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+#main {
+    width: 100%;
+    margin: 0 auto;
+}
+
+#banner {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+#ul-imgs {
+    list-style: none;
+}
+
+#ul-imgs.transition {
+    transition: all .5s linear;
+}
+
+#ul-imgs>li {
+    width: 16.666%;
+    float: left;
+}
+
+#ul-imgs img {
+    width: 100%;
+}
+
+#ul-idxs {
+    width: 100px;
+    margin: 0 auto;
+    list-style: none;
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    margin-left: -50px;
+}
+
+#ul-idxs>li {
+    float: left;
+    width: 10px;
+    height: 10px;
+    background-color: white;
+    border-radius: 5px;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+#ul-idxs>li.active {
+    background-color: blue;
+}
+
+#btn-left,
+#btn-right {
+    width: 60px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+}
+
+#btn-left {
+    left: 20px;
+    background-image: url(/static/images/home/arrow-left.png);
+}
+
+#btn-right {
+    right: 20px;
+    background-image: url(/static/images/home/arrow-right.png);
+}
+
+#btn-left:hover,
+#btn-right:hover {
+    background-size: 40px 70px
+}
+
+.my-nav ul {
+    list-style-type: none;
+    height: 100%;
+}
+
+.my-nav-ul {
+    width: 210px;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    color: #fff;
+    flex-direction: column;
+}
+
+.my-nav-ul>li {
+    height: 50%;
+    position: relative;
+    padding-top: 7px;
+}
+
+.my-nav-ul>li:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.my-nav-ul>li>a {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 400;
+    position: absolute;
+    left: 40px;
+}
+
+.my-nav-ul>li>span {
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 400;
+    font-size: 12px;
+    padding-top: 4px;
+    display: inline-block;
+    position: absolute;
+    right: 20px;
+}
+
+.my-nav {
+    position: absolute;
+    top: 0px;
+}
+
+.my-lbt {
+    position: relative;
+}
