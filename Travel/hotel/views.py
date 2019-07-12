@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, Http404, JsonResponse
 from . import models
 from django.db.models import *
 import os
@@ -8,6 +8,8 @@ from django.conf import settings
 from django.http import HttpResponseRedirect
 from user.models import Cart, Info
 from tools import weather
+from django.core import serializers
+from django.db.models import F
 
 
 # 获得今天明天的日期
@@ -44,6 +46,16 @@ def index(request):
         return render(request, 'hotel/order_hotel.html', locals())
     elif request.method == 'POST':
         pass
+
+
+#酒店首页酒店列表
+def hotel_list(request):
+    houses=models.House.objects.all()
+    houses=serializers.serialize('json',houses)
+    return HttpResponse(houses)
+    # houses
+
+
 
 
 # 酒店价格首页

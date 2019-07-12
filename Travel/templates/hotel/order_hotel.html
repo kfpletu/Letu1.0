@@ -239,35 +239,26 @@
             </div>
             <div class="new">
                 <h2>热门酒店推荐</h2>
-                <ul>
-                    <li>热门品牌：</li>
-                    <li><a href="javascript:void(0)">全部</a></li>
+                <ul id="all_hotel_name">
+{#                    <li>热门品牌：</li>#}
+{#                    <li><a href="javascript:void(0)">全部</a></li>#}
+{##}
+{#                   {% for house in house_list_li %}#}
+{##}
+{#                      <li><a href="javascript:void(0)">{{ house.hotel_name }}</a></li>#}
+{##}
+{#                  {% endfor %}#}
 
-                    {% for house in house_list_li %}
-
-                        <li><a href="javascript:void(0)">{{ house.hotel_name }}</a></li>
-
-                    {% endfor %}
-
-                    {#                    <li><a href="javascript:void(0)">富力希尔顿</a></li>#}
                 </ul>
                 <div class="hotel_imfor">
-                    {% for house in house_list %}
-                        <figure class="hotel_figure">
-                            <img src="/static/images/hotel/{{ house.hotel_p }}/11.png" alt="The Pulpit Rock"
-                                 class="hotel_img">
-                            <span class="hotel_name">{{ house.hotel_name }}</span> {{ house.hotel.hotel_level }}
-                            <a href="{{ house.id }}">点击进入</a>
-                        </figure>
-                    {% endfor %}
-                    <!--
+                    {#
                     <figure class="hotel_figure">
                         <img src="/static/images/hotel/1/4/11.png" alt="The Pulpit Rock" class="hotel_img">
                         <span class="hotel_name">美豪丽致</span>酒店 快速便捷
                         <a href="/hotel/14">点击进入</a>
                     </figure>
 
-                    -->
+                    -->#}
 
 
                 </div>
