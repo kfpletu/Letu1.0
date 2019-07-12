@@ -1,8 +1,5 @@
-import json
 from django.shortcuts import render
-from django.http import HttpResponse, Http404, HttpResponseRedirect
-from django.db.models import F
-from django.db.models import Q
+from django.http import HttpResponse, Http404
 from . import models
 from django.db.models import *
 import os
@@ -10,9 +7,7 @@ import time
 from django.conf import settings
 from django.http import HttpResponseRedirect
 from user.models import Cart, Info
-from . import weather
-
-from django.core.paginator import Paginator
+from tools import weather
 
 
 # 获得今天明天的日期

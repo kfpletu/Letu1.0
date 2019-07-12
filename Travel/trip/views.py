@@ -1,8 +1,8 @@
 from django.http import HttpResponse, Http404
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 
 from user.models import Info
-from .trail_12306 import *
+from tools.trail_12306 import *
 from . import models
 import time
 
