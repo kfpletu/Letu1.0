@@ -9,6 +9,7 @@
     {% load static %}
     <link rel="stylesheet" href="/static/css/home/home.css">
     <link rel="stylesheet" href="/static/css/basic.css">
+    <link rel="stylesheet" href="/static/css/home/banner.css">
 </head>
 <script src="/static/js/jquery.js"></script>
 <script src="/static/js/home/home_banner.js"></script>
@@ -70,7 +71,7 @@
         </nav>
     </div>
 </header>
-<div id="search">
+<!-- <div id="search">
     <div id="imgd">
         <a href="/scenic/12/" id="src1">
             <img src="../static/images/home/banner01.jpg">
@@ -102,7 +103,43 @@
         <a href="javascript:void(0)" class="left"></a>
         <a href="javascript:void(0)" class="right"></a>
     </div>
-</div>
+</div> -->
+<div id="d1" class="my-lbt">
+    <main id="main">
+        <div id="banner">
+            <div id="btn-left"></div>
+            <ul id="ul-imgs" style="width:600%; margin-left:0;">
+                <li>
+                    <a href="javascript:;"><img src="/static/images/home/banner01.jpg"></a>
+                </li>
+                <li>
+                    <a href="javascript:;"><img src="/static/images/home/banner02.jpg"></a>
+                </li>
+                <li>
+                    <a href="javascript:;"><img src="/static/images/home/banner03.jpg"></a>
+                </li>
+                <li>
+                    <a href="javascript:;"><img src="/static/images/home/banner04.jpg"></a>
+                </li>
+                <li>
+                    <a href="javascript:;"><img src="/static/images/home/banner05.jpg"></a>
+                </li>
+                <!--注意！最后li个数要比实际图片张数多1，最后一个li里的img是重复第一张li的图片-->
+                <li>
+                    <a href="javascript:;"><img src="/static/images/home/banner01.jpg"></a>
+                </li>
+            </ul>
+            <ul id="ul-idxs">
+                <!--虽然li个数比实际图片张数多1，但小圆点的个数不必多1-->
+                <li class="active"></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+            <div id="btn-right"></div>
+        </div>
+    </main>
 <div id="tour">
     <section class="center">
         <h2 class="">热门旅游搜索</h2>
@@ -278,6 +315,100 @@
         <img src="/static/images/home/pic.gif" title="站长统计">
     </div>
 </footer>
+<script>
+    var i = 0;
+    var LIWIDTH = 100;
+    var DURATION = 500;
+    var LICOUNT = 5;
+    var ulImgs = document.getElementById("ul-imgs");
+    var ulIdxs = document.getElementById("ul-idxs");
+    var lis = ulIdxs.children;
+
+    function moveTo(to) {
+        if (to == undefined) {
+            to = i + 1;
+        }
+        if (i == 0) {
+            if (to > i) {
+                ulImgs.className = "transition";
+            } else {
+                ulImgs.className = "";
+                ulImgs.style.marginLeft = -LIWIDTH * LICOUNT + "%";
+                setTimeout(function() {
+                    moveTo(LICOUNT - 1);
+                }, 100);
+                return;
+            }
+        }
+        i = to;
+        ulImgs.style.marginLeft = -i * LIWIDTH + "%";
+        for (var li of lis) {
+            li.className = ""
+        }
+        console.log(i);
+        if (i == LICOUNT) {
+            i = 0;
+            setTimeout(function() {
+                ulImgs.className = "";
+                ulImgs.style.marginLeft = 0;
+            }, DURATION)
+        }
+        lis[i].className = "active";
+    }
+    var btnLeft = document.getElementById("btn-left");
+    var btnRight = document.getElementById("btn-right");
+    var canClick = true;
+    btnRight.onclick = function() {
+        move(1)
+    }
+
+    function move(n) {
+        if (canClick) {
+            console.log(i + n);
+            moveTo(i + n);
+            canClick = false;
+            setTimeout(function() {
+                canClick = true;
+            }, DURATION + 100);
+        }
+    }
+    btnLeft.onclick = function() {
+        move(-1);
+    }
+    var interval = 3000;
+    var timer = setInterval(function() {
+        moveTo()
+    }, 3000);
+    var banner = document.getElementById("banner");
+    banner.onmouseover = function() {
+        clearInterval(timer);
+    }
+    banner.onmouseout = function() {
+        timer = setInterval(function() {
+            moveTo()
+        }, 3000);
+    }
+    var ulIdxs = document.getElementById("ul-idxs");
+    var canClick = true;
+    ulIdxs.onclick = function(e) {
+        if (canClick) {
+            var li = e.target;
+            if (li.nodeName == "LI") {
+                if (li.className !== "active") {
+                    for (var i = 0; i < lis.length; i++) {
+                        if (lis[i] == li) {
+                            break;
+                        }
+                    }
+                    moveTo(i);
+                    setTimeout(function() {
+                        canClick = true;
+                    }, DURATION);
+                }
+            }
+        }
+    }
+</script>
 </body>
 
 </html>
