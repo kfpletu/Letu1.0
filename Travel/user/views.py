@@ -416,7 +416,7 @@ def modif(request, g_id):
                 price=target.price,
                 g_num=target.g_num,
                 total_price=target.total_price,
-                booking_time='2019-2-2',
+                booking_time='2018-3-3',
                 is_del=target.is_pay
             )
         except:
@@ -560,3 +560,5 @@ def change(request):
                 return HttpResponseRedirect('/')
         except:
             raise Http404
+        
+
