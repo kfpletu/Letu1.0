@@ -33,9 +33,6 @@ def city_weather(request):
 # hotel 预订首页
 def index(request):
     if request.method == 'GET':
-        house_list = models.House.objects.order_by('-order_count')
-        # house_list=house_list[0:12]#销量排名前9的酒店
-        house_list_li = house_list[0:5]  # 热门品牌
         today, tomorrow = get_time()
         try:
             if hasattr(request, 'session') and 'userinfo' in request.session:
@@ -50,7 +47,7 @@ def index(request):
 
 #酒店首页酒店列表
 def hotel_list(request):
-    houses=models.House.objects.all()
+    houses=models.House.objects.all().order_by('-order_count')
     houses=serializers.serialize('json',houses)
     return HttpResponse(houses)
     # houses
