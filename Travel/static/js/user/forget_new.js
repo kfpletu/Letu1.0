@@ -37,7 +37,7 @@ $(function () {
                         location.href='/user/login'
                     } else {
                         alert('修改密码失败,请重新输入')
-                        location.href = '/user/getpwd'
+                        location.href = '/user/getpwd/'
                     }
                 }
             });
