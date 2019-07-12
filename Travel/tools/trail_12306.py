@@ -8,7 +8,7 @@
 import re
 import ssl
 import urllib, urllib.parse
-from . import models
+from trip import models
 import requests
 import urllib3
 
