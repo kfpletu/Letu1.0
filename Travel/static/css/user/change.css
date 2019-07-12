@@ -1,7 +1,18 @@
+
+
+#top{
+    width: 1400px;
+}
+#top .s1{
+    margin-right: 100px;
+}
+#top img{
+    margin-left: 150px;
+}
 #change{
     width: 400px;
     height: 400px;
-    background: #ddd;
+    background: #fff;
     float: right;
     margin-top: 80px;
     color: #333;
@@ -10,7 +21,7 @@
     border-radius: 20px;
 }
 #change table{
-    margin-top: 20px;
+    margin-top: 40px;
     width:400px;
     line-height: 40px;
 }
@@ -22,15 +33,21 @@
     width: 220px;
     text-align: center;
 }
-#change .subImg{
-    margin-top: 40px;
+.userDel{
+    float: right;
+    /* margin-right: 100px; */
+    font-size: 1.6em;
+    margin-top: 10px;
+    font-weight: 600;
+    color: #4F4E4D;    
 }
-#change .subImg input{
-    margin-left: 80px;
+.userDel:hover{
+    color: crimson;
 }
 #change .fImg{
-    margin-top: 20px;     
+    margin-top: 30px;     
 }
-#change .fImg input{
-    margin-left: 80px;
+#change .fImg input:nth-child(1){
+    width: 200px;
+    margin-left: 60px;
 }

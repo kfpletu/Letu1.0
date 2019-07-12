@@ -1,21 +1,13 @@
 from django.shortcuts import render
-from django.http import HttpResponse, Http404, HttpResponseRedirect
-from django.db.models import F
-from django.db.models import Q
+from django.http import HttpResponse, Http404
 from . import models
 from django.db.models import *
 import os
 import time
 from django.conf import settings
 from django.http import HttpResponseRedirect
-from user.models import Cart
-from . import weather
-from django.core.paginator import Paginator
-# from . import weather
-# Create your views here.
-
-
-# Create your views here.
+from user.models import Cart, Info
+from tools import weather
 
 
 # 获得今天明天的日期
@@ -25,59 +17,45 @@ def get_time():
     return today, tomorrow
 
 
-
-#天气预报
+# 天气预报
 def city_weather(request):
     weather_str = weather.city_weather()
-    return HttpResponse(weather_str+'这是天气信息,浏览信息请登录主页')
+    return HttpResponse(weather_str + '这是天气信息,浏览信息请登录主页')
+
+
 # def city_weather(request):
 #     weather_str = weather.city_weather()
 #     return HttpResponse(weather_str)
 
 
-
 # hotel 预订首页
 def index(request):
-    if request.method=='GET':
-        print(request)
-        house_list=models.House.objects.order_by('-order_count')
+    if request.method == 'GET':
+        house_list = models.House.objects.order_by('-order_count')
         # house_list=house_list[0:12]#销量排名前9的酒店
-        house_list_li=house_list[0:5]#热门品牌
-        today,tomorrow=get_time()
-        return render(request,'hotel/order_hotel.html',locals())
-    elif request.method=='POST':
+        house_list_li = house_list[0:5]  # 热门品牌
+        today, tomorrow = get_time()
+        try:
+            if hasattr(request, 'session') and 'userinfo' in request.session:
+                uid = request.session['userinfo']['id']
+                user = Info.objects.get(id=uid)
+        except:
+            raise Http404
+        return render(request, 'hotel/order_hotel.html', locals())
+    elif request.method == 'POST':
         pass
-        # try:
-        #     #入住时间
-        #     in_time=request.POST.get('in-time','')
-        #     #退房时间
-        #     out_time=request.POST.get('out-time','')
-        #     #获取表单信息
-        #     # room_num=request.POST.get('room-num','')
-        #     price=price_list[int(request.POST.get('room-price',''))]
-        #     hotel_level=request.POST.get('hotel-level','')
-        #     keyword=request.POST.get('room-keyword','')
-        #     #通过价位找房间
-        #     rooms=models.Room.objects.filter(iprice__range=price)
-        #     #通过关键字找匹配酒店
-        #     hotels=search(keyword,hotel_level)
-        #     rooms=set(rooms)
-        #     # print(hotels)
-        #     if  hotels:
-        #         for hotel in hotels:
-        #             for room in hotel.room_set.all():
-        #                 rooms.add(room)
-        #     return render(request,'hotel/order_room.html',locals())
-        # except:
-        #     return HttpResponseRedirect('/hotel/')
 
 
-#酒店价格首页
-price_list=[(0,200),(200,500),(500,100),(1000,2000),(2000,10000),(0,10000)]
-#关键字搜索
+# 酒店价格首页
+price_list = [(0, 200), (200, 500), (500, 100), (1000, 2000), (2000, 10000), (0, 10000)]
+
+
+# 关键字搜索
 def search(keyword):
-    if  keyword:
-        hotel=models.Hotel.objects.filter(Q(hotel_name__contains=keyword)|Q(address__contains=keyword)|Q(info__contains=keyword)|Q(hotel_level__contains=keyword))
+    if keyword:
+        hotel = models.Hotel.objects.filter(
+            Q(hotel_name__contains=keyword) | Q(address__contains=keyword) | Q(info__contains=keyword) | Q(
+                hotel_level__contains=keyword))
         return hotel
 
 
@@ -86,51 +64,54 @@ def room(request):
     if request.method == 'GET':
         # rooms=models.Room.objects.all()
         # today, tomorrow = get_time()
-        return HttpResponseRedirect('/hotel')
-    elif request.method == 'POST':
         try:
-            #入住时间
-            from_date=request.POST.get('from_date','')
-            #退房时间
-            to_date=request.POST.get('to_date','')
-            #获取表单信息
+            if hasattr(request, 'session') and 'userinfo' in request.session:
+                uid = request.session['userinfo']['id']
+                user = Info.objects.get(id=uid)
+        except:
+            raise Http404
+        return HttpResponseRedirect('/hotel', locals())
+    elif request.method == 'POST':
+        # print(request.body)
+        try:
+            if hasattr(request, 'session') and 'userinfo' in request.session:
+                uid = request.session['userinfo']['id']
+                user = Info.objects.get(id=uid)
+            # 入住时间
+            from_date = request.POST.get('from_date', '')
+            # 退房时间
+            to_date = request.POST.get('to_date', '')
+            # 获取表单信息
             # room_num=request.POST.get('room-num','')
-            price=price_list[int(request.POST.get('room-price',''))]
-            hotel_level=request.POST.get('hotel-level','')
-            keyword=request.POST.get('room-keyword','')
-            #通过价位和人数找房间
-            if request.POST['people-num']=='1':
-                 rooms=models.Room.objects.filter(Q(iprice__range=price)&(Q(room_level=1)|Q(room_level=3)))
+            price = price_list[int(request.POST.get('room-price', ''))]
+            hotel_level = request.POST.get('hotel-level', '')
+            keyword = request.POST.get('room-keyword', '')
+            # 通过价位和人数找房间
+            if request.POST['people-num'] == '1':
+                rooms = models.Room.objects.filter(Q(iprice__range=price) & (Q(room_level=1) | Q(room_level=3)))
             else:
-            # print(price)
-                rooms=models.Room.objects.filter(iprice__range=price)
-            #根据酒店级别筛选
-            rooms=list(rooms)
-            # print(len(rooms))
+                # print(price)
+                rooms = models.Room.objects.filter(iprice__range=price)
+            # 根据酒店级别筛选
+            rooms = list(rooms)
             for room in rooms:
-                # print('hotel_id',room.hotel_id//10)
-                # print('hotel_level',hotel_level)
-                if  hotel_level=='5':
+                if hotel_level == '5':
                     break
-                if room.hotel_id//10 !=int(hotel_level):
+                if room.hotel_id // 10 != int(hotel_level):
                     rooms.remove(room)
-            # print(len(rooms))
-            #通过关键字找匹配酒店
-            hotels=search(keyword)
-            # print(set(rooms))
-            rooms=set(rooms)
-            # print(hotels)
-            # print('2')
-            if  hotels:
-                for hotel in hotels:
-                    # print('3')
-                    for room in hotel.room_set.all():
 
+            # 通过关键字找匹配酒店
+            hotels = search(keyword)
+            rooms = set(rooms)
+            if hotels:
+                for hotel in hotels:
+
+                    for room in hotel.room_set.all():
                         rooms.add(room)
 
             today, tomorrow = get_time()
 
-            return render(request,'hotel/order_room.html',locals())
+            return render(request, 'hotel/order_room.html', locals())
         except:
             return HttpResponseRedirect('/hotel/')
 
@@ -230,68 +211,76 @@ def hotel_ticket(id):
     address = hotel.address  # '新城区东新街199号（近民乐园）'
     infor = hotel.info  # '西安富力希尔顿酒店坐落于古城西安市中心，周边繁华购物区林立，是商务出行和休闲度假的理想之选。步行即可到达闻名于世的明城墙和西安地标建筑钟楼。乘坐出租车仅需5分钟即可到达东大街、骡马市步行街及回民街，这里有西安特色的餐厅、购物及娱乐场所。 拥有城中稀缺宽敞大容量客房，西安富力希尔顿酒店客房面积均大于43平方米。酒店高雅的客房别出心裁将唐朝元素融入其中，并突出了房间的温馨舒适。所有客房均配备高速宽带无线上网及高水准的客用品。 西安富力希尔顿酒店将成为您在西安的会议和用餐新选择。三间风格各异的餐厅及酒吧、一间1200平方米的大宴会厅及6间多功能厅可为您提供多种规模的会议及宴会需求。'
     rooms = hotel.room_set.all()
-    longitude=hotel.jingdu
-    latitude=hotel.weidu
+    longitude = hotel.jingdu
+    latitude = hotel.weidu
     today, tomorrow = get_time()
     return locals()
 
 
-#计算住房天数
-def count_days(from_date,to_date):
-    from_date=from_date.split('-')
-    to_date=to_date.split('-')
-    if from_date[1]==to_date[1]:
-        days=int(to_date[2])-int(from_date[2])
+# 计算住房天数
+def count_days(from_date, to_date):
+    from_date = from_date.split('-')
+    to_date = to_date.split('-')
+    if from_date[1] == to_date[1]:
+        days = int(to_date[2]) - int(from_date[2])
     else:
-        days=(int(to_date[1])-int(from_date[1]))*30+int(to_date[2])-int(from_date[2])
+        days = (int(to_date[1]) - int(from_date[1])) * 30 + int(to_date[2]) - int(from_date[2])
     return days
 
+
 def map(request):
-    if hasattr(request,'session') and request.session['userinfo']:
-        id=request.session['userinfo']['id']
+    if hasattr(request, 'session') and request.session['userinfo']:
+        id = request.session['userinfo']['id']
 
     return HttpResponseRedirect('/hotel')
 
 
-#酒店详情视图函数
-def hotel(request,id,level):
+# 酒店详情视图函数
+def hotel(request, id, level):
+    dic = hotel_ticket(id)
+    if request.method == 'GET':
+        try:
+            if hasattr(request, 'session') and 'userinfo' in request.session:
+                uid = request.session['userinfo']['id']
+                dic['user'] = Info.objects.get(id=uid)
+        except:
+            raise Http404
+        return render(request, 'hotel/hotel_ticket.html', dic)
+    elif request.method == 'POST':
+        print(type(request.body))
 
-        dic=hotel_ticket(id)
-        if request.method == 'GET':
-            return render(request, 'hotel/hotel_ticket.html',dic)
-        elif request.method == 'POST':
-            #将房间加入购物车
-            try:
-                # 创建流水号
-                now = str(time.ctime())
-                now_str=str(time.time()).split('.')
-                now_str=now_str[1]+now_str[0]
-                # print(request.session['userinfo']['id'])
-                serial_num= str(request.session['userinfo']['id']) + \
-                          now_str + id+ level
-                from_date=request.POST.get("from_date", '')
-                to_date=request.POST.get("to_date", '')
-                days=count_days(from_date,to_date)
-                # 数据导入cart表
-                Cart.objects.create(
-                    user_id=request.session['userinfo']['id'],
-                    g_img="/static/images/hotel/%s/2%s.png" % (
-                        dic['hotel_p'], level),
-                    g_name=dic['hotel_name'],
-                    time1=from_date,
-                    time2=to_date,
-                    g_type=dic['rooms'][int(level)-1].room_name,
-                    price=float(dic['rooms'][int(level)-1].price)*days,
-                    total_price=float(dic['rooms'][int(level)-1].price)*days,
-                    serial_num=serial_num
+        # 将房间加入购物车
+        try:
+            # 创建流水号
+            now = str(time.ctime())
+            now_str = str(time.time()).split('.')
+            now_str = now_str[1] + now_str[0]
+            # print(request.session['userinfo']['id'])
+            serial_num = str(request.session['userinfo']['id']) + \
+                         now_str + id + level
+            from_date = request.POST.get("from_date", '')
+            to_date = request.POST.get("to_date", '')
+            days = count_days(from_date, to_date)
+            # 数据导入cart表
+            Cart.objects.create(
+                user_id=request.session['userinfo']['id'],
+                g_img="/static/images/hotel/%s/2%s.png" % (
+                    dic['hotel_p'], level),
+                g_name=dic['hotel_name'],
+                time1=from_date,
+                time2=to_date,
+                g_type=dic['rooms'][int(level) - 1].room_name,
+                price=float(dic['rooms'][int(level) - 1].price) * days,
+                total_price=float(dic['rooms'][int(level) - 1].price) * days,
+                serial_num=serial_num
 
-                )
-                return render(request, 'hotel/booking.html', locals())
-            except:
-                return render(request,'user/login.html')
+            )
+            return render(request, 'hotel/booking.html', locals())
+        except:
+            return render(request, 'user/login.html')
 
 
-#商家文件上传
+# 商家文件上传
 def upload_picture(request):
     if request.method == 'GET':
         return render(request, 'hotel/merchant.html')

@@ -22,6 +22,7 @@ $(function () {
 
     });
 
+    
     $('#upwd').blur(function () { 
         var upwd = $('#upwd').val()
         var re = /^(\w){6,20}$/

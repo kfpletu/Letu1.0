@@ -6,34 +6,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>OrderHotel</title>
-    <link rel="stylesheet" href="../../static/css/hotel/information.css">
-    <link rel="stylesheet" href="../../static/css/basic.css">
-    <link rel="stylesheet" href="../../static/css/hotel/order_hotel.css">
-    <script type="text/javascript" src='/static/js/hotel/jquery.js'></script>
-    <script type="text/javascript" src='/static/js/hotel/order_hotel.js'></script>
-    <script src="/static/js/hotel/layDate-v5.0.9/laydate/laydate.js"></script>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/hotel/information.css' %}">
+    <link rel="stylesheet" href="{% static 'css/basic.css' %}">
+    <link rel="stylesheet" href="{% static 'css/hotel/order_hotel.css' %}">
+    <script type="text/javascript" src='{% static "js/hotel/jquery.js" %}'></script>
+    <script type="text/javascript" src='{% static "js/hotel/order_hotel.js" %}'></script>
+    <script src="{% static 'js/hotel/layDate-v5.0.9/laydate/laydate.js' %}"></script>
     {% block block_css %}
         <script>
-        lay('#version').html('-v' + laydate.v);
+            lay('#version').html('-v' + laydate.v);
 
-        //执行一个laydate实例
-        laydate.render({
-            elem: '#from_date'
-        });
-        laydate.render({
-            elem: '#to_date' //指定元素,即你要输入的框的id号即可
-        });
-    </script>
-    <script src="/static/js/hotel/hotel_date.js"></script>
+            //执行一个laydate实例
+            laydate.render({
+                elem: '#from_date'
+            });
+            laydate.render({
+                elem: '#to_date' //指定元素,即你要输入的框的id号即可
+            });
+        </script>
+        <script src="{% static 'js/hotel/hotel_date.js' %}"></script>
     {% endblock block_css %}
 </head>
 
 <body>
-    <header id="header">
-        {% if request.session.userinfo %}
+<header id="header">
+    {% if request.session.userinfo %}
         <div id="cart">
             <b>
                 <ul>
+                    <a href="/user/change.html">
+                        <img src='/static/images/user/change/{{ user.head_img }}' style="opacity:1" title="点击修改头像">
+                    </a>
+                    <div class="down"></div>
                     <li class="home">
                         <a href="javascript:void(0)">
                             欢迎您,{{ request.session.userinfo.uname }}
@@ -49,7 +54,7 @@
                 </ul>
             </b>
         </div>
-        {% else %}
+    {% else %}
         <div class="login">
             <b>
                 <div id="register">
@@ -62,109 +67,109 @@
                 </div>
             </b>
         </div>
-        {% endif %}
-        <div class="center">
-            <h1 class="logo">
-                <a href="/" id="logoA">乐途旅行网</a>
-            </h1>
-            <nav>
-                <ul class="link">
-                    <h1 class="none">网站导航</h1>
-                    <li ><a href="/">首页</a></li>
-                    <li><a href="/scenic">景点门票</a></li>
-                    <li><a href="/trip">交通出行</a></li>
-                    <li class="active" ><a href="/hotel">酒店预定</a></li>
-                    <li><a href="/about">关于我们</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-    <div id="headline">
-        <div class="center">
-            <hgroup>
-                <h2>酒店信息</h2>
-                <h3>推荐各类酒店信息，方便查看和预订</h3>
-            </hgroup>
-
-        </div>
+    {% endif %}
+    <div class="center">
+        <h1 class="logo">
+            <a href="/" id="logoA">乐途旅行网</a>
+        </h1>
+        <nav>
+            <ul class="link">
+                <h1 class="none">网站导航</h1>
+                <li><a href="/">首页</a></li>
+                <li><a href="/scenic">景点门票</a></li>
+                <li><a href="/trip">交通出行</a></li>
+                <li class="active"><a href="/hotel">酒店预定</a></li>
+                <li><a href="/about">关于我们</a></li>
+            </ul>
+        </nav>
     </div>
-    <div id="container">
-        <aside class="sidebar">
-            <div class="sidebox recommend">
-                <h2>美景推荐</h2>
-                <div class="tag">
-                    <a href="https://vacations.ctrip.com/tours/d-shaanxi-100057?salecity=1">陕西(10)</a>
-                    <a href="https://vacations.ctrip.com/tours/d-sichuan-100009?salecity=1">四川(10)</a>
-                    <a href="https://vacations.ctrip.com/tours/d-zhejiang-100065?salecity=1">浙江(10)</a>
-                    <a href="https://vacations.ctrip.com/tours/d-guangdong-100051?salecity=1">广东(10)</a>
-                    <a href="https://vacations.ctrip.com/tours/d-yunnan-100007?salecity=1">云南(10)</a>
-                    <a href="https://vacations.ctrip.com/tours/d-jiangsu-100066?salecity=1">江苏(10)</a>
-                    <a href="https://vacations.ctrip.com/tours/d-shandong-100039?salecity=1">山东(10)</a>
-                    <a href="https://vacations.ctrip.com/tours/d-henan-100058?salecity=1">河南(10)</a>
-                    <a href="https://vacations.ctrip.com/tours/d-hubei-100067?salecity=1">湖北(10)</a>
-                    <a href="https://vacations.ctrip.com/tours/d-gansu-100060?salecity=1">甘肃(10)</a>
-                    <a href="https://vacations.ctrip.com/tours/d-hebei-100059?salecity=1">河北(10)</a>
-                    <a href="https://vacations.ctrip.com/tours/d-hunan-100053?salecity=1">湖南(10)</a>
-                    <a href="https://vacations.ctrip.com/tours/d-guangxi-100052?salecity=1">广西(10)</a>
-                    <a href="https://vacations.ctrip.com/tours/d-xinjiang-100008?salecity=1">新疆(10)</a>
-                    <a href="https://vacations.ctrip.com/tours/d-innermongolia-100062?salecity=1">内蒙古(10)</a>
-                    <a href="https://vacations.ctrip.com/tours/d-beijing-1?salecity=1">北京(10)</a>
-                    <a href="https://vacations.ctrip.com/whole-1b126/?searchvalue=%E6%B5%B7%E5%8D%97&searchtext=%E6%B5%B7%E5%8D%97">海南(10)</a>
-                    <a href="https://vacations.ctrip.com/tours/d-guizhou-100064?salecity=1">贵州(10)</a>
-                    <a href="https://vacations.ctrip.com/tours/d-anhui-100068?salecity=1">安徽(10)</a>
-                    <a href="https://vacations.ctrip.com/tours/d-qinghai-100032?salecity=1">青海(10)</a>
-                    <a href="https://vacations.ctrip.com/tours/d-shanghai-2?salecity=1">上海(10)</a>
-                </div>
+</header>
+<div id="headline">
+    <div class="center">
+        <hgroup>
+            <h2>酒店信息</h2>
+            <h3>推荐各类酒店信息，方便查看和预订</h3>
+        </hgroup>
 
+    </div>
+</div>
+<div id="container">
+    <aside class="sidebar">
+        <div class="sidebox recommend">
+            <h2>美景推荐</h2>
+            <div class="tag">
+                <a href="https://vacations.ctrip.com/tours/d-shaanxi-100057?salecity=1">陕西(10)</a>
+                <a href="https://vacations.ctrip.com/tours/d-sichuan-100009?salecity=1">四川(10)</a>
+                <a href="https://vacations.ctrip.com/tours/d-zhejiang-100065?salecity=1">浙江(10)</a>
+                <a href="https://vacations.ctrip.com/tours/d-guangdong-100051?salecity=1">广东(10)</a>
+                <a href="https://vacations.ctrip.com/tours/d-yunnan-100007?salecity=1">云南(10)</a>
+                <a href="https://vacations.ctrip.com/tours/d-jiangsu-100066?salecity=1">江苏(10)</a>
+                <a href="https://vacations.ctrip.com/tours/d-shandong-100039?salecity=1">山东(10)</a>
+                <a href="https://vacations.ctrip.com/tours/d-henan-100058?salecity=1">河南(10)</a>
+                <a href="https://vacations.ctrip.com/tours/d-hubei-100067?salecity=1">湖北(10)</a>
+                <a href="https://vacations.ctrip.com/tours/d-gansu-100060?salecity=1">甘肃(10)</a>
+                <a href="https://vacations.ctrip.com/tours/d-hebei-100059?salecity=1">河北(10)</a>
+                <a href="https://vacations.ctrip.com/tours/d-hunan-100053?salecity=1">湖南(10)</a>
+                <a href="https://vacations.ctrip.com/tours/d-guangxi-100052?salecity=1">广西(10)</a>
+                <a href="https://vacations.ctrip.com/tours/d-xinjiang-100008?salecity=1">新疆(10)</a>
+                <a href="https://vacations.ctrip.com/tours/d-innermongolia-100062?salecity=1">内蒙古(10)</a>
+                <a href="https://vacations.ctrip.com/tours/d-beijing-1?salecity=1">北京(10)</a>
+                <a href="https://vacations.ctrip.com/whole-1b126/?searchvalue=%E6%B5%B7%E5%8D%97&searchtext=%E6%B5%B7%E5%8D%97">海南(10)</a>
+                <a href="https://vacations.ctrip.com/tours/d-guizhou-100064?salecity=1">贵州(10)</a>
+                <a href="https://vacations.ctrip.com/tours/d-anhui-100068?salecity=1">安徽(10)</a>
+                <a href="https://vacations.ctrip.com/tours/d-qinghai-100032?salecity=1">青海(10)</a>
+                <a href="https://vacations.ctrip.com/tours/d-shanghai-2?salecity=1">上海(10)</a>
             </div>
-            <div class="sidebox popular">
-                <h2>热卖旅游</h2>
-                <div class="figure">
-                    <figure>
-                        <img src="../../static/images/hotel/recommend/xian.jpg" alt="西安 2 日游">
-                        <figcaption>西安 2 日游</figcaption>
-                    </figure>
-                    <figure> <img src="../../static/images/hotel/recommend/beijing.jpg" alt="北京 5日 4晚 游">
-                        <figcaption>北京 5日 4晚 游</figcaption>
-                    </figure>
-                    <figure> <img src="../../static/images/hotel/recommend/zhejiang.jpg" alt="浙江双飞 3 日游">
-                        <figcaption>浙江双飞 3 日游</figcaption>
-                    </figure>
-                    <figure> <img src="../../static/images/hotel/recommend/yunnan.gif" alt="云南丽江 6 日游">
-                        <figcaption>云南丽江 6 日游</figcaption>
-                    </figure>
-                    <figure> <img src="../../static/images/hotel/recommend/shandong.gif" alt="山东青岛 5 日游">
-                        <figcaption>山东青岛 5 日游</figcaption>
-                    </figure>
-                    <figure> <img src="../../static/images/hotel/recommend/guangxi.jpg" alt="广西 6 日半游">
-                        <figcaption>广西 6 日半游</figcaption>
-                    </figure>
-                    <figure> <img src="../../static/images/hotel/recommend/qinghai.jpg" alt="青海新疆 9 日游">
-                        <figcaption>青海新疆 9 日游</figcaption>
-                    </figure>
-                    <figure> <img src="../../static/images/hotel/recommend/hainan.gif" alt="海南三亚 4日 5夜游">
-                        <figcaption>海南三亚 4日 5夜游</figcaption>
-                    </figure>
-                </div>
+
+        </div>
+        <div class="sidebox popular">
+            <h2>热卖旅游</h2>
+            <div class="figure">
+                <figure>
+                    <img src="../../static/images/hotel/recommend/xian.jpg" alt="西安 2 日游">
+                    <figcaption>西安 2 日游</figcaption>
+                </figure>
+                <figure><img src="../../static/images/hotel/recommend/beijing.jpg" alt="北京 5日 4晚 游">
+                    <figcaption>北京 5日 4晚 游</figcaption>
+                </figure>
+                <figure><img src="../../static/images/hotel/recommend/zhejiang.jpg" alt="浙江双飞 3 日游">
+                    <figcaption>浙江双飞 3 日游</figcaption>
+                </figure>
+                <figure><img src="../../static/images/hotel/recommend/yunnan.gif" alt="云南丽江 6 日游">
+                    <figcaption>云南丽江 6 日游</figcaption>
+                </figure>
+                <figure><img src="../../static/images/hotel/recommend/shandong.gif" alt="山东青岛 5 日游">
+                    <figcaption>山东青岛 5 日游</figcaption>
+                </figure>
+                <figure><img src="../../static/images/hotel/recommend/guangxi.jpg" alt="广西 6 日半游">
+                    <figcaption>广西 6 日半游</figcaption>
+                </figure>
+                <figure><img src="../../static/images/hotel/recommend/qinghai.jpg" alt="青海新疆 9 日游">
+                    <figcaption>青海新疆 9 日游</figcaption>
+                </figure>
+                <figure><img src="../../static/images/hotel/recommend/hainan.gif" alt="海南三亚 4日 5夜游">
+                    <figcaption>海南三亚 4日 5夜游</figcaption>
+                </figure>
             </div>
-        </aside>
-        <div class="list order">
-            {% block block_new %}
+        </div>
+    </aside>
+    <div class="list order">
+        {% block block_new %}
             <div class="brandListBox" id="brandListFirst">{{ weather_str }}</div>
-{#                <a href="">花样土耳其 10 日游</a>#}
-{#                {% for  weather in weather_list %}#}
-{#                        {% for wea in weather %}#}
-{#                            <a href="">{{ wea }}</a>}#}
-{#                        {% endfor %}#}
-{#                {% endfor %}#}
+            {#                <a href="">花样土耳其 10 日游</a>#}
+            {#                {% for  weather in weather_list %}#}
+            {#                        {% for wea in weather %}#}
+            {#                            <a href="">{{ wea }}</a>}#}
+            {#                        {% endfor %}#}
+            {#                {% endfor %}#}
             </div>
             <div class="out-form">
-                <form action="room" method="post"  id='form'>
+                <form action="room" method="post" id='form'>
                     {% csrf_token %}
                     <div class="form">
-                       {% csrf_token %}
-                    <h2>酒店预订</h2>
-                    <p>
+                        {% csrf_token %}
+                        <h2>酒店预订</h2>
+                        <p>
                         <ul class="infor">
                             <li>住宿类型:</li>
                             <li><a href="javascript:void(0)">星级酒店</a></li>
@@ -173,63 +178,64 @@
                             <li><a href="javascript:void(0)">主题酒店</a></li>
 
                         </ul>
-                    </p>
-
-                    <div class="form-top">
-                        <p>
-                            <label for="from_date">入住日期:</label>
-                            <input type="text" name="from_date" class="date_time" id="from_date" value="{{ today }}">
-                            <label for="to_date">退房日期:</label>
-                            <input type="text" name="to_date" class="date_time"  id="to_date" value="{{ tomorrow }}">
-
-                         <label>房客数量:</label>
-                            <select name="people-num">
-                                <option value="5" selected>不限</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">大于4</option>
-                                <option value="1">1</option>
-                            </select>   
                         </p>
 
-                    </div>
-                    <div class="form-middle">
-                        <p>                        
-                            房间价位:
-                            <select name="room-price">
-                                <option value="0">200元以下</option>
-                                <option value="2">500元-1000元</option>
-                                <option value="3">1000元-2000元</option>
-                                <option value="4">2000元以上</option>
-                                <option value="1">200元-500元</option>
-                                <option value="5" selected>不限</option>
-                            </select>
-                            酒店级别:
-                            <select name="hotel-level" id="hotel-level">
-                                <option value="3">星级酒店</option>
-                                <option value="4">主题酒店</option>
-                                <option value="2">民宿公寓</option>
-                                <option value="1" >快速便捷</option>
-                                <option value="5" selected>不限</option>
-                            </select>
-                            <label for="room-keyword">其他要求:</label>
-                            <input type="text" name="room-keyword">
-                        </p>
-                    </div>
-                    <div class="form-bottom">
-                        <p>
-                             <button class="button">订房</button>
+                        <div class="form-top">
+                            <p>
+                                <label for="from_date">入住日期:</label>
+                                <input type="text" name="from_date" class="date_time" id="from_date"
+                                       value="{{ today }}">
+                                <label for="to_date">退房日期:</label>
+                                <input type="text" name="to_date" class="date_time" id="to_date" value="{{ tomorrow }}">
 
-                        </p>
+                                <label>房客数量:</label>
+                                <select name="people-num">
+                                    <option value="5" selected>不限</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">大于4</option>
+                                    <option value="1">1</option>
+                                </select>
+                            </p>
 
+                        </div>
+                        <div class="form-middle">
+                            <p>
+                                房间价位:
+                                <select name="room-price">
+                                    <option value="0">200元以下</option>
+                                    <option value="2">500元-1000元</option>
+                                    <option value="3">1000元-2000元</option>
+                                    <option value="4">2000元以上</option>
+                                    <option value="1">200元-500元</option>
+                                    <option value="5" selected>不限</option>
+                                </select>
+                                酒店级别:
+                                <select name="hotel-level" id="hotel-level">
+                                    <option value="3">星级酒店</option>
+                                    <option value="4">主题酒店</option>
+                                    <option value="2">民宿公寓</option>
+                                    <option value="1">快速便捷</option>
+                                    <option value="5" selected>不限</option>
+                                </select>
+                                <label for="room-keyword">其他要求:</label>
+                                <input type="text" name="room-keyword">
+                            </p>
+                        </div>
+                        <div class="form-bottom">
+                            <p>
+                                <button class="button">订房</button>
+
+                            </p>
+
+                        </div>
                     </div>
-                </div>
                 </form>
 
                 <div>
                     <img src="/static/images/hotel/out-form-img.jpeg">
                 </div>
-                
+
             </div>
             <div class="new">
                 <h2>热门酒店推荐</h2>
@@ -237,22 +243,23 @@
                     <li>热门品牌：</li>
                     <li><a href="javascript:void(0)">全部</a></li>
 
-                  {% for house in house_list_li %}
+                    {% for house in house_list_li %}
 
                         <li><a href="javascript:void(0)">{{ house.hotel_name }}</a></li>
 
-                  {% endfor %}
+                    {% endfor %}
 
-{#                    <li><a href="javascript:void(0)">富力希尔顿</a></li>#}
+                    {#                    <li><a href="javascript:void(0)">富力希尔顿</a></li>#}
                 </ul>
                 <div class="hotel_imfor">
-                {% for house in house_list  %}
-                    <figure class="hotel_figure">
-                        <img src="/static/images/hotel/{{ house.hotel_p }}/11.png" alt="The Pulpit Rock" class="hotel_img">
-                        <span class="hotel_name">{{ house.hotel_name }}</span> {{ house.hotel.hotel_level }}
-                        <a href="{{ house.id }}">点击进入</a>
-                    </figure>
-                {% endfor %}
+                    {% for house in house_list %}
+                        <figure class="hotel_figure">
+                            <img src="/static/images/hotel/{{ house.hotel_p }}/11.png" alt="The Pulpit Rock"
+                                 class="hotel_img">
+                            <span class="hotel_name">{{ house.hotel_name }}</span> {{ house.hotel.hotel_level }}
+                            <a href="{{ house.id }}">点击进入</a>
+                        </figure>
+                    {% endfor %}
                     <!--
                     <figure class="hotel_figure">
                         <img src="/static/images/hotel/1/4/11.png" alt="The Pulpit Rock" class="hotel_img">
@@ -263,111 +270,110 @@
                     -->
 
 
-
                 </div>
             </div>
-            {% endblock block_new %}
-            <div class="brandListBox" id="last_brand">
-                <a class="brandList">
-                    <img src="../../static/images/hotel/hotel_brand/xed.jpg" alt="">
-                    希尔顿
-                </a>
-                <a class="brandList">
-                    <img src="../../static/images/hotel/hotel_brand/biguiyuan.jpg" alt="">碧桂园
-                </a>
-                <a class="brandList">
-                    <img src="../../static/images/hotel/hotel_brand/hengdajiudian.png" alt="">恒大酒店
-                </a>
-                <a class="brandList">
-                    <img src="../../static/images/hotel/hotel_brand/jinghan.jpg" alt="">均含酒店
-                </a>
-                <a class="brandList">
-                    <img src="../../static/images/hotel/hotel_brand/kaiyuanmingdu.jpg" alt="">开元酒店集团
-                </a>
-                <a class="brandList">
-                    <img src="../../static/images/hotel/hotel_brand/weiyena.jpg" alt="">维也纳酒店
-                </a>
-                <a class="brandList">
-                    <img src="../../static/images/hotel/hotel_brand/xianggelila.jpg" alt="">香格里拉
-                </a>
-                <a class="brandList">
-                    <img src="../../static/images/hotel/hotel_brand/huazhu.png" alt="">华住酒店集团
-                </a>
-                <a class="brandList">
-                    <img src="../../static/images/hotel/hotel_brand/jinjiang.png" alt="">锦江酒店
-                </a>
-                <a class="brandList">
-                    <img src="../../static/images/hotel/hotel_brand/wj.jpg" alt="">维京酒店集团
-                </a>
-                <a class="brandList">
-                    <img src="../../static/images/hotel/hotel_brand/botaojituan.jpg" alt="">铂涛集团
-                </a>
-                <a class="brandList">
-                    <img src="../../static/images/hotel/hotel_brand/chengshimingren.jpg" alt="">城市名人
-                </a>
-                <a class="brandList">
-                    <img src="../../static/images/hotel/hotel_brand/chengshibianjie.jpg" alt="">城市便捷
-                </a>
-                <a class="brandList">
-                    <img src="../../static/images/hotel/hotel_brand/dazhonghua.jpg" alt="">大中华集团
-                </a>
-                <a class="brandList">
-                    <img src="../../static/images/hotel/hotel_brand/haihang.jpg" alt="">海航集团
-                </a>
-                <a class="brandList">
-                    <img src="../../static/images/hotel/hotel_brand/huajiantang.jpg" alt="">花间堂
-                </a>
-                <a class="brandList">
-                    <img src="../../static/images/hotel/hotel_brand/jinlinliansuo.jpg" alt="">金陵连锁
-                </a>
-                <a class="brandList">
-                    <img src="../../static/images/hotel/hotel_brand/shuxiangliansuo.png" alt="">书香连锁酒店
-                </a>
-                <a class="brandList">
-                    <img src="../../static/images/hotel/hotel_brand/wanhao.jpg" alt="">万豪团
-                </a>
-                <a class="brandList">
-                    <img src="../../static/images/hotel/hotel_brand/yinju.jpg" alt="">隐居
-                </a>
-                <a class="brandList">
-                    <img src="../../static/images/hotel/hotel_brand/yuehai.jpg" alt="">粤海集团
-                </a>
-            </div>
+        {% endblock block_new %}
+    <div class="brandListBox" id="last_brand">
+        <a class="brandList">
+            <img src="{% static 'images/hotel/hotel_brand/xed.jpg' %}" alt="">
+            希尔顿
+        </a>
+        <a class="brandList">
+            <img src="{% static 'images/hotel/hotel_brand/biguiyuan.jpg' %}" alt="">碧桂园
+        </a>
+        <a class="brandList">
+            <img src="../../static/images/hotel/hotel_brand/hengdajiudian.png" alt="">恒大酒店
+        </a>
+        <a class="brandList">
+            <img src="../../static/images/hotel/hotel_brand/jinghan.jpg" alt="">均含酒店
+        </a>
+        <a class="brandList">
+            <img src="../../static/images/hotel/hotel_brand/kaiyuanmingdu.jpg" alt="">开元酒店集团
+        </a>
+        <a class="brandList">
+            <img src="../../static/images/hotel/hotel_brand/weiyena.jpg" alt="">维也纳酒店
+        </a>
+        <a class="brandList">
+            <img src="../../static/images/hotel/hotel_brand/xianggelila.jpg" alt="">香格里拉
+        </a>
+        <a class="brandList">
+            <img src="../../static/images/hotel/hotel_brand/huazhu.png" alt="">华住酒店集团
+        </a>
+        <a class="brandList">
+            <img src="../../static/images/hotel/hotel_brand/jinjiang.png" alt="">锦江酒店
+        </a>
+        <a class="brandList">
+            <img src="../../static/images/hotel/hotel_brand/wj.jpg" alt="">维京酒店集团
+        </a>
+        <a class="brandList">
+            <img src="../../static/images/hotel/hotel_brand/botaojituan.jpg" alt="">铂涛集团
+        </a>
+        <a class="brandList">
+            <img src="../../static/images/hotel/hotel_brand/chengshimingren.jpg" alt="">城市名人
+        </a>
+        <a class="brandList">
+            <img src="../../static/images/hotel/hotel_brand/chengshibianjie.jpg" alt="">城市便捷
+        </a>
+        <a class="brandList">
+            <img src="../../static/images/hotel/hotel_brand/dazhonghua.jpg" alt="">大中华集团
+        </a>
+        <a class="brandList">
+            <img src="../../static/images/hotel/hotel_brand/haihang.jpg" alt="">海航集团
+        </a>
+        <a class="brandList">
+            <img src="../../static/images/hotel/hotel_brand/huajiantang.jpg" alt="">花间堂
+        </a>
+        <a class="brandList">
+            <img src="../../static/images/hotel/hotel_brand/jinlinliansuo.jpg" alt="">金陵连锁
+        </a>
+        <a class="brandList">
+            <img src="../../static/images/hotel/hotel_brand/shuxiangliansuo.png" alt="">书香连锁酒店
+        </a>
+        <a class="brandList">
+            <img src="../../static/images/hotel/hotel_brand/wanhao.jpg" alt="">万豪团
+        </a>
+        <a class="brandList">
+            <img src="../../static/images/hotel/hotel_brand/yinju.jpg" alt="">隐居
+        </a>
+        <a class="brandList">
+            <img src="../../static/images/hotel/hotel_brand/yuehai.jpg" alt="">粤海集团
+        </a>
     </div>
-    <footer id="footer">
-        <div class="top">
-            <div class="block left">
-                <h2>合作伙伴</h2>
-                <hr>
-                <p><a href="http://www.tuniu.com">途牛旅游网</a></p>
-                <p><a href="http://www.lvmama.com">驴妈妈旅游网</a></p>
-                <p><a href="http://www.ctrip.com">携程旅行网</a></p>
-                <p><a href="http://www.cytsonline.com">中国青年旅行社</a></p>
-            </div>
-            <div class="block center">
-                <h2>旅游 FAQ</h2>
-                <hr>
-                <p><a href="/about/travelContract">旅游合同签订方式？</a></p>
-                <p><a href="/about/childPrice">儿童价是基于什么制定的？</a></p>
-                <p><a href="/about/touristRoute">旅游的线路品质怎么界定的？</a></p>
-                <p><a href="/about/singleRoom">单房差是什么？</a></p>
-                <p><a href="/about/travelInsuranceCategory">旅游保险有那些种类？</a></p>
-            </div>
-            <div class="block right">
-                <h2>联系方式</h2>
-                <hr>
-                <ul>
-                    <li>微博：weibo.com/letu</li>
-                    <li>邮件：letu@letu.com</li>
-                    <li>地址：陕西西安碑林区中铁第一国际9层</li>
-                </ul>
-            </div>
+</div>
+<footer id="footer">
+    <div class="top">
+        <div class="block left">
+            <h2>合作伙伴</h2>
+            <hr>
+            <p><a href="http://www.tuniu.com">途牛旅游网</a></p>
+            <p><a href="http://www.lvmama.com">驴妈妈旅游网</a></p>
+            <p><a href="http://www.ctrip.com">携程旅行网</a></p>
+            <p><a href="http://www.cytsonline.com">中国青年旅行社</a></p>
         </div>
-        <div class="bottom">
-            <p>Copyright ©LT 乐途旅行网 | 陕ICP备120110109号 | 旅行网经营许可证： L-LT-BK12345</p>
-            <img src="../../static/images/hotel/pic.gif" title="站长统计">
+        <div class="block center">
+            <h2>旅游 FAQ</h2>
+            <hr>
+            <p><a href="/about/travelContract">旅游合同签订方式？</a></p>
+            <p><a href="/about/childPrice">儿童价是基于什么制定的？</a></p>
+            <p><a href="/about/touristRoute">旅游的线路品质怎么界定的？</a></p>
+            <p><a href="/about/singleRoom">单房差是什么？</a></p>
+            <p><a href="/about/travelInsuranceCategory">旅游保险有那些种类？</a></p>
         </div>
-    </footer>
+        <div class="block right">
+            <h2>联系方式</h2>
+            <hr>
+            <ul>
+                <li>微博：weibo.com/letu</li>
+                <li>邮件：letu@letu.com</li>
+                <li>地址：陕西西安碑林区中铁第一国际9层</li>
+            </ul>
+        </div>
+    </div>
+    <div class="bottom">
+        <p>Copyright ©LT 乐途旅行网 | 陕ICP备120110109号 | 旅行网经营许可证： L-LT-BK12345</p>
+        <img src="{% static 'images/hotel/pic.gif' %}" title="站长统计">
+    </div>
+</footer>
 </body>
 
 </html>

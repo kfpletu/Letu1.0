@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>个人中心</title>
     {% extends 'pay/topUp.html' %}
     {% block head %}
     <link rel="stylesheet" href="/static/css/base.css" type="text/css">
@@ -13,9 +13,41 @@
     <script src="/static/js/pay/topUP.js"></script>
     <link rel="stylesheet" href="/static/css/user/change.css">
     <script src="/static/js/user/change.js"></script>
+    
+    <script>
+        $(function(){
+            $(".userDel").click(function(){
+                if(confirm('注销后将无法登录，是否继续注销？')){
+                    console.log('sjdfjksf')
+                    $.ajax({
+                        type:"get",
+                        url:"cancel",
+                        success:function(res){
+                            console.log(res)
+                            if(res){
+                                window.location.href = '/user/'+res
+                            }
+                        }
+                    })
+                }  
+            })
+        })
+    </script>
     {% endblock head %}
 </head>
 <body>
+    {% block del %}
+    <div id="top">
+    <a href="/index">
+        <img src="/static/images/home/logo.png" alt="logo">
+    </a>
+    <span>个人中心</span>
+    <!-- <a href="javascript:void(0)"><span class="userDel">注销账户</span></a>  -->
+    <a href="javascript:void(0)" class="userDel">注销账户</a>
+    <a href="/index"><span class="s1">返回首页</span></a>
+    <a href="/user/cart"><span class="s2">购物车</span></a>
+    </div>
+    {% endblock del %}
     {% block change %}
     <div id="change">
     <form action="/user/change" method="POST" enctype="multipart/form-data">
@@ -42,13 +74,10 @@
                     <td>{{ user.price }}</td>
                 </tr>
             </table>
-                <p class="fImg" >
-                    <input type="file" name="uimg">
-                </p>
-                <p class='subImg'>
-                    <input type="submit" value="上传头像">
-                </p>
-            
+            <p class="fImg" >
+                <input type="file" name="uimg">
+                <input type="submit" value="上传头像">
+            </p>  
        </div> 
     </form>
     </div>

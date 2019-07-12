@@ -1,6 +1,6 @@
 $(function(){
 	// alert('fdsfsd')
-	$('form').submit(function(){
+	$('.fImg input:nth-child(2)').click(function(){
 		styleStr =($('[type=file]').val().split('.')).pop()
 		// console.log($('[type=file]').val())
 		// console.log(($('[type=file]').val().split('.')))
