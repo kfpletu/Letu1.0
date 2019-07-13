@@ -54,6 +54,7 @@
 .orderTable td:nth-child(2){
     width:400px;
     text-align: center;
+    color: red;
 }
 .orderTable th{
     font-size: 1.2em;

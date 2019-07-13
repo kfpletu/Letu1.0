@@ -3,7 +3,7 @@ from django.contrib import admin
 
 from.import views
 
-# 梦晗的路由
+# 登录注册路由
 urlpatterns = [
     #url(r '^admin/', admin.site.urls),
     url(r'^login', views.login),
@@ -25,7 +25,6 @@ urlpatterns = [
 # kavin的路由
 urlpatterns += [
     url(r'^payment', views.payment),
-    url(r'^test', views.test), #用于测试
     url(r'^delete/', views.delete),
     url(r'^order',views.order,name='order'),
     url(r'^topUp$',views.topup),

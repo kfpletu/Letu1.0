@@ -30,7 +30,7 @@ class TicketQuery:
             'If-Modified-Since': '0',
             'Pragma': 'no-cache',
             'Referer': 'https://kyfw.12306.cn/otn/leftTicket/init',
-            'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36',
+            'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36',
             'X-Requested-With': 'XMLHttpRequest'
         }
 
@@ -48,15 +48,14 @@ class TicketQuery:
         new_station_name_dict = dict(zip(station_name_dict.values(), station_name_dict.keys()))
         return (station_name_dict,new_station_name_dict)
 
-    def get_station_daima(self, station_daima):
-        pass
-
     def query(self, from_station, to_station, date):
         ticket = {}
         fromstation = self.get_station_name()[0][from_station]
         tostation = self.get_station_name()[0][to_station]
-        url = f'https://kyfw.12306.cn/otn/leftTicket/query?leftTicketDTO.train_date={date}&leftTicketDTO.from_station={fromstation}&leftTicketDTO.to_station={tostation}&purpose_codes=ADULT'
-        # url = f'https://kyfw.12306.cn/otn/leftTicket/init?linktypeid=dc&fs={from_station_url},{fromstation}&ts={to_station_url},{tostation}&date={date}&flag=N,N,Y'
+        url =f'https://kyfw.12306.cn/otn/leftTicket/query?leftTicketDTO.train_date={date}&leftTicketDTO.from_station={fromstation}&leftTicketDTO.to_station={tostation}&purpose_codes=ADULT'
+        # url ='https://kyfw.12306.cn/otn/leftTicket/query?leftTicketDTO.train_date=%s&leftTicketDTO.from_station=%s&leftTicketDTO.to_station=%s&purpose_codes=ADULT'%(date,fromstation,tostation)
+        # url = f'https://kyfw.12306.cn/otn/leftTicket/init?linktypeid=dc&fs=
+        #{from_station_url},{fromstation}&ts={to_station_url},{tostation}&date={date}&flag=N,N,Y'
         # print(url)
         try:
             html = requests.get(url, headers=self.headers, verify=False).json()
@@ -153,9 +152,9 @@ class TicketQuery:
 
 
 if __name__ == '__main__':
-    #     tt = TicketQuery()
-    #     # aa = tt.get_station_name('西安')
-    #     # print(aa)
-    #     aa = tt.query('西安', '兰州', '2019-06-26')
-    #     print(aa)
+        # tt = TicketQuery()
+        # aa = tt.get_station_name('西安')
+        # print(aa)
+        # aa = tt.query('西安', '兰州', '2019-07-16')
+        # print(aa)
     pass
