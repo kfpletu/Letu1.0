@@ -3,7 +3,7 @@ from . import views
 
 urlpatterns = [
     url(r'^$',views.index,name='hotel'),
-    url(r'^(\d+)/(\d?)/',views.hotel,name='room'),
+    url(r'^(\d+)/(\d?)',views.hotel,name='room'),
     url('^room$',views.room),
     url('^weather/$',views.city_weather),
     url('^hotel-list$',views.hotel_list)
