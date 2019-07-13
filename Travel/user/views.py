@@ -11,7 +11,7 @@ from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from PIL import Image, ImageDraw, ImageFont
 
-# 订单结算
+# 订单结算                                
 from hotel.models import House
 
 from .models import *
@@ -20,7 +20,7 @@ def pwd_hash(passwd):
     # 将密码进行hash
         s = 'letuTravel'
         h_p = hashlib.sha1()
-        s_p = hashlib.sha1()
+        s_p = hashlib.sha1()   
         h_p.update(passwd.encode())
         s_p.update(s.encode())
         upwd = h_p.hexdigest() + s_p.hexdigest()
