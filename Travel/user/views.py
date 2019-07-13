@@ -16,6 +16,7 @@ from hotel.models import House
 
 from .models import *
 
+<<<<<<< HEAD
 
 # 登录
 def login(request):
@@ -27,18 +28,30 @@ def login(request):
         upwd = request.POST.get('upwd')
 
         # 将密码进行hash
+=======
+def pwd_hash(passwd):
+    # 将密码进行hash
+>>>>>>> e4e5deff4ff3ac4b95e076f668c1a2e6e3e19d16
         s = 'letuTravel'
         h_p = hashlib.sha1()
         s_p = hashlib.sha1()
-        h_p.update(upwd.encode())
+        h_p.update(passwd.encode())
         s_p.update(s.encode())
         upwd = h_p.hexdigest() + s_p.hexdigest()
         h_p = hashlib.sha1()
         h_p.update(upwd.encode())
         upwd = h_p.hexdigest()
+        return upwd
 
-        # 获取记住密码单选框的状态
-        remember = request.POST.get('remember')
+# 登录
+def login(request):
+    if request.method == 'GET':
+        return render(request, 'user/login.html')
+    elif request.method == 'POST':
+        # 获取登录页面form表单提交的uname和upwd,并将upwd进行hash加密
+        uname = request.POST.get('uname')
+        upwd = request.POST.get('upwd')
+        upwd = pwd_hash(upwd)
         try:
             # 从数据库获取uname和upwd
             user = Info.objects.get(uname=uname, upwd=upwd)
@@ -51,21 +64,16 @@ def login(request):
                     resp = HttpResponse('该用户已在其他地方登录')
                     return resp
                 else:
-                    # 修改登录状态,发送seesion,cookie,返回首页
+                    # 修改登录状态,发送seesion,返回首页
                     user.is_online = 1
                     user.save()
                     request.session['userinfo'] = {
                         'uname': user.uname,
                         'id': user.id
                     }
-
                     resp = HttpResponse('登录成功', locals())
-                    if remember:
-                        resp.set_cookie('uname', uname, max_age=7 * 24 * 60 * 60)
-                    else:
-                        resp.delete_cookie('uname')
                     return resp
-        except:
+        except Exception as e:
             # 出异常,说明用户名密码不正确,刷新当前登录页面
             return HttpResponse('登录失败,请重新登录')
 
@@ -86,11 +94,10 @@ def yanzma(request):
             fill=(0, 0, 0))  # 颜色
     for _ in range(10):
         draw.line([(random.randint(0, 110), random.randint(0, 37)),
-                   (random.randint(0, 110), random.randint(0, 37))],
+        (random.randint(0, 110), random.randint(0, 37))],
                   fill=(150, 150, 2))
 
-    font = ImageFont.truetype(
-        "/usr/share/fonts/truetype/freefont/FreeSerif.ttf", 24)
+    font = ImageFont.truetype("/usr/share/fonts/truetype/freefont/FreeSerif.ttf", 24)
     draw.text((5, 5), code, font=font, fill="green")
     src = 'static/images/logImg/code.jpg'
     img.save(src)
@@ -187,9 +194,10 @@ def register(request):
     if request.method == 'GET':
         return render(request, 'user/register.html')
     elif request.method == 'POST':
-        # 获取用户注册输入的信息
+        # 获取用户注册输入的信息,并将密码进行hash加密
         uname = request.POST.get('uname')
         upwd = request.POST.get('upwd')
+<<<<<<< HEAD
 
         # 将密码进行hash
         s = 'letuTravel'
@@ -202,6 +210,9 @@ def register(request):
         h_p.update(upwd.encode())
         upwd = h_p.hexdigest()
 
+=======
+        upwd = pwd_hash(upwd)
+>>>>>>> e4e5deff4ff3ac4b95e076f668c1a2e6e3e19d16
         phone = request.POST.get('phone')
         email = request.POST.get('email')
         # 尝试向数据库添加用户信息,成功返回到登录页面进行登录
@@ -268,6 +279,7 @@ def updatepwd(request):
         # 获取用户输入的新密码
         new_pwd = request.POST.get('new_pwd')
 
+<<<<<<< HEAD
         # 将密码进行hash
         s = 'letuTravel'
         h_p = hashlib.sha1()
@@ -278,6 +290,9 @@ def updatepwd(request):
         h_p = hashlib.sha1()
         h_p.update(upwd.encode())
         upwd = h_p.hexdigest()
+=======
+        upwd = pwd_hash(new_pwd)
+>>>>>>> e4e5deff4ff3ac4b95e076f668c1a2e6e3e19d16
 
         try:
             uname = request.session['uname']
@@ -290,7 +305,6 @@ def updatepwd(request):
         except:
             # 重新返回忘记密码页面
             return HttpResponse('')
-
 
 # 退出登录
 def logout(request):

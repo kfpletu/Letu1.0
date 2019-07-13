@@ -106,11 +106,12 @@ body{
     border-radius: 5px;
 }
 .savePwd{
+    height: 29px;
     color: #fff;
     margin-bottom: 15px;
 }
 .savePwd a{
-    float: right;
+    float: left;
     color: #fff;
 }
 .savePwd input{
