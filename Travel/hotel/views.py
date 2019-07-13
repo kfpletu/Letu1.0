@@ -67,7 +67,7 @@ def search(keyword):
                 hotel_level__contains=keyword))
         return hotel
 
-
+hotel_level_list=[(10,19),(20,29),(30,39),(40,49),(50,59)]
 # 酒店首页搜索引擎
 def room(request):
     # if request.method == 'GET':
@@ -81,44 +81,43 @@ def room(request):
     #         raise Http404
     #     return HttpResponseRedirect('/hotel', locals())
     if request.method == 'GET':
+        today, tomorrow = get_time()
         try:
             if hasattr(request, 'session') and 'userinfo' in request.session:
                 uid = request.session['userinfo']['id']
                 user = Info.objects.get(id=uid)
+            #直接通过路由进入,显示全部房间
+            if not request.GET:
+                rooms = models.Room.objects.all()
+                return render(request, 'hotel/order_room.html', locals())
             # 入住时间
-            from_date = request.POST.get('from_date', '')
+            from_date = request.GET.get('from_date', '')
             # 退房时间
-            to_date = request.POST.get('to_date', '')
+            to_date = request.GET.get('to_date', '')
             # 获取表单信息
 
-            price = price_list[int(request.POST.get('room-price', ''))]
-            hotel_level = request.POST.get('hotel-level', '')
-            keyword = request.POST.get('room-keyword', '')
+            price = price_list[int(request.GET.get('room-price', ''))]
+            hotel_level = request.GET.get('hotel-level', '')
+            keyword = request.GET.get('room-keyword', '')
             # 通过价位和人数找房间
-            if request.POST['people-num'] == '1':
+            if request.GET['people-num'] == '1':
                 rooms = models.Room.objects.filter(Q(iprice__range=price) & (Q(room_level=1) | Q(room_level=3)))
             else:
 
                 rooms = models.Room.objects.filter(iprice__range=price)
             # 根据酒店级别筛选
-            rooms = list(rooms)
-            for room in rooms:
-                if hotel_level == '5':
-                    break
-                if room.hotel_id // 10 != int(hotel_level):
-                    rooms.remove(room)
+
+            if hotel_level !='5':
+                range=hotel_level_list[int(hotel_level)-1]
+                rooms=rooms.filter(hotel_id__gte=range[0],hotel_id__lte=range[1])#hotel_level_list[int(hotel_level)-1])
 
             # 通过关键字找匹配酒店
             hotels = search(keyword)
-            rooms = set(rooms)
+            print(hotels)
             if hotels:
-                for hotel in hotels:
-
-                    for room in hotel.room_set.all():
-                        rooms.add(room)
-
-            today, tomorrow = get_time()
-
+                hotel_rooms=models.Room.objects.filter(hotel__in=hotels)
+                print(hotel_rooms)
+                rooms=rooms |hotel_rooms
             return render(request, 'hotel/order_room.html', locals())
         except:
             return HttpResponseRedirect('/hotel/')
