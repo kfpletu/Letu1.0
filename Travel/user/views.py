@@ -41,27 +41,27 @@ def login(request):
         try:
             # 从数据库获取uname和upwd
             user = Info.objects.get(uname=uname, upwd=upwd)
-            # 登录状态为真,刷新登录页面,禁止登录
-            if user.is_alive:
-                resp = HttpResponse('该用户已经注销')
-                return resp
-            else:
-                if user.is_online:
-                    resp = HttpResponse('该用户已在其他地方登录')
-                    return resp
-                else:
-                    # 修改登录状态,发送seesion,返回首页
-                    user.is_online = 1
-                    user.save()
-                    request.session['userinfo'] = {
-                        'uname': user.uname,
-                        'id': user.id
-                    }
-                    resp = HttpResponse('登录成功', locals())
-                    return resp
         except Exception as e:
             # 出异常,说明用户名密码不正确,刷新当前登录页面
             return HttpResponse('登录失败,请重新登录')
+        # 登录状态为真,刷新登录页面,禁止登录
+        if user.is_alive:
+            resp = HttpResponse('该用户已经注销')
+            return resp
+        else:
+            if user.is_online:
+                resp = HttpResponse('该用户已在其他地方登录')
+                return resp
+            else:
+                # 修改登录状态,发送seesion,返回首页
+                user.is_online = 1
+                user.save()
+                request.session['userinfo'] = {
+                    'uname': user.uname,
+                    'id': user.id
+                }
+                resp = HttpResponse('登录成功', locals())
+                return resp
 
 
 # 图片验证码
