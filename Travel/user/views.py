@@ -16,20 +16,6 @@ from hotel.models import House
 
 from .models import *
 
-<<<<<<< HEAD
-
-# 登录
-def login(request):
-    if request.method == 'GET':
-        return render(request, 'user/login.html')
-    elif request.method == 'POST':
-        # 获取登录页面form表单提交的uname和upwd
-        uname = request.POST.get('uname')
-        upwd = request.POST.get('upwd')
-
-        # 将密码进行has
-=======
->>>>>>> a7af9b24ab90f50deb5b9762026f17ac60e75122
 def pwd_hash(passwd):
     # 将密码进行hash
         s = 'letuTravel'
@@ -197,11 +183,6 @@ def register(request):
         # 获取用户注册输入的信息,并将密码进行hash加密
         uname = request.POST.get('uname')
         upwd = request.POST.get('upwd')
-<<<<<<< HEAD
-
-
-=======
->>>>>>> a7af9b24ab90f50deb5b9762026f17ac60e75122
         upwd = pwd_hash(upwd)
         phone = request.POST.get('phone')
         email = request.POST.get('email')
@@ -268,10 +249,6 @@ def updatepwd(request):
     elif request.method == 'POST':
         # 获取用户输入的新密码
         new_pwd = request.POST.get('new_pwd')
-<<<<<<< HEAD
-=======
-
->>>>>>> a7af9b24ab90f50deb5b9762026f17ac60e75122
         upwd = pwd_hash(new_pwd)
 
         try:
