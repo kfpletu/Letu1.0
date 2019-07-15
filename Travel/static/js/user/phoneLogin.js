@@ -103,19 +103,14 @@ $(function () {
                                 location.href = '/user/phoneLogin'
                             } else {
                                 alert('登录成功')
-                                location.href = '/'
-                                // refer_url = document.referrer
-                                // //如果是项目内部的请求，回跳到上一步
-                                // console.log(refer_url);
-                                // if (refer_url.search('127.0.0.1') != -1){
-
-                                //     window.location = refer_url;
-
-                                // }else{
-
-                                //     window.location =  '/' + result.username + '/topics';
-                                // }
-
+                                if (document.referrer=='http://127.0.0.1:7890/user/register' ||
+                                    document.referrer=='http://127.0.0.1:7890/user/forget' ||
+                                    document.referrer=='http://127.0.0.1:7890/user/getpwd/'||
+                                    document.referrer=='http://127.0.0.1:7890/user/login'){
+                                    location.href='/'
+                                }else{
+                                    window.location=document.referrer
+                                }
                             }
                         }
                     });

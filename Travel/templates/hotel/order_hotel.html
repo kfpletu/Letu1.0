@@ -164,7 +164,7 @@
             {#                {% endfor %}#}
             </div>
             <div class="out-form">
-                <form action="room" method="post" id='form'>
+                <form action="room" method='get' id='form'>
                     {% csrf_token %}
                     <div class="form">
                         {% csrf_token %}
@@ -240,14 +240,14 @@
             <div class="new">
                 <h2>热门酒店推荐</h2>
                 <ul id="all_hotel_name">
-{#                    <li>热门品牌：</li>#}
-{#                    <li><a href="javascript:void(0)">全部</a></li>#}
-{##}
-{#                   {% for house in house_list_li %}#}
-{##}
-{#                      <li><a href="javascript:void(0)">{{ house.hotel_name }}</a></li>#}
-{##}
-{#                  {% endfor %}#}
+                {#  <li>热门品牌：</li>
+                   <li><a href="javascript:void(0)">全部</a></li>
+
+                 {% for house in house_list_li %}
+
+                     <li><a href="javascript:void(0)">{{ house.hotel_name }}</a></li>
+
+                 {% endfor %}#}
 
                 </ul>
                 <div class="hotel_imfor">
@@ -258,7 +258,7 @@
                         <a href="/hotel/14">点击进入</a>
                     </figure>
 
-                    -->#}
+                    #}
 
 
                 </div>

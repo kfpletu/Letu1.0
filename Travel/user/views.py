@@ -11,7 +11,7 @@ from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from PIL import Image, ImageDraw, ImageFont
 
-# 订单结算
+# 订单结算                                
 from hotel.models import House
 
 from .models import *
@@ -20,10 +20,10 @@ def pwd_hash(passwd):
     # 将密码进行hash
         s = 'letuTravel'
         h_p = hashlib.sha1()
-        s_p = hashlib.sha1()
+        s_p = hashlib.sha1()   
         h_p.update(passwd.encode())
         s_p.update(s.encode())
-        upwd = h_p.hexdigest()+s_p.hexdigest()
+        upwd = h_p.hexdigest() + s_p.hexdigest()
         h_p = hashlib.sha1()
         h_p.update(upwd.encode())
         upwd = h_p.hexdigest()
@@ -70,7 +70,7 @@ def yanzma(request):
         登录图形图形验证码
     """
     img = Image.new("RGB", (110, 37), (255, 255, 255))
-    code = [chr(x) for x in range(97, 122)] + [str(x) for x in range(2,10)]+[chr(x) for x in range(65,90)]
+    code = [chr(x) for x in range(97, 122)] + [str(x) for x in range(2, 10)] + [chr(x) for x in range(65, 90)]
     code = random.sample(code, 6)
     code = ''.join(code)
     draw = ImageDraw.Draw(img)
@@ -146,14 +146,15 @@ def check_phone_login(request):
 def getMes(request):
     phone = request.GET.get('phone')
     number = random.randint(100000, 999999)
-    phone_check(phone,"SMS_169902712",number)
+    phone_check(phone, "SMS_169902712", number)
     jsonStr = {
         'num': number
     }
     return HttpResponse(json.dumps(jsonStr))
 
+
 # 发送手机验证码
-def phone_check(phone,code,number):
+def phone_check(phone, code, number):
     client = AcsClient('LTAIxo8uU7FoZPog',
                        '5fhRNu2256WxUF5dP9QdSmqqbZ50ul', 'cn-hangzhou')
     request = CommonRequest()
@@ -172,6 +173,7 @@ def phone_check(phone,code,number):
 
     response = client.do_action(request)
     print(str(response, encoding='utf-8'))
+
 
 # 注册
 def register(request):
@@ -214,7 +216,7 @@ def checkphone(request):
 def message(request):
     phone = request.GET.get('phone')
     number = random.randint(100000, 999999)
-    phone_check(phone,"SMS_169897609",number)
+    phone_check(phone, "SMS_169897609", number)
     jsonStr = {
         'num': number
     }
@@ -247,7 +249,6 @@ def updatepwd(request):
     elif request.method == 'POST':
         # 获取用户输入的新密码
         new_pwd = request.POST.get('new_pwd')
-
         upwd = pwd_hash(new_pwd)
 
         try:
@@ -316,7 +317,7 @@ def cart(request):
 def order(request):
     uid = request.session['userinfo']['id']
     user = Info.objects.get(id=uid)
-    datas = History_list.objects.filter(u_id=uid, is_del='1')
+    datas = History_list.objects.filter(u_id=uid, is_del='1').order_by('-booking_time')
     paginator = Paginator(datas, 4)
     print(paginator.page_range)
     cur_page = request.GET.get('page', 1)
@@ -325,7 +326,7 @@ def order(request):
 
 
 # 删除购物车商品
-def del_goods(request, g_id,num):
+def del_goods(request, g_id, num):
     target = Cart.objects.get(id=g_id)
     target.delete()
     u_id = request.session['userinfo']['id']
@@ -362,8 +363,6 @@ def reduce(request, g_id):
     return render(request, 'user/cart.html')
 
 
-
-
 def modif(request, g_id):
     target = Cart.objects.get(id=g_id)
     target.is_pay = 1
@@ -398,7 +397,7 @@ def modif(request, g_id):
             return HttpResponse('payment.html')
 
 
-#支付成功跳转页面
+# 支付成功跳转页面
 
 def payment(request):
     """
@@ -408,7 +407,7 @@ def payment(request):
     """
     uid = request.session['userinfo']['id']
     user = Info.objects.get(id=uid)
-    return render(request, 'user/payment.html',locals())
+    return render(request, 'user/payment.html', locals())
 
 
 def test(request):
@@ -459,7 +458,8 @@ def top_top(request):
     except:
         return HttpResponse("0")
 
-#删除历史订单
+
+# 删除历史订单
 def delete(request):
     """
     用户删除自己的购买记录
@@ -474,7 +474,7 @@ def delete(request):
     order = History_list.objects.filter(u_id=user_id, is_del=1)
     paginator = Paginator(order, 4)
     page = paginator.page(num)
-    return render(request,'user/order.html',locals())
+    return render(request, 'user/order.html', locals())
 
 
 # 余额
@@ -532,5 +532,3 @@ def change(request):
                 return HttpResponseRedirect('/')
         except:
             raise Http404
-        
-
