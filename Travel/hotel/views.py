@@ -70,16 +70,6 @@ def search(keyword):
 hotel_level_list=[(10,19),(20,29),(30,39),(40,49),(50,59)]
 # 酒店首页搜索引擎
 def room(request):
-    # if request.method == 'GET':
-    #     # rooms=models.Room.objects.all()
-    #     # today, tomorrow = get_time()
-    #     try:
-    #         if hasattr(request, 'session') and 'userinfo' in request.session:
-    #             uid = request.session['userinfo']['id']
-    #             user = Info.objects.get(id=uid)
-    #     except:
-    #         raise Http404
-    #     return HttpResponseRedirect('/hotel', locals())
     if request.method == 'GET':
         today, tomorrow = get_time()
         try:
@@ -103,17 +93,15 @@ def room(request):
             if request.GET['people-num'] == '1':
                 rooms = models.Room.objects.filter(Q(iprice__range=price) & (Q(room_level=1) | Q(room_level=3)))
             else:
-
                 rooms = models.Room.objects.filter(iprice__range=price)
             # 根据酒店级别筛选
-
             if hotel_level !='5':
                 range=hotel_level_list[int(hotel_level)-1]
                 rooms=rooms.filter(hotel_id__gte=range[0],hotel_id__lte=range[1])#hotel_level_list[int(hotel_level)-1])
 
             # 通过关键字找匹配酒店
             hotels = search(keyword)
-            print(hotels)
+            # print(hotels)
             if hotels:
                 hotel_rooms=models.Room.objects.filter(hotel__in=hotels)
                 print(hotel_rooms)
@@ -254,8 +242,7 @@ def hotel(request, id, level):
             raise Http404
         return render(request, 'hotel/hotel_ticket.html', dic)
     elif request.method == 'POST':
-        print(type(request.body))
-
+        # print(type(request.body))
         # 将房间加入购物车
         try:
             # 创建流水号
@@ -280,7 +267,6 @@ def hotel(request, id, level):
                 price=float(dic['rooms'][int(level) - 1].price) * days,
                 total_price=float(dic['rooms'][int(level) - 1].price) * days,
                 serial_num=serial_num
-
             )
             return render(request, 'hotel/booking.html', locals())
         except:
