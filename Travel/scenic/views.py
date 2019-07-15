@@ -40,6 +40,12 @@ def ticket(request, s):
     if 'userinfo' not in request.session:
         return HttpResponseRedirect('/user/login')
     if request.method == 'GET':
+        try:
+            if hasattr(request, 'session') and 'userinfo' in request.session:
+                uid = request.session['userinfo']['id']
+                user = Info.objects.get(id=uid)
+        except:
+            raise Http404
         return render(request, 'scenic/ticket.html', locals())
     elif request.method == 'POST':
         if request.POST.get('sub') != '':
