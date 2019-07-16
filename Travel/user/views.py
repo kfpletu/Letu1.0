@@ -393,9 +393,11 @@ def reduce(request, g_id):
 
 
 def modif(request, g_id):
+    '''订单结算'''
     target = Cart.objects.get(id=g_id)
     target.is_pay = 1
     target.save()
+    #销量统计
     try:
         house_id = int(str(target.g_img)[-8]) + int(str(target.g_img)[-10]) * 10
         # print(house_id)
@@ -404,6 +406,7 @@ def modif(request, g_id):
         house.save()
     except:
         pass
+    #购买成功生成历史订单
     finally:
         try:
             History_list.objects.create(
