@@ -9,7 +9,7 @@ urlpatterns = [
     url(r'^login', views.login),
     url(r'^register', views.register),
     url(r'^forget$', views.getpwd),
-    url(r'^getpwd/$', views.updatepwd),
+    url(r'^getpwd$', views.updatepwd),
     url(r'^logout$', views.logout),
     url(r'^cancel$', views.cancel),
     url(r'^checkuname$', views.checkuname),

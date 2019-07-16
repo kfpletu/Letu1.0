@@ -11,28 +11,16 @@ from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from PIL import Image, ImageDraw, ImageFont
 
-# 订单结算
+# 订单结算                                
 from hotel.models import House
 
 from .models import *
 
-
-
-# 登录
-def login(request):
-    if request.method == 'GET':
-        return render(request, 'user/login.html')
-    elif request.method == 'POST':
-        # 获取登录页面form表单提交的uname和upwd
-        uname = request.POST.get('uname')
-        upwd = request.POST.get('upwd')
-
-        # 将密码进行hash
 def pwd_hash(passwd):
     # 将密码进行hash
         s = 'letuTravel'
         h_p = hashlib.sha1()
-        s_p = hashlib.sha1()
+        s_p = hashlib.sha1()   
         h_p.update(passwd.encode())
         s_p.update(s.encode())
         upwd = h_p.hexdigest() + s_p.hexdigest()
@@ -53,27 +41,27 @@ def login(request):
         try:
             # 从数据库获取uname和upwd
             user = Info.objects.get(uname=uname, upwd=upwd)
-            # 登录状态为真,刷新登录页面,禁止登录
-            if user.is_alive:
-                resp = HttpResponse('该用户已经注销')
-                return resp
-            else:
-                if user.is_online:
-                    resp = HttpResponse('该用户已在其他地方登录')
-                    return resp
-                else:
-                    # 修改登录状态,发送seesion,返回首页
-                    user.is_online = 1
-                    user.save()
-                    request.session['userinfo'] = {
-                        'uname': user.uname,
-                        'id': user.id
-                    }
-                    resp = HttpResponse('登录成功', locals())
-                    return resp
         except Exception as e:
             # 出异常,说明用户名密码不正确,刷新当前登录页面
             return HttpResponse('登录失败,请重新登录')
+        # 登录状态为真,刷新登录页面,禁止登录
+        if user.is_alive:
+            resp = HttpResponse('该用户已经注销')
+            return resp
+        else:
+            if user.is_online:
+                resp = HttpResponse('该用户已在其他地方登录')
+                return resp
+            else:
+                # 修改登录状态,发送seesion,返回首页
+                user.is_online = 1
+                user.save()
+                request.session['userinfo'] = {
+                    'uname': user.uname,
+                    'id': user.id
+                }
+                resp = HttpResponse('登录成功', locals())
+                return resp
 
 
 # 图片验证码
@@ -195,17 +183,6 @@ def register(request):
         # 获取用户注册输入的信息,并将密码进行hash加密
         uname = request.POST.get('uname')
         upwd = request.POST.get('upwd')
-
-        # 将密码进行hash
-        s = 'letuTravel'
-        h_p = hashlib.sha1()
-        s_p = hashlib.sha1()
-        h_p.update(upwd.encode())
-        s_p.update(s.encode())
-        upwd = h_p.hexdigest() + s_p.hexdigest()
-        h_p = hashlib.sha1()
-        h_p.update(upwd.encode())
-        upwd = h_p.hexdigest()
         upwd = pwd_hash(upwd)
         phone = request.POST.get('phone')
         email = request.POST.get('email')
@@ -272,16 +249,6 @@ def updatepwd(request):
     elif request.method == 'POST':
         # 获取用户输入的新密码
         new_pwd = request.POST.get('new_pwd')
-        # 将密码进行hash
-        s = 'letuTravel'
-        h_p = hashlib.sha1()
-        s_p = hashlib.sha1()
-        h_p.update(new_pwd.encode())
-        s_p.update(s.encode())
-        upwd = h_p.hexdigest() + s_p.hexdigest()
-        h_p = hashlib.sha1()
-        h_p.update(upwd.encode())
-        upwd = h_p.hexdigest()
         upwd = pwd_hash(new_pwd)
 
         try:

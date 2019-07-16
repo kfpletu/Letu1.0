@@ -98,46 +98,49 @@ $(function(){
                 return false;
                  }
         }	
-    
+
     })
 })
 </script>
 
 <body>
-    <header id="header">
-        {% if request.session.userinfo %}
-        <div id="cart">
-            <b>
-                <ul>
-                    <li class="home">
-                        <a href="javascript:void(0)">
-                            欢迎您,{{ request.session.userinfo.uname }}
-                        </a>
-                        <ol class='info1'>
-                            <li><a href="/user/topUp">我的钱包</a></li>
-                            <li><a href="/user/change">个人信息</a></li>
-                            <li><a href="/user/cart">购物车</a></li>
-                            <li><a href="/user/order">我的订单</a></li>
-                            <li><a href="/user/logout">退出登录</a></li>
-                        </ol>
-                    </li>
-                </ul>
-            </b>
-        </div>
-        {% else %}
-        <div class="login">
-            <b>
-                <div id="register">
-                    <a href="/user/register">免费注册</a>
-                </div>
-            </b>
-            <b>
-                <div id="login">
-                    <a href="/user/login">您好,请登录</a>
-                </div>
-            </b>
-        </div>
-        {% endif %}
+<header id="header">
+    {% if request.session.userinfo %}
+    <div id="cart">
+        <b>
+            <ul>
+
+                <a href="/user/change.html">
+                    <img src='/static/images/user/change/{{ user.head_img }}' style="opacity:1"
+                         title="点击修改头像">
+                </a>
+                <div class="down"></div>
+                <li class="home"><a href="javascript:void(0)">欢迎您,{{ request.session.userinfo.uname }}</a>
+                    <ol class='info1'>
+                        <li><a href="/user/topUp">我的钱包</a></li>
+                        <li><a href="/user/change">个人信息</a></li>
+                        <li><a href="/user/cart">购物车</a></li>
+                        <li><a href="/user/order">我的订单</a></li>
+                        <li><a href="/user/logout">退出登录</a></li>
+                    </ol>
+                </li>
+            </ul>
+        </b>
+    </div>
+{% else %}
+    <div class="login">
+        <b>
+            <div id="register">
+                <a href="/user/register">免费注册</a>
+            </div>
+        </b>
+        <b>
+            <div id="login">
+                <a href="/user/login">您好,请登录</a>
+            </div>
+        </b>
+    </div>
+{% endif %}
         <div class="center">
             <h1 class="logo">
                 <a href="/" id="logoA">乐途旅行网</a>
@@ -153,7 +156,7 @@ $(function(){
                 </ul>
             </nav>
         </div>
-    </header>
+</header>
 
     <div id="bodyer1">
         <div id="content">
