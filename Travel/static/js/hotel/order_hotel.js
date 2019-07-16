@@ -1,4 +1,5 @@
 $(function(){
+	//搜索框住宿类型
 	$('#container .form ul li a').click(function(){
 		$('#hotel-level option').removeAttr('selected')
 		
@@ -10,18 +11,8 @@ $(function(){
 		}
 
 	})
-	$('#container .new li a:first').mouseover(function(){
-		$('.hotel_figure').css('display','block')
-	})
-	$('#container .new li a:gt(0)').click(function(){
-		$('.hotel_figure').css('display','none')
-		var elems =$(".hotel_figure .hotel_name")
-		for(var i =0;i<elems.length;i++){
-			if($(this).html()==elems.eq(i).html()){
-				elems.eq(i).parent().css('display','block')
-			}
-		}
-	})
+
+	//天气预报栏
 	var listBoxMarginH=0;
 	var timerH=setInterval(function(){
 		listBoxMarginH-=2;
@@ -45,6 +36,8 @@ $(function(){
 	},50)
 	})
 
+
+	//底部酒店品牌
 	var listBoxMarginF=0;
 	var timerF=setInterval(function(){
 		listBoxMarginF-=2;
@@ -71,10 +64,44 @@ $(function(){
 	})	
 
 	$('#brandListFirst').load('/hotel/weather/')
-	// $.get('/hotel/weather/',function(data){
-	// 	alert('new FileReaderSyn')
-	// 	$('#brandListFirst').html(data)
-	// })
+	
+	//酒店列表
+	$.get(
+		'/hotel/hotel-list',
+		function(hotels){
+			var html=''
+			html+='<li>热门品牌：</li>'
+			for (var i = 0; i < hotels.length; i++) {			
+				html+=' <li><a href='+hotels[i].pk +'>'
+				html+=hotels[i].fields.hotel_name
+				html+='</a></li>'			
+				if(i==5){			
+					break;
+				}			
+			}
+			$('#all_hotel_name').html(html)
+			html=''
+			var hotel_level_list=['','快速便捷','民宿公寓','星级酒店','主题酒店']
+			$(hotels).each(function(i,hotel){
+				hotel_index=Number(hotel.fields.hotel_p.charAt())
+				html+=	'<figure class="hotel_figure">'
+				html+=	'<img src="/static/images/hotel/'
+				html+=  hotel.fields.hotel_p
+				html+='/11.png" alt="The Pulpit Rock" class="hotel_img"> '
+                html+=  '<span class="hotel_name">'  
+                html+=hotel.fields.hotel_name
+                html+='</span> '    
+                html+= hotel_level_list[hotel_index] 
+                html+=  '<a href=" '+hotel.pk +'">点击进入</a> '
+				html+=  '</figure>'
 
+			})
+			$('.hotel_imfor').html(html)	
+		},'json'
+	);
+	$('#all_hotel_name').mouseover(function(){
+		console.log('111111')
+		$(this).next().find().css('display','block')
+	})
 
 })

@@ -40,6 +40,12 @@ def ticket(request, s):
     if 'userinfo' not in request.session:
         return HttpResponseRedirect('/user/login')
     if request.method == 'GET':
+        try:
+            if hasattr(request, 'session') and 'userinfo' in request.session:
+                uid = request.session['userinfo']['id']
+                user = Info.objects.get(id=uid)
+        except:
+            raise Http404
         return render(request, 'scenic/ticket.html', locals())
     elif request.method == 'POST':
         if request.POST.get('sub') != '':
@@ -51,6 +57,9 @@ def ticket(request, s):
             sname=request.POST.get('sname')
             sprice=request.POST.get('sprice')
             tprice=request.POST.get('tprice')
+            now_str = str(time.time()).split('.')
+            now_str = now_str[1] + now_str[0]
+            serial_num=str(request.session['userinfo']['id']) + now_str + str(s) + str(random.randint(10,99))
             ord=Cart.objects.create(
                                 user_id=request.session['userinfo']['id'],
                                 g_img=ts.img1,
@@ -62,12 +71,8 @@ def ticket(request, s):
                                 g_num=num,
                                 total_price=tprice,
                                 add_time=retime,
-                                serial_num=str(request.session['userinfo']['id']) +retime
+                                serial_num=serial_num,
                                         )
-            now = retime
-            from_data = sttime
-            to_data = entime
-            cart_id = str(request.session['userinfo']['id']) + now+str(random.uniform(5,10))
             return render(request,'scenic/booking.html',locals())
 
 # def add_s1(request):

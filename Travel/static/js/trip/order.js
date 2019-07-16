@@ -16,3 +16,21 @@ $(function () {
     });
 
 });
+function func() {
+    if ($("#from_city").val()==''){
+        alert("请输入出发城市");
+        return false;
+    }
+    if ($("#to_city").val()==''){
+        alert("请输入到达城市");
+        return false;
+    }
+    if ($("#from_date").val()==''){
+        alert("请输入出发时间");
+        return false;
+    }
+    if ($("#to_date").val()==''){
+        alert("请输入返回时间");
+        return false;
+    }
+}

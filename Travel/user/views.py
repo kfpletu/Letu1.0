@@ -11,63 +11,57 @@ from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from PIL import Image, ImageDraw, ImageFont
 
-# 订单结算
+# 订单结算                                
 from hotel.models import House
 
 from .models import *
 
+def pwd_hash(passwd):
+    # 将密码进行hash
+        s = 'letuTravel'
+        h_p = hashlib.sha1()
+        s_p = hashlib.sha1()   
+        h_p.update(passwd.encode())
+        s_p.update(s.encode())
+        upwd = h_p.hexdigest() + s_p.hexdigest()
+        h_p = hashlib.sha1()
+        h_p.update(upwd.encode())
+        upwd = h_p.hexdigest()
+        return upwd
 
 # 登录
 def login(request):
     if request.method == 'GET':
         return render(request, 'user/login.html')
     elif request.method == 'POST':
-        # 获取登录页面form表单提交的uname和upwd
+        # 获取登录页面form表单提交的uname和upwd,并将upwd进行hash加密
         uname = request.POST.get('uname')
         upwd = request.POST.get('upwd')
-        
-        # 将密码进行hash
-        s = 'letuTravel'
-        h_p = hashlib.sha1()
-        s_p = hashlib.sha1()
-        h_p.update(upwd.encode())
-        s_p.update(s.encode())
-        upwd = h_p.hexdigest()+s_p.hexdigest()
-        h_p = hashlib.sha1()
-        h_p.update(upwd.encode())
-        upwd = h_p.hexdigest()
-
-        # 获取记住密码单选框的状态
-        remember = request.POST.get('remember')
+        upwd = pwd_hash(upwd)
         try:
             # 从数据库获取uname和upwd
             user = Info.objects.get(uname=uname, upwd=upwd)
-            # 登录状态为真,刷新登录页面,禁止登录
-            if user.is_alive:
-                resp = HttpResponse('该用户已经注销')
-                return resp
-            else:
-                if user.is_online:
-                    resp = HttpResponse('该用户已在其他地方登录')
-                    return resp
-                else:
-                    # 修改登录状态,发送seesion,cookie,返回首页
-                    user.is_online = 1
-                    user.save()
-                    request.session['userinfo'] = {
-                        'uname': user.uname,
-                        'id': user.id
-                    }
-
-                    resp = HttpResponse('登录成功', locals())
-                    if remember:
-                        resp.set_cookie('uname', uname, max_age=7 * 24 * 60 * 60)
-                    else:
-                        resp.delete_cookie('uname')
-                    return resp
-        except:
+        except Exception as e:
             # 出异常,说明用户名密码不正确,刷新当前登录页面
             return HttpResponse('登录失败,请重新登录')
+        # 登录状态为真,刷新登录页面,禁止登录
+        if user.is_alive:
+            resp = HttpResponse('该用户已经注销')
+            return resp
+        else:
+            if user.is_online:
+                resp = HttpResponse('该用户已在其他地方登录')
+                return resp
+            else:
+                # 修改登录状态,发送seesion,返回首页
+                user.is_online = 1
+                user.save()
+                request.session['userinfo'] = {
+                    'uname': user.uname,
+                    'id': user.id
+                }
+                resp = HttpResponse('登录成功', locals())
+                return resp
 
 
 # 图片验证码
@@ -76,7 +70,7 @@ def yanzma(request):
         登录图形图形验证码
     """
     img = Image.new("RGB", (110, 37), (255, 255, 255))
-    code = [chr(x) for x in range(97, 122)] + [str(x) for x in range(2,10)]+[chr(x) for x in range(65,90)]
+    code = [chr(x) for x in range(97, 122)] + [str(x) for x in range(2, 10)] + [chr(x) for x in range(65, 90)]
     code = random.sample(code, 6)
     code = ''.join(code)
     draw = ImageDraw.Draw(img)
@@ -86,11 +80,10 @@ def yanzma(request):
             fill=(0, 0, 0))  # 颜色
     for _ in range(10):
         draw.line([(random.randint(0, 110), random.randint(0, 37)),
-                   (random.randint(0, 110), random.randint(0, 37))],
+        (random.randint(0, 110), random.randint(0, 37))],
                   fill=(150, 150, 2))
 
-    font = ImageFont.truetype(
-        "/usr/share/fonts/truetype/freefont/FreeSerif.ttf", 24)
+    font = ImageFont.truetype("/usr/share/fonts/truetype/freefont/FreeSerif.ttf", 24)
     draw.text((5, 5), code, font=font, fill="green")
     src = 'static/images/logImg/code.jpg'
     img.save(src)
@@ -153,14 +146,15 @@ def check_phone_login(request):
 def getMes(request):
     phone = request.GET.get('phone')
     number = random.randint(100000, 999999)
-    phone_check(phone,"SMS_169902712",number)
+    phone_check(phone, "SMS_169902712", number)
     jsonStr = {
         'num': number
     }
     return HttpResponse(json.dumps(jsonStr))
 
+
 # 发送手机验证码
-def phone_check(phone,code,number):
+def phone_check(phone, code, number):
     client = AcsClient('LTAIxo8uU7FoZPog',
                        '5fhRNu2256WxUF5dP9QdSmqqbZ50ul', 'cn-hangzhou')
     request = CommonRequest()
@@ -180,26 +174,16 @@ def phone_check(phone,code,number):
     response = client.do_action(request)
     print(str(response, encoding='utf-8'))
 
+
 # 注册
 def register(request):
     if request.method == 'GET':
         return render(request, 'user/register.html')
     elif request.method == 'POST':
-        # 获取用户注册输入的信息
+        # 获取用户注册输入的信息,并将密码进行hash加密
         uname = request.POST.get('uname')
         upwd = request.POST.get('upwd')
-        
-        # 将密码进行hash
-        s = 'letuTravel'
-        h_p = hashlib.sha1()
-        s_p = hashlib.sha1()
-        h_p.update(upwd.encode())
-        s_p.update(s.encode())
-        upwd = h_p.hexdigest()+s_p.hexdigest()
-        h_p = hashlib.sha1()
-        h_p.update(upwd.encode())
-        upwd = h_p.hexdigest()
-
+        upwd = pwd_hash(upwd)
         phone = request.POST.get('phone')
         email = request.POST.get('email')
         # 尝试向数据库添加用户信息,成功返回到登录页面进行登录
@@ -232,7 +216,7 @@ def checkphone(request):
 def message(request):
     phone = request.GET.get('phone')
     number = random.randint(100000, 999999)
-    phone_check(phone,"SMS_169897609",number)
+    phone_check(phone, "SMS_169897609", number)
     jsonStr = {
         'num': number
     }
@@ -265,17 +249,7 @@ def updatepwd(request):
     elif request.method == 'POST':
         # 获取用户输入的新密码
         new_pwd = request.POST.get('new_pwd')
-
-        # 将密码进行hash
-        s = 'letuTravel'
-        h_p = hashlib.sha1()
-        s_p = hashlib.sha1()
-        h_p.update(new_pwd.encode())
-        s_p.update(s.encode())
-        upwd = h_p.hexdigest()+s_p.hexdigest()
-        h_p = hashlib.sha1()
-        h_p.update(upwd.encode())
-        upwd = h_p.hexdigest()
+        upwd = pwd_hash(new_pwd)
 
         try:
             uname = request.session['uname']
@@ -288,7 +262,6 @@ def updatepwd(request):
         except:
             # 重新返回忘记密码页面
             return HttpResponse('')
-
 
 # 退出登录
 def logout(request):
@@ -344,7 +317,7 @@ def cart(request):
 def order(request):
     uid = request.session['userinfo']['id']
     user = Info.objects.get(id=uid)
-    datas = History_list.objects.filter(u_id=uid, is_del='1')
+    datas = History_list.objects.filter(u_id=uid, is_del='1').order_by('-booking_time')
     paginator = Paginator(datas, 4)
     print(paginator.page_range)
     cur_page = request.GET.get('page', 1)
@@ -353,7 +326,7 @@ def order(request):
 
 
 # 删除购物车商品
-def del_goods(request, g_id,num):
+def del_goods(request, g_id, num):
     target = Cart.objects.get(id=g_id)
     target.delete()
     u_id = request.session['userinfo']['id']
@@ -388,8 +361,6 @@ def reduce(request, g_id):
     target.g_num = n
     target.save()
     return render(request, 'user/cart.html')
-
-
 
 
 def modif(request, g_id):
@@ -429,7 +400,7 @@ def modif(request, g_id):
             return HttpResponse('payment.html')
 
 
-#支付成功跳转页面
+# 支付成功跳转页面
 
 def payment(request):
     """
@@ -439,7 +410,7 @@ def payment(request):
     """
     uid = request.session['userinfo']['id']
     user = Info.objects.get(id=uid)
-    return render(request, 'user/payment.html',locals())
+    return render(request, 'user/payment.html', locals())
 
 
 def test(request):
@@ -490,7 +461,8 @@ def top_top(request):
     except:
         return HttpResponse("0")
 
-#删除历史订单
+
+# 删除历史订单
 def delete(request):
     """
     用户删除自己的购买记录
@@ -505,7 +477,7 @@ def delete(request):
     order = History_list.objects.filter(u_id=user_id, is_del=1)
     paginator = Paginator(order, 4)
     page = paginator.page(num)
-    return render(request,'user/order.html',locals())
+    return render(request, 'user/order.html', locals())
 
 
 # 余额
@@ -563,5 +535,3 @@ def change(request):
                 return HttpResponseRedirect('/')
         except:
             raise Http404
-        
-
