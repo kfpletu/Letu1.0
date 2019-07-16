@@ -473,7 +473,7 @@ def delete(request):
     data = History_list.objects.filter(id=id)
     data.update(is_del=0)
     user_id = request.session['userinfo']['id']
-    order = History_list.objects.filter(u_id=user_id, is_del=1)
+    order = History_list.objects.filter(u_id=user_id, is_del=1).order_by('-booking_time')
     paginator = Paginator(order, 4)
     page = paginator.page(num)
     return render(request, 'user/order.html', locals())
