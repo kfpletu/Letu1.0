@@ -10,7 +10,7 @@ $(function() {
             }
             $.ajax({
                 type: "post",
-                url: "/user/login",
+                url: "/user/login", 
                 data: jsObj,
                 success: function(response) {
                     alert(response)
