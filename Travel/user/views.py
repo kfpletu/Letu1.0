@@ -332,7 +332,7 @@ def del_goods(request, g_id, num):
     goods = Cart.objects.filter(user_id=u_id, is_pay=0).order_by("-add_time")
     paginator = Paginator(goods, 4)
     num = int(num)
-    if (paginator.count)%4==0 or num>4:
+    if (paginator.count)%4==0:
         page = paginator.page(num-1)
     else:
         page = paginator.page(num)
