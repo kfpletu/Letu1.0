@@ -104,22 +104,4 @@ $(function(){
 		$(this).next().find().css('display','block')
 	})
 
-
-
-	// $('#all_hotel_name:first-child').mouseover(function(){
-	// 	console.log('1111')
-	// 	$('.hotel_figure').css('display','block')
-	// });
-
-	// $('#container .new li a:gt(0)').click(function(){
-	// 	console.log('1111')
-	// 	$('.hotel_figure').css('display','none')
-	// 	var elems =$(".hotel_figure .hotel_name")
-	// 	for(var i =0;i<elems.length;i++){
-	// 		if($(this).html()==elems.eq(i).html()){
-	// 			elems.eq(i).parent().css('display','block')
-	// 		}
-	// 	}
-	// });
-
 })

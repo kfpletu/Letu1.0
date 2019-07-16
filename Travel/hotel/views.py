@@ -56,7 +56,7 @@ def hotel_list(request):
 
 
 # 酒店价格首页
-price_list = [(0, 200), (200, 500), (500, 100), (1000, 2000), (2000, 10000), (0, 10000)]
+price_list = [(0, 200), (200, 500), (500, 1000), (1000, 2000), (2000, 10000), (0, 10000)]
 
 
 # 关键字搜索
@@ -87,6 +87,7 @@ def room(request):
             # 获取表单信息
 
             price = price_list[int(request.GET.get('room-price', ''))]
+            print('prince',price)
             hotel_level = request.GET.get('hotel-level', '')
             keyword = request.GET.get('room-keyword', '')
             # 通过价位和人数找房间
@@ -104,8 +105,8 @@ def room(request):
             # print(hotels)
             if hotels:
                 hotel_rooms=models.Room.objects.filter(hotel__in=hotels)
-                print(hotel_rooms)
-                rooms=rooms |hotel_rooms
+                # print(hotel_rooms)
+                # rooms=rooms |hotel_rooms
             return render(request, 'hotel/order_room.html', locals())
         except:
             return HttpResponseRedirect('/hotel/')
