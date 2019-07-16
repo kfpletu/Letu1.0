@@ -16,7 +16,7 @@ from hotel.models import House
 
 from .models import *
 
-<<<<<<< HEAD
+
 
 # 登录
 def login(request):
@@ -28,10 +28,8 @@ def login(request):
         upwd = request.POST.get('upwd')
 
         # 将密码进行hash
-=======
 def pwd_hash(passwd):
     # 将密码进行hash
->>>>>>> e4e5deff4ff3ac4b95e076f668c1a2e6e3e19d16
         s = 'letuTravel'
         h_p = hashlib.sha1()
         s_p = hashlib.sha1()
@@ -197,7 +195,6 @@ def register(request):
         # 获取用户注册输入的信息,并将密码进行hash加密
         uname = request.POST.get('uname')
         upwd = request.POST.get('upwd')
-<<<<<<< HEAD
 
         # 将密码进行hash
         s = 'letuTravel'
@@ -209,10 +206,7 @@ def register(request):
         h_p = hashlib.sha1()
         h_p.update(upwd.encode())
         upwd = h_p.hexdigest()
-
-=======
         upwd = pwd_hash(upwd)
->>>>>>> e4e5deff4ff3ac4b95e076f668c1a2e6e3e19d16
         phone = request.POST.get('phone')
         email = request.POST.get('email')
         # 尝试向数据库添加用户信息,成功返回到登录页面进行登录
@@ -278,8 +272,6 @@ def updatepwd(request):
     elif request.method == 'POST':
         # 获取用户输入的新密码
         new_pwd = request.POST.get('new_pwd')
-
-<<<<<<< HEAD
         # 将密码进行hash
         s = 'letuTravel'
         h_p = hashlib.sha1()
@@ -290,9 +282,7 @@ def updatepwd(request):
         h_p = hashlib.sha1()
         h_p.update(upwd.encode())
         upwd = h_p.hexdigest()
-=======
         upwd = pwd_hash(new_pwd)
->>>>>>> e4e5deff4ff3ac4b95e076f668c1a2e6e3e19d16
 
         try:
             uname = request.session['uname']
