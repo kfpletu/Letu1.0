@@ -319,7 +319,6 @@ def order(request):
     user = Info.objects.get(id=uid)
     datas = History_list.objects.filter(u_id=uid, is_del='1').order_by('-booking_time')
     paginator = Paginator(datas, 4)
-    print(paginator.page_range)
     cur_page = request.GET.get('page', 1)
     page = paginator.page(cur_page)
     return render(request, 'user/order.html', locals())
@@ -330,7 +329,7 @@ def del_goods(request, g_id, num):
     target = Cart.objects.get(id=g_id)
     target.delete()
     u_id = request.session['userinfo']['id']
-    goods = Cart.objects.filter(user_id=u_id, is_pay=0)
+    goods = Cart.objects.filter(user_id=u_id, is_pay=0).order_by("-add_time")
     paginator = Paginator(goods, 4)
     page = paginator.page(num)
     return render(request, 'user/cart.html', locals())
