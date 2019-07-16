@@ -19,7 +19,7 @@ $(function () {
                         alert(response)
                         location.href = '/user/forget'
                     } else {
-                        location.href = '/user/getpwd/'
+                        location.href = '/user/getpwd'
                     }
                 }
             });

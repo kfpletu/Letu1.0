@@ -105,7 +105,8 @@ $(function () {
                                 alert('登录成功')
                                 if (document.referrer=='http://127.0.0.1:7890/user/register' ||
                                     document.referrer=='http://127.0.0.1:7890/user/forget' ||
-                                    document=='http://127.0.0.1:7890/user/getpwd/'){
+                                    document.referrer=='http://127.0.0.1:7890/user/getpwd'||
+                                    document.referrer=='http://127.0.0.1:7890/user/login'){
                                     location.href='/'
                                 }else{
                                     window.location=document.referrer
