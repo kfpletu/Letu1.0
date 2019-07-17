@@ -2,6 +2,7 @@ import hashlib
 import json
 import os
 import random
+import time
 
 from aliyunsdkcore.client import AcsClient
 from aliyunsdkcore.request import CommonRequest
@@ -15,6 +16,7 @@ from tools.ssm_tx import ssm
 # 订单结算                                
 from hotel.models import House
 
+from tools.send_email import SendMail
 from .models import *
 
 def pwd_hash(passwd):
@@ -320,7 +322,6 @@ def order(request):
     user = Info.objects.get(id=uid)
     datas = History_list.objects.filter(u_id=uid, is_del='1').order_by('-booking_time')
     paginator = Paginator(datas, 4)
-    print(paginator.page_range)
     cur_page = request.GET.get('page', 1)
     page = paginator.page(cur_page)
     return render(request, 'user/order.html', locals())
@@ -331,9 +332,13 @@ def del_goods(request, g_id, num):
     target = Cart.objects.get(id=g_id)
     target.delete()
     u_id = request.session['userinfo']['id']
-    goods = Cart.objects.filter(user_id=u_id, is_pay=0)
+    goods = Cart.objects.filter(user_id=u_id, is_pay=0).order_by("-add_time")
     paginator = Paginator(goods, 4)
-    page = paginator.page(num)
+    num = int(num)
+    if (paginator.count)%4==0:
+        page = paginator.page(num-1)
+    else:
+        page = paginator.page(num)
     return render(request, 'user/cart.html', locals())
 
 
@@ -365,9 +370,11 @@ def reduce(request, g_id):
 
 #结算
 def modif(request, g_id):
+    '''订单结算'''
     target = Cart.objects.get(id=g_id)
     target.is_pay = 1
     target.save()
+    #销量统计
     try:
         house_id = int(str(target.g_img)[-8]) + int(str(target.g_img)[-10]) * 10
         # print(house_id)
@@ -376,6 +383,7 @@ def modif(request, g_id):
         house.save()
     except:
         pass
+    #购买成功生成历史订单
     finally:
         try:
             History_list.objects.create(
@@ -404,7 +412,6 @@ def modif(request, g_id):
 
 
 # 支付成功跳转页面
-
 def payment(request):
     """
     支付界面的返回
@@ -460,6 +467,18 @@ def top_top(request):
         change_money = change_money + money
         user.price = change_money
         user.save()
+        time1=time.strftime('%Y-%m-%d %H:%M:%S')
+        content = '亲爱的乐途用户,您在 %s 成功充值 %s 元,您的可用余额为 %s 元。' \
+                  '努力,让旅行变得更简单,让旅行变得更享受,让您乐在途中![乐途旅行网]' % (time1,money,change_money)
+        to_user = user.email
+        send = SendMail(username='360679877@qq.com',
+                              passwd='mzawjnawwpzxbicj',
+                              recv=to_user,
+                              title='[余额变动通知]',
+                              content=content,
+                              file=None,
+                              ssl=True, )
+        send.send_mail()
         return HttpResponse("1")
     except:
         return HttpResponse("0")
@@ -477,7 +496,7 @@ def delete(request):
     data = History_list.objects.filter(id=id)
     data.update(is_del=0)
     user_id = request.session['userinfo']['id']
-    order = History_list.objects.filter(u_id=user_id, is_del=1)
+    order = History_list.objects.filter(u_id=user_id, is_del=1).order_by('-booking_time')
     paginator = Paginator(order, 4)
     page = paginator.page(num)
     return render(request, 'user/order.html', locals())
