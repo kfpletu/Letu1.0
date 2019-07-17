@@ -8,3 +8,5 @@ class InfoManage(admin.ModelAdmin):
 
 
 admin.site.register(models.Info,InfoManage)
+admin.site.register(models.History_list)
+admin.site.register(models.Cart)

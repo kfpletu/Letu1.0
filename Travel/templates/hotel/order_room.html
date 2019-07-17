@@ -50,11 +50,14 @@
         </div>
 
         <div class="conten">
+            {% if rooms or hotel_rooms %}
             <!--购票信息-->
-           {% for room in rooms %}
-                <div class="item">
+                {% if hotel_rooms %}
+                    <h3>与“{{ keyword }}”相关的酒店</h3>
+                    <hr>
+                    {% for room in hotel_rooms %}
+                    <div class="item">
                     <div class="check">
-
 
                     </div>
                     <div class="gname">
@@ -87,10 +90,50 @@
                     </form>
                 </div>
 
-           {% empty  %}
-               <h1>对不起,亲,没有相对应的房间,请点击查看酒店返回.......</h1>
-           {% endfor %}
+                    {% endfor %}
 
+                    <h3>其他搜索结果</h3>
+                    <hr>
+                {% endif %}
+                {% for room in rooms %}
+                    <div class="item">
+                    <div class="check">
+
+                    </div>
+                    <div class="gname">
+                        <img src="/static/images/hotel/{{ room.house.hotel_p }}/2{{ room.room_level }}.png">
+                        <p><b>{{ room.house.hotel_name }}</b></p>
+                        <p>{#窗户  有#}{{ room.window }}</p>
+                        <p>{#面积  43㎡#}{{ room.area }}</p>
+                        <p>{#床型  大床1.8×2.0米1张#}{{ room.bed }}</p>
+                    </div>
+                    <form action="{% url 'hotel'%}{{ room.house.id }}/{{ room.room_level }}" method="post" class="form">
+                        {% csrf_token %}
+                        <div class=gpt>
+                            <p><label for="from_date{{ room.room_level }}">入住时间：</label><input type="text" id="from_date{{ room.room_level }}" name="from_date" value="{{ today }}"></p>
+                            <p><label for="to_date{{ room.room_level }}">预计搬出：</label><input type="text" id="to_date{{ room.room_level }}" name="to_date" value="{{ tomorrow }}"></p>
+                        </div>
+                        <div class="gprice">
+                            <h3>{{ room.room_name }}</h3>
+                            <p>￥ {#977.00#}{{ room.price }}</p>
+                        </div>
+                        <div class="gcount">
+                            <!--阻止超链接默认事件-->
+                            <a href="javascript:void(0)" class="minus">-</a>
+                            <input type="text" value="1">
+                            <a href="javascript:void(0)" class="add">+</a>
+
+
+                        </div>
+                        <div class="gsum">￥ 977.00</div>
+                        <div class="action"><input type="submit" value="直接订房"></div>
+                    </form>
+                </div>
+
+                {% endfor %}
+            {% else %}
+                <h1>对不起,亲,没有相对应的房间,请点击“查看酒店”返回.......</h1>
+            {% endif %}
         </div>
     </div>
 {% endblock block_new %}
