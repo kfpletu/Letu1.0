@@ -11,6 +11,7 @@ from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from PIL import Image, ImageDraw, ImageFont
 
+from tools.ssm_tx import ssm
 # 订单结算                                
 from hotel.models import House
 
@@ -362,7 +363,7 @@ def reduce(request, g_id):
     target.save()
     return render(request, 'user/cart.html')
 
-
+#结算
 def modif(request, g_id):
     target = Cart.objects.get(id=g_id)
     target.is_pay = 1
@@ -390,10 +391,15 @@ def modif(request, g_id):
                 booking_time='2018-3-3',
                 is_del=target.is_pay
             )
+            # phone=Info.objects.get(id=target.user_id).phone
+            # g_name=target.g_name+'-'
+            # g_type=target.g_type
+            # menoy=str(target.total_price)[0:-1]
+            # from_time=target.time1
+            # print(ssm(phone,g_name,g_type,menoy,from_time))
         except:
             return HttpResponse('购买失败')
         else:
-
             return HttpResponse('payment.html')
 
 
