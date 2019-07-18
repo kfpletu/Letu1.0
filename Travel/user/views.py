@@ -334,10 +334,15 @@ def del_goods(request, g_id, num):
     target = Cart.objects.get(id=g_id)
     target.delete()
     u_id = request.session['userinfo']['id']
+    # 获取用户对象
+    balance = Info.objects.get(id=u_id)
     goods = Cart.objects.filter(user_id=u_id, is_pay=0).order_by("-add_time")
     paginator = Paginator(goods, 4)
     num = int(num)
+    print('我是num:',num)
+    print('啦啦啦',(paginator.count)%4)
     if (paginator.count)%4==0:
+        print('哈哈哈哈')
         page = paginator.page(num-1)
     else:
         page = paginator.page(num)
