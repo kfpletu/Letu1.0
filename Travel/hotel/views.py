@@ -293,4 +293,8 @@ def upload_picture(request):
 
 # 测试
 def test(request):
-    return render(request, 'hotel/order_room.html')
+    hotels=models.Hotel.objects.all()
+    for hotel in hotels:
+        hotel.house.hotel_name=hotel.hotel_name
+    print('fsdfsda')
+    return JsonResponse({'code':200,'data':'ok'})

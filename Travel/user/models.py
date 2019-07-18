@@ -34,6 +34,8 @@ class Cart(models.Model):
     serial_num = models.CharField('流水号',max_length=50)
     is_pay = models.BooleanField(default=False)  # 默认0为未支付，1为已支付
 
+    def __str__(self):
+        return '订单id%s 用户id%s 产品名称%s '%(self.id,self.user_id,self.g_name)
 
 class History_list(models.Model):
     u_id = models.IntegerField('用户id', db_index=True)
