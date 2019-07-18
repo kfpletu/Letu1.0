@@ -2,6 +2,7 @@ import hashlib
 import json
 import os
 import random
+import time
 
 from aliyunsdkcore.client import AcsClient
 from aliyunsdkcore.request import CommonRequest
@@ -11,9 +12,11 @@ from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from PIL import Image, ImageDraw, ImageFont
 
+from tools.ssm_tx import ssm
 # 订单结算                                
 from hotel.models import House
 
+from tools.send_email import SendMail
 from .models import *
 
 def pwd_hash(passwd):
@@ -370,7 +373,7 @@ def reduce(request, g_id):
     target.save()
     return render(request, 'user/cart.html')
 
-
+#结算
 def modif(request, g_id):
     '''订单结算'''
     target = Cart.objects.get(id=g_id)
@@ -401,15 +404,19 @@ def modif(request, g_id):
                 booking_time='2018-3-3',
                 is_del=target.is_pay
             )
+            # phone=Info.objects.get(id=target.user_id).phone
+            # g_name=target.g_name+'-'
+            # g_type=target.g_type
+            # menoy=str(target.total_price)[0:-1]
+            # from_time=target.time1
+            # print(ssm(phone,g_name,g_type,menoy,from_time))
         except:
             return HttpResponse('购买失败')
         else:
-
             return HttpResponse('payment.html')
 
 
 # 支付成功跳转页面
-
 def payment(request):
     """
     支付界面的返回
@@ -465,6 +472,18 @@ def top_top(request):
         change_money = change_money + money
         user.price = change_money
         user.save()
+        time1=time.strftime('%Y-%m-%d %H:%M:%S')
+        content = '亲爱的乐途用户,您在 %s 成功充值 %s 元,您的可用余额为 %s 元。' \
+                  '努力,让旅行变得更简单,让旅行变得更享受,让您乐在途中![乐途旅行网]' % (time1,money,change_money)
+        to_user = user.email
+        send = SendMail(username='360679877@qq.com',
+                              passwd='mzawjnawwpzxbicj',
+                              recv=to_user,
+                              title='[余额变动通知]',
+                              content=content,
+                              file=None,
+                              ssl=True, )
+        send.send_mail()
         return HttpResponse("1")
     except:
         return HttpResponse("0")
