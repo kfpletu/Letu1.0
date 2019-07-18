@@ -8,7 +8,7 @@ from aliyunsdkcore.client import AcsClient
 from aliyunsdkcore.request import CommonRequest
 from django.conf import settings
 from django.core.paginator import Paginator
-from django.http import Http404, HttpResponse, HttpResponseRedirect
+from django.http import Http404, HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from PIL import Image, ImageDraw, ImageFont
 
@@ -18,6 +18,8 @@ from hotel.models import House
 
 from tools.send_email import SendMail
 from .models import *
+
+import redis
 
 def pwd_hash(passwd):
     # 将密码进行hash
@@ -388,41 +390,69 @@ def modif(request, g_id):
     target = Cart.objects.get(id=g_id)
     target.is_pay = 1
     target.save()
-    #销量统计
+
+     #购买成功生成历史订单
     try:
+        History_list.objects.create(
+            u_id=target.user_id,
+            g_img=target.g_img,
+            g_name=target.g_name,
+            time1=target.time1,
+            time2=target.time2,
+            g_type=target.g_type,
+            price=target.price,
+            g_num=target.g_num,
+            total_price=target.total_price,
+            booking_time='2018-3-3',
+            is_del=target.is_pay
+        )
+        #酒店结算
         house_id = int(str(target.g_img)[-8]) + int(str(target.g_img)[-10]) * 10
-        # print(house_id)
-        house = House.objects.get(id=house_id)
-        house.order_count = house.order_count + 1
-        house.save()
+        #成交短信
+
+        user_key='user'+str(target.user_id)
+        target_id = 'target' + str(target.id)
+        #将订单id加入到用户id的列表中
+        redis.Redis().lpush(user_key,target_id)
+        phone=Info.objects.get(id=target.user_id).phone
+        g_name=target.g_name+','
+        g_type=target.g_type
+        menoy=str(target.total_price)[0:-1]
+        from_time=target.time1
+        #将电话，金额等属性生产以订单id哈希映射中
+        redis.Redis().hmset(target_id,{'phone':phone,'g_name':g_name,
+                                            'g_type':g_type,'menoy':menoy,'from_time':from_time})
+
     except:
-        pass
-    #购买成功生成历史订单
-    finally:
-        try:
-            History_list.objects.create(
-                u_id=target.user_id,
-                g_img=target.g_img,
-                g_name=target.g_name,
-                time1=target.time1,
-                time2=target.time2,
-                g_type=target.g_type,
-                price=target.price,
-                g_num=target.g_num,
-                total_price=target.total_price,
-                booking_time='2018-3-3',
-                is_del=target.is_pay
-            )
-            # phone=Info.objects.get(id=target.user_id).phone
-            # g_name=target.g_name+'-'
-            # g_type=target.g_type
-            # menoy=str(target.total_price)[0:-1]
-            # from_time=target.time1
-            # print(ssm(phone,g_name,g_type,menoy,from_time))
-        except:
-            return HttpResponse('购买失败')
-        else:
-            return HttpResponse('payment.html')
+        return HttpResponse('购买失败')
+    else:
+        return HttpResponse('payment.html')
+
+#支付成功页面发短信
+def payment_ssm(request):
+    if hasattr(request, 'session') and 'userinfo' in request.session:
+        u_id = request.session['userinfo']['id']
+        r=redis.Redis().lrange('user'+str(u_id),0,-1)
+        print('r',r)
+        for i in range(len(r)):
+            target_id=r.pop().decode()
+            dict=redis.Redis().hgetall(target_id)
+            print(dict)
+            phone=dict[b'phone'].decode()
+            g_name=dict[b'g_name'].decode()
+            g_type=dict[b'g_type'].decode()
+            menoy=dict[b'menoy'].decode()
+            from_time=dict[b'from_time'].decode()
+            print(phone,g_name,g_type,menoy,from_time)
+            # result=ssm(phone,g_name,g_type,menoy,from_time)
+            # print(result)
+            redis.Redis().delete(target_id)
+
+        return JsonResponse({'code':'200','data':'ok'})
+    else:
+        return HttpResponseRedirect('/')
+
+
 
 
 # 支付成功跳转页面
@@ -435,6 +465,8 @@ def payment(request):
     uid = request.session['userinfo']['id']
     user = Info.objects.get(id=uid)
     return render(request, 'user/payment.html', locals())
+
+
 
 
 def test(request):
