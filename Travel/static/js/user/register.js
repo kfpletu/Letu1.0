@@ -4,7 +4,7 @@ $(function () {
             var uname = $('#uname').val()
             var re = /^[a-zA-Z]{1}([a-zA-Z0-9]|[._]){4,14}$/
             if (!re.exec(uname)) {
-                $('#name').html('输入的用户名格式有误')
+                $('#name').html('输入的用户名格式有误!')
             } else {
                 var xhr = createXhr()
                 var url = '/user/checkuname?uname=' + uname
@@ -17,7 +17,7 @@ $(function () {
                 xhr.send(null)
             }
         } else {
-            $('#name').html('用户名不能为空')
+            $('#name').html('用户名不能为空!')
         }
 
     });
@@ -27,12 +27,12 @@ $(function () {
         var re = /^(\w){6,20}$/
         if (upwd) {
             if (!re.exec(upwd)) {
-                $('#pwd').html('输入的密码格式有误')
+                $('#pwd').html('输入的密码格式有误!')
             } else {
                 $('#pwd').html('')
             }
         } else {
-            $('#pwd').html('密码不能为空')
+            $('#pwd').html('密码不能为空!')
         }
         
     });
@@ -66,14 +66,14 @@ $(function () {
     $('#btnPhone').click(function () { 
         if ($('#phone').val()) {
             if ($('#uphone').html() != '请获取手机验证码') {
-                $('#uphone').html('请输入正确的手机号码')
+                $('#uphone').html('请输入正确的手机号码!')
             } else {
                 $('#showMess').css('display', 'block');
                 $('#subReg').attr('disabled', true);
                 $('#subReg').css('background', 'gray');
             }
         } else {
-            $('#uphone').html('请输入手机号码')
+            $('#uphone').html('手机号码不能为空!')
         }
 
     });
@@ -113,7 +113,7 @@ $(function () {
             $('#subReg').css('background', '#997679');
             $('#subReg').attr('disabled', false);
         } else {
-            alert('验证码输入错误')
+            alert('验证码输入错误!')
             $('#mes').val('');
             $('#subReg').attr('disabled', true);
         }
@@ -137,7 +137,7 @@ $(function () {
     $('#subReg').click(function () { 
         if ($('#uname').val() && $('#upwd').val() && $('#phone').val() && $('#email').val()) {
             if ($('#name').html() || $('#pwd').html() || $('#uphone').html() || $('#uemail').html()) {
-                alert('注册失败')
+                alert('请输入正确信息!')
             } else {
                 var xhr = createXhr()
                 xhr.open('post', '/user/register', true)
