@@ -296,5 +296,6 @@ def test(request):
     hotels=models.Hotel.objects.all()
     for hotel in hotels:
         hotel.house.hotel_name=hotel.hotel_name
+        hotel.house.save()
     print('fsdfsda')
     return JsonResponse({'code':200,'data':'ok'})
