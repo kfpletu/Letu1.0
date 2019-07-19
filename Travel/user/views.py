@@ -406,22 +406,24 @@ def modif(request, g_id):
             booking_time='2018-3-3',
             is_del=target.is_pay
         )
-        #酒店结算
-        house_id = int(str(target.g_img)[-8]) + int(str(target.g_img)[-10]) * 10
+        # #酒店结算
+        # house_id = int(str(target.g_img)[-8]) + int(str(target.g_img)[-10]) * 10
         #成交短信
-
-        user_key='user'+str(target.user_id)
-        target_id = 'target' + str(target.id)
-        #将订单id加入到用户id的列表中
-        redis.Redis().lpush(user_key,target_id)
-        phone=Info.objects.get(id=target.user_id).phone
-        g_name=target.g_name
-        g_type=target.g_type
-        menoy=str(target.total_price)[0:-1]
-        from_time=target.time1
-        #将电话，金额等属性生产以订单id哈希映射中
-        redis.Redis().hmset(target_id,{'phone':phone,'g_name':g_name,
+        try:
+            user_key='user'+str(target.user_id)
+            target_id = 'target' + str(target.id)
+            #将订单id加入到用户id的列表中
+            redis.Redis().lpush(user_key,target_id)
+            phone=Info.objects.get(id=target.user_id).phone
+            g_name=target.g_name
+            g_type=target.g_type
+            menoy=str(target.total_price)[0:-1]
+            from_time=target.time1
+            #将电话，金额等属性生产以订单id哈希映射中
+            redis.Redis().hmset(target_id,{'phone':phone,'g_name':g_name,
                                             'g_type':g_type,'menoy':menoy,'from_time':from_time})
+        except:
+            pass
 
     except:
         return HttpResponse('购买失败')
@@ -452,8 +454,8 @@ def payment_ssm(request):
                 menoy=dict[b'menoy'].decode()
                 from_time=dict[b'from_time'].decode()
                 # print(phone,g_name,g_type,menoy,from_time)
-                # result=ssm(phone,g_name,g_type,menoy,from_time)
-                # print(result)
+                result=ssm(phone,g_name,g_type,menoy,from_time)
+                print(result)
         except :
             return JsonResponse({'code':'300','error':'no cart'})
         finally:
