@@ -32,15 +32,24 @@ $(function () {
             } else {
                 alert("请选择支付方式哦!");
             }
-        } else if ($("#money5").val() == 0) {
-            alert("充值金额不能为 0 哦!");
-        } else if ($("#money5").val() != 0) {
-            if ($("#zhifubao").prop('checked') || $("#weixin").prop('checked') || $("#yinlian").prop('checked')) {
-                payment();
-            } else {
-                alert("请选择支付方式哦!");
+        } else {
+            if ($("#money5").val() == 0||$("#money5").val()<0) {
+                alert("请输入正确的金额哦!");
+            }else {
+                if ($("#zhifubao").prop('checked') || $("#weixin").prop('checked') || $("#yinlian").prop('checked')) {
+                    payment();
+                } else {
+                    alert("请选择支付方式哦!");
+                }
             }
         }
+        // else if ($("#money5").val() != 0) {
+        //     // if ($("#zhifubao").prop('checked') || $("#weixin").prop('checked') || $("#yinlian").prop('checked')) {
+        //     //     payment();
+        //     // } else {
+        //     //     alert("请选择支付方式哦!");
+        //     // }
+        // }
         /* var money = choice();
          console.log(money);
          var csrf={
@@ -55,6 +64,7 @@ $(function () {
                  alert("当前充值人数较多,请客官稍后再试哦!")
              }
          })*/
+
     });
     $(".closeimg>.clo").click(function () {
         $("#success").css("display", "none");
@@ -73,7 +83,12 @@ function choice() {
     } else if ($("#money4").prop('checked')) {
         return $("#money4").val();
     } else {
-        return $("#money5").val();
+        if($("#money5").val()<0||$("#money5").val()==0){
+            alert("请输入正确的金额哦!")
+        }else {
+            return $("#money5").val();
+        }
+
     }
 }
 

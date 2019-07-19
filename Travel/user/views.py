@@ -2,19 +2,24 @@ import hashlib
 import json
 import os
 import random
+import time
 
 from aliyunsdkcore.client import AcsClient
 from aliyunsdkcore.request import CommonRequest
 from django.conf import settings
 from django.core.paginator import Paginator
-from django.http import Http404, HttpResponse, HttpResponseRedirect
+from django.http import Http404, HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from PIL import Image, ImageDraw, ImageFont
 
+from tools.ssm_tx import ssm
 # 订单结算                                
 from hotel.models import House
 
+from tools.send_email import SendMail
 from .models import *
+
+import redis
 
 def pwd_hash(passwd):
     # 将密码进行hash
@@ -302,7 +307,10 @@ def booking(request):
 
 # 购物车
 def cart(request):
-    u_id = request.session['userinfo']['id']
+    try:
+        u_id = request.session['userinfo']['id']
+    except:
+        return render(request,'user/login.html')
     # 获取用户对象
     balance = Info.objects.get(id=u_id)
     # 获取该用户购物车商品对象
@@ -315,11 +323,13 @@ def cart(request):
 
 # 历史记录
 def order(request):
-    uid = request.session['userinfo']['id']
+    try:
+        uid = request.session['userinfo']['id']
+    except:
+        return render(request,'user/login.html')
     user = Info.objects.get(id=uid)
     datas = History_list.objects.filter(u_id=uid, is_del='1').order_by('-booking_time')
     paginator = Paginator(datas, 4)
-    print(paginator.page_range)
     cur_page = request.GET.get('page', 1)
     page = paginator.page(cur_page)
     return render(request, 'user/order.html', locals())
@@ -329,10 +339,22 @@ def order(request):
 def del_goods(request, g_id, num):
     target = Cart.objects.get(id=g_id)
     target.delete()
-    u_id = request.session['userinfo']['id']
-    goods = Cart.objects.filter(user_id=u_id, is_pay=0)
+    try:
+        u_id = request.session['userinfo']['id']
+    except:
+        return render(request,'user/login.html')
+    # 获取用户对象
+    balance = Info.objects.get(id=u_id)
+    goods = Cart.objects.filter(user_id=u_id, is_pay=0).order_by("-add_time")
     paginator = Paginator(goods, 4)
-    page = paginator.page(num)
+    num = int(num)
+    print('我是num:',num)
+    print('啦啦啦',(paginator.count)%4)
+    if (paginator.count)%4==0:
+        print('哈哈哈哈')
+        page = paginator.page(num-1)
+    else:
+        page = paginator.page(num)
     return render(request, 'user/cart.html', locals())
 
 
@@ -362,43 +384,78 @@ def reduce(request, g_id):
     target.save()
     return render(request, 'user/cart.html')
 
-
+#结算
 def modif(request, g_id):
+    '''订单结算'''
     target = Cart.objects.get(id=g_id)
     target.is_pay = 1
     target.save()
-    try:
-        house_id = int(str(target.g_img)[-8]) + int(str(target.g_img)[-10]) * 10
-        # print(house_id)
-        house = House.objects.get(id=house_id)
-        house.order_count = house.order_count + 1
-        house.save()
-    except:
-        pass
-    finally:
-        try:
-            History_list.objects.create(
-                u_id=target.user_id,
-                g_img=target.g_img,
-                g_name=target.g_name,
-                time1=target.time1,
-                time2=target.time2,
-                g_type=target.g_type,
-                price=target.price,
-                g_num=target.g_num,
-                total_price=target.total_price,
-                booking_time='2018-3-3',
-                is_del=target.is_pay
-            )
-        except:
-            return HttpResponse('购买失败')
-        else:
 
-            return HttpResponse('payment.html')
+     #购买成功生成历史订单
+    try:
+        History_list.objects.create(
+            u_id=target.user_id,
+            g_img=target.g_img,
+            g_name=target.g_name,
+            time1=target.time1,
+            time2=target.time2,
+            g_type=target.g_type,
+            price=target.price,
+            g_num=target.g_num,
+            total_price=target.total_price,
+            booking_time='2018-3-3',
+            is_del=target.is_pay
+        )
+        #酒店结算
+        house_id = int(str(target.g_img)[-8]) + int(str(target.g_img)[-10]) * 10
+        #成交短信
+
+        user_key='user'+str(target.user_id)
+        target_id = 'target' + str(target.id)
+        #将订单id加入到用户id的列表中
+        redis.Redis().lpush(user_key,target_id)
+        phone=Info.objects.get(id=target.user_id).phone
+        g_name=target.g_name+','
+        g_type=target.g_type
+        menoy=str(target.total_price)[0:-1]
+        from_time=target.time1
+        #将电话，金额等属性生产以订单id哈希映射中
+        redis.Redis().hmset(target_id,{'phone':phone,'g_name':g_name,
+                                            'g_type':g_type,'menoy':menoy,'from_time':from_time})
+
+    except:
+        return HttpResponse('购买失败')
+    else:
+        return HttpResponse('payment.html')
+
+#支付成功页面发短信
+def payment_ssm(request):
+    if hasattr(request, 'session') and 'userinfo' in request.session:
+        u_id = request.session['userinfo']['id']
+        r=redis.Redis().lrange('user'+str(u_id),0,-1)
+        print('r',r)
+        for i in range(len(r)):
+            target_id=r.pop().decode()
+            dict=redis.Redis().hgetall(target_id)
+            print(dict)
+            phone=dict[b'phone'].decode()
+            g_name=dict[b'g_name'].decode()
+            g_type=dict[b'g_type'].decode()
+            menoy=dict[b'menoy'].decode()
+            from_time=dict[b'from_time'].decode()
+            print(phone,g_name,g_type,menoy,from_time)
+            # result=ssm(phone,g_name,g_type,menoy,from_time)
+            # print(result)
+            redis.Redis().delete(target_id)
+
+        return JsonResponse({'code':'200','data':'ok'})
+    else:
+        return HttpResponseRedirect('/')
+
+
 
 
 # 支付成功跳转页面
-
 def payment(request):
     """
     支付界面的返回
@@ -408,6 +465,8 @@ def payment(request):
     uid = request.session['userinfo']['id']
     user = Info.objects.get(id=uid)
     return render(request, 'user/payment.html', locals())
+
+
 
 
 def test(request):
@@ -454,6 +513,18 @@ def top_top(request):
         change_money = change_money + money
         user.price = change_money
         user.save()
+        time1=time.strftime('%Y-%m-%d %H:%M:%S')
+        content = '亲爱的乐途用户,您在 %s 成功充值 %s 元,您的可用余额为 %s 元。' \
+                  '努力,让旅行变得更简单,让旅行变得更享受,让您乐在途中![乐途旅行网]' % (time1,money,change_money)
+        to_user = user.email
+        send = SendMail(username='360679877@qq.com',
+                              passwd='mzawjnawwpzxbicj',
+                              recv=to_user,
+                              title='[余额变动通知]',
+                              content=content,
+                              file=None,
+                              ssl=True, )
+        send.send_mail()
         return HttpResponse("1")
     except:
         return HttpResponse("0")
@@ -471,7 +542,7 @@ def delete(request):
     data = History_list.objects.filter(id=id)
     data.update(is_del=0)
     user_id = request.session['userinfo']['id']
-    order = History_list.objects.filter(u_id=user_id, is_del=1)
+    order = History_list.objects.filter(u_id=user_id, is_del=1).order_by('-booking_time')
     paginator = Paginator(order, 4)
     page = paginator.page(num)
     return render(request, 'user/order.html', locals())

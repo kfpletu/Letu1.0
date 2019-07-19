@@ -35,6 +35,7 @@ $(function(){
         xhr.open("get",url,true);
         xhr.send(null);
     })
+    //确认支付
     $("#box1 .btnYes").click(function(){
         var msg = {
             totalPrice: $(".result .total-price").html()

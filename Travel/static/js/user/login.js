@@ -18,7 +18,7 @@ $(function() {
                         if (document.referrer=='http://176.234.8.16:7890/user/register' ||
                             document.referrer=='http://176.234.8.16:7890/user/forget' ||
                             document.referrer=='http://176.234.8.16:7890/user/getpwd'||
-                            document.referrer=='http://176.234.8.16:7890//user/login'){
+                            document.referrer=='http://176.234.8.16:7890/user/login'){
                             location.href='/'
                         }else{
                             window.location=document.referrer

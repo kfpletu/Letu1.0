@@ -81,7 +81,7 @@
 
 }
 #container .form input {
-    width: 230px;
+    width: 250px;
     height: 30px;
     border: 1px solid #ccc;
     background-color: #fff;
@@ -89,12 +89,12 @@
     padding: 5px;
     font-size: 18px;
     color: #666;
-    margin: 0 0 0 16px;
+    margin: 0 0 0 16px
 
 }
 
 #container .form .left {
-    width: 40%;
+    width: 37%;
     display: inline-block;
 }
 
@@ -103,7 +103,7 @@
 }
 
 #container .form .center {
-    width: 40%;
+    width: 37%;
     display: inline-block;
 }
 

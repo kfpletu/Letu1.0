@@ -30,6 +30,10 @@ urlpatterns += [
     url(r'^topUp$',views.topup),
     url(r'^top-top/$',views.top_top),
 ]
+#购物短信路由
+urlpatterns += [
+    url(r'^ssm_payment',views.payment_ssm)
+]
 
 # 购物车的路由
 urlpatterns += [
