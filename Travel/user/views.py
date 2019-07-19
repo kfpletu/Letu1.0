@@ -446,9 +446,9 @@ def payment_ssm(request):
             g_type=dict[b'g_type'].decode()
             menoy=dict[b'menoy'].decode()
             from_time=dict[b'from_time'].decode()
-            print(phone,g_name,g_type,menoy,from_time)
-            result=ssm(phone,g_name,g_type,menoy,from_time)
-            print(result)
+            # print(phone,g_name,g_type,menoy,from_time)
+            # result=ssm(phone,g_name,g_type,menoy,from_time)
+            # print(result)
             redis.Redis().delete(target_id)
 
         return JsonResponse({'code':'200','data':'ok'})
