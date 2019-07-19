@@ -116,11 +116,12 @@ function sum(){
 $(".item .oaction").click(function(){
     //移除整个商品记录
     $(this).parents(".item").remove();
-    //显示空空如也
-    if($("#content .item").length==0){
-        $("#empty").css("display","block");
-}
 });
+//显示空空如也
+if($("#content .item").length==0){
+    console.log('1234564')
+    $("#empty").css("display","block");
+}
 });
 
 
