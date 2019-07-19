@@ -307,7 +307,10 @@ def booking(request):
 
 # 购物车
 def cart(request):
-    u_id = request.session['userinfo']['id']
+    try:
+        u_id = request.session['userinfo']['id']
+    except:
+        return render(request,'user/login.html')
     # 获取用户对象
     balance = Info.objects.get(id=u_id)
     # 获取该用户购物车商品对象
@@ -320,7 +323,10 @@ def cart(request):
 
 # 历史记录
 def order(request):
-    uid = request.session['userinfo']['id']
+    try:
+        uid = request.session['userinfo']['id']
+    except:
+        return render(request,'user/login.html')
     user = Info.objects.get(id=uid)
     datas = History_list.objects.filter(u_id=uid, is_del='1').order_by('-booking_time')
     paginator = Paginator(datas, 4)
@@ -333,7 +339,10 @@ def order(request):
 def del_goods(request, g_id, num):
     target = Cart.objects.get(id=g_id)
     target.delete()
-    u_id = request.session['userinfo']['id']
+    try:
+        u_id = request.session['userinfo']['id']
+    except:
+        return render(request,'user/login.html')
     # 获取用户对象
     balance = Info.objects.get(id=u_id)
     goods = Cart.objects.filter(user_id=u_id, is_pay=0).order_by("-add_time")
