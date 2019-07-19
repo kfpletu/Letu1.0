@@ -415,7 +415,7 @@ def modif(request, g_id):
         #将订单id加入到用户id的列表中
         redis.Redis().lpush(user_key,target_id)
         phone=Info.objects.get(id=target.user_id).phone
-        g_name=target.g_name+','
+        g_name=target.g_name
         g_type=target.g_type
         menoy=str(target.total_price)[0:-1]
         from_time=target.time1
@@ -432,23 +432,32 @@ def modif(request, g_id):
 def payment_ssm(request):
     if hasattr(request, 'session') and 'userinfo' in request.session:
         u_id = request.session['userinfo']['id']
-        r=redis.Redis().lrange('user'+str(u_id),0,-1)
-        print('r',r)
-        for i in range(len(r)):
-            target_id=r.pop().decode()
-            dict=redis.Redis().hgetall(target_id)
-            print(dict)
-            phone=dict[b'phone'].decode()
-            g_name=dict[b'g_name'].decode()
-            g_type=dict[b'g_type'].decode()
-            menoy=dict[b'menoy'].decode()
-            from_time=dict[b'from_time'].decode()
-            print(phone,g_name,g_type,menoy,from_time)
-            # result=ssm(phone,g_name,g_type,menoy,from_time)
-            # print(result)
-            redis.Redis().delete(target_id)
-
-        return JsonResponse({'code':'200','data':'ok'})
+        #根据用户键，得到订单keys
+        try:
+            r=redis.Redis().lrange('user'+str(u_id),0,-1)
+            redis.Redis().delete('user'+str(u_id))
+            # print('r',r)
+            for i in range(len(r)):
+                #取出一个订单
+                target_id=r.pop().decode()
+                print(target_id)
+                #根据订单id，找到订单哈希
+                dict=redis.Redis().hgetall(target_id)
+                redis.Redis().delete(target_id)
+                # print(dict)
+                print(dict)
+                phone=dict[b'phone'].decode()
+                g_name=dict[b'g_name'].decode()
+                g_type=dict[b'g_type'].decode()
+                menoy=dict[b'menoy'].decode()
+                from_time=dict[b'from_time'].decode()
+                # print(phone,g_name,g_type,menoy,from_time)
+                result=ssm(phone,g_name,g_type,menoy,from_time)
+                print(result)
+        except :
+            return JsonResponse({'code':'300','error':'no cart'})
+        finally:
+            return JsonResponse({'code':'200','data':'ok'})
     else:
         return HttpResponseRedirect('/')
 
