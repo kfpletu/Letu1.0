@@ -137,3 +137,15 @@ SESSION_COOKIE_AGE = 24 * 60 * 60
 #hotel 文件上传测试代码
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images/hotel')
 CHANGE_MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images/user/change')
+
+# 发送邮件配置
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# smpt服务地址
+EMAIL_HOST = 'smtp.qq.com'
+EMAIL_PORT = 25
+# 发送邮件的邮箱
+EMAIL_HOST_USER = '360679877@qq.com'
+# 在邮箱中设置的客户端授权密码
+EMAIL_HOST_PASSWORD = 'mzawjnawwpzxbicj'
+# 收件人看到的发件人
+EMAIL_FROM = '乐途旅行网<360679877@qq.com>'
