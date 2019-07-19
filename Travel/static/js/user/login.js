@@ -3,6 +3,7 @@ $(function() {
         if ($('#show').html() ||!$('#validateCode').val()){
             alert('请输入验证码')
         }else{
+            $(".login").attr('disabled', true);
             var jsObj = {
                 uname: $('#uname').val(),
                 upwd: $('#upwd').val(),
@@ -25,6 +26,7 @@ $(function() {
                         }
                     } else {
                         location.href = '/user/login'
+                        $(".login").attr('disabled', false);
                     }
                 }
             });

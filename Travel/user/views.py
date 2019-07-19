@@ -16,7 +16,7 @@ from tools.ssm_tx import ssm
 # 订单结算                                
 from hotel.models import House
 
-from tools.send_email import SendMail
+from django.core.mail import send_mail
 from .models import *
 
 import redis
@@ -414,7 +414,7 @@ def modif(request, g_id):
         #将订单id加入到用户id的列表中
         redis.Redis().lpush(user_key,target_id)
         phone=Info.objects.get(id=target.user_id).phone
-        g_name=target.g_name+','
+        g_name=target.g_name
         g_type=target.g_type
         menoy=str(target.total_price)[0:-1]
         from_time=target.time1
@@ -431,23 +431,32 @@ def modif(request, g_id):
 def payment_ssm(request):
     if hasattr(request, 'session') and 'userinfo' in request.session:
         u_id = request.session['userinfo']['id']
-        r=redis.Redis().lrange('user'+str(u_id),0,-1)
-        print('r',r)
-        for i in range(len(r)):
-            target_id=r.pop().decode()
-            dict=redis.Redis().hgetall(target_id)
-            print(dict)
-            phone=dict[b'phone'].decode()
-            g_name=dict[b'g_name'].decode()
-            g_type=dict[b'g_type'].decode()
-            menoy=dict[b'menoy'].decode()
-            from_time=dict[b'from_time'].decode()
-            print(phone,g_name,g_type,menoy,from_time)
-            # result=ssm(phone,g_name,g_type,menoy,from_time)
-            # print(result)
-            redis.Redis().delete(target_id)
-
-        return JsonResponse({'code':'200','data':'ok'})
+        #根据用户键，得到订单keys
+        try:
+            r=redis.Redis().lrange('user'+str(u_id),0,-1)
+            redis.Redis().delete('user'+str(u_id))
+            # print('r',r)
+            for i in range(len(r)):
+                #取出一个订单
+                target_id=r.pop().decode()
+                # print(target_id)
+                #根据订单id，找到订单哈希
+                dict=redis.Redis().hgetall(target_id)
+                redis.Redis().delete(target_id)
+                # print(dict)
+                print(dict)
+                phone=dict[b'phone'].decode()
+                g_name=dict[b'g_name'].decode()
+                g_type=dict[b'g_type'].decode()
+                menoy=dict[b'menoy'].decode()
+                from_time=dict[b'from_time'].decode()
+                # print(phone,g_name,g_type,menoy,from_time)
+                # result=ssm(phone,g_name,g_type,menoy,from_time)
+                # print(result)
+        except :
+            return JsonResponse({'code':'300','error':'no cart'})
+        finally:
+            return JsonResponse({'code':'200','data':'ok'})
     else:
         return HttpResponseRedirect('/')
 
@@ -512,18 +521,14 @@ def top_top(request):
         change_money = change_money + money
         user.price = change_money
         user.save()
-        time1=time.strftime('%Y-%m-%d %H:%M:%S')
-        content = '亲爱的乐途用户,您在 %s 成功充值 %s 元,您的可用余额为 %s 元。' \
-                  '努力,让旅行变得更简单,让旅行变得更享受,让您乐在途中![乐途旅行网]' % (time1,money,change_money)
+        time1 = time.strftime('%Y-%m-%d %H:%M:%S')
+        message = '亲爱的乐途用户,您在 %s 成功充值 %s 元,您的可用余额为 %s 元。' \
+                  '努力,让旅行变得更简单,让旅行变得更享受,让您乐在途中![乐途旅行网]' % (time1, money, change_money)
         to_user = user.email
-        send = SendMail(username='360679877@qq.com',
-                              passwd='mzawjnawwpzxbicj',
-                              recv=to_user,
-                              title='[余额变动通知]',
-                              content=content,
-                              file=None,
-                              ssl=True, )
-        send.send_mail()
+        subject = '乐途旅行网充值信息'
+        sender = settings.EMAIL_FROM
+        receiver = [to_user]
+        send_mail(subject, message, sender, receiver)
         return HttpResponse("1")
     except:
         return HttpResponse("0")
