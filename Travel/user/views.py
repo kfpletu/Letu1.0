@@ -350,7 +350,8 @@ def del_goods(request, g_id, num):
     paginator = Paginator(goods, 4)
     num = int(num)
     if paginator.count>0:
-        if (paginator.count)%4==0:
+        if (paginator.count)%4==0 and (paginator.num_pages)+1==num:
+            print('啦啦啦啦',paginator.num_pages)
             page = paginator.page(num-1)
         else:
             page = paginator.page(num)
