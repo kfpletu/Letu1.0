@@ -350,7 +350,7 @@ def del_goods(request, g_id, num):
     paginator = Paginator(goods, 4)
     num = int(num)
     if paginator.count>0:
-        if (paginator.count)%4==0:
+        if (paginator.count)%4==0 and (paginator.num_pages)+1==num:
             page = paginator.page(num-1)
         else:
             page = paginator.page(num)
@@ -551,10 +551,11 @@ def delete(request):
     order = History_list.objects.filter(u_id=user_id, is_del=1).order_by('-booking_time')
     paginator = Paginator(order, 4)
     num = int(num)
-    if (paginator.count)%4==0:
-        page = paginator.page(num-1)
-    else:
-        page = paginator.page(num)
+    if paginator.count>0:
+        if (paginator.count)%4==0 and (paginator.num_pages)+1==num:
+            page = paginator.page(num-1)
+        else:
+            page = paginator.page(num)
     return render(request, 'user/order.html', locals())
 
 
