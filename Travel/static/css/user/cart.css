@@ -8,7 +8,7 @@
     box-sizing:border-box;
     width: 1200px;
     height: 600px;
-    border: 1px solid orange;
+    border: none;
     position: relative;
 }
 
