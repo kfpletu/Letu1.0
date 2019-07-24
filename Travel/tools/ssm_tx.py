@@ -2,9 +2,9 @@ from qcloudsms_py import SmsSingleSender
 from qcloudsms_py.httpclient import HTTPError
 #腾讯云sdk发短信
 def ssm(phone,g_name,g_type,menoy,time):
-    appid = 1400231462  # SDK AppID 以1400开头
+    appid = 1400*****  # SDK AppID 以1400开头
     # 短信应用 SDK AppKey
-    appkey = "e67d6231bce04f4e707a8d10673ac3cc"
+    appkey = "e6++++++++8d106****c"
     # 需要发送短信的手机号码
     template_id = 375220  # NOTE: 这里的模板 ID`7839`只是示例，真实的模板 ID 需要在短信控制台中申请
     # 签名

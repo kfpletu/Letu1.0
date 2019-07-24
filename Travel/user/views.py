@@ -160,8 +160,8 @@ def getMes(request):
 
 # 发送手机验证码
 def phone_check(phone, code, number):
-    client = AcsClient('LTAIxo8uU7FoZPog',
-                       '5fhRNu2256WxUF5dP9QdSmqqbZ50ul', 'cn-hangzhou')
+    client = AcsClient('LToZPog',
+                       '5fhP950ul', 'cn-hangzhou')
     request = CommonRequest()
     request.set_accept_format('json')
     request.set_domain('dysmsapi.aliyuncs.com')
